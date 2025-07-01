@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   User,
@@ -16,325 +16,406 @@ import {
   X,
 } from "lucide-react";
 
-const Navbar = () => {
-  const [openMenu, setOpenMenu] = useState(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileOpenMenus, setMobileOpenMenus] = useState({});
+// Navigation configuration data
+const NAVIGATION_CONFIG = [
+  {
+    key: "about",
+    label: "About Us",
+    icon: User,
+    baseRoute: "/about-us",
+    items: [
+      { slug: "About Gbu", label: "About GBU" },
+      { slug: "chancellor-message", label: "Chancellor Message" },
+      { slug: "vice-chancellor-message", label: "Vice Chancellor Message" },
+      { slug: "governance-committees", label: "Governance Committees" },
+      { slug: "policies-statutes-rti", label: "Policies Statutes RTI" },
+      { slug: "mandatory-disclosures", label: "Mandatory Disclosures" },
+    ],
+  },
+  {
+    key: "academics",
+    label: "Academics",
+    icon: GraduationCap,
+    baseRoute: "/academics",
+    items: [
+      { slug: "schools", label: "Schools & Departments" },
+      { slug: "faculty", label: "Faculty Directory" },
+      { slug: "academic-calendar", label: "Academic Calendar & Regulations" },
+      { slug: "cbcs-framework", label: "CBCS Curriculum Framework" },
+      { slug: "centers-of-excellence", label: "Centers of Excellence" },
+      { slug: "international-collaboration", label: "International Collaboration" },
+      { slug: "reports-publications", label: "Reports & Publications" },
+    ],
+  },
+  {
+    key: "admissions",
+    label: "Admissions",
+    icon: FileText,
+    baseRoute: "/admissions",
+    items: [
+      { slug: "admission-process", label: "Admission Process" },
+      { slug: "courses-offered", label: "Courses Offered (UG | PG | PhD)" },
+      { slug: "eligibility-reservation", label: "Eligibility & Reservation" },
+      { slug: "fee-structure-prospectus", label: "Fee Structure & Prospectus" },
+      { slug: "international-admissions", label: "International Admissions" },
+    ],
+  },
+  {
+    key: "research",
+    label: "Research",
+    icon: BookOpen,
+    baseRoute: "/research",
+    items: [
+      { slug: "research-centers", label: "Center of Excellence and Labs" },
+      { slug: "publications-patents", label: "Publications, Patents and Projects" },
+      { slug: "incubation", label: "GBU Incubation Cell" },
+      { slug: "institution-innovation", label: "Institution and Innovation" },
+      { slug: "ipr-cell", label: "IPR Cell" },
+    ],
+  },
+  {
+    key: "campus",
+    label: "Campus Life",
+    icon: Home,
+    baseRoute: "/campus-life",
+    items: [
+      { slug: "hero", label: "Overview" },
+      { slug: "hostel-facilities", label: "Hostels" },
+      { slug: "sports-fitness", label: "Sports" },
+      { slug: "clubs-societies", label: "Clubs and Societies" },
+      { slug: "meditation-center", label: "Meditation Centre" },
+      { 
+        slug: "https://mygbu-nss-ncc.lovable.app/", 
+        label: "National Service Scheme (NSS)",
+        isExternal: true 
+      },
+      { 
+        slug: "https://mygbu-nss-ncc.lovable.app/", 
+        label: "National Cadet Corps (NCC)",
+        isExternal: true 
+      },
+    ],
+  },
+  {
+    key: "announcements",
+    label: "Announcements",
+    icon: Camera,
+    baseRoute: "/announcements",
+    items: [
+      { slug: "news-notifications", label: "News & Updates" },
+      { slug: "event-calendar", label: "Upcoming Events" },
+      { slug: "notices", label: "Notices & Circular" },
+      { slug: "media-gallery", label: "Media Gallery" },
+      { slug: "newsletter", label: "Newsletter" },
+    ],
+  },
+  {
+    key: "placements",
+    label: "Placements",
+    icon: Briefcase,
+    directPath: "/placements",
+  },
+  {
+    key: "alumni",
+    label: "Alumni",
+    icon: Users,
+    baseRoute: "/alumni",
+    items: [
+      { slug: "alumni-network", label: "Alumni Network" },
+      { slug: "alumni-events", label: "Alumni Events" },
+      { slug: "become-mentor", label: "Become a Mentor" },
+    ],
+  },
+];
+
+// Custom hooks for navbar functionality
+const useScrollDetection = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const menuRefs = useRef({});
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = (menu) => {
-    setOpenMenu((prev) => (prev === menu ? null : menu));
+  return isScrolled;
+};
+
+const useDropdownMenu = () => {
+  const [activeMenu, setActiveMenu] = useState(null);
+  const menuRefs = useRef(new Map());
+
+  const toggleMenu = (menuKey) => {
+    setActiveMenu(prev => prev === menuKey ? null : menuKey);
   };
 
-  const toggleMobileMenu = (menuKey) => {
-    setMobileOpenMenus((prev) => ({
-      ...prev,
-      [menuKey]: !prev[menuKey],
-    }));
-  };
-
-  const handleClickOutside = (event) => {
-    const isClickInsideAnyMenu = Object.values(menuRefs.current).some(
-      (ref) => ref?.contains(event.target)
-    );
-    if (!isClickInsideAnyMenu) {
-      setOpenMenu(null);
-    }
-  };
+  const closeMenu = () => setActiveMenu(null);
 
   useEffect(() => {
+    const handleClickOutside = (event) => {
+      const isInsideMenu = Array.from(menuRefs.current.values())
+        .some(ref => ref?.contains(event.target));
+      
+      if (!isInsideMenu) {
+        closeMenu();
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const menus = [
-    {
-      key: "about",
-      label: "About Us",
-      icon: <User size={16} />,
-      items: [
-        "About GBU",
-        "chancellor-message",
-        "vice-chancellor-message",
-        "governance-committees",
-        "policies-statutes-rti",
-        "mandatory-disclosures",
-      ].map((slug) => (
-        <Link to={`/about-us/${slug}`} key={slug}>
-          {slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
-        </Link>
-      )),
-    },
-    {
-      key: "academics",
-      label: "Academics",
-      icon: <GraduationCap size={16} />,
-      items: [
-        ["schools", "Schools & Departments"],
-        ["faculty", "Faculty Directory"],
-        ["academic-calendar", "Academic Calendar & Regulations"],
-        ["cbcs-framework", "CBCS Curriculum Framework"],
-        ["centers-of-excellence", "Centers of Excellence"],
-        ["international-collaboration", "International Collaboration"],
-        ["reports-publications", "Reports & Publications"],
-      ].map(([slug, text]) => (
-        <Link to={`/academics/${slug}`} key={slug}>
-          {text}
-        </Link>
-      )),
-    },
-    {
-      key: "admissions",
-      label: "Admissions",
-      icon: <FileText size={16} />,
-      items: [
-        ["admission-process", "Admission Process"],
-        ["courses-offered", "Courses Offered (UG | PG | PhD)"],
-        ["eligibility-reservation", "Eligibility & Reservation"],
-        ["fee-structure-prospectus", "Fee Structure & Prospectus"],
-        ["international-admissions", "International Admissions"],
-      ].map(([slug, text]) => (
-        <Link to={`/admissions/${slug}`} key={slug}>
-          {text}
-        </Link>
-      )),
-    },
-    {
-      key: "research",
-      label: "Research",
-      icon: <BookOpen size={16} />,
-      items: [
-        ["research-centers", "Center of Excellence and Labs"],
-        ["publications-patents", "Publications, Patents and Projects"],
-        ["incubation", "GBU Incubation Cell"],
-        ["institution-innovation", "Institution and Innovation"],
-        ["ipr-cell", "IPR Cell"],
-      ].map(([slug, text]) => (
-        <Link to={`/research/${slug}`} key={slug}>
-          {text}
-        </Link>
-      )),
-    },
-    {
-      key: "campus",
-      label: "Campus Life",
-      icon: <Home size={16} />,
-      items: [
-        ["hero", "Overview"],
-        ["hostel-facilities", "Hostels"],
-        ["sports-fitness", "Sports"],
-        ["clubs-societies", "Clubs and Societies"],
-        ["meditation-center", "Meditation Centre"],
-        ["https://mygbu-nss-ncc.lovable.app/", "National Service Scheme (NSS)"],
-        ["https://mygbu-nss-ncc.lovable.app/", "National Cadet Corps (NCC)"],
-      ].map(([slug, text]) => (
-        <Link to={`/campus-life/${slug}`} key={slug}>
-          {text}
-        </Link>
-      )),
-    },
-    {
-      key: "announcements",
-      label: "Announcements",
-      icon: <Camera size={16} />,
-      items: [
-        ["news-notifications", "News & Updates"],
-        ["event-calendar", "Upcoming Events"],
-        ["notices", "Notices & Circular"],
-        ["media-gallery", "Media Gallery"],
-        ["newsletter", "Newsletter"],
-      ].map(([slug, text]) => (
-        <Link to={`/announcements/${slug}`} key={slug}>
-          {text}
-        </Link>
-      )),
-    },
-    {
-      key: "placements",
-      label: "Placements",
-      icon: <Briefcase size={16} />,
-      path: "/placements",
-    },
-    {
-      key: "alumni",
-      label: "Alumni",
-      icon: <Users size={16} />,
-      items: [
-        ["alumni-network", "Alumni Network"],
-        ["alumni-events", "Alumni Events"],
-        ["become-mentor", "Become a Mentor"],
-      ].map(([slug, text]) => (
-        <Link to={`/alumni/${slug}`} key={slug}>
-          {text}
-        </Link>
-      )),
-    },
-  ];
+  return {
+    activeMenu,
+    toggleMenu,
+    closeMenu,
+    menuRefs,
+  };
+};
 
-  const createMenu = (label, icon, menuKey, items, path) => {
-    if (path) {
-      return (
-        <li key={menuKey}>
-          <Link
-            to={path}
-            className="flex items-center gap-1 hover:text-blue-600 text-gray-700 px-3 py-2 text-sm font-medium"
-          >
-            {icon} {label}
-          </Link>
-        </li>
-      );
-    }
+const useMobileMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [expandedSubmenus, setExpandedSubmenus] = useState(new Set());
 
+  const toggle = () => setIsOpen(prev => !prev);
+  const close = () => setIsOpen(false);
+
+  const toggleSubmenu = (menuKey) => {
+    setExpandedSubmenus(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(menuKey)) {
+        newSet.delete(menuKey);
+      } else {
+        newSet.add(menuKey);
+      }
+      return newSet;
+    });
+  };
+
+  return {
+    isOpen,
+    toggle,
+    close,
+    expandedSubmenus,
+    toggleSubmenu,
+  };
+};
+
+// UI Components
+const MenuIcon = ({ icon: Icon, size = 16 }) => <Icon size={size} />;
+
+const DropdownMenuItem = ({ item, baseRoute, onClick }) => {
+  const linkProps = item.isExternal 
+    ? { href: item.slug, target: "_blank", rel: "noopener noreferrer" }
+    : { to: `${baseRoute}/${item.slug}` };
+
+  const LinkComponent = item.isExternal ? 'a' : Link;
+
+  return (
+    <LinkComponent
+      {...linkProps}
+      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+      onClick={onClick}
+    >
+      {item.label}
+    </LinkComponent>
+  );
+};
+
+const DropdownMenu = ({ items, baseRoute, onItemClick }) => (
+  <div className="absolute left-0 top-full mt-1 w-64 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-100">
+    {items.map((item, index) => (
+      <DropdownMenuItem
+        key={`${item.slug}-${index}`}
+        item={item}
+        baseRoute={baseRoute}
+        onClick={onItemClick}
+      />
+    ))}
+  </div>
+);
+
+const DesktopMenuItem = ({ menu, isActive, onToggle, menuRef, onMenuClose }) => {
+  if (menu.directPath) {
     return (
-      <li
-        key={menuKey}
-        className="relative"
-        ref={(el) => (menuRefs.current[menuKey] = el)}
-        aria-haspopup="true"
-      >
-        <button
-          onClick={() => toggleMenu(menuKey)}
-          className="flex items-center gap-1 hover:text-blue-600 text-gray-700 px-3 py-2 text-sm font-medium"
+      <li>
+        <Link
+          to={menu.directPath}
+          className="flex items-center gap-1 hover:text-blue-600 text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
         >
-          {icon} {label}
-          {openMenu === menuKey ? (
-            <ChevronUp size={14} />
-          ) : (
-            <ChevronDown size={14} />
-          )}
-        </button>
-        {openMenu === menuKey && (
-          <div className="absolute left-0 top-full mt-1 w-64 bg-white rounded-lg shadow-lg py-2 z-50">
-            <div className="flex flex-col">
-              {items.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => setOpenMenu(null)}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+          <MenuIcon icon={menu.icon} />
+          {menu.label}
+        </Link>
       </li>
     );
+  }
+
+  return (
+    <li className="relative" ref={menuRef} aria-haspopup="true">
+      <button
+        onClick={() => onToggle(menu.key)}
+        className="flex items-center gap-1 hover:text-blue-600 text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
+        aria-expanded={isActive}
+      >
+        <MenuIcon icon={menu.icon} />
+        {menu.label}
+        {isActive ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+      </button>
+      
+      {isActive && (
+        <DropdownMenu
+          items={menu.items}
+          baseRoute={menu.baseRoute}
+          onItemClick={onMenuClose}
+        />
+      )}
+    </li>
+  );
+};
+
+const MobileMenuItem = ({ menu, isExpanded, onToggle, onSubmenuToggle }) => {
+  if (menu.directPath) {
+    return (
+      <Link
+        to={menu.directPath}
+        className="block px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+        onClick={onToggle}
+      >
+        <span className="flex items-center gap-2">
+          <MenuIcon icon={menu.icon} />
+          {menu.label}
+        </span>
+      </Link>
+    );
+  }
+
+  return (
+    <div>
+      <button
+        onClick={() => onSubmenuToggle(menu.key)}
+        className="w-full flex items-center justify-between px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+      >
+        <span className="flex items-center gap-2">
+          <MenuIcon icon={menu.icon} />
+          {menu.label}
+        </span>
+        {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+      </button>
+      
+      {isExpanded && (
+        <div className="bg-gray-50">
+          {menu.items.map((item, index) => (
+            <DropdownMenuItem
+              key={`mobile-${item.slug}-${index}`}
+              item={item}
+              baseRoute={menu.baseRoute}
+              onClick={onToggle}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const SearchButton = ({ isMobile = false }) => (
+  <button
+    className={`${
+      isMobile 
+        ? "w-full flex items-center gap-2 px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100" 
+        : "ml-4 p-2 hover:bg-gray-100 rounded-full text-gray-700"
+    } transition-colors`}
+    aria-label="Search"
+  >
+    <Search size={isMobile ? 16 : 20} />
+    {isMobile && "Search"}
+  </button>
+);
+
+// Main Navbar Component
+const Navbar = () => {
+  const isScrolled = useScrollDetection();
+  const { activeMenu, toggleMenu, closeMenu, menuRefs } = useDropdownMenu();
+  const { isOpen: isMobileOpen, toggle: toggleMobile, close: closeMobile, expandedSubmenus, toggleSubmenu } = useMobileMenu();
+
+  // Memoize navigation items to prevent unnecessary re-renders
+  const navigationItems = useMemo(() => NAVIGATION_CONFIG, []);
+
+  const setMenuRef = (menuKey, ref) => {
+    if (ref) {
+      menuRefs.current.set(menuKey, ref);
+    } else {
+      menuRefs.current.delete(menuKey);
+    }
   };
 
   return (
-    <div
+    <nav
       className={`fixed top-9 left-0 w-full z-40 bg-white transition-all duration-300 ${
         isScrolled ? "shadow-md" : "shadow"
       }`}
+      role="navigation"
+      aria-label="Main navigation"
     >
-      <div className="container mx-auto px-4 md:px-16">
+      <div className="px-4 md:px-16">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center" aria-label="GBU Home">
             <img
               src="/assets/logo.svg"
               alt="GBU Logo"
-              className="h-12 w-auto"
+              className="h-12 w-auto "
             />
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center">
+          {/* Desktop Navigation */}
+          <div className="hidden xl:flex items-center">
             <ul className="flex items-center space-x-1">
-              {menus.map((menu) =>
-                createMenu(menu.label, menu.icon, menu.key, menu.items, menu.path)
-              )}
+              {navigationItems.map((menu) => (
+                <DesktopMenuItem
+                  key={menu.key}
+                  menu={menu}
+                  isActive={activeMenu === menu.key}
+                  onToggle={toggleMenu}
+                  menuRef={(ref) => setMenuRef(menu.key, ref)}
+                  onMenuClose={closeMenu}
+                />
+              ))}
             </ul>
-
-            {/* Search Icon */}
-            <button
-              className="ml-4 p-2 hover:bg-gray-100 rounded-full text-gray-700"
-              aria-label="Search"
-            >
-              <Search size={20} />
-            </button>
+            <SearchButton />
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Toggle */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-700"
-            aria-label="Toggle menu"
+            onClick={toggleMobile}
+            className="xl:hidden p-2 text-gray-700 transition-colors"
+            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileOpen}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200">
+        {/* Mobile Navigation */}
+        {isMobileOpen && (
+          <div className="xl:hidden border-t border-gray-200">
             <div className="py-2">
-              {menus.map((menu) => (
-                <div key={menu.key}>
-                  {menu.path ? (
-                    <Link
-                      to={menu.path}
-                      className="block px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100"
-                    >
-                      <span className="flex items-center gap-2">
-                        {menu.icon}
-                        {menu.label}
-                      </span>
-                    </Link>
-                  ) : (
-                    <div>
-                      <button
-                        onClick={() => toggleMobileMenu(menu.key)}
-                        className="w-full flex items-center justify-between px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100"
-                      >
-                        <span className="flex items-center gap-2">
-                          {menu.icon}
-                          {menu.label}
-                        </span>
-                        {mobileOpenMenus[menu.key] ? (
-                          <ChevronUp size={16} />
-                        ) : (
-                          <ChevronDown size={16} />
-                        )}
-                      </button>
-                      {mobileOpenMenus[menu.key] && (
-                        <div className="bg-gray-50">
-                          {menu.items.map((item, index) => (
-                            <div
-                              key={index}
-                              className="block px-6 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            >
-                              {item}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
+              {navigationItems.map((menu) => (
+                <MobileMenuItem
+                  key={menu.key}
+                  menu={menu}
+                  isExpanded={expandedSubmenus.has(menu.key)}
+                  onToggle={closeMobile}
+                  onSubmenuToggle={toggleSubmenu}
+                />
               ))}
-              {/* Search in mobile menu */}
-              <div className="px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100">
-                <span className="flex items-center gap-2">
-                  <Search size={16} />
-                  Search
-                </span>
-              </div>
+              <SearchButton isMobile />
             </div>
           </div>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 

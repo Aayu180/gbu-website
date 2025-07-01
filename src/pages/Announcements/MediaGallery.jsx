@@ -1,7 +1,7 @@
 import React, { useState, useMemo, cloneElement } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import SearchFilter from '../../components/announcement/SearchFilter';
-import EnhancedPagination from '../../components/announcement/EnhancedPagination';
+import Pagination from '../../components/announcement/Pagination';
 
 // === Dialog ===
 const Dialog = ({ open, children }) => (open ? <>{children}</> : null);
@@ -82,172 +82,264 @@ TabsContent.displayName = 'TabsContent';
 const mockMedia = [
   {
     id: 1,
-    title: 'Convocation 2023 Highlights',
+    title: '15th Annual Convocation Ceremony',
     category: 'Convocation',
-    year: '2023',
-    date: '2023-05-15',
+    year: '2025',
+    date: '2025-05-12',
     images: [
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+      'https://www.ic3ecsbhi.com/Gallery/20231224_134240.jpg',
+      'https://www.ic3ecsbhi.com/Events/IMG-20231224-WA0082.jpg',
+      'https://hostels.gbu.ac.in/uploads/eventsfiles/photos/65a98a5384fb0_GBU-Convocation.jpeg',
     ],
   },
   {
     id: 2,
-    title: 'Annual Sports Meet',
+    title: 'National Sports Meet 2025',
     category: 'Sports',
-    year: '2022',
-    date: '2022-11-10',
+    year: '2025',
+    date: '2025-02-18',
     images: [
-      'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=600&q=80',
+      'https://www.gbu.ac.in/Content/img/sports/banner2.jpg',
+      'https://www.gbu.ac.in/Content/img/sports/banner1.jpg',
     ],
   },
   {
     id: 3,
-    title: 'Cultural Fest Night',
+    title: 'Annual Cultural Fest - Rhythms 2025',
     category: 'Cultural',
-    year: '2023',
-    date: '2023-02-20',
+    year: '2025',
+    date: '2025-03-10',
     images: [
-      'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+      'https://images.openai.com/thumbnails/url/VUAonnicu1mUUVJSUGylr5-al1xUWVCSmqJbkpRnoJdeXJJYkpmsl5yfq5-Zm5ieWmxfaAuUsXL0S7F0Tw4pdXePdE1PTTRzDypwLPYzijAtjjAIzSpJLfbzKgur8o3y1E3XTdWNqNBNzwyvisoxzcgLcHNLSYtXKwYAxKYpTA',
+      'https://www.gbu.ac.in/Content/img/cc/Artboard%201abhivyanjana7.jpg',
     ],
   },
   {
     id: 4,
-    title: 'Academic Seminar',
+    title: 'International Research Symposium',
     category: 'Academic',
-    year: '2021',
-    date: '2021-09-05',
+    year: '2025',
+    date: '2025-04-08',
     images: [
-      'https://images.unsplash.com/photo-1498079022511-d15614cb1c02?auto=format&fit=crop&w=600&q=80',
+      'https://images.openai.com/thumbnails/url/LsfcCHicu1mSUVJSUGylr5-al1xUWVCSmqJbkpRnoJdeXJJYkpmsl5yfq5-Zm5ieWmxfaAuUsXL0S7F0Tw5yCUrMyjJPyQ6N9LIMsnBNiSjNNNJ1T0oNTI4vyvf3yCnwN03OLk_JKI9MTXIOMk23NI40dHYsM061SFcrBgAaYCmm',
     ],
   },
   {
     id: 5,
-    title: 'Campus Life Moments',
+    title: 'Campus Life - Spring Moments',
     category: 'Campus Life',
-    year: '2022',
-    date: '2022-03-18',
+    year: '2025',
+    date: '2025-03-25',
     images: [
-      'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1504691342899-8d2d1a0d88d3?auto=format&fit=crop&w=600&q=80',
+      'https://cdn.thedecorjournalindia.com/wp-content/uploads/2022/11/9_Modern-day-marvel-Gautam-Buddha-University-by-CP-Kukreja-architects-transpires-fresh-vibe-and-ancient-wisdom.jpg?lossy=1&resize=1920%2C1357&ssl=1&strip=all',
+      'https://images.lifestyleasia.com/wp-content/uploads/sites/7/2022/11/03131617/1-inside-image-816-x-576-horizontal.jpeg',
+      'https://hawmagazine.com/wp-content/uploads/2023/11/DSF8939-croped-1.jpg',
     ],
   },
   {
     id: 6,
-    title: 'Tech Symposium',
+    title: 'Tech Symposium 2025',
     category: 'Events',
-    year: '2023',
-    date: '2023-07-12',
+    year: '2025',
+    date: '2025-01-22',
     images: [
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
-      'https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&w=600&q=80',
+      'https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic9.jpg',
+      'https://www.ic3ecsbhi.com/dsf8951%20copy.jpeg',
     ],
   },
   {
     id: 7,
-    title: 'Robotics Workshop',
+    title: 'Robotics Workshop & Expo',
     category: 'Academic',
-    year: '2023',
-    date: '2023-08-05',
+    year: '2024',
+    date: '2024-08-10',
     images: [
-      'https://images.unsplash.com/photo-1581090700227-4c4c2a5d7a2b?auto=format&fit=crop&w=600&q=80',
+      'https://www.ux4g.gov.in/assets/img/awareness-workshop/gbu-19-11-24/900x1.webp','https://static.toiimg.com/thumb/msid-104795413%2Cwidth-1280%2Cheight-720%2Cresizemode-72/104795413.jpg',
     ],
   },
   {
     id: 8,
-    title: 'Faculty Development Program',
+    title: 'Faculty Development Program 2024',
     category: 'Academic',
-    year: '2022',
-    date: '2022-12-11',
+    year: '2024',
+    date: '2024-12-12',
     images: [
-      'https://images.unsplash.com/photo-1523289333742-be1143f6b766?auto=format&fit=crop&w=600&q=80',
+      'https://images.openai.com/thumbnails/url/zkzpLXicu1mSUVJSUGylr5-al1xUWVCSmqJbkpRnoJdeXJJYkpmsl5yfq5-Zm5ieWmxfaAuUsXL0S7F0Tw4MyfdN8zD28HBKcs11M0mJCg0wLnT2sgwpKk_1K89zcTUKDQxMKs4tcws19wpwyi2JSCwzKEtNcvSMClQrBgAHqSmf',
     ],
   },
   {
     id: 9,
-    title: 'Annual Science Fair',
+    title: 'Science & Innovation Fair',
     category: 'Academic',
-    year: '2021',
-    date: '2021-10-22',
+    year: '2024',
+    date: '2024-10-18',
     images: [
-      'https://images.unsplash.com/photo-1558981403-c5f98968e4c6?auto=format&fit=crop&w=600&q=80',
+      'https://gburif.org/images/intro-carousel/gautam-buddha-university-3.jpg','https://www.hindustantimes.com/ht-img/img/2024/09/05/1600x900/The-12-hour-Hackathon-was-held-at-the-Central-Comp_1725563537794.jpg',
     ],
   },
   {
     id: 10,
-    title: 'Inter-College Football Tournament',
+    title: 'Inter-College Football League',
     category: 'Sports',
-    year: '2023',
-    date: '2023-04-03',
+    year: '2024',
+    date: '2024-09-20',
     images: [
-      'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=600&q=80',
+      'https://www.gbu.ac.in/Content/img/sports/banner1.jpg',
     ],
   },
   {
     id: 11,
-    title: 'Winter Cultural Eve',
+    title: 'Winter Cultural Gala',
     category: 'Cultural',
-    year: '2022',
-    date: '2022-12-21',
+    year: '2024',
+    date: '2024-12-22',
     images: [
-      'https://images.unsplash.com/photo-1515165562838-8d6f33ab9a3a?auto=format&fit=crop&w=600&q=80',
+      'https://i.ytimg.com/vi/Aicd7XpY9eI/sd2.jpg?rs=AOn4CLCprID9Bk-ruT1eZpLbeLjahWmBSg&sqp=-oaymwEoCIAFEOAD8quKqQMcGADwAQH4AYwCgALgA4oCDAgAEAEYVCAgKH8wDw%3D%3D',
     ],
   },
   {
     id: 12,
-    title: 'Open Mic Night',
+    title: 'Open Stage Night',
     category: 'Cultural',
-    year: '2021',
-    date: '2021-11-02',
+    year: '2024',
+    date: '2024-11-15',
     images: [
-      'https://images.unsplash.com/photo-1515705576963-95cad62945b6?auto=format&fit=crop&w=600&q=80',
+      'https://images.openai.com/thumbnails/url/7Lm6aHicu1mUUVJSUGylr5-al1xUWVCSmqJbkpRnoJdeXJJYkpmsl5yfq5-Zm5ieWmxfaAuUsXL0S7F0Tw70yzeriqpK84uvjPd0yqrKMDDLMS-KDwwxTg4LKowITk3P9c2vTEqxTAkviTTKjfD2TC0rMg0ydQtVKwYA5T8p4A',
     ],
   },
   {
     id: 13,
-    title: 'Yoga & Wellness Camp',
+    title: 'Yoga & Wellness Retreat',
     category: 'Campus Life',
-    year: '2023',
-    date: '2023-06-15',
+    year: '2024',
+    date: '2024-07-05',
     images: [
-      'https://images.unsplash.com/photo-1554306274-f7c838fa9e38?auto=format&fit=crop&w=600&q=80',
+      'https://www.gbu.ac.in/Content/gbudata/meditation/img/buddha28.jpg','https://www.gbu.ac.in/Content/gbudata/meditation/img/buddha31.jpg',
     ],
   },
   {
     id: 14,
-    title: 'Literary Fest',
+    title: 'GBU Literary Festival',
     category: 'Cultural',
-    year: '2022',
-    date: '2022-09-12',
+    year: '2024',
+    date: '2024-09-15',
     images: [
-      'https://images.unsplash.com/photo-1579546929155-97d9f43511d7?auto=format&fit=crop&w=600&q=80',
+      'https://sameer.mygbu.in/home/uploads/4.jpg',
     ],
   },
   {
     id: 15,
-    title: 'Marathon 2023',
+    title: 'GBU Half Marathon 2025',
     category: 'Sports',
-    year: '2023',
-    date: '2023-01-25',
+    year: '2025',
+    date: '2025-01-28',
     images: [
-      'https://images.unsplash.com/photo-1504470695779-75300268aa44?auto=format&fit=crop&w=600&q=80',
+      'https://www.gbu.ac.in/Content/img/sports/banner1.jpg',
     ],
   },
-  // Add 15 more to ensure pagination:
-  ...Array.from({ length: 15 }, (_, i) => ({
-    id: 16 + i,
-    title: `Extra Event ${i + 1}`,
-    category: ['Convocation', 'Sports', 'Cultural', 'Academic', 'Campus Life', 'Events'][i % 6],
-    year: ['2021', '2022', '2023'][i % 3],
-    date: `2023-0${(i % 9) + 1}-15`,
-    images: [
-      `https://source.unsplash.com/random/600x400?sig=${i}`,
-      `https://source.unsplash.com/random/601x400?sig=${i + 50}`,
-    ],
-  })),
+  {
+  id: 16,
+  title: 'Inter-University Debate Championship',
+  category: 'Academic',
+  year: '2025',
+  date: '2025-02-20',
+  images: [
+    'https://d8it4huxumps7.cloudfront.net/lambda-pdfs/opportunity-bannerImages/1743929131.png',
+  ],
+},
+{
+  id: 17,
+  title: 'Startup Expo & Innovation Fair',
+  category: 'Events',
+  year: '2025',
+  date: '2025-03-18',
+  images: [
+    'https://images.unsplash.com/photo-1564866657310-2630c1f1df9f?auto=format&fit=crop&w=600&q=80',
+  ],
+},
+{
+  id: 18,
+  title: 'Women Empowerment Seminar',
+  category: 'Academic',
+  year: '2025',
+  date: '2025-03-25',
+  images: [
+    'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80',
+  ],
+},
+{
+  id: 19,
+  title: 'Spring Tree Plantation Drive',
+  category: 'Campus Life',
+  year: '2025',
+  date: '2025-04-05',
+  images: [
+    'https://images.unsplash.com/photo-1559634684-e3eab5be0985?auto=format&fit=crop&w=600&q=80',
+  ],
+},
+{
+  id: 20,
+  title: 'GBU Alumni Meet & Reunion',
+  category: 'Events',
+  year: '2025',
+  date: '2025-04-20',
+  images: [
+    'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&q=80',
+  ],
+},
+{
+  id: 21,
+  title: 'Environmental Awareness Drive',
+  category: 'Campus Life',
+  year: '2025',
+  date: '2025-05-02',
+  images: [
+    'https://images.unsplash.com/photo-1575202335306-5c8c54b6db1c?auto=format&fit=crop&w=600&q=80',
+  ],
+},
+{
+  id: 22,
+  title: 'Inter-College Hackathon',
+  category: 'Academic',
+  year: '2025',
+  date: '2025-05-15',
+  images: [
+    'https://images.unsplash.com/photo-1537432376769-00aabc1ca45c?auto=format&fit=crop&w=600&q=80',
+  ],
+},
+{
+  id: 23,
+  title: 'Cultural Evening - Folk Fusion',
+  category: 'Cultural',
+  year: '2025',
+  date: '2025-06-10',
+  images: [
+    'https://images.unsplash.com/photo-1587049352849-35263f2e96f5?auto=format&fit=crop&w=600&q=80',
+  ],
+},
+{
+  id: 24,
+  title: 'Photography Exhibition',
+  category: 'Cultural',
+  year: '2025',
+  date: '2025-06-20',
+  images: [
+    'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80',
+  ],
+},
+{
+  id: 25,
+  title: 'Summer Internship Orientation',
+  category: 'Academic',
+  year: '2025',
+  date: '2025-07-01',
+  images: [
+    'https://biotechworldindia.in/wp-content/uploads/2023/11/IMG-20200620-WA0002-1024x705.jpg',
+  ],
+},
+
 ];
+
 
 
 // === Shimmer ===
@@ -331,7 +423,7 @@ const MediaGallery = () => {
 
         {totalPages > 1 && (
           <div className="mt-10">
-            <EnhancedPagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} itemsPerPage={itemsPerPage} onItemsPerPageChange={setItemsPerPage} />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} itemsPerPage={itemsPerPage} onItemsPerPageChange={setItemsPerPage} />
           </div>
         )}
 

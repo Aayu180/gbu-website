@@ -22,16 +22,16 @@ const Primarynavbar = () => {
       role="navigation"
       aria-label="Primary navigation"
     >
-      <div className="w-full py-2 px-6 md:px-16 flex justify-between items-center">
+      <div className="w-full py-2 px-6 xl:px-16 flex justify-between items-center">
         {/* Mobile menu button */}
-        <div className="md:hidden">
+        <div className="xl:hidden">
           <button onClick={() => setIsOpen(true)} aria-label="Open menu">
             <Menu size={20} />
           </button>
         </div>
 
         {/* Desktop navigation */}
-        <div className="hidden md:flex w-full justify-between">
+        <div className="hidden xl:flex w-full justify-between">
           {/* Left links */}
           <div className="flex flex-wrap gap-4 items-center">
             <a href="https://tender-navigator-portal.vercel.app/" className="flex items-center gap-1 hover:underline">
