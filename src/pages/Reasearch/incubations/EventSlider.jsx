@@ -8,13 +8,13 @@ const events = [
   {
     title: "GBU STUDENTS VISIT WORKSHOPS",
     date: "March 15, 2024",
-    image: "https://www.gburif.org/event/students.jpeg",
+    image: "https://workshop.sobt.lbsonline.in/assets/p2-XrJoWuig.webp",
     description: "Students from various departments visited industry workshops to explore practical applications and innovations."
   },
   {
     title: "TECH INNOVATION FAIR",
     date: "April 2, 2024",
-    image: "https://www.gburif.org/event/students.jpeg",
+    image: "https://static.wixstatic.com/media/bc6a73_a51fa15dce7d4c229f9090932d2071f3~mv2.jpg/v1/fill/w_793,h_639,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/bc6a73_a51fa15dce7d4c229f9090932d2071f3~mv2.jpg",
     description: "A showcase of student-led innovations with live prototypes and demos."
   },
   {
@@ -26,43 +26,43 @@ const events = [
   {
     title: "AI & ROBOTICS WORKSHOP",
     date: "May 10, 2024",
-    image: "https://www.gburif.org/event/students.jpeg",
+    image: "https://www.nvidia.com/content/nvidiaGDC/sg/en_SG/industries/robotics/_jcr_content/root/responsivegrid/nv_container_1842050078/nv_tabs/item_1/nv_teaser_copy_68232_723076021.coreimg.100.1070.jpeg/1749568225098/robotics-video-learn-ari-1920x1080.jpeg",
     description: "Hands-on experience with real robots and AI models designed by students."
   },
   {
     title: "CAMPUS HACKATHON 2024",
     date: "June 5, 2024",
-    image: "https://www.gburif.org/event/students.jpeg",
+    image: "https://www.ic3ecsbhi.com/Events/IMG-20221122-WA0091.jpg",
     description: "24-hour coding competition attracting teams from across India."
   },
   {
     title: "STARTUP PITCH DAY",
     date: "June 20, 2024",
-    image: "https://www.gburif.org/event/students.jpeg",
+    image: "https://www.ic3ecsbhi.com/Events/FB_IMG_1664482115262.jpg",
     description: "Incubated startups presented their business ideas to angel investors and mentors."
   },
   {
     title: "GREEN TECH CONFERENCE",
     date: "July 3, 2024",
-    image: "https://www.gburif.org/event/students.jpeg",
+    image: "https://images.hindustantimes.com/img/2022/09/13/1600x900/02cb1596-3350-11ed-aaf6-899a59fb6c14_1663065626595.jpg",
     description: "Focused on sustainability, recycling innovation, and green energy."
   },
   {
     title: "INTERNATIONAL GUEST TALK",
     date: "July 18, 2024",
-    image: "https://www.gburif.org/event/students.jpeg",
+    image: "https://www.ic3ecsbhi.com/Events/20231028_115832.jpg",
     description: "Dr. Emily Tan from Stanford spoke on global research opportunities for students."
   },
   {
     title: "OPEN MIC & IDEATHON",
     date: "August 1, 2024",
-    image: "https://www.gburif.org/event/students.jpeg",
+    image: "https://www.ic3ecsbhi.com/Events/h1.jpg",
     description: "Students pitched raw ideas and received feedback from peers and faculty."
   },
   {
     title: "EXHIBITION DAY",
     date: "August 25, 2024",
-    image: "https://www.gburif.org/event/students.jpeg",
+    image: "https://tennews.in/wp-content/uploads/2018/03/WhatsApp-Image-2018-03-16-at-1.56.41-PM.jpeg",
     description: "All departments displayed their annual project work in a public showcase."
   }
 ];

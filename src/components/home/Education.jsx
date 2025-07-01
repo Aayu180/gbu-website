@@ -146,7 +146,7 @@ export default function ExcellenceSection() {
                 </div>
               </div>
 
-              <div className="p-6 relative">
+              <div className="text-center p-6 relative">
                 <h3 className="font-bold text-xl text-gray-800 mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-blue-600 group-hover:bg-clip-text transition-all duration-500">
                   {item.title}
                 </h3>

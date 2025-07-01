@@ -17,26 +17,26 @@ const teamMembers = [
   {
     name: 'Dr. Vinay Kumar Litoria',
     position: 'Nodal Officer',
-    linkedin: 'https://www.linkedin.com/in/dr-vinay-kumar-litoria',
-    image: 'https://via.placeholder.com/150?text=Vinay+Litoria'
+    linkedin: 'https://www.linkedin.com/in/vimlesh-kumar-ray-ph-d-99646b32/',
+    image: 'https://www.gbu.ac.in/Content/clubs/wc/Vinay_kumar.jpeg'
   },
   {
     name: 'Mr. Raj Kumar',
     position: 'Manager',
-    linkedin: 'https://www.linkedin.com/in/raj-kumar-manager',
-    image: 'https://via.placeholder.com/150?text=Raj+Kumar'
+    linkedin: 'https://www.linkedin.com/in/raj-kumar-34b0761b0/',
+    image: 'https://media.licdn.com/dms/image/v2/D5603AQHeaguw0nI1sQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1713076791131?e=1756944000&v=beta&t=DMiDFl0vqYLkd5ZeWkoc0DYeVUaYbuS6_s9lB50st6U'
   },
   {
     name: 'Mr. Manish Bhardwaj',
     position: 'Office Assistant',
-    linkedin: 'https://www.linkedin.com/in/manish-bhardwaj-office',
-    image: 'https://via.placeholder.com/150?text=Manish+Bhardwaj'
+    linkedin: 'https://www.linkedin.com/in/dr-manish-bhardwaj-48308a56/?originalSubdomain=in',
+    image: 'https://media.licdn.com/dms/image/v2/C5103AQEqmwMAeRWXSA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1516891760776?e=1756944000&v=beta&t=520pqvHDb-7s0fS-WJnjPoJyNI_XjgDtPz4RowUJnTg'
   },
   {
     name: 'Mr. Shekhar Chandra',
     position: 'Office Attendant',
-    linkedin: 'https://www.linkedin.com/in/shekhar-chandra-attendant',
-    image: 'https://via.placeholder.com/150?text=Shekhar+Chandra'
+    linkedin: 'https://www.linkedin.com/in/chandra-shekhar-07879473/?originalSubdomain=uk',
+    image: 'https://media.licdn.com/dms/image/v2/D5603AQHEbkxAOdEyDQ/profile-displayphoto-shrink_800_800/B56Zaf4CmjGoAc-/0/1746438990755?e=1756944000&v=beta&t=zs6AHwnYU1XDPZTiMtuoJBgaKUjuL_6Zx-sYeP1zUiA'
   }
 ];
 

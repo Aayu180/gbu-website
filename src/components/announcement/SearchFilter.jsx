@@ -190,8 +190,8 @@ const SearchFilter = ({
   const clearSearch = () => { setSearchQuery(''); onSearch(''); };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-white p-2 rounded-2xl shadow-2xl mb-10 border border-blue-100">
-      <form onSubmit={handleSearch} className="space-y-6">
+    <div className="bg-gradient-to-br from-blue-50 to-white p-2 rounded-2xl mb-2 shadow-2xl border border-blue-100">
+      <form onSubmit={handleSearch} className="space-y-2">
         <div className="flex flex-col md:flex-row gap-6 items-center">
           {/* Search Input */}
           <div className="w-3/6">
@@ -202,7 +202,7 @@ const SearchFilter = ({
                 placeholder={placeholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 text-lg pr-10"
+                className="pl-12 text-md pr-10"
                 aria-label="Search"
                 autoFocus
               />
@@ -251,7 +251,7 @@ const SearchFilter = ({
         </div>
 
         {/* Additional Filters */}
-        <div className="flex flex-col sm:flex-row gap-4 items-center">
+        <div className="flex -mt-8 flex-col sm:flex-row gap-4 items-center">
           {types.length > 0 && onTypeFilter && (
             <Select
               value={type}
