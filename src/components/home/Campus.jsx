@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function CampusLifeSection() {
   const [testimonials, setTestimonials] = useState([]);
-  const BASE = import.meta.env.VITE_HOST?.replace(/\/$/, '');
+  const BASE = import.meta.env.VITE_HOST?.replace(/\/$/, "");
   const CAMPUS_LIFE_API = `${BASE}/landing/campus-life/`;
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function CampusLifeSection() {
           setTestimonials(data);
         }
       } catch (error) {
-        console.error('Failed to fetch campus life data:', error);
+        console.error("Failed to fetch campus life data:", error);
       }
     };
     fetchTestimonials();
@@ -28,26 +28,26 @@ export default function CampusLifeSection() {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 50,
-      scale: 0.9
+      scale: 0.9,
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   const imageVariants = {
@@ -55,18 +55,18 @@ export default function CampusLifeSection() {
       scale: 1.1,
       transition: {
         duration: 0.4,
-        ease: "easeInOut"
-      }
-    }
+        ease: "easeInOut",
+      },
+    },
   };
 
   const overlayVariants = {
     hover: {
       opacity: 1,
       transition: {
-        duration: 0.3
-      }
-    }
+        duration: 0.3,
+      },
+    },
   };
 
   const textVariants = {
@@ -74,21 +74,21 @@ export default function CampusLifeSection() {
       y: -5,
       transition: {
         duration: 0.3,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   return (
     <div className="px-6 md:px-20 py-16 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header Section */}
-      <motion.div 
+      <motion.div
         className="text-center mb-16"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <motion.h2 
+        <motion.h2
           className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-800 via-purple-800 to-blue-800 bg-clip-text text-transparent mb-4"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -96,42 +96,43 @@ export default function CampusLifeSection() {
         >
           Campus Life at GBU
         </motion.h2>
-        <motion.div 
+        <motion.div
           className="w-24 h-1 bg-gradient-to-r from-orange-400 to-pink-500 mx-auto mb-6 rounded-full"
           initial={{ width: 0 }}
           animate={{ width: 96 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         />
-        <motion.p 
+        <motion.p
           className="text-gray-600 mb-4 max-w-3xl mx-auto text-lg leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          Experience a vibrant campus life filled with learning, growth, and unforgettable memories.
-          Our diverse community of students creates an environment where everyone can thrive.
+          Experience a vibrant campus life filled with learning, growth, and
+          unforgettable memories. Our diverse community of students creates an
+          environment where everyone can thrive.
         </motion.p>
       </motion.div>
 
       {/* Cards Grid */}
-      <motion.div 
+      <motion.div
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         {testimonials.map((item, index) => {
-          const [categoryRaw] = item.card_content.split('-');
-          const category = categoryRaw?.trim() || '';
-          const quote = item.description?.replace(/\r\n/g, ' ').trim() || '';
+          const [categoryRaw] = item.card_content.split("-");
+          const category = categoryRaw?.trim() || "";
+          const quote = item.description?.replace(/\r\n/g, " ").trim() || "";
 
           return (
             <motion.div
               key={index}
               variants={cardVariants}
-              whileHover={{ 
+              whileHover={{
                 y: -10,
-                transition: { duration: 0.3 }
+                transition: { duration: 0.3 },
               }}
               className="group cursor-pointer"
             >
@@ -146,14 +147,14 @@ export default function CampusLifeSection() {
                     variants={imageVariants}
                     whileHover="hover"
                   />
-                  
+
                   {/* Gradient Overlay */}
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0"
                     variants={overlayVariants}
                     whileHover="hover"
                   />
-                  
+
                   {/* Category Badge */}
                   <motion.div
                     className="absolute top-3 left-3"
@@ -186,20 +187,18 @@ export default function CampusLifeSection() {
                     whileHover="hover"
                     className="h-full flex flex-col justify-center"
                   >
-                    <p className="text-gray-800 text-sm leading-relaxed italic relative font-semibold">
-                      <span className="text-4xl text-indigo-200 absolute -top-2 -left-2 font-serif">"</span>
-                      <span 
+                    <p className="text-gray-800 text-xl leading-relaxed italic relative font-semibold">
+                      <span
                         className="relative z-10 line-clamp-3 font-medium"
                         style={{
-                          display: '-webkit-box',
+                          display: "-webkit-box",
                           WebkitLineClamp: 3,
-                          WebkitBoxOrient: 'vertical',
-                          overflow: 'hidden',
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
                         }}
                       >
                         {quote}
                       </span>
-                      <span className="text-4xl text-indigo-200 absolute -bottom-4 -right-2 font-serif">"</span>
                     </p>
                   </motion.div>
 
@@ -209,10 +208,13 @@ export default function CampusLifeSection() {
 
                 {/* Subtle Pattern Overlay */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500">
-                  <div className="w-full h-full" style={{
-                    backgroundImage: `radial-gradient(circle at 1px 1px, rgba(99, 102, 241, 0.3) 1px, transparent 0)`,
-                    backgroundSize: '20px 20px'
-                  }}></div>
+                  <div
+                    className="w-full h-full"
+                    style={{
+                      backgroundImage: `radial-gradient(circle at 1px 1px, rgba(99, 102, 241, 0.3) 1px, transparent 0)`,
+                      backgroundSize: "20px 20px",
+                    }}
+                  ></div>
                 </div>
               </div>
             </motion.div>
@@ -221,7 +223,7 @@ export default function CampusLifeSection() {
       </motion.div>
 
       {/* Bottom Decoration */}
-      <motion.div 
+      <motion.div
         className="mt-12 flex justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -234,12 +236,12 @@ export default function CampusLifeSection() {
               className="w-3 h-3 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-full"
               animate={{
                 scale: [1, 1.2, 1],
-                opacity: [0.5, 1, 0.5]
+                opacity: [0.5, 1, 0.5],
               }}
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                delay: i * 0.2
+                delay: i * 0.2,
               }}
             />
           ))}
