@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+ import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   User,
@@ -85,14 +85,14 @@ const NAVIGATION_CONFIG = [
       { slug: "clubs-societies", label: "Clubs and Societies" },
       { slug: "meditation-center", label: "Meditation Centre" },
       { 
-        slug: "https://mygbu-nss-ncc.lovable.app/", 
+        slug: "NSS", 
         label: "National Service Scheme (NSS)",
-        isExternal: true 
+        
       },
       { 
-        slug: "https://mygbu-nss-ncc.lovable.app/", 
+        slug: "NCC", 
         label: "National Cadet Corps (NCC)",
-        isExternal: true 
+        
       },
     ],
   },

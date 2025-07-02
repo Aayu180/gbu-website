@@ -4,7 +4,7 @@ const Card = ({ children, className = '', ...props }) => (
 );
 
 const CardHeader = ({ children, className = '', ...props }) => (
-  <div className={`border-b px-6 py-4 ${className}`} {...props}>{children}</div>
+  <div className={` px-6 py-4 ${className}`} {...props}>{children}</div>
 );
 
 const CardTitle = ({ children, className = '', ...props }) => (
@@ -173,7 +173,7 @@ const NSSAchievements = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 mx-20">
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Achievements & Recognition</h2>

@@ -200,7 +200,7 @@ const NSSActivities = () => {
   };
 
   return (
-    <div className="space-y-8 py-10 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div className="space-y-8 py-10 px-4 mx-20 sm:px-6 lg:px-8 bg-gray-50">
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">NSS Activities</h2>

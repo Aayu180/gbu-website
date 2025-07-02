@@ -1,11 +1,21 @@
-import React from 'react';
-// Card, CardContent, CardHeader, and CardTitle components defined locally for responsive design
+ import React from 'react';
+import { Mail, Phone } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+// Card, Header, Title, Content, Badge Components
 const Card = ({ className = '', children }) => (
-  <div className={`bg-white rounded-lg shadow ${className}`}>{children}</div>
+  <motion.div
+    className={`bg-white rounded-lg border-gray-300 shadow ${className}`}
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.98 }}
+    transition={{ duration: 0.3 }}
+  >
+    {children}
+  </motion.div>
 );
 
 const CardHeader = ({ className = '', children }) => (
-  <div className={`px-6 py-4 border-b ${className}`}>{children}</div>
+  <div className={`px-6 py-4 ${className}`}>{children}</div>
 );
 
 const CardTitle = ({ className = '', children }) => (
@@ -13,23 +23,18 @@ const CardTitle = ({ className = '', children }) => (
 );
 
 const CardContent = ({ className = '', children }) => (
-  <div className={className}>{children}</div>
+  <div className={`px-6 pb-6 ${className}`}>{children}</div>
 );
-import { Mail, Phone } from 'lucide-react';
-// Card, CardContent, CardHeader, CardTitle, and Badge components defined locally
 
 const Badge = ({ className = '', variant = '', children }) => {
-  let base =
-    'inline-block px-3 py-1 rounded-full text-xs font-semibold';
+  let base = 'inline-block px-3 py-1 rounded-full text-xs font-semibold';
   let color =
     variant === 'secondary'
       ? 'bg-blue-100 text-blue-800'
       : variant === 'outline'
       ? 'border border-blue-400 text-blue-700 bg-white'
       : 'bg-gray-100 text-gray-700';
-  return (
-    <span className={`${base} ${color} ${className}`}>{children}</span>
-  );
+  return <span className={`${base} ${color} ${className}`}>{children}</span>;
 };
 
 const NSSStructure = () => {
@@ -80,80 +85,96 @@ const NSSStructure = () => {
     { name: 'Unit D', volunteers: 85, focus: 'Rural Development' }
   ];
 
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.2, duration: 0.5 }
+    })
+  };
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-12 mx-20">
       {/* Program Officer Section */}
-      <Card className="overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
-          <CardTitle className="text-2xl">Program Officer</CardTitle>
-        </CardHeader>
-        <CardContent className="p-6">
-          <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
-            <img
-              src={programOfficer.image}
-              alt={programOfficer.name}
-              className="w-32 h-32 rounded-full object-cover border-4 border-blue-200"
-            />
-            <div className="flex-1 text-center md:text-left">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">{programOfficer.name}</h3>
-              <p className="text-lg text-blue-600 font-semibold mb-4">{programOfficer.designation}</p>
+      <motion.div variants={fadeIn} initial="hidden" animate="visible">
+        <Card className="overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+            <CardTitle className="text-2xl">Program Officer</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
+              <img
+                src={programOfficer.image}
+                alt={programOfficer.name}
+                className="w-32 h-32 rounded-full object-cover border-4 border-blue-200"
+              />
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{programOfficer.name}</h3>
+                <p className="text-lg text-blue-600 font-semibold mb-4">{programOfficer.designation}</p>
 
-              <div className="space-y-2 mb-4">
-                <div className="flex items-center justify-center md:justify-start space-x-2">
-                  <Mail className="h-4 w-4 text-gray-500" />
-                  <span className="text-gray-700">{programOfficer.email}</span>
+                <div className="space-y-2 mb-4">
+                  <div className="flex items-center justify-center md:justify-start gap-2">
+                    <Mail className="h-4 w-4 text-gray-500" />
+                    <span className="text-gray-700">{programOfficer.email}</span>
+                  </div>
+                  <div className="flex items-center justify-center md:justify-start gap-2">
+                    <Phone className="h-4 w-4 text-gray-500" />
+                    <span className="text-gray-700">{programOfficer.phone}</span>
+                  </div>
                 </div>
-                <div className="flex items-center justify-center md:justify-start space-x-2">
-                  <Phone className="h-4 w-4 text-gray-500" />
-                  <span className="text-gray-700">{programOfficer.phone}</span>
+
+                <div className="mb-4">
+                  <h4 className="font-semibold text-gray-900 mb-2">Qualifications:</h4>
+                  <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                    {programOfficer.qualifications.map((qual, index) => (
+                      <Badge key={index} variant="secondary">{qual}</Badge>
+                    ))}
+                  </div>
                 </div>
+                <p className="text-gray-600">{programOfficer.experience}</p>
               </div>
-
-              <div className="mb-4">
-                <h4 className="font-semibold text-gray-900 mb-2">Qualifications:</h4>
-                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                  {programOfficer.qualifications.map((qual, index) => (
-                    <Badge key={index} variant="secondary">{qual}</Badge>
-                  ))}
-                </div>
-              </div>
-
-              <p className="text-gray-600">{programOfficer.experience}</p>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </motion.div>
 
       {/* Volunteer Leaders Section */}
       <div>
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">Volunteer Leadership Team</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {volunteerLeaders.map((leader, index) => (
-            <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
-              <CardContent className="p-6 text-center">
-                <img
-                  src={leader.image}
-                  alt={leader.name}
-                  className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-3 border-blue-200"
-                />
-                <h3 className="text-xl font-bold text-gray-900 mb-1">{leader.name}</h3>
-                <p className="text-blue-600 font-semibold mb-2">{leader.role}</p>
-                <p className="text-gray-600 mb-2">{leader.year} • {leader.program}</p>
+            <motion.div
+              key={index}
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
+              custom={index + 1}
+            >
+              <Card>
+                <CardContent className="p-6 text-center">
+                  <img
+                    src={leader.image}
+                    alt={leader.name}
+                    className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-blue-200"
+                  />
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">{leader.name}</h3>
+                  <p className="text-blue-600 font-semibold mb-2">{leader.role}</p>
+                  <p className="text-gray-600 mb-2">{leader.year} • {leader.program}</p>
 
-                <div className="flex items-center justify-center space-x-2 mb-4">
-                  <Mail className="h-4 w-4 text-gray-500" />
-                  <span className="text-sm text-gray-700">{leader.email}</span>
-                </div>
+                  <div className="flex items-center justify-center space-x-2 mb-4">
+                    <Mail className="h-4 w-4 text-gray-500" />
+                    <span className="text-sm text-gray-700">{leader.email}</span>
+                  </div>
 
-                <div className="space-y-1">
-                  {leader.achievements.map((achievement, idx) => (
-                    <Badge key={idx} variant="outline" className="text-xs">
-                      {achievement}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {leader.achievements.map((achievement, idx) => (
+                      <Badge key={idx} variant="outline">{achievement}</Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -163,53 +184,57 @@ const NSSStructure = () => {
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">NSS Units</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {units.map((unit, index) => (
-            <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-2xl text-blue-600">{unit.name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{unit.volunteers}</div>
-                <div className="text-sm text-gray-600 mb-4">Active Volunteers</div>
-                <Badge className="bg-blue-100 text-blue-800">{unit.focus}</Badge>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={index}
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
+              custom={index + 1}
+            >
+              <Card className="text-center">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-2xl text-blue-600">{unit.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-gray-900 mb-2">{unit.volunteers}</div>
+                  <div className="text-sm text-gray-600 mb-4">Active Volunteers</div>
+                  <Badge className="bg-blue-100 text-blue-800">{unit.focus}</Badge>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
 
       {/* Organizational Chart */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">Organizational Hierarchy</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col items-center space-y-8">
-            <div className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold">
-              Program Officer
-            </div>
-            <div className="w-px h-8 bg-gray-300"></div>
-            <div className="flex flex-wrap justify-center gap-4">
-              <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-medium">
-                NSS Secretary
+      <motion.div variants={fadeIn} initial="hidden" animate="visible" custom={1}>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl text-center">Organizational Hierarchy</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col items-center space-y-8">
+              <div className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold">
+                Program Officer
               </div>
-              <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-medium">
-                Joint Secretary
+              <div className="w-px h-8 bg-gray-300"></div>
+              <div className="flex flex-wrap justify-center gap-4">
+                <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-medium">NSS Secretary</div>
+                <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-medium">Joint Secretary</div>
+                <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-medium">Volunteer Coordinator</div>
               </div>
-              <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-medium">
-                Volunteer Coordinator
+              <div className="w-px h-8 bg-gray-300"></div>
+              <div className="flex flex-wrap justify-center gap-4">
+                {units.map((unit, index) => (
+                  <div key={index} className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg">
+                    {unit.name} ({unit.volunteers} Volunteers)
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="w-px h-8 bg-gray-300"></div>
-            <div className="flex flex-wrap justify-center gap-4">
-              {units.map((unit, index) => (
-                <div key={index} className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg">
-                  {unit.name} ({unit.volunteers} Volunteers)
-                </div>
-              ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 };
