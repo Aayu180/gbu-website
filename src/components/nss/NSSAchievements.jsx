@@ -15,7 +15,9 @@ const Card = ({ children, className = '', ...props }) => (
 );
 
 const CardHeader = ({ children, className = '', ...props }) => (
+
   <div className={`px-6 py-4 ${className}`} {...props}>{children}</div>
+
 );
 
 const CardTitle = ({ children, className = '', ...props }) => (
@@ -183,12 +185,14 @@ const NSSAchievements = () => {
   };
 
   return (
+
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="space-y-8 mx-20"
     >
+
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Achievements & Recognition</h2>

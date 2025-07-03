@@ -26,9 +26,9 @@ const Faculty = () => {
     const fetchAllData = async () => {
       try {
         const [facultyRes, directoryRes, joinRes] = await Promise.all([
-          axios.get(`${VITE_HOST}academic/faculty/members/`),
-          axios.get(`${VITE_HOST}academic/faculty/directory/`),
-          axios.get(`${VITE_HOST}academic/faculty/join/`)
+          axios.get(`${VITE_HOST}/academic/faculty/members/`),
+          axios.get(`${VITE_HOST}/academic/faculty/directory/`),
+          axios.get(`${VITE_HOST}/academic/faculty/join/`)
         ]);
         setFacultyMembers(facultyRes.data);
         setDirectoryStats(directoryRes.data[0]);

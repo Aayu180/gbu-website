@@ -235,6 +235,7 @@ const NSSActivities = () => {
   };
 
   return (
+
     <motion.div
       className="space-y-8 py-10 px-4 mx-20 sm:px-6 lg:px-8 bg-gray-50"
       initial="hidden"
@@ -254,6 +255,7 @@ const NSSActivities = () => {
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           NSS Activities
         </h2>
+
         <p className="text-lg text-gray-600">
           Explore our community service initiatives and their impact on society
         </p>

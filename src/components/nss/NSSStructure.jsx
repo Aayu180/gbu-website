@@ -1,9 +1,11 @@
+
 import React from "react";
 import { Mail, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Card, Header, Title, Content, Badge Components
 const Card = ({ className = "", children }) => (
+
   <motion.div
     className={`bg-white rounded-lg border-gray-300 shadow ${className}`}
     whileHover={{ scale: 1.03 }}
@@ -14,13 +16,16 @@ const Card = ({ className = "", children }) => (
   </motion.div>
 );
 
+
 const CardHeader = ({ className = "", children }) => (
+
   <div className={`px-6 py-4 ${className}`}>{children}</div>
 );
 
 const CardTitle = ({ className = "", children }) => (
   <h2 className={`font-bold ${className}`}>{children}</h2>
 );
+
 
 const CardContent = ({ className = "", children }) => (
   <div className={`px-6 pb-6 ${className}`}>{children}</div>
@@ -34,6 +39,7 @@ const Badge = ({ className = "", variant = "", children }) => {
       : variant === "outline"
       ? "border border-blue-400 text-blue-700 bg-white"
       : "bg-gray-100 text-gray-700";
+
   return <span className={`${base} ${color} ${className}`}>{children}</span>;
 };
 
@@ -160,14 +166,17 @@ const NSSStructure = () => {
     visible: (i = 1) => ({
       opacity: 1,
       y: 0,
+
       transition: { delay: i * 0.2, duration: 0.5 },
     }),
+
   };
 
   return (
     <div className="space-y-12 mx-20">
       {/* Program Officer Section */}
       <motion.div variants={fadeIn} initial="hidden" animate="visible">
+
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
           University Coordinators
         </h2>
@@ -270,6 +279,7 @@ const NSSStructure = () => {
         ))}
       </div>
 
+
       {/* Volunteer Leaders Section */}
       <div>
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
@@ -284,16 +294,19 @@ const NSSStructure = () => {
               animate="visible"
               custom={index + 1}
             >
+
               <Card className=" hover:shadow-md
         hover:scale-105
         transform
         transition-all duration-300 ">
                 <CardContent className="p-6 text-center ">
+
                   <img
                     src={leader.image}
                     alt={leader.name}
                     className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-blue-200"
                   />
+
                   <h3 className="text-xl font-bold text-gray-900 mb-1">
                     {leader.name}
                   </h3>
@@ -309,13 +322,16 @@ const NSSStructure = () => {
                     <span className="text-sm text-gray-700">
                       {leader.email}
                     </span>
+
                   </div>
 
                   <div className="flex flex-wrap gap-2 justify-center">
                     {leader.achievements.map((achievement, idx) => (
+
                       <Badge key={idx} variant="outline">
                         {achievement}
                       </Badge>
+
                     ))}
                   </div>
                 </CardContent>
@@ -339,6 +355,7 @@ const NSSStructure = () => {
               animate="visible"
               custom={index + 1}
             >
+
               <Card className="text-center  hover:shadow-md
         hover:scale-105
         transform
@@ -358,6 +375,7 @@ const NSSStructure = () => {
                   <Badge className="bg-blue-100 text-blue-800">
                     {unit.focus}
                   </Badge>
+
                 </CardContent>
               </Card>
             </motion.div>
@@ -366,6 +384,7 @@ const NSSStructure = () => {
       </div>
 
       {/* Organizational Chart */}
+
       <motion.div
         variants={fadeIn}
         initial="hidden"
@@ -377,6 +396,7 @@ const NSSStructure = () => {
             <CardTitle className="text-2xl text-center">
               Organizational Hierarchy
             </CardTitle>
+
           </CardHeader>
           <CardContent>
             <div className="flex flex-col items-center space-y-8">
@@ -385,6 +405,7 @@ const NSSStructure = () => {
               </div>
               <div className="w-px h-8 bg-gray-300"></div>
               <div className="flex flex-wrap justify-center gap-4">
+
                 <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-medium">
                   NSS Secretary
                 </div>
@@ -394,14 +415,17 @@ const NSSStructure = () => {
                 <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-medium">
                   Volunteer Coordinator
                 </div>
+
               </div>
               <div className="w-px h-8 bg-gray-300"></div>
               <div className="flex flex-wrap justify-center gap-4">
                 {units.map((unit, index) => (
+
                   <div
                     key={index}
                     className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg"
                   >
+
                     {unit.name} ({unit.volunteers} Volunteers)
                   </div>
                 ))}

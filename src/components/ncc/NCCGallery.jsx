@@ -1,5 +1,6 @@
  import React, { useState } from 'react';
 import { motion, AnimatePresence  } from 'framer-motion';
+
 import {
   Camera,
   Filter,
@@ -238,7 +239,7 @@ const NCCGallery = () => {
   };
 const [dialogImage, setDialogImage] = useState(null);
   return (
-    
+
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -300,7 +301,9 @@ const [dialogImage, setDialogImage] = useState(null);
       </motion.div>
 
       {/* GALLERY GRID */}
+
       {/* <div className="space-y-8">
+
         {filteredItems.map((item) => (
           <motion.div
             key={item.id}
@@ -328,6 +331,7 @@ const [dialogImage, setDialogImage] = useState(null);
                     </Badge>
                     <Badge variant="outline">{item.year}</Badge>
                   </div>
+
                 </div>
               </CardHeader>
               <CardContent>
@@ -459,6 +463,7 @@ const [dialogImage, setDialogImage] = useState(null);
                 </button>
               </div>
             </div>
+
           </motion.div>
         ))}
       </motion.div>
@@ -523,6 +528,7 @@ const [dialogImage, setDialogImage] = useState(null);
           </motion.div>
         )}
       </AnimatePresence>
+
       {/* VIDEO SECTION */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

@@ -222,6 +222,7 @@ const NSSEvents = () => {
   };
 
   return (
+
     <motion.div
       initial="hidden"
       animate="visible"
@@ -231,6 +232,7 @@ const NSSEvents = () => {
       }}
       className="space-y-8 mx-20"
     >
+
       {/* Header */}
       <motion.div
         variants={{

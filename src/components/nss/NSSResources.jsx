@@ -178,6 +178,7 @@ const NSSResources = () => {
   };
 
   return (
+
     <motion.div
       className="space-y-12 mx-4 md:mx-20"
       initial="hidden"
@@ -198,6 +199,7 @@ const NSSResources = () => {
           </p>
         </div>
       </motion.div>
+
 
       {/* Handbooks */}
       <motion.div variants={fadeUp} custom={1}>
