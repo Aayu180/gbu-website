@@ -115,7 +115,7 @@ const NCCStructure = () => {
     <div className="space-y-8 mx-20">
       {/* ANO Section */}
       <Card className="overflow-hidden mr-5 ml-5">
-        <CardHeader className="bg-gradient-to-r  from-blue-600 to-blue-400 text-white">
+        <CardHeader className=" bg-gradient-to-r from-blue-600 to-purple-600 text-white">
           <CardTitle className="text-2xl flex items-center">
             <Shield className="h-6 w-6 mr-2" />
             Associate NCC Officer (ANO)

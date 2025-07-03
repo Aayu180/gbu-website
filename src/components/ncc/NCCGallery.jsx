@@ -1,5 +1,5 @@
  import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence  } from 'framer-motion';
 import {
   Camera,
   Filter,
@@ -198,7 +198,7 @@ const NCCGallery = () => {
       year: '2024',
       date: '2024-01-26',
       images: [
-        { url: '/placeholder.svg', caption: 'RDC participants marching' },
+        { url: 'https://static.mygov.in/indiancc/2021/05/mygov-9999999991614076475-1024x576.jpg', caption: 'RDC participants marching' },
         { url: '/placeholder.svg', caption: 'Cultural program at RDC' },
         { url: '/placeholder.svg', caption: 'Award ceremony' },
         { url: '/placeholder.svg', caption: 'Meeting with dignitaries' },
@@ -236,8 +236,9 @@ const NCCGallery = () => {
     };
     return colors[category] || 'bg-gray-100 text-gray-800';
   };
-
+const [dialogImage, setDialogImage] = useState(null);
   return (
+    
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -299,7 +300,7 @@ const NCCGallery = () => {
       </motion.div>
 
       {/* GALLERY GRID */}
-      <div className="space-y-8">
+      {/* <div className="space-y-8">
         {filteredItems.map((item) => (
           <motion.div
             key={item.id}
@@ -343,12 +344,12 @@ const NCCGallery = () => {
                             alt={image.caption}
                             className="w-full h-32 object-cover rounded-lg"
                           />
-                          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
+                          <div className="absolute field inset-0  bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
                             <Eye className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                           </div>
                         </motion.div>
                       </DialogTrigger>
-                      <DialogContent className="max-w-4xl">
+                      <DialogContent className="max-w-4xl mb-5">
                         <div className="space-y-4">
                           <img
                             src={image.url}
@@ -378,8 +379,150 @@ const NCCGallery = () => {
             </Card>
           </motion.div>
         ))}
-      </div>
+      </div> */}
+{/* GALLERY GRID */}
+      <motion.div
+        className="space-y-8"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.2 } },
+        }}
+      >
+        {filteredItems.map((item) => (
+          <motion.div
+            key={item.id}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            className="bg-white rounded-lg shadow overflow-hidden"
+          >
+            <div className="p-4 border-b border-gray-200">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="font-semibold text-xl text-gray-900">{item.title}</h3>
+                  <p className="text-gray-600 mt-1">
+                    {new Date(item.date).toLocaleDateString("en-IN", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
+                </div>
+                <div className="flex space-x-2">
+                  <span
+                    className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${getCategoryColor(
+                      item.category
+                    )}`}
+                  >
+                    {item.category}
+                  </span>
+                  <span className="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-gray-300 text-gray-700 bg-white">
+                    {item.year}
+                  </span>
+                </div>
+              </div>
+            </div>
 
+            <div className="p-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {item.images.map((image, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={{ scale: 1.05 }}
+                    className="relative group cursor-pointer"
+                    onClick={() => setDialogImage(image)}
+                  >
+                    <img
+                      src={image.url}
+                      alt={image.caption}
+                      className="w-full h-32 object-cover rounded-lg"
+                    />
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      className="absolute inset-0 bg-black bg-opacity-50 rounded-lg flex items-center justify-center"
+                    >
+                      <Eye className="h-6 w-6 text-white" />
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
+                <span className="text-sm text-gray-600">{item.images.length} photos</span>
+                <button className="flex items-center gap-2 px-4 py-2 text-sm border rounded text-gray-700 bg-white hover:bg-gray-50">
+                  <Download className="h-4 w-4" />
+                  Download All
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* DIALOG */}
+      <AnimatePresence>
+        {dialogImage && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-start justify-center bg-white/80 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setDialogImage(null)}
+          >
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="bg-white rounded-xl shadow-2xl p-4 md:p-6 w-[90vw] max-w-xl relative mt-32"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 focus:outline-none"
+                onClick={() => setDialogImage(null)}
+                aria-label="Close"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+
+              <div className="space-y-3">
+                <div className="flex items-center justify-center">
+                  <img
+                    src={dialogImage.url}
+                    alt={dialogImage.caption}
+                    className="rounded-md object-contain max-h-[60vh]"
+                  />
+                </div>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                  <p className="text-gray-700 text-center sm:text-left">{dialogImage.caption}</p>
+                  <button className="flex items-center gap-2 px-4 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700 transition">
+                    <Download className="h-4 w-4" />
+                    Download
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* VIDEO SECTION */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
