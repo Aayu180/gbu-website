@@ -5,7 +5,7 @@ const Badge = ({ children, className = '', variant = 'default', ...props }) => {
   const baseStyle =
     'inline-block rounded-full font-medium text-sm px-2 py-1';
   const variants = {
-    default: 'bg-gray-200 text-gray-800',
+    default: 'bg-blue-200 text-blue-800',
     outline: 'border border-blue-400 bg-white text-blue-800',
   };
   return (

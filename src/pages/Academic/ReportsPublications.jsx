@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {
   FileText, Download, Calendar, Eye, BookOpen,
@@ -8,6 +9,8 @@ import {
 const ReportsPublications = () => {
   const [hero, setHero] = useState(null);
   const [reports, setReports] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const BASE = import.meta.env.VITE_HOST?.replace(/\/$/, '');
 
@@ -29,91 +32,32 @@ const ReportsPublications = () => {
   };
 
   useEffect(() => {
-    // Static realistic data simulation for GBU context
-    const heroData = {
-      title: 'Reports & Publications',
-      description:
-        'Explore a comprehensive collection of institutional reports, financial audits, accreditations, and student achievements from Gautam Buddha University.',
-      sub_title: 'Transparency & Academic Excellence',
-      sub_description:
-        'We prioritize openness and continuous improvement through timely reporting and documentation across academic and administrative domains.',
-      reprts_count: 120,
-      accreditation_count: 8,
-      acheivements_counts: 45
+    const fetchData = async () => {
+      try {
+        const [heroRes, reportsRes] = await Promise.all([
+          axios.get(`${BASE}/academic/reports/hero/`),
+          axios.get(`${BASE}/academic/reports/list/`)
+        ]);
+
+        setHero(heroRes.data[0]);
+        setReports(reportsRes.data);
+      } catch (error) {
+        console.error('Error fetching reports data:', error);
+      }
     };
 
-    const reportsData = [
-      {
-        id: 1,
-        card_title: 'Annual Institutional Report 2024',
-        card_desc: 'A detailed account of academic, research, and administrative activities for the year 2024.',
-        category: 'Institutional',
-        date: '2025-03-15',
-        downloads: 2356,
-        pages: 120,
-        file_size_mb: 5.4,
-        file: 'downloads/reports/annual_report_2024.pdf'
-      },
-      {
-        id: 2,
-        card_title: 'NAAC Accreditation Report',
-        card_desc: 'NAAC peer team report with institutional assessment outcomes and recommendations.',
-        category: 'Accreditation',
-        date: '2023-11-05',
-        downloads: 1728,
-        pages: 84,
-        file_size_mb: 3.2,
-        file: 'downloads/reports/naac_accreditation.pdf'
-      },
-      {
-        id: 3,
-        card_title: 'Finance Audit Report 2023-24',
-        card_desc: 'Audit report covering university finances, grants, and expenditures for FY 2023-24.',
-        category: 'Finance',
-        date: '2024-07-20',
-        downloads: 980,
-        pages: 95,
-        file_size_mb: 4.1,
-        file: 'downloads/reports/finance_audit_2023.pdf'
-      },
-      {
-        id: 4,
-        card_title: 'Student Achievements Digest 2024',
-        card_desc: 'A compilation of national and international accolades received by students.',
-        category: 'Student',
-        date: '2025-01-25',
-        downloads: 1460,
-        pages: 52,
-        file_size_mb: 2.8,
-        file: 'downloads/reports/student_achievements_2024.pdf'
-      },
-      {
-        id: 5,
-        card_title: 'Academic Calendar Implementation Report',
-        card_desc: 'Monitoring and review of the academic schedule compliance across departments.',
-        category: 'Institutional',
-        date: '2024-06-15',
-        downloads: 894,
-        pages: 60,
-        file_size_mb: 2.5,
-        file: 'downloads/reports/academic_calendar_review.pdf'
-      },
-      {
-        id: 6,
-        card_title: 'IQAC Annual Quality Assurance Report (AQAR)',
-        card_desc: 'Annual report by the Internal Quality Assurance Cell as per NAAC guidelines.',
-        category: 'Accreditation',
-        date: '2024-12-10',
-        downloads: 1120,
-        pages: 88,
-        file_size_mb: 3.9,
-        file: 'downloads/reports/iqac_aqar_2024.pdf'
-      }
-    ];
+    fetchData();
+  }, [BASE]);
 
-    setHero(heroData);
-    setReports(reportsData);
-  }, []);
+  const filteredReports = reports.filter(report => {
+    const matchesCategory =
+      selectedCategory === 'All' ||
+      report.category.toLowerCase() === selectedCategory.toLowerCase();
+    const matchesSearch =
+      report.card_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      report.card_desc.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   if (!hero) return <div className="text-center py-20">Loading...</div>;
 
@@ -187,8 +131,9 @@ const ReportsPublications = () => {
             {categories.map((category, index) => (
               <button
                 key={index}
+                onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  index === 0
+                  selectedCategory === category
                     ? 'bg-blue-600 text-white'
                     : 'bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600'
                 }`}
@@ -199,14 +144,15 @@ const ReportsPublications = () => {
             <input
               type="text"
               placeholder="Search reports..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="ml-4 px-4 py-2 rounded-full border border-gray-300 border-solid focus:outline-none focus:ring-2 focus:ring-blue-200 text-sm"
               style={{ minWidth: 200 }}
-              disabled
             />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {reports.map((report, index) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 mx-10 gap-8">
+            {filteredReports.map((report, index) => (
               <div
                 key={report.id}
                 className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 animate-fade-in"

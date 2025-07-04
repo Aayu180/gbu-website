@@ -93,7 +93,7 @@ const Index = lazy(() =>
 const Publications = lazy(() =>
   import("../pages/Reasearch/researchhighlights/Publications.jsx")
 );
- 
+
 const ResearchCenters = lazy(() =>
   import("../pages/Reasearch/ResearchCenters.jsx")
 );
@@ -125,6 +125,8 @@ import LaboratoryCards from "../pages/departments/laboratries.jsx";
 // import MediaCoverage from "../pages/Announcements/MediaCoverage.jsx";
 import Placement_home from "../pages/Placement/Placement_home.jsx";
 
+import RTI from "../pages/RTI.jsx";
+
 export default function AppRouter() {
   return (
     <Suspense
@@ -138,7 +140,7 @@ export default function AppRouter() {
         <Routes>
           {/* About Us Routes */}
           <Route path="/" element={<Home />} />
-        <Route path="/about-us/About GBU" element={<Vision />} />
+          <Route path="/about-us/About GBU" element={<Vision />} />
           <Route path="/about-us/chancellor-message" element={<Chancellor />} />
           <Route
             path="/about-us/vice-chancellor-message"
@@ -267,7 +269,7 @@ export default function AppRouter() {
             path="/campus-life/clubs-societies"
             element={<ClubsCouncils />}
           />
-           <Route path="/club/:clubId" element={<ClubDetail />} />
+          <Route path="/club/:clubId" element={<ClubDetail />} />
           <Route path="/campus-life/NSS" element={<NSS />} />
           <Route path="/campus-life/NCC" element={<NCC />} />
 
@@ -293,8 +295,8 @@ export default function AppRouter() {
             path="/announcements/event-calendar/:id"
             element={<EventDetail />}
           />
-          <Route path="/announcements/notices" element={<Notice/>} />
-          <Route path="/announcements/notices/:id" element={<NoticeDetail/>} />
+          <Route path="/announcements/notices" element={<Notice />} />
+          <Route path="/announcements/notices/:id" element={<NoticeDetail />} />
           <Route
             path="/announcements/media-gallery"
             element={<MediaGallery />}
@@ -302,7 +304,7 @@ export default function AppRouter() {
 
           <Route
             path="/announcements/newsletter"
-            element={<NewsLetter/>}
+            element={<NewsLetter />}
           />
 
           {/* Placements Routes */}
@@ -360,6 +362,9 @@ export default function AppRouter() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/escalation-policy" element={<EscalationPolicy />} />
+
+          <Route path="/rti" element={<RTI />} />
+
         </Routes>
       </AuthProvider>
     </Suspense>
