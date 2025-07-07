@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Play, Users, Award } from 'lucide-react';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 const Button = ({ children, className = '', variant = 'default', size = 'md', ...props }) => {
   const base =
     'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500';
@@ -50,6 +51,7 @@ const ClubHero = ({ club }) => {
 
   return (
     <>
+    <SearchableWrapper>
       <div className="relative bg-gradient-to-r from-blue-900 via-purple-900 to-blue-800 text-white overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-black/20">
@@ -164,6 +166,7 @@ const ClubHero = ({ club }) => {
           </div>
         </div>
       )}
+      </SearchableWrapper>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Share2, Facebook, Twitter, Linkedin, MessageCircle } from 'lucide-react';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 // Button component
 const Button = ({ children, className = "", size = "md", variant = "default", ...props }) => {
@@ -119,6 +120,7 @@ const SocialShare = ({ url, title, className = "" }) => {
   ];
 
   return (
+    <SearchableWrapper>
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className={`flex items-center gap-2 ${className}`}>
@@ -142,6 +144,7 @@ const SocialShare = ({ url, title, className = "" }) => {
         </div>
       </PopoverContent>
     </Popover>
+    </SearchableWrapper>
   );
 };
 

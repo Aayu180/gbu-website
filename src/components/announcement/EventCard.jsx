@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, ExternalLink } from 'lucide-react';
 import { format } from 'date-fns';
 import SocialShare from './SocialShare';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 // Card component
 const Card = ({ className = '', children }) => (
@@ -79,6 +80,7 @@ const EventCard = ({ event, isPastEvent = false }) => {
   };
 
   return (
+    <SearchableWrapper>
     <Link to={`/announcements/event-calendar/${event.id}`} className="block group">
       <Card
         className={`h-130 flex flex-col hover:shadow-2xl transition-shadow duration-300 
@@ -149,6 +151,7 @@ const EventCard = ({ event, isPastEvent = false }) => {
         </CardContent>
       </Card>
     </Link>
+    </SearchableWrapper>
   );
 };
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Mail, User } from 'lucide-react';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
+
 const Card = ({ className = '', children }) => (
   <div className={`bg-white rounded-lg shadow ${className}`}>{children}</div>
 );
@@ -26,6 +28,7 @@ const ClubTeam = ({ club }) => {
   ];
 
   return (
+    <SearchableWrapper>
     <div className="space-y-8">
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
@@ -147,6 +150,7 @@ const ClubTeam = ({ club }) => {
         </CardContent>
       </Card>
     </div>
+    </SearchableWrapper>
   );
 };
 

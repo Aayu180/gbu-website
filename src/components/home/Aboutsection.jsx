@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import SearchableWrapper from "../Searchbar/SearchableWrapper";
 
 const BASE_URL = import.meta.env.VITE_HOST || "";
 
@@ -12,7 +13,7 @@ export default function AboutSection() {
         const res = await axios.get(`${BASE_URL}/landing/about/`);
         const data = res.data;
         console.log("Fetched aboutData:", data);
-        setAboutData(data[0]); // ✅ first object from array
+        setAboutData(data[0]); 
       } catch (error) {
         console.error("Fetch error:", error);
       }
@@ -28,6 +29,7 @@ export default function AboutSection() {
     : `${BASE_URL}/${aboutData.image.startsWith("media") ? "" : "media/"}${aboutData.image}`;
 
   return (
+     <SearchableWrapper>
     <div className="bg-white py-12 px-6 sm:py-16 sm:px-10 md:px-20">
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
 
@@ -79,5 +81,6 @@ export default function AboutSection() {
         </div>
       </div>
     </div>
+    </SearchableWrapper>
   );
 }

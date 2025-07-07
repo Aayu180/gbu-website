@@ -1,6 +1,7 @@
  
 import React, { useState, useEffect, Children, cloneElement } from 'react';
 import { FileText, Download, ChevronDown, ChevronUp, Calendar } from 'lucide-react';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 // Card Components
 const Card = ({ children, className = "" }) => (
@@ -93,6 +94,7 @@ const ClubPolicies = ({ club }) => {
   };
 
   return (
+    <SearchableWrapper>
     <div className="space-y-6 bg-gray-50 p-6 md:p-10 rounded-xl">
       <div className="text-center">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Club Policies & Guidelines</h2>
@@ -163,6 +165,7 @@ const ClubPolicies = ({ club }) => {
         </Card>
       </div>
     </div>
+    </SearchableWrapper>
   );
 };
 

@@ -1,6 +1,7 @@
 import SearchFilter from './SearchFilter';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 const EventFilters = ({
   onSearch,
@@ -13,6 +14,7 @@ const EventFilters = ({
   const [hovered, setHovered] = useState(false);
 
   return (
+    <SearchableWrapper>
     <div
       className={`bg-gradient-to-br from-slate-50 to-blue-100 rounded-[22px] shadow-lg w-full py-2  mx-auto flex flex-col items-center border border-slate-300 transition-shadow duration-200 ${
         hovered ? 'shadow-2xl border-indigo-500' : ''
@@ -37,6 +39,7 @@ const EventFilters = ({
         placeholder="Search events, types, or years..."
       /></div>
     </div>
+    </SearchableWrapper>
   );
 };
 

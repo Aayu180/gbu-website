@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 // Utility: Conditional class join
 function cn(...args) {
@@ -190,6 +191,7 @@ const SearchFilter = ({
   const clearSearch = () => { setSearchQuery(''); onSearch(''); };
 
   return (
+    <SearchableWrapper>
     <div className="bg-gradient-to-br from-blue-50 to-white p-2 rounded-2xl mb-2 shadow-2xl border border-blue-100">
       <form onSubmit={handleSearch} className="space-y-2">
         <div className="flex flex-col md:flex-row gap-6 items-center">
@@ -281,6 +283,7 @@ const SearchFilter = ({
         </div>
       </form>
     </div>
+    </SearchableWrapper>
   );
 };
 

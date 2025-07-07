@@ -1,4 +1,4 @@
- import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   User,
@@ -9,12 +9,13 @@ import {
   Camera,
   Briefcase,
   Users,
-  Search,
   ChevronDown,
   ChevronUp,
   Menu,
   X,
 } from "lucide-react";
+import SearchBar from "../Searchbar/searchbar";
+import SearchableWrapper from "../Searchbar/SearchableWrapper";
 
 // Navigation configuration data
 const NAVIGATION_CONFIG = [
@@ -87,12 +88,10 @@ const NAVIGATION_CONFIG = [
       { 
         slug: "NSS", 
         label: "National Service Scheme (NSS)",
-        
       },
       { 
         slug: "NCC", 
         label: "National Cadet Corps (NCC)",
-        
       },
     ],
   },
@@ -319,20 +318,6 @@ const MobileMenuItem = ({ menu, isExpanded, onToggle, onSubmenuToggle }) => {
   );
 };
 
-const SearchButton = ({ isMobile = false }) => (
-  <button
-    className={`${
-      isMobile 
-        ? "w-full flex items-center gap-2 px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100" 
-        : "ml-4 p-2 hover:bg-gray-100 rounded-full text-gray-700"
-    } transition-colors`}
-    aria-label="Search"
-  >
-    <Search size={isMobile ? 16 : 20} />
-    {isMobile && "Search"}
-  </button>
-);
-
 // Main Navbar Component
 const Navbar = () => {
   const isScrolled = useScrollDetection();
@@ -351,71 +336,75 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className={`fixed top-9 left-0 w-full z-40 bg-white transition-all duration-300 ${
-        isScrolled ? "shadow-md" : "shadow"
-      }`}
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <div className="px-4 md:px-16">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center" aria-label="GBU Home">
-            <img
-              src="/assets/logo.svg"
-              alt="GBU Logo"
-              className="h-12 w-auto "
-            />
-          </Link>
+    <SearchableWrapper>
+      <nav
+        className={`fixed top-9 left-0 w-full z-40 bg-white transition-all duration-300 ${
+          isScrolled ? "shadow-md" : "shadow"
+        }`}
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        <div className="px-4 md:px-">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <Link to="/" className="flex items-center" aria-label="GBU Home">
+              <img
+                src="/assets/logo.svg"
+                alt="GBU Logo"
+                className="h-12 w-auto"
+              />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden xl:flex items-center">
-            <ul className="flex items-center space-x-1">
-              {navigationItems.map((menu) => (
-                <DesktopMenuItem
-                  key={menu.key}
-                  menu={menu}
-                  isActive={activeMenu === menu.key}
-                  onToggle={toggleMenu}
-                  menuRef={(ref) => setMenuRef(menu.key, ref)}
-                  onMenuClose={closeMenu}
-                />
-              ))}
-            </ul>
-            <SearchButton />
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={toggleMobile}
-            className="xl:hidden p-2 text-gray-700 transition-colors"
-            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMobileOpen}
-          >
-            {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMobileOpen && (
-          <div className="xl:hidden border-t border-gray-200">
-            <div className="py-2">
-              {navigationItems.map((menu) => (
-                <MobileMenuItem
-                  key={menu.key}
-                  menu={menu}
-                  isExpanded={expandedSubmenus.has(menu.key)}
-                  onToggle={closeMobile}
-                  onSubmenuToggle={toggleSubmenu}
-                />
-              ))}
-              <SearchButton isMobile />
+            {/* Desktop Navigation */}
+            <div className="hidden xl:flex items-center">
+              <ul className="flex items-center space-x-1">
+                {navigationItems.map((menu) => (
+                  <DesktopMenuItem
+                    key={menu.key}
+                    menu={menu}
+                    isActive={activeMenu === menu.key}
+                    onToggle={toggleMenu}
+                    menuRef={(ref) => setMenuRef(menu.key, ref)}
+                    onMenuClose={closeMenu}
+                  />
+                ))}
+              </ul>
+              {/* Desktop SearchBar */}
+              <SearchBar />
             </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={toggleMobile}
+              className="xl:hidden p-2 text-gray-700 transition-colors"
+              aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileOpen}
+            >
+              {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
-        )}
-      </div>
-    </nav>
+
+          {/* Mobile Navigation */}
+          {isMobileOpen && (
+            <div className="xl:hidden border-t border-gray-200">
+              <div className="py-2">
+                {navigationItems.map((menu) => (
+                  <MobileMenuItem
+                    key={menu.key}
+                    menu={menu}
+                    isExpanded={expandedSubmenus.has(menu.key)}
+                    onToggle={closeMobile}
+                    onSubmenuToggle={toggleSubmenu}
+                  />
+                ))}
+                {/* Mobile SearchBar */}
+                <SearchBar isMobile />
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+    </SearchableWrapper>
   );
 };
 

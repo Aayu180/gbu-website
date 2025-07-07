@@ -36,7 +36,7 @@ function App() {
             ) : (
               <Navbar />
             )}
-            <div className={isICTPage ? "pt-8" : "pt-[6.5rem]"}>
+            <div className={isICTPage ? "pt-8" : "pt-[6.3rem]"}>
               <AppRouter />
             </div>
             <Footer />

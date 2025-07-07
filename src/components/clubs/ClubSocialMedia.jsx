@@ -1,5 +1,6 @@
 import React from 'react';
 import { clubsData} from './data/clubsData';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 const Card = ({ children, className, ...props }) => (
   <div className={`rounded-lg shadow bg-white ${className ?? ''}`} {...props}>{children}</div>
@@ -59,6 +60,7 @@ const ClubSocialMedia = ({ club }) => {
   ].filter(link => link.url);
 
   return (
+    <SearchableWrapper>
     <Card className="sticky top-8">
       <CardHeader>
         <CardTitle className="text-lg text-gray-900 flex items-center gap-2">
@@ -89,6 +91,7 @@ const ClubSocialMedia = ({ club }) => {
         )}
       </CardContent>
     </Card>
+    </SearchableWrapper>
   );
 };
 
