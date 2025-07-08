@@ -1,6 +1,3 @@
-import Footer from "../../components/home/Footer.jsx";
-import Navbar from "../../components/home/Navbar.jsx";
-import Primarynavbar from "../../components/home/Primarynavbar.jsx";
 import WelcomePage from "../../components/home/HeroBanner.jsx";
 import QuickAccess from "../../components/home/Quicklink.jsx"
 import AboutSection from "../../components/home/Aboutsection.jsx";

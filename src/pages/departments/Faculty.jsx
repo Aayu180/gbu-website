@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import {
   Mail, Phone, Search, Filter, X, BookOpen
 } from 'lucide-react';
-import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 const Faculty = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -827,34 +826,39 @@ const Faculty = () => {
   };
 
   // Convert hierarchical faculty data to flat array
-  const getAllFaculty = () => {
-    const allFaculty = [];
-    Object.values(facultyData).forEach(dept => {
-      Object.values(dept.faculty).forEach(level => {
-        allFaculty.push(...level);
+ const getAllFaculty = () => {
+    const all = [];
+    Object.entries(facultyData).forEach(([deptId, dept]) => {
+      Object.values(dept.faculty).forEach(levelList => {
+        levelList.forEach(entry => {
+          all.push({
+            ...entry,
+            deptId
+          });
+        });
       });
     });
-    return allFaculty;
+    return all;
   };
-
   const filteredFaculty = getAllFaculty().filter(faculty => {
-    const matchesSearch = 
-      faculty.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      faculty.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      faculty.specialization.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      faculty.department.toLowerCase().includes(searchTerm.toLowerCase());
+     const matchesSearch = 
+    faculty.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    faculty.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (faculty.specialization|| '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    faculty.department.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesDepartment = selectedDepartment === 'All' || faculty.department.includes(departments.find(d => d.id === selectedDepartment)?.name || '');
+  const matchesDepartment = selectedDepartment === 'All' || faculty.deptId === selectedDepartment;
+const expYears = parseInt(faculty.experience) || 0;
+   const matchesExperience =
+      selectedExperience === 'All' ||
+      (selectedExperience === '0-5 years' && expYears <= 5) ||
+      (selectedExperience === '6-10 years' && expYears >= 6 && expYears <= 10) ||
+      (selectedExperience === '11-15 years' && expYears >= 11 && expYears <= 15) ||
+      (selectedExperience === '16+ years' && expYears >= 16);
 
-    const matchesExperience = selectedExperience === 'All' || 
-      (selectedExperience === '0-5 years' && faculty.experience.includes('5')) ||
-      (selectedExperience === '6-10 years' && faculty.experience.includes('10')) ||
-      (selectedExperience === '11-15 years' && faculty.experience.includes('15')) ||
-      (selectedExperience === '16+ years' && faculty.experience.includes('16'));
+  const matchesQualification = selectedQualification === 'All' || faculty.qualification === selectedQualification;
 
-    const matchesQualification = selectedQualification === 'All' || faculty.qualification === selectedQualification;
-
-    return matchesSearch && matchesDepartment && matchesExperience && matchesQualification;
+  return matchesSearch && matchesDepartment && matchesExperience && matchesQualification;
   });
 
   const clearFilters = () => {
@@ -865,7 +869,6 @@ const Faculty = () => {
   };
 
   return (
-    <SearchableWrapper>
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section with Dark Overlay */}
       <div className="relative h-[400px] bg-cover bg-center" style={{ backgroundImage: 'url(/assets/GBU.webp)' }}>
@@ -968,91 +971,92 @@ const Faculty = () => {
         )}
 
         {/* Department Sections */}
-        {['cse', 'it', 'ece', 'ocfd'].map((deptId) => {
-          const deptData = facultyData[deptId];
-          const deptFaculty = Object.values(deptData.faculty).flat();
-          
-          if ((selectedDepartment === 'All' || selectedDepartment === deptId) && deptFaculty.length > 0) {
-            return (
-              <div key={deptId} className="mb-12">
-                <div className="relative h-[200px] rounded-xl overflow-hidden shadow-lg">
-                  {/* Background image with overlay */}
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center" 
-                    style={{ backgroundImage: 'url(/assets/GBU.webp)' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/70" />
-                  
-                  {/* Content */}
-                  <div className="relative h-full flex flex-col justify-center px-8 py-6">
-                    <h2 className="text-3xl font-bold text-white mb-2">{deptData.name}</h2>
-                    <p className="text-gray-300 text-lg">{deptData.shortName} Department</p>
-                    
-                    {/* Large Department Code */}
-                    <div className="absolute right-8 top-1/2 -translate-y-1/2 text-[8rem] font-bold text-white/10">
-                      {deptData.shortName}
-                    </div>
-                </div>
-                </div>
+         {['cse', 'it', 'ece', 'ocfd'].map((deptId) => {
+  // Get department data
+  const deptData = facultyData[deptId];
+  
+  // ✅ Get filtered faculty for this department only
+  const deptFilteredFaculty = filteredFaculty.filter(f => f.deptId === deptId);
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                  {deptFaculty.map((faculty) => (
-                    <div
-                      key={faculty.id}
-                      className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                    >
-                      <div className="p-6">
-                        <div className="flex flex-col items-center text-center">
-                          <img
-                            src={faculty.image}
-                            alt={faculty.name}
-                            className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-200 transition-colors"
-                          />
-                          <h3 className="text-xl font-bold text-gray-800 mb-2">{faculty.name}</h3>
-                          <p className="text-blue-600 font-semibold mb-4">{faculty.title}</p>
-                          <div className="w-full space-y-3 mb-6">
-                            <div className="bg-gray-50 rounded-lg p-3">
-                              <p className="text-sm font-semibold text-gray-600 mb-1">Specialization</p>
-                              <p className="text-gray-800">{faculty.specialization}</p>
-                            </div>
-                            <div className="grid grid-cols-2 gap-3">
-                              <div className="bg-blue-50 rounded-lg p-3 text-center">
-                                <p className="text-lg font-bold text-blue-600">{faculty.experience}</p>
-                                <p className="text-xs text-gray-600">Experience</p>
-                              </div>
-                              <div className="bg-green-50 rounded-lg p-3 text-center">
-                                <p className="text-lg font-bold text-green-600">{faculty.publications}</p>
-                                <p className="text-xs text-gray-600">Publications</p>
-                              </div>
-                            </div>
-                            <div className="bg-gray-50 rounded-lg p-3">
-                              <p className="text-sm font-semibold text-gray-600 mb-1">Education</p>
-                              <p className="text-sm text-gray-800">{faculty.education}</p>
-                            </div>
-                          </div>
-                          <div className="w-full space-y-2">
-                            <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                              <Mail className="w-4 h-4" />
-                              <span>{faculty.email}</span>
-                            </div>
-                            <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                              <Phone className="w-4 h-4" />
-                              <span>{faculty.phone}</span>
-                            </div>
-                          </div>
-                        </div>
+  // Only render if any match
+  if (deptFilteredFaculty.length > 0) {
+    return (
+      <div key={deptId} className="mb-12">
+        <div className="relative h-[200px] rounded-xl overflow-hidden shadow-lg">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: 'url(/assets/GBU.webp)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/70" />
+
+          <div className="relative h-full flex flex-col justify-center px-8 py-6">
+            <h2 className="text-3xl font-bold text-white mb-2">{deptData.name}</h2>
+            <p className="text-gray-300 text-lg">{deptData.shortName} Department</p>
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 text-[8rem] font-bold text-white/10">
+              {deptData.shortName}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+          {deptFilteredFaculty.map((faculty) => (
+            <div
+              key={faculty.id}
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+            >
+              <div className="p-6">
+                <div className="flex flex-col items-center text-center">
+                  <img
+                    src={faculty.image}
+                    alt={faculty.name}
+                    className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-200 transition-colors"
+                  />
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{faculty.name}</h3>
+                  <p className="text-blue-600 font-semibold mb-4">{faculty.title}</p>
+                  <div className="w-full space-y-3 mb-6">
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <p className="text-sm font-semibold text-gray-600 mb-1">Specialization</p>
+                      <p className="text-gray-800">{faculty.specialization || "N/A"}</p>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="bg-blue-50 rounded-lg p-3 text-center">
+                        <p className="text-lg font-bold text-blue-600">{faculty.experience}</p>
+                        <p className="text-xs text-gray-600">Experience</p>
+                      </div>
+                      <div className="bg-green-50 rounded-lg p-3 text-center">
+                        <p className="text-lg font-bold text-green-600">{faculty.publications || "N/A"}</p>
+                        <p className="text-xs text-gray-600">Publications</p>
                       </div>
                     </div>
-                  ))}
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <p className="text-sm font-semibold text-gray-600 mb-1">Education</p>
+                      <p className="text-sm text-gray-800">{faculty.education}</p>
+                    </div>
+                  </div>
+                  <div className="w-full space-y-2">
+                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+                      <Mail className="w-4 h-4" />
+                      <span>{faculty.email}</span>
+                    </div>
+                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+                      <Phone className="w-4 h-4" />
+                      <span>{faculty.phone}</span>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-          );
-          }
-          return null;
-        })}
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+})}
+
       </div>
     </div>
-    </SearchableWrapper>
   );
 };
 

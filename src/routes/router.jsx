@@ -1,4 +1,4 @@
-import Home from "../pages/Aboutus/Home.jsx";
+ import Home from "../pages/Aboutus/Home.jsx";
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import InternshipProgrammes from "../pages/Placement/InternshipProgrammes.jsx";
@@ -48,6 +48,8 @@ import Contact from "../pages/grievance/Contact";
 import EscalationPolicy from "../pages/grievance/EscalationPolicy";
 import ComplaintDetail from "../pages/grievance/ComplaintDetail";
 import FacultyDashboard from "../pages/grievance/FacultyDashboard";
+import BiotechnologyLayout from "../components/departments/BiotechnologyLayout.jsx";
+import Biotechnology from "../pages/departments/Biotechnology.jsx";
 
 const AcademicCalendar = React.lazy(() =>
   import("../pages/Academic/AcademicCalendar.jsx")
@@ -93,7 +95,7 @@ const Index = lazy(() =>
 const Publications = lazy(() =>
   import("../pages/Reasearch/researchhighlights/Publications.jsx")
 );
-
+ 
 const ResearchCenters = lazy(() =>
   import("../pages/Reasearch/ResearchCenters.jsx")
 );
@@ -124,8 +126,9 @@ import LaboratoryCards from "../pages/departments/laboratries.jsx";
 // import NewsLetter from "../pages/Announcements/NewsLetter.jsx";
 // import MediaCoverage from "../pages/Announcements/MediaCoverage.jsx";
 import Placement_home from "../pages/Placement/Placement_home.jsx";
-
-import RTI from "../pages/RTI.jsx";
+import StaffMembers from "../pages/departments/StaffMembers.jsx";
+import Coedt from "../pages/departments/Coedt.jsx";
+import Raem from "../pages/departments/Raem.jsx";
 
 export default function AppRouter() {
   return (
@@ -140,7 +143,7 @@ export default function AppRouter() {
         <Routes>
           {/* About Us Routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/about-us/About GBU" element={<Vision />} />
+        <Route path="/about-us/About GBU" element={<Vision />} />
           <Route path="/about-us/chancellor-message" element={<Chancellor />} />
           <Route
             path="/about-us/vice-chancellor-message"
@@ -187,6 +190,47 @@ export default function AppRouter() {
           <Route path="/schools/ict" element={<ICTLayout />}>
             {/* ICT Home Page */}
             <Route index element={<ICTPage />} />
+
+            {/* Faculty */}
+            <Route path="faculty" element={<ICTFaculty />} />
+
+            {/* About Section */}
+            <Route
+              path="about/coeidrone"
+              element={<Coedt/>}
+            />
+            <Route path="about/dean" element={<Dean />} />
+            <Route
+              path="about/coeiraem"
+              element={<Raem/>}
+            />
+            <Route path="about/board" element={<BoardOfStudies />} />
+            <Route path="about/staff" element={<StaffMembers/>} />
+            <Route path="about/labs" element={<LaboratoryCards />} />
+            <Route path="about/activities" element={<Conferences />} />
+
+            {/* Departments */}
+            <Route path="departments/cse" element={<CSE />} />
+            <Route path="departments/it" element={<IT />} />
+            <Route path="departments/ece" element={<ECE />} />
+
+            {/* Research Section */}
+            <Route path="research/profile" element={<ResearchArea />} />
+            <Route
+              path="research/consultancy"
+              element={<TrainingConsultancy />}
+            />
+            <Route path="research/scholars" element={<ResearchScholars />} />
+            <Route path="research/projects" element={<ResearchProjects />} />
+            <Route path="research/patents" element={<Patents />} />
+
+            {/* Contact Page */}
+            <Route path="contact" element={<ICTContact />} />
+          </Route>
+
+          <Route path="/schools/Biotechnology" element={<BiotechnologyLayout />}>
+            {/* Biotechnology Home Page */}
+            <Route index element={<Biotechnology/>} />
 
             {/* Faculty */}
             <Route path="faculty" element={<ICTFaculty />} />
@@ -269,7 +313,7 @@ export default function AppRouter() {
             path="/campus-life/clubs-societies"
             element={<ClubsCouncils />}
           />
-          <Route path="/club/:clubId" element={<ClubDetail />} />
+           <Route path="/club/:clubId" element={<ClubDetail />} />
           <Route path="/campus-life/NSS" element={<NSS />} />
           <Route path="/campus-life/NCC" element={<NCC />} />
 
@@ -295,8 +339,8 @@ export default function AppRouter() {
             path="/announcements/event-calendar/:id"
             element={<EventDetail />}
           />
-          <Route path="/announcements/notices" element={<Notice />} />
-          <Route path="/announcements/notices/:id" element={<NoticeDetail />} />
+          <Route path="/announcements/notices" element={<Notice/>} />
+          <Route path="/announcements/notices/:id" element={<NoticeDetail/>} />
           <Route
             path="/announcements/media-gallery"
             element={<MediaGallery />}
@@ -304,7 +348,7 @@ export default function AppRouter() {
 
           <Route
             path="/announcements/newsletter"
-            element={<NewsLetter />}
+            element={<NewsLetter/>}
           />
 
           {/* Placements Routes */}
@@ -362,9 +406,6 @@ export default function AppRouter() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/escalation-policy" element={<EscalationPolicy />} />
-
-          <Route path="/rti" element={<RTI />} />
-
         </Routes>
       </AuthProvider>
     </Suspense>

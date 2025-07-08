@@ -1,95 +1,111 @@
-import { useState, useEffect } from "react";
+ import { useState, useEffect } from "react";
 import { Badge } from "../ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const RecentPlacements = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // 🔹 Dynamic Data Object
+  const data = {
+    heading: "Recent Placements",
+    subheading: "Our students securing positions at top companies",
+    sectionTitle: "Success Stories",
+    students: [
+      {
+        name: "Rahul Sharma",
+        company: "TCS",
+        package: "₹6.5 LPA",
+        department: "B.Tech CSE",
+        photo:
+          "https://images.unsplash.com/photo-1571945192246-4fcee13c27b1?w=200&h=200&fit=crop&crop=face",
+      },
+      {
+        name: "Priya Verma",
+        company: "BlackRock",
+        package: "₹16 LPA",
+        department: "B.Tech IT",
+        photo:
+          "https://images.unsplash.com/photo-1619346344241-3f6082489467?w=200&h=200&fit=crop&crop=face",
+      },
+      {
+        name: "Amit Kumar",
+        company: "Honda",
+        package: "₹8.2 LPA",
+        department: "B.Tech ME",
+        photo:
+          "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=200&h=200&fit=crop&crop=face",
+      },
+      {
+        name: "Neha Singh",
+        company: "HDFC Bank",
+        package: "₹7.5 LPA",
+        department: "MBA Finance",
+        photo:
+          "https://images.unsplash.com/photo-1619346344878-db3c555dab3a?w=200&h=200&fit=crop&crop=face",
+      },
+      {
+        name: "Aditya Patel",
+        company: "Paytm",
+        package: "₹12 LPA",
+        department: "B.Tech ECE",
+        photo:
+          "https://images.unsplash.com/photo-1634193295627-1cdddf751ebf?w=200&h=200&fit=crop&crop=face",
+      },
+      {
+        name: "Riya Gupta",
+        company: "HCL Technologies",
+        package: "₹7.8 LPA",
+        department: "MCA",
+        photo:
+          "https://images.unsplash.com/photo-1619346344878-db3c555dab3a?w=200&h=200&fit=crop&crop=face",
+      },
+      {
+        name: "Mohammed Siddiqui",
+        company: "Wipro",
+        package: "₹6.8 LPA",
+        department: "B.Tech CSE",
+        photo:
+          "https://images.unsplash.com/photo-1621784563330-caee0b138a00?w=200&h=200&fit=crop&crop=face",
+      },
+      {
+        name: "Ananya Reddy",
+        company: "OYO",
+        package: "₹9.5 LPA",
+        department: "MBA Marketing",
+        photo:
+          "https://images.unsplash.com/photo-1619346344878-db3c555dab3a?w=200&h=200&fit=crop&crop=face",
+      },
+    ],
+  };
 
-  const recentPlacements = [
-    {
-      name: "Rahul Sharma",
-      company: "TCS",
-      package: "₹6.5 LPA",
-      department: "B.Tech CSE",
-      photo: "https://images.unsplash.com/photo-1571945192246-4fcee13c27b1?w=200&h=200&fit=crop&crop=face",
-    },
-    {
-      name: "Priya Verma",
-      company: "BlackRock",
-      package: "₹16 LPA",
-      department: "B.Tech IT",
-      photo: "https://images.unsplash.com/photo-1619346344241-3f6082489467?w=200&h=200&fit=crop&crop=face",
-    },
-    {
-      name: "Amit Kumar",
-      company: "Honda",
-      package: "₹8.2 LPA",
-      department: "B.Tech ME",
-      photo: "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=200&h=200&fit=crop&crop=face",
-    },
-    {
-      name: "Neha Singh",
-      company: "HDFC Bank",
-      package: "₹7.5 LPA",
-      department: "MBA Finance",
-      photo: "https://images.unsplash.com/photo-1619346344878-db3c555dab3a?w=200&h=200&fit=crop&crop=face",
-    },
-    {
-      name: "Aditya Patel",
-      company: "Paytm",
-      package: "₹12 LPA",
-      department: "B.Tech ECE",
-      photo: "https://images.unsplash.com/photo-1634193295627-1cdddf751ebf?w=200&h=200&fit=crop&crop=face",
-    },
-    {
-      name: "Riya Gupta",
-      company: "HCL Technologies",
-      package: "₹7.8 LPA",
-      department: "MCA",
-      photo: "https://images.unsplash.com/photo-1619346344878-db3c555dab3a?w=200&h=200&fit=crop&crop=face",
-    },
-    {
-      name: "Mohammed Siddiqui",
-      company: "Wipro",
-      package: "₹6.8 LPA",
-      department: "B.Tech CSE",
-      photo: "https://images.unsplash.com/photo-1621784563330-caee0b138a00?w=200&h=200&fit=crop&crop=face",
-    },
-    {
-      name: "Ananya Reddy",
-      company: "OYO",
-      package: "₹9.5 LPA",
-      department: "MBA Marketing",
-      photo: "https://images.unsplash.com/photo-1619346344878-db3c555dab3a?w=200&h=200&fit=crop&crop=face",
-    }
-  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+const fallbackImage = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide(
-        (prev) => (prev + 1) % Math.ceil(recentPlacements.length / 2)
+        (prev) => (prev + 1) % Math.ceil(data.students.length / 2)
       );
     }, 4000);
     return () => clearInterval(timer);
-  }, [recentPlacements.length]);
+  }, [data.students.length]);
 
   const nextSlide = () => {
     setCurrentSlide(
-      (prev) => (prev + 1) % Math.ceil(recentPlacements.length / 2)
+      (prev) => (prev + 1) % Math.ceil(data.students.length / 2)
     );
   };
 
   const prevSlide = () => {
     setCurrentSlide(
       (prev) =>
-        (prev - 1 + Math.ceil(recentPlacements.length / 2)) %
-        Math.ceil(recentPlacements.length / 2)
+        (prev - 1 + Math.ceil(data.students.length / 2)) %
+        Math.ceil(data.students.length / 2)
     );
   };
 
   const getCurrentPlacements = () => {
     const startIndex = currentSlide * 2;
-    return recentPlacements.slice(startIndex, startIndex + 2);
+    return data.students.slice(startIndex, startIndex + 2);
   };
 
   return (
@@ -98,20 +114,18 @@ const RecentPlacements = () => {
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 text-blue-800">
-            Recent Placements
+            {data.heading}
           </h2>
-          <p className="text-xl text-gray-600">
-            Our students securing positions at top companies
-          </p>
+          <p className="text-xl text-gray-600">{data.subheading}</p>
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full" />
         </div>
 
-        {/* Content Card */}
+        {/* Card */}
         <div className="rounded-xl shadow-2xl border-0 bg-white backdrop-blur-sm relative overflow-hidden">
           <div className="bg-white border-b border-gray-200 p-4 text-center">
             <h3 className="flex justify-center items-center text-blue-800 text-lg font-bold">
               <div className="w-2 h-8 bg-blue-500 rounded-full mr-3" />
-              Success Stories
+              {data.sectionTitle}
             </h3>
           </div>
 
@@ -126,6 +140,7 @@ const RecentPlacements = () => {
                     <img
                       src={placement.photo}
                       alt={placement.name}
+                      onError={(e) => (e.target.src = fallbackImage)}
                       className="w-20 h-20 rounded-full object-cover ring-4 ring-yellow-300/30 group-hover:ring-yellow-400/60 transition-all duration-300"
                     />
                     <div className="flex-1">
@@ -167,7 +182,7 @@ const RecentPlacements = () => {
             {/* Dots */}
             <div className="flex justify-center mt-8 space-x-2">
               {Array.from({
-                length: Math.ceil(recentPlacements.length / 2),
+                length: Math.ceil(data.students.length / 2),
               }).map((_, index) => (
                 <button
                   key={index}

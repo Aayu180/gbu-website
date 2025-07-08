@@ -1,33 +1,38 @@
-const PlacementsSection = () => {
-  const placementStats = [
-  { label: "Placement Rate", value: "85‑90%", color: "bg-green-500" },
-  { label: "Highest Package", value: "₹51 LPA", color: "bg-blue-500" },
-  { label: "Average Package", value: "₹6 LPA", color: "bg-purple-500" },
-  { label: "Companies Visited", value: "150+", color: "bg-yellow-500" },
-];
+import React from "react";
 
+const PlacementsSection = () => {
+  // 🔹 Dynamic Placement Data (can be moved to API or MongoDB later)
+  const data = {
+    title: "Placements",
+    subTitle: "Connecting talent with opportunities",
+    heroImage:
+      "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1200&h=300&fit=crop",
+    placementStats: [
+      { label: "Placement Rate", value: "85‑90%", color: "bg-green-500" },
+      { label: "Highest Package", value: "₹51 LPA", color: "bg-blue-500" },
+      { label: "Average Package", value: "₹6 LPA", color: "bg-purple-500" },
+      { label: "Companies Visited", value: "150+", color: "bg-yellow-500" },
+    ],
+  };
+
+  const { title, subTitle, heroImage, placementStats } = data;
 
   return (
-    <section
-      id="placements"
-      className="py-20 bg-gray-100"
-    >
+    <section id="placements" className="py-20 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Heading */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-800">
-            Placements
+            {title}
           </h2>
-          <p className="text-xl text-gray-600">
-            Connecting talent with opportunities
-          </p>
+          <p className="text-xl text-gray-600">{subTitle}</p>
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-6 rounded-full" />
         </div>
 
         {/* Hero Image */}
         <div className="relative mb-12 rounded-2xl overflow-hidden shadow-lg group">
           <img
-            src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1200&h=300&fit=crop"
+            src={heroImage}
             alt="Placement Drive"
             className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
           />

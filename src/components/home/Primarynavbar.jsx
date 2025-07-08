@@ -39,7 +39,7 @@ const Primarynavbar = () => {
             <a href="https://tender-navigator-portal.vercel.app/" className="flex items-center gap-1 hover:underline">
               <Send size={14} /> Tenders
             </a>
-            <a href="https://recruit-hub-display.lovable.app/" className="flex items-center gap-1 hover:underline">
+            <a href="/recruitments" className="flex items-center gap-1 hover:underline">
               <Send size={14} /> Recruitments
             </a>
             <a href="https://mygbu-smart-booking.vercel.app" className="hover:underline">Booking</a>
@@ -109,7 +109,7 @@ const Primarynavbar = () => {
                 <a href="https://tender-navigator-portal.vercel.app/" className="block px-3 py-2 rounded-md hover:bg-gray-100">
                   Tenders
                 </a>
-                <a href="https://recruit-hub-display.lovable.app/" className="block px-3 py-2 rounded-md hover:bg-gray-100">
+                <a href="/recruitments" className="block px-3 py-2 rounded-md hover:bg-gray-100">
                   Recruitments
                 </a>
                 <a href="https://gbu-facility-bookings-39.lovable.app/" className="block px-3 py-2 rounded-md hover:bg-gray-100">

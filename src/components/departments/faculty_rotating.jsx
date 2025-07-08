@@ -3,8 +3,12 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const faculty = [
-  {
+// Sample fallback data for testing
+const defaultData = {
+  title: "Faculty of ICT",
+  subTitle: "",
+  facultyList: [
+     {
     name: "Dr. Arpit Bhardwaj",
     title: "Dean, CSE",
     image:
@@ -89,21 +93,26 @@ const faculty = [
     title: "Assistant Professor – IT",
     image: "https://faculty.gbu.ac.in/uploads/photos/67c1a9f10e9e1_profile_pic_ManeetSingh.jpg",
   },
-];
+  ],
+};
 
-export default function FacultyResponsiveSlider() {
+export default function FacultyResponsiveSlider({ data = defaultData }) {
+  const { title, subTitle, facultyList } = data;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [disableAnimation, setDisableAnimation] = useState(false);
   const navigate = useNavigate();
+
   const cardWidth = 280;
   const gap = 38;
   const moveBy = cardWidth + gap;
   const visibleCards = 4;
+  const loopData = [...facultyList, ...facultyList.slice(0, visibleCards)];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {
-        if (prev === faculty.length) {
+        if (prev === facultyList.length) {
           setDisableAnimation(true);
           setTimeout(() => {
             setCurrentIndex(0);
@@ -115,28 +124,33 @@ export default function FacultyResponsiveSlider() {
       });
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [facultyList.length]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) =>
+      prev === 0 ? facultyList.length - 1 : (prev - 1 + facultyList.length) % facultyList.length
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % (facultyList.length + 1));
+  };
 
   const handleCardClick = () => {
     navigate("/schools/ict/faculty");
   };
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? faculty.length - 1 : (prev - 1 + faculty.length) % faculty.length
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % (faculty.length + 1));
-  };
-
   return (
     <section className="py-10 bg-white overflow-hidden relative">
-      <h2 className="text-2xl sm:text-3xl font-bold text-center text-blue-700 mb-8">
-        Faculty of ICT
-        <div className="w-16 h-1 bg-blue-500 mx-auto mt-2 rounded-full"></div>
-      </h2>
+      <div className="text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-blue-700">
+          {title}
+          <div className="w-16 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+        </h2>
+        {subTitle && (
+          <p className="text-gray-600 text-sm mt-1">{subTitle}</p>
+        )}
+      </div>
 
       <div className="relative w-full max-w-7xl mx-auto px-4">
         <button
@@ -160,10 +174,10 @@ export default function FacultyResponsiveSlider() {
             }
             className="flex gap-[38px]"
             style={{
-              width: `${(cardWidth + gap) * (faculty.length + visibleCards)}px`,
+              width: `${(cardWidth + gap) * (facultyList.length + visibleCards)}px`,
             }}
           >
-            {[...faculty, ...faculty.slice(0, visibleCards)].map((member, i) => (
+            {loopData.map((member, i) => (
               <div
                 key={i}
                 onClick={handleCardClick}
