@@ -1,4 +1,5 @@
  import React from 'react';
+ import Meditation from '../../../assets/Meditation.jpeg';
 
 export default function Services() {
   const content = [
@@ -10,7 +11,7 @@ export default function Services() {
     {
       title: 'Meditation Centre',
       description: 'The centre is looking forward to organize seminars, lectures and experiential workshops in meditation, positive values, stress free living and self management.',
-      image: 'https://lh3.googleusercontent.com/gps-cs-s/AC9h4npYxVVIAlDFUcTnHZ_tVVIyyYE-jtRLfbLvJqGwxCQ1l9f9KK7i54YuIRPCLWMFVn3dEsqcEBXSM_QbfOA56v0CCf4gEjGocDaqvhv6yHmoUBsHrpRRWPeDd9rwfaMhWkll0mHclA=s680-w680-h510-rw',
+      image: Meditation,
     },
     {
       title: 'Central Computer Center',

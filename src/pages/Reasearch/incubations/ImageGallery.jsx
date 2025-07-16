@@ -56,7 +56,7 @@ export default function GallerySlider() {
         {/* Main Image */}
         <div
           className="relative w-full rounded-xl overflow-hidden shadow-xl mb-8 cursor-pointer group"
-          onClick={() => setModalOpen(true)}
+         
         >
           <img
             src={currentImage}

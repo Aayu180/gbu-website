@@ -1,7 +1,7 @@
 import React from "react";
-import { ArrowRight, PenTool, Wrench, Send, Rocket } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-// Reusable Button component
+// ✅ Reusable Button component
 const Button = ({
   children,
   size = "md",
@@ -29,9 +29,7 @@ const Button = ({
 
   return (
     <button
-      className={`${base} ${
-        sizes[size] || sizes.md
-      } ${variantClass} ${className}`}
+      className={`${base} ${sizes[size] || sizes.md} ${variantClass} ${className}`}
       {...props}
     >
       {children}
@@ -39,7 +37,17 @@ const Button = ({
   );
 };
 
-const Hero = () => {
+// ✅ Reusable Hero component
+const Hero = ({
+  backgroundImage,
+  title,
+  highlightedText,
+  subtitle,
+  showTagline = false,
+  taglineItems = [],
+  primaryBtn = {},
+  secondaryBtn = {},
+}) => {
   return (
     <section
       id="home"
@@ -48,8 +56,8 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 opacity-30">
         <img
-          src="http://raem.gbu.ac.in/images/demo/gallery/rect/IMG-20190423-WA0128.jpg"
-          alt="Programming Background"
+          src={backgroundImage}
+          alt="Background"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 to-purple-600/30"></div>
@@ -64,50 +72,50 @@ const Hero = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-extrabold text-foreground mb-6 leading-tight tracking-tight">
-            Center for
+        <div className="max-w-5xl mx-auto text-center">
+          <h1 className="text-2xl md:text-5xl font-extrabold text-foreground mb-6 leading-tight tracking-tight">
+            {title}
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              Rapid and Alternative Energy Mobility
+              {highlightedText}
             </span>
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
-            Empowering Sustainable Mobility and Clean Energy Innovation
+            {subtitle}
           </p>
 
           {/* Tagline with Icons */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-lg font-semibold text-gray-800 mb-10">
-            <div className="flex items-center gap-2 transition-transform hover:scale-105">
-              <PenTool className="w-6 h-6 text-blue-600" />
-              <span>Research</span>
+          {showTagline && (
+            <div className="flex flex-wrap items-center justify-center gap-6 text-lg font-semibold text-gray-800 mb-10">
+              {taglineItems.map(({ icon: Icon, text, color }, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 transition-transform hover:scale-105"
+                >
+                  <Icon className={`w-6 h-6 ${color}`} />
+                  <span>{text}</span>
+                </div>
+              ))}
             </div>
-            <div className="flex items-center gap-2 transition-transform hover:scale-105">
-              <Wrench className="w-6 h-6 text-green-600" />
-              <span>Develop</span>
-            </div>
-            <div className="flex items-center gap-2 transition-transform hover:scale-105">
-              <Send className="w-6 h-6 text-indigo-600" />
-              <span>Deploy</span>
-            </div>
-            <div className="flex items-center gap-2 transition-transform hover:scale-105">
-              <Rocket className="w-6 h-6 text-purple-600" />
-              <span>Transform Mobility</span>
-            </div>
-          </div>
+          )}
 
           {/* Call to Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-            >
-              Explore Programs
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button variant="outline" size="lg">
-              Projects
-            </Button>
+            {primaryBtn?.label && (
+              <Button
+                size="lg"
+                className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                onClick={primaryBtn.onClick}
+              >
+                {primaryBtn.label}
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            )}
+            {secondaryBtn?.label && (
+              <Button variant="outline" size="lg" onClick={secondaryBtn.onClick}>
+                {secondaryBtn.label}
+              </Button>
+            )}
           </div>
         </div>
       </div>

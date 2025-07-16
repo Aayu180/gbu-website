@@ -1,545 +1,399 @@
- 
-import { Users, Award, BookOpen, Lightbulb, Cpu, Zap, Radio, Microchip, GraduationCap, Brain, Beaker, Trophy, Star, User, Medal, Target } from "lucide-react";
+import React from "react";
+import HeroSection from "../../components/departments/cse/Hero";
+import AboutDepartment from "../../components/departments/cse/AboutDepartment";
+import Research from "../../components/departments/cse/Research";
+import HeroBanner from "../../components/departments/Research";
+import HodMessage from "../../components/departments/cse/Hod";
+import Programs from "../../components/departments/cse/Program";
+import Faculty from "../../components/departments/cse/Faculty";
+import StudentAchievers from "../../components/departments/cse/StudentAchievers";
 
-const Card = ({ children, className = "" }) => (
-  <div className={`bg-white rounded-xl shadow-lg border ${className}`}>{children}</div>
-);
+import {
+  Cpu, Radio, Waves, Satellite, Users, Award, BookOpen, Lightbulb, GraduationCap, Shield, Cloud, Smartphone, Globe
+} from "lucide-react";
 
-const CardHeader = ({ children, className = "" }) => (
-  <div className={`p-6 border-b ${className}`}>{children}</div>
-);
-
-const CardTitle = ({ children, className = "" }) => (
-  <h3 className={`text-xl font-bold text-foreground ${className}`}>{children}</h3>
-);
-
-const CardDescription = ({ children, className = "" }) => (
-  <p className={`text-muted-foreground text-sm ${className}`}>{children}</p>
-);
-
-const CardContent = ({ children, className = "" }) => (
-  <div className={`p-6 ${className}`}>{children}</div>
-);
-
-
-const Button = ({ children, variant = "default", size = "md", className = "", ...props }) => {
-  const baseStyle = "inline-flex items-center justify-center font-medium rounded-lg transition duration-300";
-
-  const sizeStyles = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-4 py-2 text-base",
-    lg: "px-6 py-3 text-lg",
-  };
-
-  const variantStyles = {
-    default: "bg-emerald-600 text-white hover:bg-emerald-700",
-    outline: "border border-emerald-300 text-emerald-700 hover:bg-emerald-50",
-    ghost: "text-emerald-700 hover:bg-emerald-100",
-  };
-
-  return (
-    <button
-      className={`${baseStyle} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
-
+import researchBg from "../../assets/research.jpg";
 
 const ECE = () => {
-  const stats = [
-    { icon: Users, label: "Students", value: "600+", color: "bg-blue-600" },
-    { icon: GraduationCap, label: "Faculty", value: "35+", color: "bg-indigo-600" },
-    { icon: Brain, label: "Research Projects", value: "80+", color: "bg-purple-600" },
-    { icon: Trophy, label: "Patents Filed", value: "15+", color: "bg-emerald-600" },
-  ];
+  const heroProps = {
+    title: "Department of",
+    highlight: "Electronics & Communication Engineering",
+    subtitle:
+      "Shaping the future of communications and electronics through innovation, research, and academic excellence.",
+    primaryButton: { label: "Explore Programs" },
+    secondaryButton: { label: "Research Areas" },
+    backgroundImage:
+      "https://images.unsplash.com/photo-1581090700227-4c4c1a7b8f17?auto=format&fit=crop&w=1920&q=80",
+    features: [
+      {
+        icon: <Cpu className="h-8 w-8 text-white" />,
+        bg: "bg-gradient-to-br from-pink-500 to-pink-600",
+        title: "Embedded Systems",
+        description: "Designing smart embedded solutions for diverse applications.",
+      },
+      {
+        icon: <Radio className="h-8 w-8 text-white" />,
+        bg: "bg-gradient-to-br from-yellow-500 to-yellow-600",
+        title: "Communication Systems",
+        description: "Wireless, satellite, and optical communication research.",
+      },
+      {
+        icon: <Waves className="h-8 w-8 text-white" />,
+        bg: "bg-gradient-to-br from-green-500 to-green-600",
+        title: "Signal Processing",
+        description: "Advanced signal processing, VLSI design, and IoT integration.",
+      },
+    ],
+  };
 
-  const programs = [
+  const hodProps = {
+    title: "From the Desk of HOD, ECE",
+    image: "https://www.gbu.ac.in/USICT/media/img/vidushii.jpg",
+    name: "Dr. Vidushi Sharma",
+    designation: "Head of Department",
+    messageParagraphs: [
+      "Greeting from the Department of Electronics and Communication Engineering!!",
+      "I warmly welcome you to the Department of Electronics and Communication Engineering, Gautam Buddha University. Over all these years, we have made progress in imparting technical education to our students and bringing them at par with the ever-expanding horizons of Electronics and Communication Engineering and its application areas. At the undergraduate level, we offer four-year B. Tech. Programme, and four-year B. Tech. (Engineering Design) Programme. At the postgraduate level, we offer three areas of specialization for two-year M. Tech. Programmes: (i) Wireless Communication and Networks, (ii) VLSI Design, (iii) Railway Signalling Telecommunication and RAMS. We also offer Ph.D. Programmes for full time and working professionals in all areas where research is being currently conducted by our faculty members.",
+      "The Electronics and Communication Engineering department has always placed prime emphasis on excellence in teaching and research. Faculty members have very good academic credentials and are highly motivated towards imparting the best of education, as well as pioneering research and development. Our courses are frequently updated in terms of depth as well as the subjects themselves, so that our students always remain on the forefront of technological advancement. Well-equipped laboratories and encouragement to pursue research have increased our students’ productivity in terms of placements, higher studies, and research contributions. It has been observed that student research contribution has increased tremendously during the last few years. We regularly organize seminars, workshops, conferences, faculty development programmes, skill enhancement programmes, expert talks, invited lectures, etc., that benefit our students as well as the staff members of our school.",
+      "Thank you for visiting us. If you require any information, or wish to get in touch, please feel free to reach me via email.",
+      "Dr. Vidushi Sharma",
+      "Head, Department of Electronics and Communication Engineering",
+      "Email: vidushi@gbu.ac.in Phone: 0120-2346080 (Ext.6080)"
+    ],
+    contact: {
+      name: "Dr. Vidushi Sharma",
+      designation: "Head of Department - ECE",
+      email: "vidushi@gbu.ac.in",
+      phone: "0120-2346080 (Ext.6080)"
+    }
+  };
+
+
+  const aboutProps = {
+    heading: "About the Department",
+    subheading:
+      "Established in 1995, the ECE department has been at the forefront of electronics and communication research and education.",
+    stats: [
+      { icon: Users, label: "Students", value: "700+" },
+      { icon: BookOpen, label: "Faculty", value: "40+" },
+      { icon: Award, label: "Research Projects", value: "100+" },
+      { icon: Lightbulb, label: "Patents Filed", value: "20+" },
+    ],
+    highlights: [
+      {
+        title: "Quality Education",
+        description:
+          "Undergraduate and postgraduate programs designed to equip students with strong fundamentals and industry-ready skills.",
+        dotColor: "#ec4899",
+      },
+      {
+        title: "Research Excellence",
+        description:
+          "Active research in wireless networks, IoT, VLSI design, and communication systems. Frequent publications in high-impact journals.",
+        dotColor: "#f59e0b",
+      },
+      {
+        title: "Industry Connect",
+        description:
+          "Partnerships with ISRO, DRDO, Intel, Texas Instruments, and other leading companies for research and student internships.",
+        dotColor: "#10b981",
+      },
+    ],
+    vision:
+      "To be a leader in providing world-class education and research in electronics and communication technologies for sustainable development.",
+    missionPoints: [
+      "Deliver quality education in electronics and communication.",
+      "Promote cutting-edge research in emerging fields.",
+      "Encourage innovation and product development.",
+      "Strengthen industry-academia collaboration.",
+      "Contribute to technological advancement for societal benefit.",
+    ],
+  };
+
+  const programsData = [
     {
       title: "B.Tech Electronics & Communication Engineering",
       duration: "4 Years",
-      intake: "90 Students",
-      description: "Comprehensive program covering analog/digital electronics, communication systems, and embedded systems.",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-600 to-indigo-600",
-      curriculum: [
+      intake: "100 Students",
+      description:
+        "A rigorous undergraduate program covering core areas of electronics and modern communication technologies.",
+      image:
+        "https://images.unsplash.com/photo-1684430598623-e04d754cec59?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8JTIyQW5hbG9nJTIwJTI2JTIwRGlnaXRhbCUyMEVsZWN0cm9uaWNzJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyTWljcm9wcm9jZXNzb3JzJTIwJTI2JTIwTWljcm9jb250cm9sbGVycyUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMkNvbW11bmljYXRpb24lMjBTeXN0ZW1zJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyVkxTSSUyMERlc2lnbiUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMkVtYmVkZGVkJTIwU3lzdGVtcyUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMlNpZ25hbCUyMFByb2Nlc3NpbmclMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJJb1QlMjBBcHBsaWNhdGlvbnMlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJXaXJlbGVzcyUyME5ldHdvcmtzJTIyJTJDfGVufDB8fDB8fHww",
+      gradient: "from-pink-500 to-pink-600",
+      highlights: [
         "Analog & Digital Electronics",
+        "Microprocessors & Microcontrollers",
         "Communication Systems",
         "VLSI Design",
         "Embedded Systems",
         "Signal Processing",
-        "Microprocessors",
-        "Antenna Theory",
-        "Control Systems"
-      ]
+        "IoT Applications",
+        "Wireless Networks",
+      ],
     },
     {
-      title: "M.Tech Electronics & Communication",
+      title: "M.Tech Electronics & Communication Engineering",
       duration: "2 Years",
-      intake: "45 Students",
-      description: "Advanced program with specializations in VLSI, Signal Processing, and Communication Networks.",
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-600 to-purple-600",
-      curriculum: [
-        "Advanced VLSI Design",
+      intake: "40 Students",
+      description:
+        "Advanced postgraduate program focusing on research and specialization in communication, VLSI, and embedded systems.",
+      image:
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-yellow-500 to-yellow-600",
+      highlights: [
+        "Advanced Communication",
+        "VLSI Technology",
+        "Embedded System Design",
+        "Wireless & Mobile Networks",
+        "Antenna & Microwave Engineering",
         "Digital Signal Processing",
-        "Wireless Communication",
-        "Network Analysis",
-        "Semiconductor Devices",
-        "RF Circuit Design",
         "Research Methodology",
-        "Master's Thesis"
-      ]
-    }
+        "Thesis Project",
+      ],
+    },
+    {
+      title: "PhD Electronics & Communication",
+      duration: "3-5 Years",
+      intake: "10 Students",
+      description:
+        "Doctoral program focused on pioneering research in electronics, communication systems, and allied technologies.",
+      image:
+        "https://images.unsplash.com/photo-1628582453226-a0027de09af1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fCUyMkluZGVwZW5kZW50JTIwUmVzZWFyY2glMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJJbnRlcmRpc2NpcGxpbmFyeSUyMFByb2plY3RzJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyUGFwZXIlMjBQdWJsaWNhdGlvbnMlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJJbnRlcm5hdGlvbmFsJTIwQ29uZmVyZW5jZXMlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJJbmR1c3RyeSUyMFJlc2VhcmNoJTIwQ29sbGFib3JhdGlvbiUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMlBhdGVudCUyMEZpbGluZyUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMlRlYWNoaW5nJTIwQXNzaXN0YW50c2hpcCUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMlRoZXNpcyUyMERlZmVuc2UlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlNUQlMkN8ZW58MHx8MHx8fDA%3D",
+      gradient: "from-green-500 to-green-600",
+      highlights: [
+        "Independent Research",
+        "Interdisciplinary Projects",
+        "Paper Publications",
+        "International Conferences",
+        "Industry Research Collaboration",
+        "Patent Filing",
+        "Teaching Assistantship",
+        "Thesis Defense",
+      ],
+    },
   ];
 
+  const facultyMembers = [
+    {
+      name: "Dr. Mangal Das",
+      position: "Assistant Professor",
+      specialization: "Semiconductor Fabrication Nanotechnology Robotics AI/ML",
+      email: "mangal.das@gbu.ac.in",
+      achievements: "Indian Institute of Technology Indore",
+      image: "https://faculty.gbu.ac.in/uploads/photos/676049327abf5_Mangal_Das_2024-min.JPG", 
+      color: "from-pink-500 to-pink-600",
+      extraIcon: Award,
+    },
+    {
+      name: "Dr. Navaid Zafar Rizvi",
+      position: "Assistant Professor",
+      specialization: "Machine Intelligence for ICs, MEMS/VLSI Design, Antenna & Microwave Techniques & RF Technology, Microsystems Fabrication",
+      email: "navaid@gbu.ac.in",
+      achievements: "PhD , M.S- Inf. & Comm. Engg. (TUD-Darmstadt, Germany), M.S- Microsystems Engg. (HFU, Germany)",
+      image: "https://faculty.gbu.ac.in/uploads/photos/66066a93789f0_navaid-rizvi.jpg", 
+      color: "from-yellow-500 to-yellow-600",
+      extraIcon: Award,
+    },
+    {
+      name: "Dr. Priyanka Goyal",
+      position: "Assistant Professor",
+      specialization: "Field of teaching- Basic electronics, Analog Communication, Network Analysis and Synthesis, VHDL, Verilog, Low Power VLSI, Automation and Physical Design, Principles",
+      email: "priyankag@gbu.ac.in",
+      achievements: "PhD (2018) in Optoelectronics and VLSI (On-chip optical interconnects)",
+      image: "https://faculty.gbu.ac.in/uploads/photos/66052fa591258_priyankag.jpg", 
+      color: "from-green-500 to-green-600",
+    },
+    {
+      name: "Dr. Rajesh Mishra",
+      position: "Assistant Professor",
+      specialization: "Networks, Signal Processing, Communication Systems, Reliability Engineering, RAMS",
+      email: "rmishra@gbu.ac.in",
+      achievements: "B.E. (Electronics Engineering), M. Tech. & Ph.D. (IIT Kharagpur)",
+      image: "https://faculty.gbu.ac.in/uploads/photos/67c341c729a98_rajesh%20photo.jpg",
+      color: "from-orange-500 to-orange-600",
+    },
+  ];
+
+
+  const facultyStats = {
+    text: "Our department boasts 40+ dedicated faculty members contributing to diverse domains of ECE.",
+    stats: [
+      {
+        icon: BookOpen,
+        value: "400+",
+        label: "Research Papers",
+        bg: "bg-pink-50",
+        color: "text-pink-600",
+      },
+      {
+        icon: Award,
+        value: "40+",
+        label: "Awards",
+        bg: "bg-yellow-50",
+        color: "text-yellow-600",
+      },
+      {
+        icon: null,
+        custom: "PhD",
+        value: "95%",
+        label: "PhD Faculty",
+        bg: "bg-green-50",
+        color: "bg-green-600",
+      },
+      {
+        icon: null,
+        custom: "Exp",
+        value: "12+",
+        label: "Avg Experience",
+        bg: "bg-orange-50",
+        color: "bg-orange-600",
+      },
+    ],
+  };
   const researchAreas = [
     {
-      title: "VLSI Design & Technology",
-      description: "Advanced integrated circuit design, nanotechnology, and semiconductor device research for next-generation electronics.",
-      icon: Microchip,
-      projects: ["Low-Power VLSI Design", "Memory Circuit Optimization", "Analog IC Design"],
-      color: "text-blue-600"
+      icon: Satellite,
+      title: "Wireless & Mobile Communication",
+      description: "Next-gen wireless networks, 5G/6G, and mobile communication systems.",
+      projects: ["5G Testbed", "IoT Communication", "Smart City Connectivity"],
+      image: "https://source.unsplash.com/400x300/?5g,network,tower", // Wireless Communication
+      gradient: "from-pink-500 to-rose-500",
     },
     {
-      title: "Wireless Communication",
-      description: "5G/6G networks, satellite communication, and advanced modulation techniques for modern communication systems.",
-      icon: Radio,
-      projects: ["5G Network Optimization", "Satellite Communication", "Antenna Design"],
-      color: "text-indigo-600"
+      icon: Shield,
+      title: "Embedded Systems & IoT",
+      description: "Designing intelligent embedded and IoT solutions for smart applications.",
+      projects: ["Smart Agriculture", "Healthcare IoT", "Home Automation"],
+      image: "https://source.unsplash.com/400x300/?iot,embedded,smart-device", // Embedded IoT
+      gradient: "from-yellow-500 to-amber-500",
     },
     {
-      title: "Signal Processing",
-      description: "Digital signal processing, image processing, and machine learning applications in signal analysis.",
-      icon: Zap,
-      projects: ["Medical Image Processing", "Speech Recognition", "Radar Signal Processing"],
-      color: "text-purple-600"
+      icon: Waves,
+      title: "Signal & Image Processing",
+      description: "Digital signal processing, image analysis, biomedical applications.",
+      projects: ["Medical Image Processing", "Speech Recognition", "Remote Sensing"],
+      image: "https://source.unsplash.com/400x300/?signal-processing,image-analysis,biomedical", // Signal/Image
+      gradient: "from-green-500 to-lime-500",
     },
     {
-      title: "Embedded Systems",
-      description: "IoT devices, real-time systems, and smart sensor networks for industrial and consumer applications.",
       icon: Cpu,
-      projects: ["Smart IoT Devices", "Industrial Automation", "Wearable Technology"],
-      color: "text-emerald-600"
-    }
+      title: "VLSI Design",
+      description: "Design and fabrication of integrated circuits, SoC, and FPGA systems.",
+      projects: ["Low-Power VLSI", "Nanoelectronics", "MEMS"],
+      image: "https://source.unsplash.com/400x300/?vlsi,chip,semiconductor", // VLSI
+      gradient: "from-purple-500 to-violet-500",
+    },
+    {
+      icon: Globe,
+      title: "Optical & Microwave Communication",
+      description: "Research in optical fiber communication, antennas, and microwave engineering.",
+      projects: ["Smart Antennas", "Microwave Circuits", "Optical Sensors"],
+      image: "https://source.unsplash.com/400x300/?fiber-optic,microwave,antenna", // Optical/Microwave
+      gradient: "from-indigo-500 to-blue-500",
+    },
+  ];
+
+
+  const researchStats = [
+    { value: "60+", label: "Research Projects", bg: "bg-pink-500/20" },
+    { value: "₹8Cr+", label: "Research Funding", bg: "bg-yellow-500/20" },
+    { value: "200+", label: "Publications", bg: "bg-green-500/20" },
+    { value: "12+", label: "Patents Filed", bg: "bg-purple-500/20" },
   ];
 
   const topAchievers = [
     {
-      name: "Ananya Patel",
+      name: "Rohan Agarwal",
       year: "B.Tech ECE 2024",
-      achievement: "Intel Student Research Award, Internship at Qualcomm, Best Project Award",
-      image: "https://media.istockphoto.com/id/1272815911/photo/young-indian-female-university-student-stock-photo.webp?a=1&b=1&s=612x612&w=0&k=20&c=gIZZVJ3_oo9pxN0TtTaBCk7G8xBHO6vZWy9cJVt8jWA=",
-      skills: ["VLSI Design", "MATLAB", "Verilog", "Circuit Analysis"]
+      achievement:
+        "Gold Medalist in National Robotics Challenge, Internship at Qualcomm",
+      image:
+        "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      skills: ["Robotics", "Embedded C", "PCB Design", "IoT"],
     },
     {
-      name: "Karan Mehta",
+      name: "Isha Mehta",
       year: "M.Tech ECE 2023",
-      achievement: "IEEE Best Paper Award, Patent filed for 5G antenna design",
-      image: "https://media.istockphoto.com/id/1342062117/photo/smart-arab-guy-student-with-backpack-and-books.webp?a=1&b=1&s=612x612&w=0&k=20&c=QVDN4v9Qrkw1UqqRIAew4uU-HlxWjgsmm5LItr96Qoo=",
-      skills: ["RF Design", "Antenna Theory", "5G Technology", "Research"]
+      achievement:
+        "Published 4 papers on VLSI, Best Paper Award at IEEE Conference",
+      image:
+        "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      skills: ["VLSI Design", "FPGA", "SystemVerilog", "Signal Processing"],
     },
     {
-      name: "Sneha Gupta",
+      name: "Ankit Sharma",
       year: "B.Tech ECE 2024",
-      achievement: "Winner National Innovation Contest, Founder of hardware startup",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80",
-      skills: ["Embedded Systems", "IoT", "Entrepreneurship", "Product Design"]
-    }
+      achievement:
+        "Winner of National IoT Hackathon, Founder of IoT Start-Up",
+      image:
+        "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      skills: ["IoT", "Arduino", "Python", "Wireless Networks"],
+    },
   ];
 
   const achievements = [
     {
       title: "IEEE Student Chapter",
-      description: "Active student chapter with 200+ members",
+      description: "Active IEEE chapter with 250+ ECE students",
       icon: Award,
-      color: "text-blue-600"
+      color: "text-pink-600",
     },
     {
-      title: "Research Publications",
-      description: "150+ papers in international journals",
+      title: "VLSI Research",
+      description: "150+ papers published in reputed ECE journals",
       icon: BookOpen,
-      color: "text-indigo-600"
+      color: "text-yellow-600",
     },
     {
-      title: "Industry Partnerships",
-      description: "Collaborations with leading tech companies",
+      title: "Industry Tie-Ups",
+      description: "MoUs with ISRO, Intel, and DRDO for research & training",
       icon: Lightbulb,
-      color: "text-purple-600"
+      color: "text-green-600",
     },
     {
-      title: "Placement Record",
-      description: "95% placement rate with top companies",
+      title: "Placement Success",
+      description: "95% placements in core ECE companies & PSUs",
       icon: GraduationCap,
-      color: "text-emerald-600"
-    }
+      color: "text-purple-600",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-background">
-
-
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
-        <div className="absolute inset-0 opacity-10">
-          <img
-            src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=80"
-            alt="Electronics Circuit Board"
-            className="w-full h-full object-cover"
+      <HeroSection {...heroProps} />
+      <HodMessage {...hodProps} />
+      <AboutDepartment {...aboutProps} />
+      <Programs
+        heading="Academic Programs"
+        subheading="Diverse programs to help you build a strong foundation in electronics and communication."
+        programs={programsData}
+      />
+      <Faculty
+        title="Distinguished Faculty"
+        subtitle="Guided by leading experts pushing the boundaries of ECE research."
+        facultyMembers={facultyMembers}
+        bottomStats={facultyStats}
+      />
+      <Research
+        banner={() => (
+          <HeroBanner
+            backgroundImage={researchBg}
+            mainHeading="Research"
+            highlight="& Innovation"
+            subheading="Pioneering research for connected and intelligent systems."
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 to-purple-900/40"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-6">
-              <GraduationCap className="h-16 w-16 text-blue-600 mx-auto mb-4" />
-            </div>
-
-            <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
-              Department of
-              <span className="block bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Electronics & Communication Engineering
-              </span>
-            </h1>
-
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-              Empowering future engineers through excellence in electronics, communication systems, and cutting-edge research for a connected world.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button size="lg" className="group bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
-                <BookOpen className="h-5 w-5 mr-2" />
-                Explore Programs
-              </Button>
-              <Button variant="outline" size="lg" className="border-blue-300 text-blue-700 hover:bg-blue-50">
-                <Beaker className="h-5 w-5 mr-2" />
-                Research Areas
-              </Button>
-            </div>
-
-            {/* Feature Icons */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16">
-              <div className="flex flex-col items-center p-6 bg-white/90 rounded-xl backdrop-blur-sm border border-blue-200 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="bg-blue-100 p-4 rounded-full mb-4">
-                  <Microchip className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">VLSI Design</h3>
-                <p className="text-muted-foreground text-center text-sm">Advanced integrated circuit design and fabrication</p>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-white/90 rounded-xl backdrop-blur-sm border border-indigo-200 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="bg-indigo-100 p-4 rounded-full mb-4">
-                  <Radio className="h-8 w-8 text-indigo-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Communication Systems</h3>
-                <p className="text-muted-foreground text-center text-sm">Wireless networks and satellite communication</p>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-white/90 rounded-xl backdrop-blur-sm border border-purple-200 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="bg-purple-100 p-4 rounded-full mb-4">
-                  <Zap className="h-8 w-8 text-purple-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Signal Processing</h3>
-                <p className="text-muted-foreground text-center text-sm">Digital signal processing and image analysis</p>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-white/90 rounded-xl backdrop-blur-sm border border-emerald-200 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="bg-emerald-100 p-4 rounded-full mb-4">
-                  <Cpu className="h-8 w-8 text-emerald-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Embedded Systems</h3>
-                <p className="text-muted-foreground text-center text-sm">Microcontrollers and IoT device development</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* HOD Message */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">
-                FROM THE DESK OF HOD, ECE
-              </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto"></div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 items-start">
-              <div className="md:col-span-1 flex flex-col items-center">
-                <div className="relative w-56 h-56 rounded-full overflow-hidden mb-6 shadow-2xl border-4 border-white">
-                  <img
-                    src="https://www.gbu.ac.in/USICT/media/img/vidushii.jpg"
-                    alt="Dr. Vidushi Sharma - Head of Department"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent"></div>
-                </div>
-                <h3 className="text-2xl font-bold text-foreground">Dr. Vidushi Sharma</h3>
-                <p className="text-blue-600 font-semibold text-lg">Head of Department</p>
-                {/* <p className="text-sm text-muted-foreground">PhD Electronics Engineering, IIT Bombay</p>
-                <p className="text-sm text-muted-foreground">25+ Years of Experience</p> */}
-              </div>
-
-              <div className="md:col-span-2 space-y-6 text-muted-foreground bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
-                <div className="text-6xl text-blue-200 font-serif">"</div>
-
-                <p className="leading-relaxed">
-                Greeting from the Department of Electronics and Communication Engineering!!
-                </p>
-
-                <p className="text-lg leading-relaxed -mt-4">
-                  I warmly welcome you to the Department of Electronics and Communication Engineering, Gautam Buddha University. Over all these years, we have made progress in imparting technical education to our students and bring them at par with the ever-expanding horizons of Electronics and Communication Engineering and its application areas. At the under graduate level, we offer four-year B. Tech. Programme, and four-year B. Tech. (Engineering Design) Programme. At post graduate level, we offer three areas of specialization for two-year M. Tech.. Programmes: (i) Wireless Communication and Networks, (ii) VLSI Design (iii) Railway Signalling Telecommunication and RAMS. We also offer Ph.D. Programmes for full time and working professional mode in all areas where research is being currently conducted by our faculty members.
-
-                </p>
-
-                <p className="leading-relaxed">
-                 The Electronics and Communication Engineering department has always placed prime emphasis on excellence in teaching and research. Faculty members have very good academic credentials, and are highly motivated towards imparting the best of education, and also pioneering research and development. Our courses are frequently updated in terms of depth as well as the subjects themselves, so that our students always remain on the forefront of technological advancement. Well-equipped Laboratories and encouragement to pursue research has increased our students’ productivity in terms of placements, higher studies and research contributions. It has been observed that student research contribution has increased tremendously during last few years. We regularly organize seminars/workshops/conferences/faculty development programmes/skill enhancement programmes/expert talks/invited lectures etc. that benefits our students as well as the staff members of our school.
-                </p>
-
-                <p className="leading-relaxed">
-                  Thank you for visiting us. If you require any information, or wish to get in touch, please feel free to reach me via email.
-                </p>
-
-                 <p className="leading-relaxed">
-                  Dr. Vidushi Sharma
-                  Head, Department of Electronics and Communication Engineering
-                  vidushi@gbu.ac.in
-                  Phone: 0120-2346080 (Ext.6080)
-                 </p>
-
-                <div className="pt-6 border-t border-blue-200">
-                  <p className="font-bold text-foreground text-lg">Dr. Vidushi Sharma</p>
-                  <p className="text-blue-600 font-medium">Head of Department - ECE</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-16 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Department Statistics</h2>
-              <p className="text-xl text-muted-foreground">Excellence in numbers</p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center p-8 bg-white rounded-2xl border shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                  <div className={`w-16 h-16 ${stat.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                    <stat.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <div className="text-4xl font-bold text-foreground mb-2">{stat.value}</div>
-                  <div className="text-muted-foreground font-medium">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Detailed Programs */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Academic Programs</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Comprehensive engineering education designed to prepare students for successful careers in electronics and communication.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {programs.map((program, index) => (
-                <Card key={index} className="hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 overflow-hidden border-0 shadow-xl bg-white">
-                  <div className="relative h-56 overflow-hidden">
-                    <img
-                      src={program.image}
-                      alt={program.title}
-                      className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${program.gradient} opacity-85`}></div>
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <GraduationCap className="h-8 w-8" />
-                    </div>
-                  </div>
-                  <CardHeader className="pb-4">
-                    <CardTitle className="text-xl text-foreground">{program.title}</CardTitle>
-                    <CardDescription className="text-base">{program.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between text-sm bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border border-blue-200">
-                      <span className="font-semibold text-blue-700">{program.duration}</span>
-                      <span className="font-semibold text-indigo-700">{program.intake}</span>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                        <BookOpen className="h-4 w-4 mr-2" />
-                        Core Curriculum
-                      </h4>
-                      <div className="grid grid-cols-1 gap-2">
-                        {program.curriculum.map((subject, idx) => (
-                          <span key={idx} className="text-xs bg-blue-50 text-blue-700 px-3 py-2 rounded-full border border-blue-200">
-                            {subject}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Research Areas */}
-      <section className="py-16 bg-gradient-to-br from-slate-900 via-gray-900 to-blue-900 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">Research Excellence</h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Pioneering research in electronics and communication technologies, driving innovation for tomorrow's connected world.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
-              {researchAreas.map((area, index) => (
-                <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className="bg-blue-500/20 p-3 rounded-full">
-                        <area.icon className="h-6 w-6 text-blue-400" />
-                      </div>
-                      <CardTitle className="text-xl text-white">{area.title}</CardTitle>
-                    </div>
-                    <CardDescription className="text-gray-300 leading-relaxed">
-                      {area.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <h4 className="font-semibold text-white mb-3">Current Projects:</h4>
-                    <div className="space-y-2">
-                      {area.projects.map((project, idx) => (
-                        <div key={idx} className="text-sm text-gray-300 bg-white/10 px-3 py-2 rounded-lg">
-                          • {project}
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-              <h3 className="text-2xl font-bold text-center mb-8">Research Impact</h3>
-              <div className="grid md:grid-cols-4 gap-8 text-center">
-                <div className="bg-blue-500/20 p-6 rounded-xl">
-                  <div className="text-3xl font-bold mb-2">80+</div>
-                  <div className="text-sm text-gray-300">Research Projects</div>
-                </div>
-                <div className="bg-indigo-500/20 p-6 rounded-xl">
-                  <div className="text-3xl font-bold mb-2">₹10Cr+</div>
-                  <div className="text-sm text-gray-300">Research Funding</div>
-                </div>
-                <div className="bg-purple-500/20 p-6 rounded-xl">
-                  <div className="text-3xl font-bold mb-2">250+</div>
-                  <div className="text-sm text-gray-300">Publications</div>
-                </div>
-                <div className="bg-emerald-500/20 p-6 rounded-xl">
-                  <div className="text-3xl font-bold mb-2">15+</div>
-                  <div className="text-sm text-gray-300">Patents Filed</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Top Achievers */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Student Achievers</h2>
-              <p className="text-xl text-muted-foreground">
-                Celebrating our outstanding students who excel in academics, research, and innovation.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {topAchievers.map((student, index) => (
-                <Card key={index} className="hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-white border-0 shadow-lg">
-                  <CardHeader className="text-center pb-2">
-                    <div className="relative w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-lg">
-                      <img
-                        src={student.image}
-                        alt={student.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <CardTitle className="text-xl text-foreground">{student.name}</CardTitle>
-                    <CardDescription className="text-blue-600 font-semibold">{student.year}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                      <div className="flex items-start space-x-2 mb-2">
-                        <Medal className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                        <p className="text-sm text-foreground leading-relaxed">{student.achievement}</p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                        <Target className="h-4 w-4 mr-2" />
-                        Expertise
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {student.skills.map((skill, idx) => (
-                          <span key={idx} className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Achievements */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Our Achievements</h2>
-              <p className="text-xl text-muted-foreground">Recognition and excellence in education</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {achievements.map((achievement, index) => (
-                <div key={index} className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                  <achievement.icon className={`h-12 w-12 ${achievement.color} mx-auto mb-4`} />
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{achievement.title}</h3>
-                  <p className="text-muted-foreground text-sm">{achievement.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-
+        )}
+        researchAreas={researchAreas}
+        stats={researchStats}
+      />
+      <StudentAchievers
+        topAchievers={topAchievers}
+        achievements={achievements}
+        achieversHeading="Top Student Achievers"
+        achieversSubheading="Students achieving excellence worldwide"
+        achievementsHeading="Key Achievements"
+        achievementsSubheading="Recognitions and accolades"
+      />
     </div>
   );
 };

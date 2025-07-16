@@ -87,9 +87,9 @@ const RecruitMain = () => {
       transition={{ duration: 0.6 }}
     >
       {/* ✅ Fixed background image */}
-      <div className="fixed inset-0 z-0 opacity-10 pointer-events-none bg-[url('/assets/GBU22.png')] bg-center bg-no-repeat bg-cover" />
+      <div className="fixed inset-0 z-0 opacity-10 pointer-events-none bg-white bg-center bg-no-repeat bg-cover" />
 
-      <div className="bg-gradient-to-r from-sky-200 to-sky-600 py-24">
+      <div className="bg-gradient-to-r from-sky-400 to-sky-600 py-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-5xl font-extrabold text-foreground mb-5 tracking-tight">
             RECRUITMENTS

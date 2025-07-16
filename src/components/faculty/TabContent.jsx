@@ -254,13 +254,13 @@ import  OverviewTab  from './tabs/OverviewTab';
 import { QualificationsTab } from './tabs/QualificationsTab';
 import { TeachingTab } from './tabs/TeachingTab';
 import { AdministrationTab } from './tabs/AdministrationTab';
-import { ResearchProjectsTab } from './tabs/ResearchProjectsTab';
+import ResearchProjectsAndGroup  from './tabs/ResearchProjectsAndGroup';
 import { ResearchGroupTab } from './tabs/ResearchGroupTab';
-import { PublicationsTab } from './tabs/PublicationsTab';
+ import PublicationsTab from "./tabs/PublicationsTab"
 import { PatentsTab } from './tabs/PatentsTab';
 import { CertificationsTab } from './tabs/CertificationsTab';
 import { TalksTab } from './tabs/TalksTab';
-import { AwardsTab } from './tabs/AwardsTab';
+import AwardsAndSocialImpactPage  from './tabs/AwardsAndSocialImpactPage';
 import { SocialImpactTab } from './tabs/SocialImpactTab';
 
 
@@ -276,7 +276,7 @@ const TabContent = ({ activeTab , profile}) => {
       case 'administration':
         return <AdministrationTab />;
       case 'research-projects':
-        return <ResearchProjectsTab />;
+        return <ResearchProjectsAndGroup />;
       case 'research-group':
         return <ResearchGroupTab />;
       case 'publications':
@@ -288,7 +288,7 @@ const TabContent = ({ activeTab , profile}) => {
       case 'talks':
         return <TalksTab />;
       case 'awards':
-        return <AwardsTab />;
+        return <AwardsAndSocialImpactPage/>;
       case 'social-impact':
         return <SocialImpactTab />;
       default:

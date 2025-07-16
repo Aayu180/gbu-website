@@ -1,545 +1,396 @@
- 
-import { Users, Award, BookOpen, Lightbulb, Globe, Server, Smartphone, Shield, GraduationCap, Brain, Code, Trophy, Star, User, Medal, Target } from "lucide-react";
+import React from "react";
+import HeroSection from "../../components/departments/cse/Hero";
+import AboutDepartment from "../../components/departments/cse/AboutDepartment";
+import Research from "../../components/departments/cse/Research";
+import HeroBanner from "../../components/departments/Research";
+import HodMessage from "../../components/departments/cse/Hod";
+import Programs from "../../components/departments/cse/Program";
+import Faculty from "../../components/departments/cse/Faculty";
+import StudentAchievers from "../../components/departments/cse/StudentAchievers";
 
-const Card = ({ children, className = "" }) => (
-  <div className={`bg-white rounded-xl shadow-lg border ${className}`}>{children}</div>
-);
+import {
+  Code,
+  Cpu,
+  Database,
+  Users,
+  Award,
+  BookOpen,
+  Lightbulb,
+  Brain,
+  Shield,
+  Cloud,
+  Smartphone,
+  GraduationCap,
+  Globe,
+  Server,
+} from "lucide-react";
 
-const CardHeader = ({ children, className = "" }) => (
-  <div className={`p-6 border-b ${className}`}>{children}</div>
-);
-
-const CardTitle = ({ children, className = "" }) => (
-  <h3 className={`text-xl font-bold text-foreground ${className}`}>{children}</h3>
-);
-
-const CardDescription = ({ children, className = "" }) => (
-  <p className={`text-muted-foreground text-sm ${className}`}>{children}</p>
-);
-
-const CardContent = ({ children, className = "" }) => (
-  <div className={`p-6 ${className}`}>{children}</div>
-);
-
-
-const Button = ({ children, variant = "default", size = "md", className = "", ...props }) => {
-  const baseStyle = "inline-flex items-center justify-center font-medium rounded-lg transition duration-300";
-
-  const sizeStyles = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-4 py-2 text-base",
-    lg: "px-6 py-3 text-lg",
-  };
-
-  const variantStyles = {
-    default: "bg-emerald-600 text-white hover:bg-emerald-700",
-    outline: "border border-emerald-300 text-emerald-700 hover:bg-emerald-50",
-    ghost: "text-emerald-700 hover:bg-emerald-100",
-  };
-
-  return (
-    <button
-      className={`${baseStyle} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
-
+import researchBg from "../../assets/research.jpg";
 
 const IT = () => {
+  const heroProps = {
+    title: "Department of",
+    highlight: "Information Technology",
+    subtitle:
+      "Empowering the digital era through cutting-edge education and research in Information Technology.",
+    primaryButton: { label: "Explore Programs" },
+    secondaryButton: { label: "Research Areas" },
+    backgroundImage:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1920&q=80",
+    features: [
+      {
+        icon: <Server className="h-8 w-8 text-white" />,
+        bg: "bg-gradient-to-br from-teal-500 to-teal-600",
+        title: "System Administration",
+        description: "Server management and network infrastructure",
+      },
+      {
+        icon: <Smartphone className="h-8 w-8 text-white" />,
+        bg: "bg-gradient-to-br from-cyan-500 to-cyan-600",
+        title: "Mobile Development",
+        description: "iOS and Android application development",
+      },
+      {
+        icon: <Shield className="h-8 w-8 text-white" />,
+        bg: "bg-gradient-to-br from-blue-500 to-blue-600",
+        title: "Cybersecurity",
+        description: "Information security and risk management",
+      },
+    ],
 
-  return (
-    <div className="min-h-screen bg-background">
+  };
 
+  const hodProps = {
+    title: "From the Desk of HOD, IT",
+    image: "https://www.gbu.ac.in/USICT/media/img/Neeta.jpg",
+    name: "Dr. Neeta Singh",
+    designation: "Head of Department",
+    messageParagraphs: [
+      "Greeting from the Department of Information Technology!!",
+      "Information technology, one of the fastest-growing technologies, has become a strategic function in every organization and lands its foot in every walk of our life. At the undergraduate level, we offer a four-year B. Tech. IT Programme and BCA. At the postgraduate level, we offer two areas of specialization for a two-year M.C.A: (i) Data Science and (ii) Artificial Intelligence. From the academic session 2022-23, the department is starting M.Tech. IT and M.Tech. Information and Cyberwarfare at the postgraduate level. We also offer Ph.D. programs in both full-time and working professional modes in all areas where our faculty members are currently conducting research.",
+      "The department has well-qualified professional faculty members along with the non-teaching staff. Faculty members are not only contributing toward the holistic development of students but also work as resource persons at the national and international levels. The department has had an approved SWAYAM Local Chapter since 2020.",
+      "We also encourage students to organize events, participate in various technical and co-curricular events organized by other colleges, and get involved in activities of social relevance. Furthermore, to promote co-curricular activities among students and faculty, the department has organized various events, competitions, and courses sponsored by NITTTR, DRDO, CSIR, etc. Most of our alumni find employment in companies of high repute in India and abroad.",
+    ],
+    contact: {
+      name: "Dr. Neeta Singh",
+      designation: "Head of Department - IT",
+      email: "neeta@gbu.ac.in",
+      phone: "0120-2346080 (Ext.6080)",
+    },
+  };
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-20">
-        <div className="absolute inset-0 opacity-10">
-          <img
-            src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=1920&q=80"
-            alt="Information Technology"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/40 to-cyan-900/40"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-6">
-              <GraduationCap className="h-16 w-16 text-emerald-600 mx-auto mb-4" />
-            </div>
-
-            <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
-              Department of
-              <span className="block bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
-                Information Technology
-              </span>
-            </h1>
-
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-              Shaping digital leaders through innovative IT education, cutting-edge research, and industry-focused learning for the future of technology.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button size="lg" className="group bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700">
-                <BookOpen className="h-5 w-5 mr-2" />
-                Explore Programs
-              </Button>
-              <Button variant="outline" size="lg" className="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
-                <Code className="h-5 w-5 mr-2" />
-                Research Areas
-              </Button>
-            </div>
-
-            {/* Feature Icons */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16">
-              <div className="flex flex-col items-center p-6 bg-white/90 rounded-xl backdrop-blur-sm border border-emerald-200 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="bg-emerald-100 p-4 rounded-full mb-4">
-                  <Globe className="h-8 w-8 text-emerald-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Web Technologies</h3>
-                <p className="text-muted-foreground text-center text-sm">Modern web development and frameworks</p>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-white/90 rounded-xl backdrop-blur-sm border border-teal-200 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="bg-teal-100 p-4 rounded-full mb-4">
-                  <Server className="h-8 w-8 text-teal-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">System Administration</h3>
-                <p className="text-muted-foreground text-center text-sm">Server management and network infrastructure</p>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-white/90 rounded-xl backdrop-blur-sm border border-cyan-200 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="bg-cyan-100 p-4 rounded-full mb-4">
-                  <Smartphone className="h-8 w-8 text-cyan-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Mobile Development</h3>
-                <p className="text-muted-foreground text-center text-sm">iOS and Android application development</p>
-              </div>
-              <div className="flex flex-col items-center p-6 bg-white/90 rounded-xl backdrop-blur-sm border border-blue-200 shadow-xl hover:shadow-2xl transition-all duration-300">
-                <div className="bg-blue-100 p-4 rounded-full mb-4">
-                  <Shield className="h-8 w-8 text-blue-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Cybersecurity</h3>
-                <p className="text-muted-foreground text-center text-sm">Information security and risk management</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* HOD Message */}
-      <section className="py-16 bg-gradient-to-r from-emerald-50 to-teal-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">
-              FROM THE DESK OF HOD, IT
-              </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto"></div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 items-start">
-              <div className="md:col-span-1 flex flex-col items-center">
-                <div className="relative w-56 h-56 rounded-full overflow-hidden mb-6 shadow-2xl border-4 border-white">
-                  <img
-                    src="https://www.gbu.ac.in/USICT/media/img/Neeta.jpg"
-                    alt="Dr. Neeta Singh - Head of Department"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/30 to-transparent"></div>
-                </div>
-                <h3 className="text-2xl font-bold text-foreground">Dr. Neeta Singh</h3>
-                <p className="text-emerald-600 font-semibold text-lg">Head of Department</p>
-                {/* <p className="text-sm text-muted-foreground">PhD Information Technology, NIT Delhi</p>
-                <p className="text-sm text-muted-foreground">20+ Years of Experience</p> */}
-              </div>
-
-              <div className="md:col-span-2 space-y-6 text-muted-foreground bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
-                <div className="text-6xl text-emerald-200 font-serif">"</div>
-                  <p className="leading-relaxed">
-                    Greeting from the Department of Information Technology!!
-                  </p>
-                <p className="text-lg leading-relaxed -mt-4">
-                  Information technology, one of the fastest-growing technologies, has become a strategic function in every organization and lands its foot in every walk of our life. At the undergraduate level, we offer a four-year B. Tech. IT Programme and BCA. At the postgraduate level, we offer two areas of specialization for a two-year M.C.A (i) Data Science and (ii) Artificial. From the academic Session, 2022-23 Department is starting M. Tech.. IT and M. Tech.. -Information and Cyberwarfare at post graduate level. We also offer Ph.D. There are programs for full-time and working professional mode in all areas where our faculty members are currently conducting research.
-                </p>
-
-                <p className="leading-relaxed">
-                 
-                The Department has well-qualified professional faculty members along with the non-teaching staff. Faculty members are not only contributing toward the holistic development of students but also works as resource person at the national and international level. Department has Approved Swyam Local Chapter since 2020.
-                </p>
-
-                <p className="leading-relaxed">
-                 We also encourage students to organize events, participate in various technical and co-curricular events organized by other colleges, and get involved in activities of social relevance. Furthermore, to promote co-curricular activities among students and faculties, the department has organized various events, completion, and courses sponsored by NITTTR, DRDO, CSIR, etc. Most of our alumni found employment in companies of high repute in India and abroad.
-                </p>
-
-                <p className="leading-relaxed">
-                  Dr. Neeta Singh
-                  Head, Department of Information Technology Department
-                  neeta@gbu.ac.in
-                  Phone: 0120-2346080 (Ext.6080)
-                </p>
-
-                <div className="pt-6 border-t border-emerald-200">
-                  <p className="font-bold text-foreground text-lg">Dr. Neeta Singh</p>
-                  <p className="text-emerald-600 font-medium">Head of Department - IT</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-16 bg-gradient-to-br from-teal-50 via-white to-cyan-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Department Statistics</h2>
-              <p className="text-xl text-muted-foreground">Leading the way in IT education</p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center p-8 bg-white rounded-2xl border shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                  <div className={`w-16 h-16 ${stat.color} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                    <stat.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <div className="text-4xl font-bold text-foreground mb-2">{stat.value}</div>
-                  <div className="text-muted-foreground font-medium">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Detailed Programs */}
-      <section className="py-16 bg-gradient-to-br from-emerald-50 to-teal-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Academic Programs</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Comprehensive IT education designed to create tomorrow's technology leaders and innovators.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {programs.map((program, index) => (
-                <Card key={index} className="hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 overflow-hidden border-0 shadow-xl bg-white">
-                  <div className="relative h-56 overflow-hidden">
-                    <img
-                      src={program.image}
-                      alt={program.title}
-                      className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-t ${program.gradient} opacity-85`}></div>
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <GraduationCap className="h-8 w-8" />
-                    </div>
-                  </div>
-                  <CardHeader className="pb-4">
-                    <CardTitle className="text-xl text-foreground">{program.title}</CardTitle>
-                    <CardDescription className="text-base">{program.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center justify-between text-sm bg-gradient-to-r from-emerald-50 to-teal-50 p-4 rounded-lg border border-emerald-200">
-                      <span className="font-semibold text-emerald-700">{program.duration}</span>
-                      <span className="font-semibold text-teal-700">{program.intake}</span>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-3 flex items-center">
-                        <BookOpen className="h-4 w-4 mr-2" />
-                        Core Curriculum
-                      </h4>
-                      <div className="grid grid-cols-1 gap-2">
-                        {program.curriculum.map((subject, idx) => (
-                          <span key={idx} className="text-xs bg-emerald-50 text-emerald-700 px-3 py-2 rounded-full border border-emerald-200">
-                            {subject}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Research Areas */}
-      <section className="py-16 bg-gradient-to-br from-slate-900 via-gray-900 to-emerald-900 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">Research Excellence</h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Cutting-edge research in emerging IT domains, addressing real-world challenges and advancing technological innovation.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
-              {researchAreas.map((area, index) => (
-                <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className="bg-emerald-500/20 p-3 rounded-full">
-                        <area.icon className="h-6 w-6 text-emerald-400" />
-                      </div>
-                      <CardTitle className="text-xl text-white">{area.title}</CardTitle>
-                    </div>
-                    <CardDescription className="text-gray-300 leading-relaxed">
-                      {area.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <h4 className="font-semibold text-white mb-3">Current Projects:</h4>
-                    <div className="space-y-2">
-                      {area.projects.map((project, idx) => (
-                        <div key={idx} className="text-sm text-gray-300 bg-white/10 px-3 py-2 rounded-lg">
-                          • {project}
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-              <h3 className="text-2xl font-bold text-center mb-8">Research Impact</h3>
-              <div className="grid md:grid-cols-4 gap-8 text-center">
-                <div className="bg-emerald-500/20 p-6 rounded-xl">
-                  <div className="text-3xl font-bold mb-2">100+</div>
-                  <div className="text-sm text-gray-300">Research Projects</div>
-                </div>
-                <div className="bg-teal-500/20 p-6 rounded-xl">
-                  <div className="text-3xl font-bold mb-2">₹12Cr+</div>
-                  <div className="text-sm text-gray-300">Research Funding</div>
-                </div>
-                <div className="bg-cyan-500/20 p-6 rounded-xl">
-                  <div className="text-3xl font-bold mb-2">300+</div>
-                  <div className="text-sm text-gray-300">Publications</div>
-                </div>
-                <div className="bg-blue-500/20 p-6 rounded-xl">
-                  <div className="text-3xl font-bold mb-2">20+</div>
-                  <div className="text-sm text-gray-300">Patents Filed</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Top Achievers */}
-      <section className="py-16 bg-gradient-to-r from-emerald-50 to-teal-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Student Achievers</h2>
-              <p className="text-xl text-muted-foreground">
-                Celebrating our outstanding students who excel in academics, research, and innovation.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {topAchievers.map((student, index) => (
-                <Card key={index} className="hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-white border-0 shadow-lg">
-                  <CardHeader className="text-center pb-2">
-                    <div className="relative w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-lg">
-                      <img
-                        src={student.image}
-                        alt={student.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <CardTitle className="text-xl text-foreground">{student.name}</CardTitle>
-                    <CardDescription className="text-emerald-600 font-semibold">{student.year}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-                      <div className="flex items-start space-x-2 mb-2">
-                        <Medal className="h-5 w-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                        <p className="text-sm text-foreground leading-relaxed">{student.achievement}</p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                        <Target className="h-4 w-4 mr-2" />
-                        Expertise
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {student.skills.map((skill, idx) => (
-                          <span key={idx} className="text-xs bg-teal-100 text-teal-700 px-2 py-1 rounded-full">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Achievements */}
-      <section className="py-16 bg-gradient-to-r from-emerald-50 to-cyan-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">Our Achievements</h2>
-              <p className="text-xl text-muted-foreground">Excellence in technology education</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {achievements.map((achievement, index) => (
-                <div key={index} className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                  <achievement.icon className={`h-12 w-12 ${achievement.color} mx-auto mb-4`} />
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{achievement.title}</h3>
-                  <p className="text-muted-foreground text-sm">{achievement.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+  const aboutProps = {
+    heading: "Department Statistics",
+    subheading: "Leading the way in IT education",
+    stats: [
+      { icon: Users, label: "Students", value: "700+", color: "bg-emerald-500" },
+      { icon: BookOpen, label: "Faculty", value: "40+", color: "bg-teal-500" },
+      { icon: Award, label: "Research Projects", value: "100+", color: "bg-cyan-500" },
+      { icon: Lightbulb, label: "Patents Filed", value: "20+", color: "bg-blue-500" },
+    ],
+    highlights: [
+      {
+        title: "Excellence in IT Education",
+        description:
+          "Our B.Tech and M.Tech programs blend theory with practical skills to produce industry-ready graduates.",
+        dotColor: "#10b981",
+      },
+      {
+        title: "Industry-Oriented Research",
+        description:
+          "Active research in data analytics, cloud computing, cybersecurity, and mobile technologies.",
+        dotColor: "#14b8a6",
+      },
+      {
+        title: "Strong Industry Ties",
+        description:
+          "Partnerships with leading tech companies for internships, live projects, and placements.",
+        dotColor: "#06b6d4",
+      },
+    ],
+    vision:
+      "To be a leading department in Information Technology education and research recognized globally.",
+    missionPoints: [
+      "Provide top-notch education in IT and allied areas.",
+      "Promote research and innovation to solve real-world problems.",
+      "Foster collaborations with industry and academia.",
+      "Develop ethical IT professionals for societal development.",
+    ],
+  };
 
 
-    </div>
-  );
-};
-
-export default IT;
-  const stats = [
-    { icon: Users, label: "Students", value: "700+", color: "bg-emerald-600" },
-    { icon: GraduationCap, label: "Faculty", value: "40+", color: "bg-teal-600" },
-    { icon: Brain, label: "Research Projects", value: "100+", color: "bg-cyan-600" },
-    { icon: Trophy, label: "Patents Filed", value: "20+", color: "bg-blue-600" },
-  ];
-
-  const programs = [
+  const programsData = [
     {
       title: "B.Tech Information Technology",
       duration: "4 Years",
       intake: "120 Students",
-      description: "Comprehensive program covering software development, web technologies, and information systems.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-600 to-teal-600",
-      curriculum: [
+      description:
+        "A comprehensive undergraduate program covering software development, networks, and emerging technologies.",
+      image:
+        "https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8JTIyRGF0YSUyMFN0cnVjdHVyZXMlMjAlMjYlMjBBbGdvcml0aG1zJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyV2ViJTIwJTI2JTIwTW9iaWxlJTIwRGV2ZWxvcG1lbnQlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJEYXRhYmFzZSUyME1hbmFnZW1lbnQlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJDb21wdXRlciUyME5ldHdvcmtzJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyQ2xvdWQlMjAlMjYlMjBJb1QlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJJbmZvcm1hdGlvbiUyMFNlY3VyaXR5JTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyRGV2T3BzJTIwJTI2JTIwQXV0b21hdGlvbiUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMkNhcHN0b25lJTIwUHJvamVjdCUyMiUyQ3xlbnwwfHwwfHx8MA%3D%3D",
+      gradient: "from-emerald-500 to-emerald-600",
+      highlights: [
         "Data Structures & Algorithms",
-        "Web Development (Full Stack)",
-        "Database Management Systems",
-        "Software Engineering",
+        "Web & Mobile Development",
+        "Database Management",
         "Computer Networks",
+        "Cloud & IoT",
         "Information Security",
-        "Mobile App Development",
-        "Cloud Computing"
-      ]
+        "DevOps & Automation",
+        "Capstone Project",
+      ],
     },
     {
       title: "M.Tech Information Technology",
       duration: "2 Years",
       intake: "50 Students",
-      description: "Advanced program with specializations in software engineering, data analytics, and IT management.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-600 to-cyan-600",
-      curriculum: [
+      description:
+        "Postgraduate program with specializations in Data Analytics, Software Engineering, and IT Management.",
+      image:
+        "https://plus.unsplash.com/premium_photo-1661454577337-7738fd3dd478?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8JTIyQWR2YW5jZWQlMjBTb2Z0d2FyZSUyMEVuZ2luZWVyaW5nJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyQmlnJTIwRGF0YSUyMEFuYWx5dGljcyUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMk1hY2hpbmUlMjBMZWFybmluZyUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMkVudGVycHJpc2UlMjBJVCUyMFNvbHV0aW9ucyUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMklUJTIwR292ZXJuYW5jZSUyMCUyNiUyME1hbmFnZW1lbnQlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJEZXZPcHMlMjBQcmFjdGljZXMlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJEaXNzZXJ0YXRpb24lMjBQcm9qZWN0JTIyJTJDfGVufDB8fDB8fHww",
+      gradient: "from-teal-500 to-teal-600",
+      highlights: [
         "Advanced Software Engineering",
         "Big Data Analytics",
         "Machine Learning",
-        "DevOps & Automation",
-        "Enterprise Architecture",
-        "IT Project Management",
+        "Enterprise IT Solutions",
+        "IT Governance & Management",
+        "DevOps Practices",
+        "Dissertation Project",
+      ],
+    },
+    {
+      title: "Ph.D. in Information Technology",
+      duration: "Minimum 3 Years",
+      intake: "As per University Norms",
+      description:
+        "Doctoral research program focusing on advanced areas like AI, Data Science, Cybersecurity, and Next-Gen Computing.",
+      image:
+        "https://images.unsplash.com/photo-1612179426608-3330c558cb70?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fEN1dHRpbmclMjBlZGdlJTIwUmVzZWFyY2glMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJSZXNlYXJjaCUyME1ldGhvZG9sb2d5JTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyVGhlc2lzJTIwJTI2JTIwUHVibGljYXRpb25zJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyU2VtaW5hcnMlMjAlMjYlMjBXb3Jrc2hvcHMlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJDb2xsYWJvcmF0aW9uJTIwd2l0aCUyMEluZHVzdHJ5JTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIySW50ZXJkaXNjaXBsaW5hcnklMjBSZXNlYXJjaCUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMlJlc2VhcmNoJTIwRnVuZGluZyUyMFN1cHBvcnQlMjIlMkN8ZW58MHx8MHx8fDA%3D",
+      gradient: "from-cyan-500 to-cyan-600",
+      highlights: [
+        "Cutting-edge Research",
         "Research Methodology",
-        "Dissertation Project"
-      ]
-    }
+        "Thesis & Publications",
+        "Seminars & Workshops",
+        "Collaboration with Industry",
+        "Interdisciplinary Research",
+        "Research Funding Support",
+      ],
+    },
   ];
+
+
+  const facultyMembers = [
+    {
+      name: "Dr. Neeta Singh",
+      position: "Professor & Head",
+      specialization: "Computer Networks, Wireless Networks, Mobile Computing, Wireless Technology, MANETs, VANETs, Next Generation Networks",
+      email: "neeta@gbu.ac.in",
+      achievements: "Ph.D. (Computer Science), M.Tech. ICT, Masters in Computers and Management, BSc.(PCM)",
+      image: "https://www.gbu.ac.in/USICT/media/img/Neeta.jpg",
+      color: "from-emerald-500 to-teal-500",
+    },
+    {
+      name: "Prof. Sanjay Kumar Sharma",
+      position: "Professor",
+      specialization: "Information Technology, Artificial Intelligence, Nanotechnology, Research Methodology, Research & Publication Ethics",
+      email: "ravikumar@gbu.ac.in",
+      achievements: "Ph. D. 1993, Kurukshetra University, Kurukshetra",
+      image: "https://faculty.gbu.ac.in/uploads/photos/66052fb965b32_sanjay.sharma.jpg",
+      color: "from-teal-500 to-cyan-500",
+    },
+    {
+      name: "Dr. Akash Kumar",
+      position: "Associate Professor",
+      specialization: "Battery Less Wireless Sensor Network, Internet of Things, Energy Harvesting, UAVs, Machine Learning, BlockChain",
+      email: "akash.kumar@gbu.ac.in",
+      achievements: "Ph.D. (IIIT-Allahabad), M.Tech. (IIIT-Allahabad), B.Tech. (UCE, RTU, Kota)",
+      image: "https://faculty.gbu.ac.in/uploads/photos/6763ee8f77b1f_Akash%20Kumar%20(PWC2016003).jpg",
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      name: "Dr. Maneet Singh",
+      position: "Assistant Professor",
+      specialization: "Opinion Mining, Social Network Analysis, Computational Social Science and Machine Learning",
+      email: "maneet.singh@gbu.ac.in",
+      achievements: "PhD (Indian Institute of Technology Ropar)",
+      image: "https://faculty.gbu.ac.in/uploads/photos/67c1a9f10e9e1_profile_pic_ManeetSingh.jpg",
+      color: "from-blue-500 to-indigo-500",
+    },
+  ];
+
+  const facultyStats = {
+    text: "Our faculty team brings decades of experience in academics and industry.",
+    stats: [
+      {
+        icon: BookOpen,
+        value: "200+",
+        label: "Research Papers",
+        bg: "bg-emerald-50",
+        color: "text-emerald-600",
+      },
+      {
+        icon: Award,
+        value: "25+",
+        label: "Awards",
+        bg: "bg-teal-50",
+        color: "text-teal-600",
+      },
+      {
+        custom: "PhD",
+        value: "100%",
+        label: "PhD Faculty",
+        bg: "bg-cyan-50",
+        color: "bg-cyan-600",
+      },
+      {
+        custom: "Exp",
+        value: "12+",
+        label: "Avg Experience",
+        bg: "bg-blue-50",
+        color: "bg-blue-600",
+      },
+    ],
+  };
 
   const researchAreas = [
     {
-      title: "Data Science & Analytics",
-      description: "Advanced research in machine learning, data mining, and predictive analytics for business intelligence.",
       icon: Brain,
-      projects: ["Predictive Healthcare Analytics", "Financial Data Mining", "Social Media Sentiment Analysis"],
-      color: "text-emerald-600"
+      title: "Data Science & Analytics",
+      description: "Machine learning, big data processing, and business intelligence.",
+      projects: ["Predictive Healthcare", "Financial Analytics", "Social Media Mining"],
+      image:
+        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-emerald-500 to-teal-500",
     },
     {
-      title: "Web Technologies",
-      description: "Modern web development frameworks, progressive web apps, and user experience research.",
-      icon: Globe,
-      projects: ["Progressive Web Applications", "Real-time Web Systems", "Accessibility Research"],
-      color: "text-teal-600"
+      icon: Cloud,
+      title: "Cloud & Distributed Systems",
+      description: "Cloud-native apps, microservices, and serverless architectures.",
+      projects: ["Microservices", "Serverless Apps", "Edge Computing"],
+      image:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-teal-500 to-cyan-500",
     },
     {
-      title: "Cloud Computing",
-      description: "Distributed systems, serverless computing, and cloud-native application development.",
-      icon: Server,
-      projects: ["Microservices Architecture", "Serverless Computing", "Container Orchestration"],
-      color: "text-cyan-600"
-    },
-    {
-      title: "Mobile Computing",
-      description: "Cross-platform mobile development, IoT integration, and mobile security research.",
       icon: Smartphone,
-      projects: ["Cross-Platform Mobile Apps", "IoT Mobile Integration", "Mobile Security Frameworks"],
-      color: "text-blue-600"
-    }
+      title: "Mobile & IoT",
+      description: "Cross-platform apps, IoT integration, and mobile security.",
+      projects: ["IoT Devices", "Smart Apps", "Secure Mobile Frameworks"],
+      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=400&q=80",
+
+      gradient: "from-cyan-500 to-blue-500",
+    },
+    {
+      icon: Shield,
+      title: "Cybersecurity & Blockchain",
+      description: "Network security, cryptography, and blockchain applications.",
+      projects: ["Secure Communication", "Blockchain Voting", "IoT Security"],
+      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-blue-500 to-indigo-500",
+    },
   ];
+
+  const researchStats = [
+    { value: "50+", label: "Research Projects", bg: "bg-emerald-500/20" },
+    { value: "₹5Cr+", label: "Research Funding", bg: "bg-teal-500/20" },
+    { value: "200+", label: "Publications", bg: "bg-cyan-500/20" },
+    { value: "10+", label: "Patents Filed", bg: "bg-blue-500/20" },];
 
   const topAchievers = [
     {
       name: "Arjun Kumar",
       year: "B.Tech IT 2024",
-      achievement: "Microsoft Student Partner, Full Stack Developer Intern at Google",
-      image: "https://images.unsplash.com/photo-1646415753793-dcfda1dfeee3?w=600&auto=format&fit=crop",
-      skills: ["React", "Node.js", "Azure", "Machine Learning"]
+      achievement: "Microsoft Student Partner, Intern at Google",
+      image:
+        "https://images.unsplash.com/photo-1646415753793-dcfda1dfeee3?auto=format&fit=crop&w=400&q=80",
+      skills: ["React", "Node.js", "Cloud", "Machine Learning"],
+    },
+
+    {
+      name: "Rajeev Verma",
+      year: "Ph.D. IT 2025",
+      achievement: "Received DST Research Fellowship, AI Researcher",
+      image:
+        "https://images.unsplash.com/photo-1644904105846-095e45fca990?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHVuaXZlcnNpdHklMjBzdHVkZW50JTIwaW1hZ2V8ZW58MHx8MHx8fDA%3D",
+      skills: ["AI", "Deep Learning", "Python", "NLP"],
     },
     {
-      name: "Priya Sharma",
-      year: "M.Tech IT 2023",
-      achievement: "Best Research Paper Award, Published 5 papers in international journals",
-      image: "https://media.istockphoto.com/id/1362063465/photo/female-teen-student-with-a-backpack-and-books-smiling-stock-photo.webp?a=1&b=1&s=612x612&w=0&k=20&c=wozjDZd9SxxOG6xGIu5Z1ncjPgeZmU_yvnVQMzqaEe8=",
-      skills: ["Data Science", "Python", "TensorFlow", "Research"]
+      name: "Megha Singh",
+      year: "B.Tech IT 2025",
+      achievement: "Won Smart India Hackathon, Intern at Infosys",
+      image:
+        "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      skills: ["Java", "Cloud Computing", "Cybersecurity"],
     },
-    {
-      name: "Rahul Singh",
-      year: "B.Tech IT 2024",
-      achievement: "Winner of Smart India Hackathon 2023, Founder of tech startup",
-      image: "https://images.unsplash.com/photo-1644904105846-095e45fca990?w=600&auto=format&fit=crop",
-      skills: ["Mobile Development", "Entrepreneurship", "UI/UX", "Leadership"]
-    }
   ];
 
   const achievements = [
     {
       title: "ACM Student Chapter",
-      description: "Largest ACM chapter with 300+ members",
+      description: "Largest ACM chapter with 300+ IT students",
       icon: Award,
-      color: "text-emerald-600"
+      color: "text-emerald-600",
     },
     {
       title: "Open Source Projects",
-      description: "200+ student-led projects on GitHub",
-      icon: Code,
-      color: "text-teal-600"
+      description: "200+ student-led open-source projects",
+      icon: BookOpen,
+      color: "text-teal-600",
     },
     {
-      title: "Tech Partnerships",
-      description: "Collaborations with major IT companies",
+      title: "Tech Industry Tie-Ups",
+      description: "Partnerships with Google, IBM, and TCS",
       icon: Lightbulb,
-      color: "text-cyan-600"
+      color: "text-cyan-600",
     },
     {
-      title: "Career Success",
-      description: "98% placement rate in top IT firms",
+      title: "Placement Record",
+      description: "98% placements in top IT companies",
       icon: GraduationCap,
-      color: "text-blue-600"
-    }
+      color: "text-blue-600",
+    },
   ];
+
+  return (
+    <div className="min-h-screen bg-background">
+      <HeroSection {...heroProps} />
+      <HodMessage {...hodProps} />
+      <AboutDepartment {...aboutProps} />
+      <Programs
+        heading="Academic Programs"
+        subheading="Explore our industry-relevant IT programs designed for your success."
+        programs={programsData}
+      />
+      <Faculty
+        title="Our Faculty"
+        subtitle="Experienced educators and researchers guiding future innovators."
+        facultyMembers={facultyMembers}
+        bottomStats={facultyStats}
+      />
+      <Research
+        banner={() => (
+          <HeroBanner
+            backgroundImage={researchBg}
+            mainHeading="Research"
+            highlight="& Innovation"
+            subheading="Pioneering new frontiers in IT and digital technologies."
+          />
+        )}
+        researchAreas={researchAreas}
+        stats={researchStats}
+      />
+      <StudentAchievers
+        topAchievers={topAchievers}
+        achievements={achievements}
+        achieversHeading="Student Achievers"
+        achieversSubheading="Proud moments from our talented students"
+        achievementsHeading="Key Highlights"
+        achievementsSubheading="Milestones and accolades"
+      />
+    </div>
+  );
+};
+
+export default IT;

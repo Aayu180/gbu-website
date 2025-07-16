@@ -8,9 +8,11 @@ const Card = ({ className = '', children }) => (
 );
 
 // CardHeader with padding and bottom border
-const CardHeader = ({ children }) => (
-  <div className="px-6 pt-6 pb-2 border-b border-gray-100 border-solid">{children}</div>
-);
+ export const CardHeader = ({ className = "", children, ...props }) => (
+   <div className={`px-6 pt-6 pb-2  `} {...props}>
+     {children}
+   </div>
+ );
 
 // CardTitle with font styling
 const CardTitle = ({ className = '', children }) => (

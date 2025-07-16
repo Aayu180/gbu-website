@@ -1,5 +1,6 @@
  import React from "react";
 import { motion } from "framer-motion";
+
  const staffData = [
   {
     department: "Electronics and Communication Engineering",
@@ -8,50 +9,43 @@ import { motion } from "framer-motion";
       {
         name: "Mr. Ravindra Kumar",
         designation: "Technical Superintendent",
-        phone: "Coming Soon",
-        email: "Coming Soon",
+        phone: "9560539604",
+        email: "ravindra@gbu.ac.in",
         image: "/staff/ravindra.jpg",
-      },
-      {
-        name: "Mr. Anmol Nagar",
-        designation: "Technical Superintendent",
-        phone: "Coming Soon",
-        email: "Coming Soon",
-        image: "/staff/anmol.jpg",
       },
       {
         name: "Mr. Himanshu Saini",
         designation: "Technical Superintendent",
-        phone: "Coming Soon",
-        email: "Coming Soon",
+        phone: "9540593279",
+        email: "himanshu@gbu.ac.in",
         image: "/staff/himanshu.jpg",
+      },
+      {
+        name: "Mr. Anmol Nagar",
+        designation: "Technical Superintendent",
+        phone: "9910997540",
+        email: "anmol@gbu.ac.in",
+        image: "/staff/anmol.jpg",
       },
       {
         name: "Mr. Amit Kumar",
         designation: "Lab Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
+        phone: "9266097577",
+        email: "amitk2193@gmail.com",
         image: "/staff/amit.jpg",
       },
       {
-        name: "Mr. Chanderpal",
+        name: "Mr. Chandra Pal Sharma",
         designation: "Lab Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
-        image: "/staff/chanderpal.jpg",
-      },
-      {
-        name: "Mrs. Rajni Saini",
-        designation: "Lab Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
-        image: "/staff/rajni.jpg",
+        phone: "7703842834",
+        email: "sharmachandrapal855@gmail.com",
+        image: "/staff/chandrapal.jpg",
       },
       {
         name: "Mr. Amar Singh",
         designation: "Lab Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
+        phone: "7275294737",
+        email: "amaripec2006@gmail.com",
         image: "/staff/amar.jpg",
       },
     ],
@@ -63,44 +57,44 @@ import { motion } from "framer-motion";
       {
         name: "Mr. Sanjeev Kumar",
         designation: "Technical Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
+        phone: "9760070427",
+        email: "sanjeev@gbu.ac.in",
         image: "/staff/sanjeev.jpg",
       },
       {
         name: "Mrs. Sunita",
         designation: "Technical Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
+        phone: "9871741203",
+        email: "sunita@gbu.ac.in",
         image: "/staff/sunita.jpg",
       },
       {
-        name: "Mr. Nitin",
+        name: "Mr. Nitin Kumar",
         designation: "Lab Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
+        phone: "8650431181",
+        email: "nitinkumarmathur1968@gmail.com",
         image: "/staff/nitin.jpg",
       },
       {
-        name: "Mrs. Kirti Chaudhary",
+        name: "Mr. Arjit",
         designation: "Lab Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
-        image: "/staff/kirti.jpg",
+        phone: "9313404138",
+        email: "arjitkumar38@gmail.com",
+        image: "/staff/arjit.jpg",
       },
       {
         name: "Mr. Rahul Kumar",
         designation: "Lab Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
+        phone: "9319799226",
+        email: "davidrahulk1019@gmail.com",
         image: "/staff/rahul.jpg",
       },
       {
-        name: "Mr. Arjit Kumar",
+        name: "Mrs. Kirti Chaudhary",
         designation: "Lab Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
-        image: "/staff/arjit.jpg",
+        phone: "9457714863",
+        email: "kirtitevatiya43@gmail.com",
+        image: "/staff/kirti.jpg",
       },
     ],
   },
@@ -109,27 +103,76 @@ import { motion } from "framer-motion";
     short: "Admin",
     members: [
       {
-        name: "Mr. Shameem Raza",
+        name: "Mr. Shamem Raza",
         designation: "Executive Assistant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
+        phone: "9910300194",
+        email: "shamem@gbu.ac.in",
         image: "/staff/shameem.jpg",
       },
       {
-        name: "Mr. Shailendra Kumar",
-        designation: "Attendant",
-        phone: "Coming Soon",
-        email: "Coming Soon",
-        image: "/staff/shailendra.jpg",
+        name: "Mr. Salendra Kumar",
+        designation: "Office Attendant",
+        phone: "7701809870",
+        email: "salendra@gbu.ac.in",
+        image: "/staff/salendra.jpg",
+      },
+      {
+        name: "Mr. Lalit Sharma",
+        designation: "Office Assistant",
+        phone: "8510927518",
+        email: "lalit.sharma812@gmail.com",
+        image: "/staff/lalit.jpg",
+      },
+      {
+        name: "Mr. Arvind Kumar",
+        designation: "Office Attendant",
+        phone: "9625397081",
+        email: "talibarvind@gmail.com",
+        image: "/staff/arvind.jpg",
+      },
+      {
+        name: "Mr. Ritesh Kumar",
+        designation: "Lab Attendant",
+        phone: "9458876635",
+        email: "ritesh945887@gmail.com",
+        image: "/staff/ritesh.jpg",
+      },
+      {
+        name: "Mr. Raghuveer Verma",
+        designation: "Office Attendant",
+        phone: "8506929538",
+        email: "raghuveervermagbu@gmail.com",
+        image: "/staff/raghuveer.jpg",
+      },
+      {
+        name: "Mr. Anish",
+        designation: "Office Attendant",
+        phone: "7505056660",
+        email: "anishkhansofiya75075000@gmail.com",
+        image: "/staff/anish.jpg",
+      },
+      {
+        name: "Mr. Vivek",
+        designation: "Office Attendant",
+        phone: "8433209830",
+        email: "Vivekkumar897961@gmail.com",
+        image: "/staff/vivek.jpg",
+      },
+      {
+        name: "Mr. Monu Tevatiya",
+        designation: "Office Attendant",
+        phone: "7599497598",
+        email: "teotiamonu98@gmail.com",
+        image: "/staff/monu.jpg",
       },
     ],
   },
 ];
-export default function StaffMembers() {
+
+function StaffMembers({ staffData }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-12 px-6">
       <div className="max-w-[1400px] mx-auto">
-        {/* Header */}
         <div className="text-center mb-12 mt-10">
           <h1 className="text-4xl font-bold text-gray-800 mb-2 tracking-tight">
             Staff Members | USICT
@@ -137,7 +180,6 @@ export default function StaffMembers() {
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full"></div>
         </div>
 
-        {/* Departments */}
         <div className="space-y-16">
           {staffData.map((dept, deptIndex) => (
             <div
@@ -147,16 +189,12 @@ export default function StaffMembers() {
                 animation: `fadeInUp 0.8s ease-out ${deptIndex * 0.2}s both`,
               }}
             >
-              {/* Department Header */}
               <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 p-6 rounded-xl mb-6 relative overflow-hidden">
                 <h2 className="text-2xl text-center font-bold text-white relative z-10">
                   {dept.department}
                 </h2>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-12 -translate-x-12"></div>
               </div>
 
-              {/* Member Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
                 {dept.members.map((member, memberIndex) => (
                   <div
@@ -168,11 +206,15 @@ export default function StaffMembers() {
                       }s both`,
                     }}
                   >
-                    {/* Photo */}
                     <div className="p-4 flex flex-col items-center">
                       <img
                         src={member.image}
                         alt={member.name}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src =
+                            "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+                        }}
                         className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100"
                       />
                       <h3 className="font-bold text-gray-800 text-lg text-center">
@@ -183,7 +225,6 @@ export default function StaffMembers() {
                       </p>
                     </div>
 
-                    {/* Contact */}
                     <div className="border-t border-gray-200 p-4 space-y-2 mt-auto">
                       <div className="flex items-center text-sm text-gray-700">
                         <svg
@@ -230,7 +271,6 @@ export default function StaffMembers() {
         </div>
       </div>
 
-      {/* Keyframes */}
       <style jsx>{`
         @keyframes fadeInUp {
           from {
@@ -256,4 +296,8 @@ export default function StaffMembers() {
       `}</style>
     </div>
   );
+}
+
+export default function StaffPage() {
+  return <StaffMembers staffData={staffData} />;
 }

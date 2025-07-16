@@ -1,5 +1,5 @@
 import WelcomePage from "../../components/home/HeroBanner.jsx";
-import QuickAccess from "../../components/home/Quicklink.jsx"
+import QuickLinks from "../../components/home/Quicklink.jsx"
 import AboutSection from "../../components/home/Aboutsection.jsx";
 import Glance from "../../components/home/Glance.jsx";
 import VisionaryLeadership from "../../components/home/Visionary.jsx";
@@ -14,7 +14,7 @@ function Home() {
     <div className="min-h-screen flex flex-col">
 
       <WelcomePage />
-    <QuickAccess />
+    <QuickLinks />
       <AboutSection />
       <Glance />
       <VisionaryLeadership />

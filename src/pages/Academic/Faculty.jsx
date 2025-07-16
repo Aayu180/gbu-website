@@ -3,9 +3,9 @@ import axios from 'axios';
 import SimpleLayout from '../../components/faculty/SimpleLayout';
 import { Link, useParams } from 'react-router-dom';
 import TabContent from '../../components/faculty/TabContent';
-import { Mail, Phone, Globe, Award, BookOpen, Users, Search, Filter, X } from 'lucide-react';
+import { Mail, Phone, Globe, Award, BookOpen, Users, Search, X } from 'lucide-react';
 
-const VITE_HOST = import.meta.env.VITE_HOST; 
+const VITE_HOST = import.meta.env.VITE_HOST;
 
 const Faculty = () => {
   const [facultyMembers, setFacultyMembers] = useState([]);
@@ -17,11 +17,9 @@ const Faculty = () => {
   const [selectedExperience, setSelectedExperience] = useState('All');
   const [selectedQualification, setSelectedQualification] = useState('All');
   const [selectedSchool, setSelectedSchool] = useState('All Schools');
-  const [showFilters, setShowFilters] = useState(false);
 
   const { id } = useParams();
 
-  // ✅ Fetch all dynamic data on mount
   useEffect(() => {
     const fetchAllData = async () => {
       try {
@@ -43,12 +41,15 @@ const Faculty = () => {
 
   const schools = [
     'All Schools',
-    'School of Information and Communication Technology',
-    'School of Biotechnology',
-    'School of Engineering',
-    'School of Management',
-    'School of Humanities',
-    'School of Law'
+    'University Schools',
+    'Biotechnology',
+    'Buddhist Studies & Civilization',
+    'Engineering',
+    'Humanities & Social Sciences',
+    'Information & Communication Technology',
+    'Law, Justice and Governance',
+    'Management',
+    'Vocational Studies & Applied Sciences'
   ];
 
   const departments = [
@@ -139,7 +140,7 @@ const Faculty = () => {
             </div>
           </section>
 
-          {/* Statistics Section */}
+          {/* Statistics */}
           <section className="py-16 bg-white">
             <div className="container mx-auto px-4">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
@@ -174,7 +175,8 @@ const Faculty = () => {
               </div>
             </div>
           </section>
-          {/* Search and Filters */}
+
+          {/* Search + Filters */}
           <section className="py-1 w-full bg-gray-50">
             <div className="container w-full mx-auto">
               <div className="mx-15 space-y-2">
@@ -189,91 +191,72 @@ const Faculty = () => {
                   />
                 </div>
 
-                <div className="bg-white rounded-lg border border-gray-200 border-solid p-4">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Schools</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {schools.map((school) => (
-                      <button
-                        key={school}
-                        onClick={() => setSelectedSchool(school)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedSchool === school
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          }`}
-                      >
-                        {school}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex justify-between items-center">
+                {(selectedDepartment !== 'All Departments' || selectedExperience !== 'All' || selectedQualification !== 'All' || selectedSchool !== 'All Schools' || searchTerm) && (
                   <button
-                    onClick={() => setShowFilters(!showFilters)}
-                    className="flex items-center space-x-2 bg-white border border-gray-300 border-solid px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+                    onClick={clearFilters}
+                    className="flex items-center space-x-2 text-red-600 hover:text-red-700 transition-colors"
                   >
-                    <Filter className="w-4 h-4" />
-                    <span>More Filters</span>
+                    <X className="w-4 h-4" />
+                    <span>Clear All</span>
                   </button>
-                  {(selectedDepartment !== 'All Departments' || selectedExperience !== 'All' || selectedQualification !== 'All' || selectedSchool !== 'All Schools' || searchTerm) && (
-                    <button
-                      onClick={clearFilters}
-                      className="flex items-center space-x-2 text-red-600 hover:text-red-700 transition-colors"
-                    >
-                      <X className="w-4 h-4" />
-                      <span>Clear All</span>
-                    </button>
-                  )}
-                </div>
-
-                {showFilters && (
-                  <div className="bg-white p-6 rounded-lg border border-gray-200 border-solid space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Department</label>
-                        <select
-                          value={selectedDepartment}
-                          onChange={(e) => setSelectedDepartment(e.target.value)}
-                          className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        >
-                          {departments.map((dept) => (
-                            <option key={dept} value={dept}>{dept}</option>
-                          ))}
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Experience</label>
-                        <select
-                          value={selectedExperience}
-                          onChange={(e) => setSelectedExperience(e.target.value)}
-                          className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        >
-                          {experienceRanges.map((range) => (
-                            <option key={range} value={range}>{range}</option>
-                          ))}
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Qualification</label>
-                        <select
-                          value={selectedQualification}
-                          onChange={(e) => setSelectedQualification(e.target.value)}
-                          className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        >
-                          {qualifications.map((qual) => (
-                            <option key={qual} value={qual}>{qual}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                  </div>
                 )}
+
+                <div className="bg-white p-6 rounded-lg border border-gray-200 border-solid space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">School</label>
+                      <select
+                        value={selectedSchool}
+                        onChange={(e) => setSelectedSchool(e.target.value)}
+                        className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                      >
+                        {schools.map(school => (
+                          <option key={school} value={school}>{school}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Department</label>
+                      <select
+                        value={selectedDepartment}
+                        onChange={(e) => setSelectedDepartment(e.target.value)}
+                        className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                      >
+                        {departments.map(dept => (
+                          <option key={dept} value={dept}>{dept}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Experience</label>
+                      <select
+                        value={selectedExperience}
+                        onChange={(e) => setSelectedExperience(e.target.value)}
+                        className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                      >
+                        {experienceRanges.map(range => (
+                          <option key={range} value={range}>{range}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Qualification</label>
+                      <select
+                        value={selectedQualification}
+                        onChange={(e) => setSelectedQualification(e.target.value)}
+                        className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                      >
+                        {qualifications.map(qual => (
+                          <option key={qual} value={qual}>{qual}</option>
+                        ))}
+                      </select>
+                    </div>
+                    
+                  </div>
+                </div>
 
                 <div className="text-sm text-gray-600">
                   Showing {filteredFaculty.length} of {facultyMembers.length} faculty members
-                  {selectedSchool !== 'All Schools' && ` in ${selectedSchool}`}
                 </div>
               </div>
             </div>
@@ -295,7 +278,8 @@ const Faculty = () => {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {filteredFaculty.map((faculty, index) => (
-                    <Link to={`/academics/faculty/${faculty.id}`}
+                    <Link
+                      to={`/academics/faculty/${faculty.id}`}
                       key={faculty.id}
                       className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fade-in group cursor-pointer"
                       style={{ animationDelay: `${index * 0.1}s` }}
@@ -348,7 +332,7 @@ const Faculty = () => {
             </div>
           </section>
 
-          {/* ✅ Call to Action Section */}
+          {/* Call to Action */}
           {joinData && (
             <section className="py-16 bg-white">
               <div className="container mx-auto px-4 text-center">

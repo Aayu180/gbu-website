@@ -1,10 +1,12 @@
-
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/announcement/Header';
 import SearchFilter from '../../components/announcement/SearchFilter';
 import SocialShare from '../../components/announcement/SocialShare';
 import Pagination from '../../components/announcement/Pagination';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Download, FileText } from 'lucide-react';
+
 // Card components
 const Card = ({ children, className = '' }) => (
   <div className={`bg-white rounded-lg border border-gray-200 border-solid${className}`}>{children}</div>
@@ -44,7 +46,7 @@ const Button = ({ children, size = 'md', variant = 'default', className = '', ..
     </button>
   );
 };
-import { Download, FileText } from 'lucide-react';
+
 // Mock data for notices
 const mockNotices = [
   {
@@ -129,7 +131,6 @@ const mockNotices = [
   }
 ];
 
-
 // Simple date formatting function (similar to date-fns format)
 function format(date, formatStr) {
   const d = new Date(date);
@@ -212,11 +213,23 @@ const Notice = () => {
     return colors[type] || colors['General'];
   };
 
+  const container = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <>
       <div className="min-h-screen bg-gray-50 pb-10">
-        {/* <Header /> */}
-
         <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl font-bold text-white mb-4">Notices & Circulars</h1>
@@ -224,10 +237,7 @@ const Notice = () => {
           </div>
         </section>
 
-
-
-
-        <SearchFilter
+        <SearchFilter 
           onSearch={handleSearch}
           onDateFilter={handleDateFilter}
           onTypeFilter={handleTypeFilter}
@@ -237,63 +247,76 @@ const Notice = () => {
           placeholder="Search notices..."
         />
 
-        <div className="space-y-4 mx-25">
-          {currentNotices.map((notice) => (
-            <Card key={notice.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Badge className={getTypeColor(notice.type)}>
-                        {notice.type}
-                      </Badge>
-                      <span className="text-sm text-gray-500">
-                        {format(new Date(notice.date), 'MMMM dd, yyyy')}
-                      </span>
-                    </div>
-                    <CardTitle className="text-lg font-semibold">
-                      {notice.title}
-                    </CardTitle>
-                    <CardDescription className="mt-2">
-                      {notice.content.substring(0, 150)}...
-                    </CardDescription>
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-2 shrink-0">
-                    {notice.pdfUrl && (
-                      <a
-                        href={notice.pdfUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        download
-                      >
-                        <Button size="sm" variant="outline">
-                          <Download size={16} className="mr-2" />
-                          Download
-                        </Button>
-                      </a>
-                    )}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="mt-8 space-y-4 lg:mx-50 sm:mx-10 md:mx-30"
+        >
+          <AnimatePresence>
+            {currentNotices.map((notice) => (
+              <motion.div key={notice.id} variants={item} whileHover={{ scale: 1.02 }}>
+                <Card className="delay-300 shadow-2xl duration-300">
+                  <CardHeader>
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Badge className={getTypeColor(notice.type)}>
+                            {notice.type}
+                          </Badge>
+                          <span className="text-sm text-gray-500">
+                            {format(new Date(notice.date), 'MMMM dd, yyyy')}
+                          </span>
+                        </div>
+                        <CardTitle className="text-lg font-semibold">
+                          {notice.title}
+                        </CardTitle>
+                        <CardDescription className="mt-2">
+                          {notice.content.substring(0, 150)}...
+                        </CardDescription>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-2 shrink-0">
+                        {notice.pdfUrl && (
+                          <a
+                            href={notice.pdfUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                          >
+                            <Button size="sm" variant="outline">
+                              <Download size={16} className="mr-2" />
+                              Download
+                            </Button>
+                          </a>
+                        )}
 
-                    <Link to={`/announcements/notices/${notice.id}`}>
-                      <Button size="sm">
-                        <FileText size={16} className="mr-2" />
-                        View Details
-                      </Button>
-                    </Link>
-                    <SocialShare
-                      url={`${window.location.origin}/notices/${notice.id}`}
-                      title={notice.title}
-                    />
-                  </div>
-                </div>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
+                        <Link to={`/announcements/notices/${notice.id}`}>
+                          <Button size="sm">
+                            <FileText size={16} className="mr-2" />
+                            View Details
+                          </Button>
+                        </Link>
+                        <SocialShare
+                          url={`${window.location.origin}/notices/${notice.id}`}
+                          title={notice.title}
+                        />
+                      </div>
+                    </div>
+                  </CardHeader>
+                </Card>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {filteredNotices.length === 0 && (
-          <div className="text-center py-12">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-12"
+          >
             <p className="text-gray-500 text-lg">No notices found matching your criteria.</p>
-          </div>
+          </motion.div>
         )}
 
         {totalPages > 1 && (
@@ -304,7 +327,6 @@ const Notice = () => {
           />
         )}
       </div>
-
     </>
   );
 };

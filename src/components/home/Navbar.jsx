@@ -81,7 +81,7 @@ const NAVIGATION_CONFIG = [
     baseRoute: "/campus-life",
     items: [
       { slug: "hero", label: "Overview" },
-      { slug: "hostel-facilities", label: "Hostels" },
+      { slug: "hostel-detailed", label: "Hostels" },
       { slug: "sports-fitness", label: "Sports" },
       { slug: "clubs-societies", label: "Clubs and Societies" },
       { slug: "meditation-center", label: "Meditation Centre" },

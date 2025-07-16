@@ -1,85 +1,118 @@
-import { Users, Award, BookOpen, Lightbulb } from "lucide-react";
+import { motion } from "framer-motion";
 
-const AboutDepartment = () => {
-  const stats = [
-    { icon: Users, label: "Students", value: "800+" },
-    { icon: BookOpen, label: "Faculty", value: "45+" },
-    { icon: Award, label: "Research Projects", value: "120+" },
-    { icon: Lightbulb, label: "Patents Filed", value: "25+" },
-  ];
-
+const AboutDepartment = ({
+  heading = "About the Department",
+  subheading = "Established in 1995, our department has been at the forefront of computer science education and research for over two decades.",
+  stats = [],
+  highlights = [],
+  vision = "",
+  missionPoints = [],
+}) => {
   return (
-    <section id="about" className="py-16 bg-primary/5">
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-foreground mb-4">
-            About the Department
+    <section
+      id="about"
+      className="py-24 bg-gradient-to-br from-[#eef2f7] via-[#f1f5f9] to-[#eef2f7]"
+    >
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="max-w-6xl mx-auto"
+        >
+          <h2 className="text-4xl md:text-5xl font-extrabold text-center text-[#111827] mb-4">
+            {heading}
           </h2>
-          <p className="text-xl text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-            Established in 1995, our department has been at the forefront of computer science education and research for over two decades.
+          <div className="h-1 w-24 bg-gradient-to-r from-[#6366f1] via-[#3b82f6] to-[#06b6d4] mx-auto mb-6 rounded-full"></div>
+          <p className="text-lg md:text-xl text-center text-[#475569] mb-16 max-w-3xl mx-auto">
+            {subheading}
           </p>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.2 } },
+            }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
+          >
             {stats.map((stat, index) => (
-              <div key={index} className="text-center p-6 bg-card rounded-lg border">
-                <stat.icon className="h-8 w-8 text-primary mx-auto mb-3" />
-                <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
-                <div className="text-muted-foreground">{stat.label}</div>
-              </div>
+              <motion.div
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                whileHover={{
+                  y: -5,
+                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
+                }}
+                className="text-center p-6 rounded-3xl bg-white/60 backdrop-blur-md shadow-lg transition-all duration-500"
+              >
+                <div className="h-16 w-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-[#6366f1] to-[#3b82f6] text-white shadow-md">
+                  <stat.icon className="h-7 w-7" />
+                </div>
+                <div className="text-3xl font-extrabold text-[#111827] mb-1">{stat.value}</div>
+                <div className="text-[#475569]">{stat.label}</div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-foreground">Excellence in Education</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Our department offers comprehensive undergraduate and postgraduate programs designed to
-                meet the evolving needs of the technology industry. We emphasize both theoretical
-                foundations and practical applications, ensuring our graduates are industry-ready.
-              </p>
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+              className="space-y-10"
+            >
+              {highlights.map((item, idx) => (
+                <div key={idx}>
+                  <h3 className="text-2xl font-bold text-[#111827] mb-3 flex items-center gap-2">
+                    <span
+                      className={`inline-block w-2 h-2 rounded-full`}
+                      style={{ backgroundColor: item.dotColor }}
+                    ></span>
+                    {item.title}
+                  </h3>
+                  <p className="text-[#475569] leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </motion.div>
 
-              <h3 className="text-2xl font-bold text-foreground">Research & Innovation</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                We are actively engaged in cutting-edge research in artificial intelligence, machine
-                learning, cybersecurity, software engineering, and data science. Our faculty and
-                students regularly publish in top-tier conferences and journals.
-              </p>
-
-              <h3 className="text-2xl font-bold text-foreground">Industry Partnerships</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Strong collaborations with leading technology companies provide our students with
-                internship opportunities, industry projects, and placement assistance. We maintain
-                partnerships with Google, Microsoft, Amazon, TCS, Infosys, and many more.
-              </p>
-            </div>
-
-            <div className="bg-card p-8 rounded-lg border">
-              <h3 className="text-xl font-bold text-foreground mb-6">Vision & Mission</h3>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+              className="bg-white/60 backdrop-blur-lg p-10 rounded-3xl shadow-2xl"
+            >
+              <h3 className="text-2xl font-bold text-[#111827] mb-6">
+                Vision & Mission
+              </h3>
 
               <div className="space-y-6">
                 <div>
-                  <h4 className="font-semibold text-foreground mb-2">Vision</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    To be a globally recognized center of excellence in computer science education,
-                    research, and innovation that contributes to societal development.
-                  </p>
+                  <h4 className="font-semibold text-[#111827] mb-2">Vision</h4>
+                  <p className="text-[#475569] text-sm leading-relaxed">{vision}</p>
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-foreground mb-2">Mission</h4>
-                  <ul className="text-muted-foreground text-sm space-y-2">
-                    <li>• Provide quality education in computer science and engineering</li>
-                    <li>• Conduct cutting-edge research in emerging technologies</li>
-                    <li>• Foster innovation and entrepreneurship among students</li>
-                    <li>• Collaborate with industry and academic institutions globally</li>
-                    <li>• Contribute to societal development through technology solutions</li>
+                  <h4 className="font-semibold text-[#111827] mb-2">Mission</h4>
+                  <ul className="text-[#475569] text-sm space-y-2 leading-relaxed list-disc pl-5">
+                    {missionPoints.map((point, idx) => (
+                      <li key={idx}>{point}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

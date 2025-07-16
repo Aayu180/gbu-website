@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, BookOpen, FileText, Download, Bell, Search } from 'lucide-react';
+import axios from 'axios';
+
+// ✅ Define BASE_URL once at the top
+const BASE_URL = 'https://meow.tilchattaas.com/academic';
 
 const AcademicCalendar = () => {
   const [events, setEvents] = useState([]);
@@ -11,107 +15,26 @@ const AcademicCalendar = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    // Static GBU academic events
-    setEvents([
-      {
-        id: 1,
-        date: '2025-07-15',
-        title: 'Commencement of Odd Semester Classes',
-        description: 'Classes for all odd semester programs begin.',
-        category: 'academic',
-        status: 'upcoming',
-        heading: 'Academic Schedule - 2025',
-        desc: 'Stay updated with the semester-wise academic calendar of GBU.'
-      },
-      {
-        id: 2,
-        date: '2025-08-01',
-        title: 'MBA Admission Round 2',
-        description: 'Final counseling and admission for MBA students.',
-        category: 'admission',
-        status: 'upcoming'
-      },
-      {
-        id: 3,
-        date: '2025-10-02',
-        title: 'Gandhi Jayanti',
-        description: 'University will remain closed.',
-        category: 'holiday',
-        status: 'upcoming'
-      },
-      {
-        id: 4,
-        date: '2025-11-25',
-        title: 'Mid Semester Exams',
-        description: 'Scheduled mid-term examination for all UG and PG courses.',
-        category: 'exam',
-        status: 'upcoming'
-      }
-    ]);
+    // Use BASE_URL for all API calls
+    axios.get(`${BASE_URL}/hero/`)
+      .then(res => setStats(res.data))
+      .catch(err => console.error('Stats Error:', err));
 
-    // Static GBU regulations
-    setRegulations([
-      {
-        title: 'UGCBCS Guidelines',
-        description: 'Detailed academic guidelines for Undergraduate Choice Based Credit System.',
-        document: '/docs/ug_cbcs_guidelines.pdf',
-        last_updated: '2024-12-01'
-      },
-      {
-        title: 'PG Ordinance 2022',
-        description: 'Postgraduate program ordinance document issued by the Academic Council.',
-        document: '/docs/pg_ordinance_2022.pdf',
-        last_updated: '2024-11-15'
-      },
-      {
-        title: 'Examination Conduct Policy',
-        description: 'Standard Operating Procedures for the conduct of university examinations.',
-        document: '/docs/exam_conduct_policy.pdf',
-        last_updated: '2025-01-10'
-      }
-    ]);
+    axios.get(`${BASE_URL}/events/`)
+      .then(res => setEvents(res.data))
+      .catch(err => console.error('Events Error:', err));
 
-    // Stats for Hero Cards
-    setStats([
-      {
-        icon_class: 'calendar',
-        icon_text: 'Semesters Covered',
-        background_color: '#e0f2fe',
-        ssemester_count: 8
-      },
-      {
-        icon_class: 'clock',
-        icon_text: 'Teaching Days',
-        background_color: '#dcfce7',
-        teaching_days: 180
-      },
-      {
-        icon_class: 'book',
-        icon_text: 'Examination Periods',
-        background_color: '#ede9fe',
-        examination_periods: '2 Sem / Year'
-      },
-      {
-        icon_class: 'file',
-        icon_text: 'Academic Regulations',
-        background_color: '#fff7ed',
-        academic_regulations: '2022 Edition'
-      }
-    ]);
+    axios.get(`${BASE_URL}/regulations/`)
+      .then(res => setRegulations(res.data))
+      .catch(err => console.error('Regulations Error:', err));
 
-    // CTA Static Content
-    setCta({
-      title: 'Stay Informed With GBU',
-      description: 'Subscribe to GBU updates and never miss important academic events or announcements.',
-      button1_text: 'Subscribe Now',
-      button2_text: 'View Notices',
-      url1: 'https://www.gbu.ac.in/subscribe',
-      url2: 'https://www.gbu.ac.in/notices',
-      background_color: '#4f46e5'
-    });
+    axios.get(`${BASE_URL}/stayupdated/`)
+      .then(res => setCta(res.data[0]))
+      .catch(err => console.error('CTA Error:', err));
   }, []);
 
   const getEventTypeColor = (type) => {
+    if (!type) return 'bg-gray-100 text-gray-800';
     switch (type) {
       case 'admission': return 'bg-blue-100 text-blue-800';
       case 'exam': return 'bg-red-100 text-red-800';
@@ -141,15 +64,17 @@ const AcademicCalendar = () => {
     alert('Export to PDF functionality can be integrated using jsPDF or html2pdf.');
   };
 
+
   return (
     <>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-20">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6 animate-fade-in">Academic Calendar & Regulations</h1>
+          <h1 className="text-5xl font-bold mb-6 animate-fade-in">
+            {stats[0]?.title || 'Academic Calendar & Regulations'}
+          </h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto animate-fade-in">
-            Stay informed with important academic dates, examination schedules, and institutional regulations
-            governing academic life at Gautam Buddha University.
+            {stats[0]?.description || 'Stay informed with important academic dates, examination schedules, and institutional regulations governing academic life at Gautam Buddha University.'}
           </p>
         </div>
       </section>
@@ -160,8 +85,10 @@ const AcademicCalendar = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, index) => (
               <div key={index} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                  style={{ backgroundColor: stat.background_color }}>
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                  style={{ backgroundColor: stat.background_color }}
+                >
                   {stat.icon_class === 'calendar' && <Calendar className="w-8 h-8 text-blue-600" />}
                   {stat.icon_class === 'clock' && <Clock className="w-8 h-8 text-green-600" />}
                   {stat.icon_class === 'book' && <BookOpen className="w-8 h-8 text-purple-600" />}
@@ -209,9 +136,8 @@ const AcademicCalendar = () => {
                 <button
                   key={type}
                   onClick={() => setFilterType(type)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium ${
-                    filterType === type ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  } transition`}
+                  className={`px-4 py-2 rounded-full text-sm font-medium ${filterType === type ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    } transition`}
                 >
                   {type === 'all' ? 'All' : type.charAt(0).toUpperCase() + type.slice(1)}
                 </button>
@@ -255,9 +181,15 @@ const AcademicCalendar = () => {
                               })}
                             </span>
                           </div>
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getEventTypeColor(event.category)}`}>
-                            {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
-                          </span>
+                          {event.category ? (
+                            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getEventTypeColor(event.category)}`}>
+                              {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
+                            </span>
+                          ) : (
+                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">
+                              Unknown
+                            </span>
+                          )}
                         </div>
                         <h4 className="text-lg font-bold text-gray-800">{event.title}</h4>
                         <p className="text-gray-600 mt-1">{event.description}</p>

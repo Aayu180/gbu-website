@@ -378,12 +378,12 @@ const EligibilityReservation = () => {
         </div>
 
         {/* Footer */}
-        <div className="mt-12 pt-8 border-t border-gray-200 border-solid">
+        {/* <div className="mt-12 pt-8 border-t border-gray-200 border-solid">
           <div className="text-center text-gray-600">
             <p className="mb-2">For more information, contact the admissions office</p>
             <p className="text-sm">Last updated: June 2025</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

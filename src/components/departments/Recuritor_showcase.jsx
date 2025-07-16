@@ -2,30 +2,10 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // ✅ Dynamic Recruiters Data (can be moved to JSON or fetched from API)
-const recruitersData = [
-  { name: "Samsung", logo: "https://www.gbu.ac.in/USICT/media/img/recute/samsung.png" },
-  { name: "TCS", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tcs.png" },
-  { name: "Adobe", logo: "https://www.gbu.ac.in/USICT/media/img/recute/adobe.png" },
-  { name: "Tech Mahindra", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tech.png" },
-  { name: "Adobe", logo: "https://logo.clearbit.com/adobe.com" },
-  { name: "Metro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/metro.png" },
-  { name: "HCL", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hcl.png" },
-  { name: "Byjus", logo: "https://www.gbu.ac.in/USICT/media/img/recute/byjus.png" },
-  { name: "Nagrro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/nagrro.png" },
-  { name: "Apple", logo: "https://www.gbu.ac.in/USICT/media/img/recute/apple.png" },
-  { name: "Byju's", logo: "https://logo.clearbit.com/byjus.com" },
-  { name: "White Hat Junior", logo: "https://www.gbu.ac.in/USICT/media/img/recute/white.png" },
-  { name: "Hexaware", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hexaware.png" },
-  { name: "Blinkit", logo: "https://www.gbu.ac.in/USICT/media/img/recute/blink-it-logo.png" },
-  { name: "Toppr", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Toppr_logo.png" },
-  { name: "Wipro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/wipro.png" },
-  { name: "Scaler", logo: "https://www.gbu.ac.in/USICT/media/img/recute/scaler.png" },
-  { name: "Chegg", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Chegg-Logo.png" }
-];
 
 const fallbackLogo = "https://upload.wikimedia.org/wikipedia/commons/9/99/User_icon.png";
 
-const RecruitersShowcase = () => {
+const RecruitersShowcase = ({recruitersData=[]}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [recruiters, setRecruiters] = useState([]);
 

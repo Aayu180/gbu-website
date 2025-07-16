@@ -1,442 +1,287 @@
- import { Link } from "react-router-dom";
-import { ArrowLeft, BookOpen, Users, Award, TrendingUp, Brain, Zap, Shield, Database } from "lucide-react";
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  BookOpen,
+  Users,
+  Award,
+  TrendingUp,
+  Brain,
+  Zap,
+  Shield,
+  Database,
+} from "lucide-react";
 
-const ResearchArea = () => {
+const ResearchArea = ({
+  hero,
+  stats,
+  domains,
+  centers,
+  funding,
+  collaborations,
+  impacts,
+  quickLinks,
+}) => {
   return (
-<>
- 
-{/* Hero Section */}
-      <section className="py-20   bg-gradient-to-br  from-green-50 to-blue-100">
+    <>
+      {/* Hero */}
+      <section className="py-30 bg-gradient-to-br from-green-50 to-blue-100">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6 animate-fade-in">
-            Research Excellence at TechVision
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in">
-              Our research ecosystem spans cutting-edge domains in engineering and technology, fostering innovation
-            that addresses global challenges and shapes the future of technology.
-          </p>
+          <h2 className="text-5xl font-bold text-gray-900 mb-6">{hero.title}</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">{hero.subtitle}</p>
         </div>
       </section>
-      {/* Stats Section */}
-      <section className="py-16 px-4 bg-white"> 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <BookOpen className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">150+</h3>
-              <p className="text-gray-600">Active Research Projects</p>
+
+      {/* Stats */}
+      <section className="py-16 px-4 bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {stats.map((s, i) => (
+            <div key={i} className="bg-white p-6 rounded-xl shadow-lg text-center">
+              <s.icon className={`h-12 w-12 ${s.color} mx-auto mb-4`} />
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">{s.number}</h3>
+              <p className="text-gray-600">{s.label}</p>
             </div>
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <Users className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">85</h3>
-              <p className="text-gray-600">Research Faculty</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <Award className="h-12 w-12 text-green-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">500+</h3>
-              <p className="text-gray-600">Publications</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <TrendingUp className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">₹25Cr</h3>
-              <p className="text-gray-600">Research Funding</p>
-            </div>
-          </div>
+          ))}
+        </div>
       </section>
 
-      {/* Major Research Areas */}
+      {/* Domains */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Major Research Domains</h2>
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* AI & Machine Learning */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-xl">
-              <div className="flex items-center mb-6">
-                <Brain className="h-12 w-12 text-blue-600 mr-4" />
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Artificial Intelligence & Machine Learning</h3>
-                  <p className="text-blue-600 font-semibold">Leading Research Domain</p>
+            {domains.map((d, i) => (
+              <div key={i} className={`bg-gradient-to-br ${d.bg} p-8 rounded-xl`}>
+                <div className="flex items-center mb-6">
+                  <d.icon className={`h-12 w-12 ${d.color} mr-4`} />
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900">{d.title}</h3>
+                    <p className={`${d.color} font-semibold`}>{d.tagline}</p>
+                  </div>
+                </div>
+                <ul className="space-y-3 text-gray-700 mb-6">
+                  {d.points.map((p, j) => (
+                    <li key={j} className="flex items-start">
+                      <span className={`w-2 h-2 ${d.color} rounded-full mt-2 mr-3 flex-shrink-0`} />
+                      <div>
+                        <strong>{p.title}</strong>
+                        <p className="text-sm text-gray-600">{p.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div className="bg-white p-4 rounded-lg">
+                  <p className="text-sm text-gray-600">
+                    <strong>Key Faculty:</strong> {d.faculty}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <strong>Research Projects:</strong> {d.projects} | <strong>Funding:</strong> {d.funding}
+                  </p>
                 </div>
               </div>
-              <ul className="space-y-3 text-gray-700 mb-6">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Deep Learning & Neural Networks</strong>
-                    <p className="text-sm text-gray-600">Advanced architectures for computer vision and NLP</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Computer Vision & Image Processing</strong>
-                    <p className="text-sm text-gray-600">Medical imaging, autonomous systems, surveillance</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Natural Language Processing</strong>
-                    <p className="text-sm text-gray-600">Chatbots, sentiment analysis, language models</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Reinforcement Learning</strong>
-                    <p className="text-sm text-gray-600">Game AI, robotics, decision-making systems</p>
-                  </div>
-                </li>
-              </ul>
-              <div className="bg-white p-4 rounded-lg">
-                <p className="text-sm text-gray-600"><strong>Key Faculty:</strong> Dr. Rajesh Kumar, Dr. Priya Sharma, Dr. Neha Agarwal</p>
-                <p className="text-sm text-gray-600"><strong>Research Projects:</strong> 25 | <strong>Funding:</strong> ₹8.5 Cr</p>
-              </div>
-            </div>
-
-            {/* VLSI & Electronics */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl">
-              <div className="flex items-center mb-6">
-                <Zap className="h-12 w-12 text-green-600 mr-4" />
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">VLSI Design & Electronics</h3>
-                  <p className="text-green-600 font-semibold">Core Engineering Research</p>
-                </div>
-              </div>
-              <ul className="space-y-3 text-gray-700 mb-6">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Low Power VLSI Design</strong>
-                    <p className="text-sm text-gray-600">Energy-efficient chip design for mobile devices</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>RF & Microwave Engineering</strong>
-                    <p className="text-sm text-gray-600">5G/6G communication systems, antenna design</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Embedded Systems & IoT</strong>
-                    <p className="text-sm text-gray-600">Smart sensors, edge computing, industrial IoT</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Signal Processing</strong>
-                    <p className="text-sm text-gray-600">Biomedical signals, audio/video processing</p>
-                  </div>
-                </li>
-              </ul>
-              <div className="bg-white p-4 rounded-lg">
-                <p className="text-sm text-gray-600"><strong>Key Faculty:</strong> Dr. Meera Krishnan, Dr. Suresh Reddy, Dr. Amit Kumar</p>
-                <p className="text-sm text-gray-600"><strong>Research Projects:</strong> 22 | <strong>Funding:</strong> ₹6.8 Cr</p>
-              </div>
-            </div>
-
-            {/* Cybersecurity */}
-            <div className="bg-gradient-to-br from-red-50 to-pink-100 p-8 rounded-xl">
-              <div className="flex items-center mb-6">
-                <Shield className="h-12 w-12 text-red-600 mr-4" />
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Cybersecurity & Information Security</h3>
-                  <p className="text-red-600 font-semibold">Critical Infrastructure Protection</p>
-                </div>
-              </div>
-              <ul className="space-y-3 text-gray-700 mb-6">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Network Security & Intrusion Detection</strong>
-                    <p className="text-sm text-gray-600">Advanced threat detection, zero-day exploits</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Cryptography & Blockchain</strong>
-                    <p className="text-sm text-gray-600">Post-quantum cryptography, DeFi security</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Digital Forensics</strong>
-                    <p className="text-sm text-gray-600">Cyber crime investigation, evidence analysis</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>IoT Security</strong>
-                    <p className="text-sm text-gray-600">Secure device communication, privacy protection</p>
-                  </div>
-                </li>
-              </ul>
-              <div className="bg-white p-4 rounded-lg">
-                <p className="text-sm text-gray-600"><strong>Key Faculty:</strong> Dr. Amit Patel, Dr. Vikram Singh, Dr. Kavita Jain</p>
-                <p className="text-sm text-gray-600"><strong>Research Projects:</strong> 18 | <strong>Funding:</strong> ₹5.2 Cr</p>
-              </div>
-            </div>
-
-            {/* Data Science */}
-            <div className="bg-gradient-to-br from-purple-50 to-violet-100 p-8 rounded-xl">
-              <div className="flex items-center mb-6">
-                <Database className="h-12 w-12 text-purple-600 mr-4" />
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">Data Science & Big Data Analytics</h3>
-                  <p className="text-purple-600 font-semibold">Data-Driven Innovation</p>
-                </div>
-              </div>
-              <ul className="space-y-3 text-gray-700 mb-6">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Big Data Processing</strong>
-                    <p className="text-sm text-gray-600">Distributed computing, real-time analytics</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Predictive Analytics</strong>
-                    <p className="text-sm text-gray-600">Healthcare predictions, financial modeling</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Data Mining & Visualization</strong>
-                    <p className="text-sm text-gray-600">Pattern discovery, interactive dashboards</p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <div>
-                    <strong>Business Intelligence</strong>
-                    <p className="text-sm text-gray-600">Decision support systems, performance analytics</p>
-                  </div>
-                </li>
-              </ul>
-              <div className="bg-white p-4 rounded-lg">
-                <p className="text-sm text-gray-600"><strong>Key Faculty:</strong> Dr. Anita Gupta, Dr. Rahul Mehta, Dr. Pooja Sharma</p>
-                <p className="text-sm text-gray-600"><strong>Research Projects:</strong> 20 | <strong>Funding:</strong> ₹4.5 Cr</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Research Centers */}
-      <section className="py-16 px-4 bg-gray-50">
+      
+      {/* <section className="py-16 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Specialized Research Centers</h2>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Center for AI & Robotics</h3>
-              <p className="text-gray-600 mb-4">Interdisciplinary research in artificial intelligence, machine learning, and autonomous systems.</p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>• Director: Dr. Rajesh Kumar</li>
-                <li>• Established: 2020</li>
-                <li>• Research Fellows: 25</li>
-                <li>• Industry Partners: 8</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Microelectronics Research Lab</h3>
-              <p className="text-gray-600 mb-4">Advanced research in VLSI design, nanoelectronics, and semiconductor technology.</p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>• Director: Dr. Meera Krishnan</li>
-                <li>• Established: 2018</li>
-                <li>• Research Fellows: 20</li>
-                <li>• Clean Room Facility: Yes</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Cybersecurity Research Center</h3>
-              <p className="text-gray-600 mb-4">Cutting-edge research in information security, cryptography, and digital forensics.</p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>• Director: Dr. Amit Patel</li>
-                <li>• Established: 2019</li>
-                <li>• Research Fellows: 18</li>
-                <li>• Security Lab: Advanced</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Data Science & Analytics Hub</h3>
-              <p className="text-gray-600 mb-4">Big data research, predictive analytics, and business intelligence solutions.</p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>• Director: Dr. Anita Gupta</li>
-                <li>• Established: 2021</li>
-                <li>• Research Fellows: 22</li>
-                <li>• Computing Cluster: 500 cores</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">IoT & Smart Systems Lab</h3>
-              <p className="text-gray-600 mb-4">Internet of Things, smart cities, and industrial automation research.</p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>• Director: Dr. Vikram Singh</li>
-                <li>• Established: 2020</li>
-                <li>• Research Fellows: 15</li>
-                <li>• Test Bed: Smart Campus</li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Renewable Energy Systems</h3>
-              <p className="text-gray-600 mb-4">Sustainable energy research, smart grids, and energy optimization systems.</p>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li>• Director: Dr. Suresh Reddy</li>
-                <li>• Established: 2017</li>
-                <li>• Research Fellows: 12</li>
-                <li>• Solar Farm: 100kW</li>
-              </ul>
-            </div>
+            {centers.map((c, i) => (
+              <div key={i} className="bg-white p-6 rounded-xl shadow-lg">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{c.title}</h3>
+                <p className="text-gray-600 mb-4">{c.desc}</p>
+                <ul className="text-sm text-gray-600 space-y-2">
+                  {c.details.map((d, j) => (
+                    <li key={j}>• {d}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Research Funding & Collaboration */}
+      {/* Funding & Collaboration */}
       <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Funding Sources */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Research Funding Sources</h2>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Research Funding Sources</h2>
+            <div className="space-y-4">
+              {funding.map((f, i) => (
+                <div key={i} className={`flex items-center justify-between p-4 rounded-lg ${f.bg}`}>
                   <div>
-                    <h3 className="font-semibold text-gray-900">Department of Science & Technology (DST)</h3>
-                    <p className="text-sm text-gray-600">Government of India</p>
+                    <h3 className="font-semibold text-gray-900">{f.title}</h3>
+                    <p className="text-sm text-gray-600">{f.subtitle}</p>
                   </div>
-                  <span className="text-blue-600 font-bold">₹8.5 Cr</span>
+                  <span className={`${f.color} font-bold`}>{f.amount}</span>
                 </div>
-                <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Science & Engineering Research Board (SERB)</h3>
-                    <p className="text-sm text-gray-600">Early Career Research Awards</p>
-                  </div>
-                  <span className="text-green-600 font-bold">₹6.2 Cr</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Industry Collaborations</h3>
-                    <p className="text-sm text-gray-600">TCS, Infosys, Intel, Qualcomm</p>
-                  </div>
-                  <span className="text-purple-600 font-bold">₹5.8 Cr</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-orange-50 rounded-lg">
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Council of Scientific & Industrial Research</h3>
-                    <p className="text-sm text-gray-600">CSIR Research Grants</p>
-                  </div>
-                  <span className="text-orange-600 font-bold">₹4.5 Cr</span>
-                </div>
-              </div>
+              ))}
             </div>
-
-            {/* International Collaborations */}
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">International Collaborations</h2>
-              <div className="space-y-6">
-                <div className="border-l-4 border-blue-600 pl-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Massachusetts Institute of Technology (MIT)</h3>
-                  <p className="text-sm text-gray-600 mb-2">Collaboration in AI and Machine Learning Research</p>
-                  <p className="text-xs text-gray-500">Joint Publications: 12 | Exchange Programs: Active</p>
+          </div>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">International Collaborations</h2>
+            <div className="space-y-6">
+              {collaborations.map((c, i) => (
+                <div key={i} className={`border-l-4 pl-6 ${c.border}`}>
+                  <h3 className="text-lg font-semibold text-gray-900">{c.title}</h3>
+                  <p className="text-sm text-gray-600 mb-2">{c.desc}</p>
+                  <p className="text-xs text-gray-500">{c.extra}</p>
                 </div>
-                <div className="border-l-4 border-green-600 pl-6">
-                  <h3 className="text-lg font-semibold text-gray-900">Stanford University</h3>
-                  <p className="text-sm text-gray-600 mb-2">VLSI Design and Computer Architecture Research</p>
-                  <p className="text-xs text-gray-500">Joint Publications: 8 | Faculty Exchange: 2 per year</p>
-                </div>
-                <div className="border-l-4 border-purple-600 pl-6">
-                  <h3 className="text-lg font-semibold text-gray-900">University of Cambridge</h3>
-                  <p className="text-sm text-gray-600 mb-2">Cybersecurity and Cryptography Research</p>
-                  <p className="text-xs text-gray-500">Joint Publications: 6 | Research Fellows: 3</p>
-                </div>
-                <div className="border-l-4 border-orange-600 pl-6">
-                  <h3 className="text-lg font-semibold text-gray-900">National University of Singapore</h3>
-                  <p className="text-sm text-gray-600 mb-2">IoT and Smart Systems Development</p>
-                  <p className="text-xs text-gray-500">Joint Publications: 10 | Student Exchange: Active</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Research Impact */}
-      <section className="py-16 px-4 bg-gray-50">
+      {/* Impact */}
+      {/* <section className="py-16 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Research Impact & Recognition</h2>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white p-6 rounded-xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">500+</div>
-              <p className="text-gray-600 mb-4">Research Publications</p>
-              <p className="text-sm text-gray-500">SCI/Scopus Indexed</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-green-600 mb-2">45</div>
-              <p className="text-gray-600 mb-4">Patents Filed</p>
-              <p className="text-sm text-gray-500">National & International</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-purple-600 mb-2">28</div>
-              <p className="text-gray-600 mb-4">Awards & Recognitions</p>
-              <p className="text-sm text-gray-500">National & International</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-lg text-center">
-              <div className="text-3xl font-bold text-orange-600 mb-2">15</div>
-              <p className="text-gray-600 mb-4">Technology Transfers</p>
-              <p className="text-sm text-gray-500">To Industry Partners</p>
-            </div>
+            {impacts.map((i, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-xl shadow-lg text-center">
+                <div className={`text-3xl font-bold ${i.color} mb-2`}>{i.number}</div>
+                <p className="text-gray-600 mb-4">{i.label}</p>
+                <p className="text-sm text-gray-500">{i.note}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Quick Links */}
-      <section className="py-16 px-4 bg-gray-900 text-white">
+      
+      {/* <section className="py-16 px-4 bg-white text-gray-950">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8">Explore More Research</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Link to="/training-consultancy" className="block p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-              <Users className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Training & Consultancy</h3>
-              <p className="text-gray-300 text-sm">Professional development and industry services</p>
-            </Link>
-            <Link to="/research-scholars" className="block p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-              <BookOpen className="h-12 w-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Research Scholars</h3>
-              <p className="text-gray-300 text-sm">Meet our brilliant research community</p>
-            </Link>
-            <Link to="/research-projects" className="block p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-              <Award className="h-12 w-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Research Projects</h3>
-              <p className="text-gray-300 text-sm">Current and completed research initiatives</p>
-            </Link>
-            <Link to="/patents" className="block p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors">
-              <TrendingUp className="h-12 w-12 text-orange-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Patents</h3>
-              <p className="text-gray-300 text-sm">Our intellectual property portfolio</p>
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-white ">
+            {quickLinks.map((l, i) => (
+              <Link key={i} to={l.href} className="block p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition-color shadow-2xl">
+                <l.icon className={`h-12 w-12 ${l.color} mx-auto mb-4`} />
+                <h3 className="text-xl font-semibold mb-2">{l.title}</h3>
+                <p className="text-gray-300 text-sm">{l.desc}</p>
+              </Link>
+            ))}
           </div>
         </div>
-      </section>
-
+      </section> */}
     </>
   );
 };
 
-export default ResearchArea;
+// ✅ ✅ ✅ Full Data Props Call
+export default function ResearchPage() {
+  return (
+    <ResearchArea
+      hero={{
+        title: "Research Excellence at TechVision",
+        subtitle: "Our research ecosystem spans cutting-edge domains in engineering and technology, fostering innovation that addresses global challenges and shapes the future of technology.",
+      }}
+      stats={[
+        { icon: BookOpen, color: "text-indigo-600", number: "150+", label: "Active Research Projects" },
+        { icon: Users, color: "text-blue-600", number: "85", label: "Research Faculty" },
+        { icon: Award, color: "text-green-600", number: "500+", label: "Publications" },
+        { icon: TrendingUp, color: "text-purple-600", number: "₹25Cr", label: "Research Funding" },
+      ]}
+      domains={[
+        {
+          icon: Brain,
+          color: "text-blue-600",
+          bg: "from-blue-50 to-indigo-100",
+          title: "Artificial Intelligence & Machine Learning",
+          tagline: "Leading Research Domain",
+          points: [
+            { title: "Deep Learning & Neural Networks", desc: "Advanced architectures for computer vision and NLP" },
+            { title: "Computer Vision & Image Processing", desc: "Medical imaging, autonomous systems, surveillance" },
+            { title: "Natural Language Processing", desc: "Chatbots, sentiment analysis, language models" },
+            { title: "Reinforcement Learning", desc: "Game AI, robotics, decision-making systems" },
+          ],
+          faculty: "Dr. Rajesh Kumar, Dr. Priya Sharma, Dr. Neha Agarwal",
+          projects: "25",
+          funding: "₹8.5 Cr",
+        },
+        {
+          icon: Zap,
+          color: "text-green-600",
+          bg: "from-green-50 to-emerald-100",
+          title: "VLSI Design & Electronics",
+          tagline: "Core Engineering Research",
+          points: [
+            { title: "Low Power VLSI Design", desc: "Energy-efficient chip design for mobile devices" },
+            { title: "RF & Microwave Engineering", desc: "5G/6G communication systems, antenna design" },
+            { title: "Embedded Systems & IoT", desc: "Smart sensors, edge computing, industrial IoT" },
+            { title: "Signal Processing", desc: "Biomedical signals, audio/video processing" },
+          ],
+          faculty: "Dr. Meera Krishnan, Dr. Suresh Reddy, Dr. Amit Kumar",
+          projects: "22",
+          funding: "₹6.8 Cr",
+        },
+        {
+          icon: Shield,
+          color: "text-red-600",
+          bg: "from-red-50 to-pink-100",
+          title: "Cybersecurity & Information Security",
+          tagline: "Critical Infrastructure Protection",
+          points: [
+            { title: "Network Security & Intrusion Detection", desc: "Advanced threat detection, zero-day exploits" },
+            { title: "Cryptography & Blockchain", desc: "Post-quantum cryptography, DeFi security" },
+            { title: "Digital Forensics", desc: "Cyber crime investigation, evidence analysis" },
+            { title: "IoT Security", desc: "Secure device communication, privacy protection" },
+          ],
+          faculty: "Dr. Amit Patel, Dr. Vikram Singh, Dr. Kavita Jain",
+          projects: "18",
+          funding: "₹5.2 Cr",
+        },
+        {
+          icon: Database,
+          color: "text-purple-600",
+          bg: "from-purple-50 to-violet-100",
+          title: "Data Science & Big Data Analytics",
+          tagline: "Data-Driven Innovation",
+          points: [
+            { title: "Big Data Processing", desc: "Distributed computing, real-time analytics" },
+            { title: "Predictive Analytics", desc: "Healthcare predictions, financial modeling" },
+            { title: "Data Mining & Visualization", desc: "Pattern discovery, interactive dashboards" },
+            { title: "Business Intelligence", desc: "Decision support systems, performance analytics" },
+          ],
+          faculty: "Dr. Anita Gupta, Dr. Rahul Mehta, Dr. Pooja Sharma",
+          projects: "20",
+          funding: "₹4.5 Cr",
+        },
+      ]}
+      centers={[
+        { title: "Center for AI & Robotics", desc: "Interdisciplinary research in artificial intelligence, machine learning, and autonomous systems.", details: ["Director: Dr. Rajesh Kumar", "Established: 2020", "Research Fellows: 25", "Industry Partners: 8"] },
+        { title: "Microelectronics Research Lab", desc: "Advanced research in VLSI design, nanoelectronics, and semiconductor technology.", details: ["Director: Dr. Meera Krishnan", "Established: 2018", "Research Fellows: 20", "Clean Room Facility: Yes"] },
+        { title: "Cybersecurity Research Center", desc: "Cutting-edge research in information security, cryptography, and digital forensics.", details: ["Director: Dr. Amit Patel", "Established: 2019", "Research Fellows: 18", "Security Lab: Advanced"] },
+        { title: "Data Science & Analytics Hub", desc: "Big data research, predictive analytics, and business intelligence solutions.", details: ["Director: Dr. Anita Gupta", "Established: 2021", "Research Fellows: 22", "Computing Cluster: 500 cores"] },
+        { title: "IoT & Smart Systems Lab", desc: "Internet of Things, smart cities, and industrial automation research.", details: ["Director: Dr. Vikram Singh", "Established: 2020", "Research Fellows: 15", "Test Bed: Smart Campus"] },
+        { title: "Renewable Energy Systems", desc: "Sustainable energy research, smart grids, and energy optimization systems.", details: ["Director: Dr. Suresh Reddy", "Established: 2017", "Research Fellows: 12", "Solar Farm: 100kW"] },
+      ]}
+      funding={[
+        { title: "Department of Science & Technology (DST)", subtitle: "Government of India", amount: "₹8.5 Cr", bg: "bg-blue-50", color: "text-blue-600" },
+        { title: "Science & Engineering Research Board (SERB)", subtitle: "Early Career Research Awards", amount: "₹6.2 Cr", bg: "bg-green-50", color: "text-green-600" },
+        { title: "Industry Collaborations", subtitle: "TCS, Infosys, Intel, Qualcomm", amount: "₹5.8 Cr", bg: "bg-purple-50", color: "text-purple-600" },
+        { title: "Council of Scientific & Industrial Research", subtitle: "CSIR Research Grants", amount: "₹4.5 Cr", bg: "bg-orange-50", color: "text-orange-600" },
+      ]}
+      collaborations={[
+        { title: "Massachusetts Institute of Technology (MIT)", desc: "Collaboration in AI and Machine Learning Research", extra: "Joint Publications: 12 | Exchange Programs: Active", border: "border-blue-600" },
+        { title: "Stanford University", desc: "VLSI Design and Computer Architecture Research", extra: "Joint Publications: 8 | Faculty Exchange: 2 per year", border: "border-green-600" },
+        { title: "University of Cambridge", desc: "Cybersecurity and Cryptography Research", extra: "Joint Publications: 6 | Research Fellows: 3", border: "border-purple-600" },
+        { title: "National University of Singapore", desc: "IoT and Smart Systems Development", extra: "Joint Publications: 10 | Student Exchange: Active", border: "border-orange-600" },
+      ]}
+      impacts={[
+        { number: "500+", label: "Research Publications", note: "SCI/Scopus Indexed", color: "text-blue-600" },
+        { number: "45", label: "Patents Filed", note: "National & International", color: "text-green-600" },
+        { number: "28", label: "Awards & Recognitions", note: "National & International", color: "text-purple-600" },
+        { number: "15", label: "Technology Transfers", note: "To Industry Partners", color: "text-orange-600" },
+      ]}
+      quickLinks={[
+        { href: "/training-consultancy", icon: Users, color: "text-blue-400", title: "Training & Consultancy", desc: "Professional development and industry services" },
+        { href: "/research-scholars", icon: BookOpen, color: "text-green-400", title: "Research Scholars", desc: "Meet our brilliant research community" },
+        { href: "/research-projects", icon: Award, color: "text-purple-400", title: "Research Projects", desc: "Current and completed research initiatives" },
+        { href: "/patents", icon: TrendingUp, color: "text-orange-400", title: "Patents", desc: "Our intellectual property portfolio" },
+      ]}
+    />
+  );
+}

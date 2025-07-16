@@ -1,17 +1,15 @@
- import React from "react";
+import React from "react";
 import Focus from "./Focus";
 import Services from "./Services";
 import StartupsCarousel from "./StartupsCarousel";
-
+import {Lightbulb} from "lucide-react";
 import StartUp from "./StartUp";
-
-
 
 import Team from "./Team";
 import ImageGallery from "./ImageGallery";
 import EventSlider from "./EventSlider";
 import ContactUs from "./ContactUs";
-import IncubationNav from "./IncubationNav";
+// import IncubationNav from "./IncubationNav";
 
 const Incubation = () => {
   return (
@@ -36,25 +34,9 @@ const Incubation = () => {
           </div>
         </div>
       </section>
- 
-    <div className="bg-yellow-400 flex items-center justify-center py-1">
-  <p className="text-black font-semibold mr-4 text-lg">
-    Click Here for Idea Submission
-  </p>
-
-  <a
-    href="https://docs.google.com/forms/d/e/1FAIpQLSc2dX1NwPluJ1A1-2cHY39ck3CYhrdCskgIQZUxCj981eDwew/viewform"
-    className="bg-gray-500 text-white px-6 py-2 rounded-full font-bold hover:bg-gray-800 transition-colors"
-  >
-    Click Here!
-  </a>
-</div>
-
-      {/* Sticky Navigation Header */}
-      <IncubationNav />
 
       {/* About Section */}
-      <div id="about" className="bg-white py-12 px-6 sm:py-16 sm:px-10 md:px-20">
+      <div className="bg-white py-12 px-6 sm:py-16 sm:px-10 md:px-20">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
           <div className="md:w-1/2 text-center md:text-left">
             <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-blue-700 to-red-500 mb-6">
@@ -94,15 +76,30 @@ const Incubation = () => {
         </div>
       </div>
 
-      {/* Sections with IDs */}
-      <div id="focus"><Focus /></div>
-      <div id="services"><Services /></div>
-      <div id="team"><Team /></div>
-      <div id="startups"><StartupsCarousel /></div>
+      <Focus />
+
+      <Services />
+
+      <Team />
+
+      <StartupsCarousel />
+
       <StartUp />
-      <div id="gallery"><ImageGallery /></div>
-      <div id="events"><EventSlider /></div>
-      <div id="contact"><ContactUs /></div>
+ 
+<div class="text-center mb-15">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc2dX1NwPluJ1A1-2cHY39ck3CYhrdCskgIQZUxCj981eDwew/viewform" 
+     target="_blank"
+     class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-500 text-white text-lg font-semibold rounded-full shadow-lg hover:scale-105 transform transition duration-300">
+    < Lightbulb size={80} className="w-5 h-5"/> 
+    Submit Your Idea
+  </a>
+</div>
+      <ImageGallery />
+
+      <EventSlider />
+
+      <ContactUs />
+ 
     </div>
   );
 };

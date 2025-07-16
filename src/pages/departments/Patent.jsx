@@ -14,7 +14,7 @@ const Patents = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20  bg-gradient-to-br from-purple-50 to-indigo-100">
+      <section className="py-30  bg-gradient-to-br from-purple-50 to-indigo-100">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-5xl font-bold text-gray-900 mb-6 animate-fade-in">
             Intellectual Property Portfolio
@@ -697,36 +697,36 @@ const Patents = () => {
       </section>
 
       {/* Contact */}
-      <section className="py-16 px-4 bg-gray-900 text-white">
+      <section className="py-16 px-4 text-gray-900 bg-white">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8">
             Intellectual Property Office
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl mb-8 max-w-3xl mx-auto">
             Interested in our patented technologies or need assistance with
             patent filing? Contact our IP office for comprehensive support.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
+            <div className="shadow-2xl p-5 rounded-2xl border-gray-300 border-[1px] border-solid">
               <FileText className="h-12 w-12 text-orange-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">Patent Filing</h3>
-              <p className="text-gray-300">patents@techvision.edu</p>
-              <p className="text-gray-300">+1 (555) 123-4583</p>
+              <p>patents@techvision.edu</p>
+              <p>+1 (555) 123-4583</p>
             </div>
-            <div>
+            <div className="shadow-2xl p-5 rounded-2xl border-gray-300 border-[1px] border-solid">
               <Award className="h-12 w-12 text-green-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">
                 Technology Licensing
               </h3>
-              <p className="text-gray-300">licensing@techvision.edu</p>
-              <p className="text-gray-300">+1 (555) 123-4584</p>
+              <p >licensing@techvision.edu</p>
+              <p >+1 (555) 123-4584</p>
             </div>
-            <div>
+            <div className="shadow-2xl p-5 rounded-2xl border-gray-300 border-[1px] border-solid">
               <Users className="h-12 w-12 text-blue-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">IP Consultation</h3>
-              <p className="text-gray-300">ip.office@techvision.edu</p>
-              <p className="text-gray-300">+1 (555) 123-4585</p>
+              <p >ip.office@techvision.edu</p>
+              <p >+1 (555) 123-4585</p>
             </div>
           </div>
         </div>

@@ -2,34 +2,29 @@
 import React from 'react';
 // Minimal UI components with Tailwind CSS, matching usage and effects
 
-export const Card = ({ className = '', children, ...props }) => (
-  <div
-    className={
-      `bg-white rounded-xl border border-gray-200 border-solid shadow-sm${className}`
-    }
-    {...props}
-  >
-    {children}
-  </div>
-);
-
-export const CardHeader = ({ className = '', children, ...props }) => (
-  <div className={`px-6 pt-6 pb-2 ${className}`} {...props}>
-    {children}
-  </div>
-);
-
-export const CardTitle = ({ className = '', children, ...props }) => (
-  <h2 className={`font-bold ${className}`} {...props}>
-    {children}
-  </h2>
-);
-
-export const CardContent = ({ className = '', children, ...props }) => (
-  <div className={`px-6 pb-6 ${className}`} {...props}>
-    {children}
-  </div>
-);
+ export const Card = ({ className = "", children, ...props }) => (
+   <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm${className}`} {...props}>
+     {children}
+   </div>
+ );
+ 
+ export const CardHeader = ({ className = "", children, ...props }) => (
+   <div className={`px-6 pt-6 pb-2  `} {...props}>
+     {children}
+   </div>
+ );
+ 
+ export const CardTitle = ({ className = "", children, ...props }) => (
+   <h2 className={`font-bold ${className}`} {...props}>
+     {children}
+   </h2>
+ );
+ 
+ export const CardContent = ({ className = "", children, ...props }) => (
+   <div className={`px-6 py-4 ${className}`} {...props}>
+     {children}
+   </div>
+ );
 
 export const Badge = ({
   className = '',
@@ -172,15 +167,17 @@ export const TalksTab = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-gray-50">
       {/* Talks Overview */}
       <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
+        
+         <CardHeader>
           <CardTitle className="text-2xl text-gray-900 flex items-center">
             <Mic className="w-6 h-6 mr-2 text-blue-600" />
             Invited Talks & Presentations
           </CardTitle>
         </CardHeader>
+        
         <CardContent>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">

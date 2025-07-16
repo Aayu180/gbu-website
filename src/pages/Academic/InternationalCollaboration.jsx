@@ -1,7 +1,44 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   Globe, Users, BookOpen, MapPin, Plane
 } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const BASE_URL = import.meta.env.VITE_HOST;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
+
+// ✅ Local static images
+const partnerImages = [
+  '/assets/partners/mit.avif',
+  '/assets/partners/cybertech.avif',
+  '/assets/partners/nextgen.avif',
+];
+
+const programImages = [
+  '/assets/programs/program1.avif',
+  '/assets/programs/program2.avif',
+  '/assets/programs/program1.avif', // Repeat if needed
+];
+
+const opportunityImages = [
+  '/assets/opportunities/opp1.avif',
+  '/assets/opportunities/opp2.avif',
+  '/assets/opportunities/opp1.avif', // Repeat if needed
+];
 
 const Collaboration = () => {
   const [hero, setHero] = useState(null);
@@ -9,220 +46,238 @@ const Collaboration = () => {
   const [programs, setPrograms] = useState([]);
   const [opportunities, setOpportunities] = useState([]);
   const [cta, setCta] = useState(null);
+  const [expanded, setExpanded] = useState({});
 
   useEffect(() => {
-    setHero({
-      title: "Global Collaborations & MoUs",
-      description: "Gautam Buddha University fosters global partnerships through active MoUs with leading universities and institutions worldwide to facilitate academic exchange, joint research, and innovation.",
-      activemou_count: 37,
-      participants_count: 450,
-      countries_count: 18,
-      publications_count: 120
-    });
+    const fetchData = async () => {
+      try {
+        const [heroRes, partnersRes, programsRes, opportunitiesRes, ctaRes] = await Promise.all([
+          axios.get(`${BASE_URL}/academic/mou/hero/`),
+          axios.get(`${BASE_URL}/academic/mou/partners/`),
+          axios.get(`${BASE_URL}/academic/mou/programs/`),
+          axios.get(`${BASE_URL}/academic/mou/opportunities/`),
+          axios.get(`${BASE_URL}/academic/mou/collaborations/`)
+        ]);
 
-    setPartners([
-      {
-        id: 1,
-        card_title: "Kyungdong University, South Korea",
-        types: "International MoU",
-        card_desc: "Joint degree programs, faculty and student exchange, and Korean language training.",
-        country: "South Korea",
-        since_year: "2017",
-        url: "https://www.gbu.ac.in/Content.aspx?ID=MoU"
-      },
-      {
-        id: 2,
-        card_title: "University of Warwick, UK",
-        types: "Research Collaboration",
-        card_desc: "Joint research in data science and workshops on advanced analytics.",
-        country: "United Kingdom",
-        since_year: "2021",
-        url: "https://www.gbu.ac.in/Content.aspx?ID=MoU"
-      },
-      {
-        id: 3,
-        card_title: "Tsinghua University, China",
-        types: "Academic MoU",
-        card_desc: "Collaborative online courses and student exchange in engineering programs.",
-        country: "China",
-        since_year: "2020",
-        url: "https://www.gbu.ac.in/Content.aspx?ID=MoU"
-      },
-      {
-        id: 4,
-        card_title: "IIT Kanpur",
-        types: "National MoU",
-        card_desc: "Co-development of AI curriculum and joint student research internships.",
-        country: "India",
-        since_year: "2019",
-        url: "https://www.gbu.ac.in/Content.aspx?ID=MoU"
+        setHero(heroRes.data[0]);
+        setPartners(partnersRes.data);
+        setPrograms(programsRes.data);
+        setOpportunities(opportunitiesRes.data);
+        setCta(ctaRes.data[0]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-    ]);
+    };
 
-    setPrograms([
-      {
-        id: 1,
-        title: "Academic Exchange Programs",
-        description: "Students gain global exposure through immersive programs with international universities.",
-        card_title: "Semester Abroad with NTU Singapore",
-        card_desc: "B.Tech students can spend a semester at NTU with full credit transfer and guided research.",
-        duration: "1 Semester",
-        participants: "25",
-        benefits: "Global Certification\r\nResearch Supervision\r\nAccommodation Support\r\nCultural Immersion"
-      },
-      {
-        id: 2,
-        card_title: "Dual Degree with Kyungdong University",
-        card_desc: "Earn a dual degree in Management or IT with 2 years each at GBU and KDU Korea.",
-        duration: "4 Years",
-        participants: "15",
-        benefits: "Dual Degree\r\n100% Scholarship\r\nInternational Placement\r\nCultural Exchange"
-      },
-      {
-        id: 3,
-        card_title: "Research Fellowship with IIT Bombay",
-        card_desc: "Summer research internships under GBU-IITB Collaborative Fellowship.",
-        duration: "2 Months (Summer)",
-        participants: "10",
-        benefits: "Research Publication\r\nMentorship\r\nStipend\r\nLab Access"
-      }
-    ]);
-
-    setOpportunities([
-      {
-        id: 1,
-        title: "Global Opportunities 2025",
-        description: "Upcoming funded international programs and training for students and faculty.",
-        card_title: "Erasmus+ Europe Student Exchange",
-        duration: "6 Months",
-        benefits: "Travel and living funded\r\nCredit Transfer",
-        eligibility: "UG/PG students with GPA above 7.0",
-        deadline: "2025-08-10",
-        url: "https://www.gbu.ac.in/Content.aspx?ID=International-Programs",
-        button_text: "Apply Now"
-      },
-      {
-        id: 2,
-        card_title: "Shastri Indo-Canadian Research Program",
-        duration: "3 Months",
-        benefits: "Research Funding\r\nFaculty Exchange",
-        eligibility: "Faculty/PhD Scholars",
-        deadline: "2025-09-01",
-        url: "https://www.gbu.ac.in/Content.aspx?ID=International-Programs",
-        button_text: "Submit Proposal"
-      },
-      {
-        id: 3,
-        card_title: "Asia-Pacific AI Internship (Korea)",
-        duration: "5 Months",
-        benefits: "AI Research\r\nIndustry Mentorship\r\nStipend",
-        eligibility: "Final year UG/PG students",
-        deadline: "2025-07-15",
-        url: "https://www.gbu.ac.in/Content.aspx?ID=International-Programs",
-        button_text: "Apply"
-      }
-    ]);
-
-    setCta({
-      title: "Partner with GBU for Academic Excellence",
-      description: "Join hands with Gautam Buddha University to foster global learning, joint innovation, and inclusive development.",
-      background_color: "#e0f2fe",
-      button1_text: "Explore MoUs",
-      button2_text: "Become a Partner",
-      url1: "https://www.gbu.ac.in/Content.aspx?ID=MoU",
-      url2: "https://www.gbu.ac.in/Contact.aspx"
-    });
+    fetchData();
   }, []);
 
-  if (!hero || !cta) return <div className="text-center py-20">Loading...</div>;
+  if (!hero || !cta) return <div className="text-center py-20 text-lg">Loading...</div>;
 
   return (
-    <div>
-      <section className="bg-gradient-to-br from-teal-600 via-blue-600 to-indigo-600 text-white py-16">
-        <div className="text-center px-4">
-          <h1 className="text-4xl font-bold mb-4">{hero.title}</h1>
-          <p className="text-lg">{hero.description}</p>
+    <div className="font-sans">
+      {/* HERO */}
+      <motion.section
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+        className="bg-gradient-to-br from-indigo-800 via-purple-700 to-blue-700 text-white py-32"
+      >
+        <div className="text-center px-6 max-w-4xl mx-auto">
+          <h1 className="text-5xl font-extrabold mb-4">{hero.title}</h1>
+          <p className="text-lg opacity-90">{hero.description}</p>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-10 bg-white text-center grid grid-cols-2 sm:grid-cols-4 gap-6 px-4">
+      {/* STATS */}
+      <motion.section
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="py-16 bg-white text-center grid grid-cols-2 sm:grid-cols-4 gap-8 px-6"
+      >
         {[
           { label: 'Active MOUs', metric: hero.activemou_count, icon: Globe },
-          { label: 'Participants', metric: hero.participants_count, icon: Users },
+          { label: 'Participants', metric: hero.participants_counts, icon: Users },
           { label: 'Countries', metric: hero.countries_count, icon: MapPin },
           { label: 'Publications', metric: hero.publications_count, icon: BookOpen }
         ].map((stat, i) => (
-          <div key={i}>
-            <div className="w-12 h-12 mx-auto bg-blue-100 text-blue-600 flex items-center justify-center rounded-full mb-2">
-              <stat.icon className="w-6 h-6" />
+          <motion.div
+            key={i}
+            className="p-6 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 bg-gradient-to-br from-white to-gray-50"
+            variants={fadeUp}
+          >
+            <div className="w-16 h-16 mx-auto bg-indigo-100 text-indigo-700 flex items-center justify-center rounded-full mb-3">
+              <stat.icon className="w-7 h-7" />
             </div>
-            <div className="text-2xl font-bold">{stat.metric}</div>
+            <div className="text-3xl font-extrabold">{stat.metric}</div>
             <div className="text-gray-600">{stat.label}</div>
-          </div>
+          </motion.div>
         ))}
-      </section>
+      </motion.section>
 
-      <section className="py-10 bg-gray-50 px-4">
-        <h2 className="text-center text-3xl font-bold mb-6">Partners</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {partners.map((p) => (
-            <div key={p.id} className="bg-white rounded-xl p-4 shadow">
-              <h3 className="text-lg font-bold">{p.card_title}</h3>
-              <p className="text-sm text-gray-600">{p.card_desc}</p>
-              <p className="text-xs text-gray-500">Country: {p.country}</p>
-              <p className="text-xs text-gray-500">Since {p.since_year}</p>
-              <a href={p.url} className="text-blue-600 text-xs">View MoU</a>
-            </div>
-          ))}
+      {/* PARTNERS */}
+      <motion.section
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="py-20 bg-gray-100 px-6"
+      >
+        <h2 className="text-center text-4xl font-extrabold mb-12 text-gray-800">Our Global Partners</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-20">
+          {partners.map((p, i) => {
+            const isExpanded = expanded[p.id] || false;
+            const shortDesc = p.card_desc?.slice(0, 60) || '';
+            const shouldShowToggle = p.card_desc?.length > 60;
+
+            return (
+              <motion.div
+                key={p.id}
+                className="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition transform hover:-translate-y-2 duration-500 group"
+                variants={fadeUp}
+              >
+                <div className="h-65 w-full overflow-hidden">
+                  <img
+                    src={partnerImages[i % partnerImages.length]}
+                    alt={p.card_title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                  />
+                </div>
+                {/* <div className="absolute inset-0 z-0"></div> */}
+                <div className="relative p-6 bg-gray-700 text-white z-10">
+                  <h3 className="text-xl font-bold">{p.card_title}</h3>
+                  <p className="text-sm opacity-80 my-3">
+                    {isExpanded ? p.card_desc : shortDesc}
+                    {shouldShowToggle && (
+                      <>
+                        {!isExpanded && '... '}
+                        <button
+                          onClick={() =>
+                            setExpanded(prev => ({ ...prev, [p.id]: !isExpanded }))
+                          }
+                          className="underline text-xs ml-1"
+                        >
+                          {isExpanded ? 'Read less' : 'Read more'}
+                        </button>
+                      </>
+                    )}
+                  </p>
+                  <p className="text-sm mb-1">Country: {p.country}</p>
+                  <p className="text-sm mb-3">Since {p.since_year}</p>
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block bg-white/10 backdrop-blur-md px-4 py-3 text-sm rounded-full hover:bg-white hover:text-black"
+                  >
+                    View MoU →
+                  </a>
+                </div>
+
+              </motion.div>
+            );
+          })}
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-10 bg-white px-4">
-        <h2 className="text-center text-3xl font-bold mb-6">{programs[0]?.title}</h2>
-        <p className="text-center text-gray-600 mb-6">{programs[0]?.description}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {programs.map((p) => (
-            <div key={p.id} className="border border-blue-100 p-4 rounded-lg">
-              <h3 className="font-bold">{p.card_title}</h3>
-              <p className="text-sm text-gray-600">{p.card_desc}</p>
-              <p className="text-xs text-gray-500">Duration: {p.duration}</p>
-              <p className="text-xs text-gray-500">Participants: {p.participants}</p>
-              <ul className="text-xs list-disc pl-4">
-                {p.benefits.split('\r\n').map((b, i) => <li key={i}>{b}</li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      <section className="py-10 bg-gray-50 px-4">
-        <h2 className="text-center text-3xl font-bold mb-6">{opportunities[0]?.title}</h2>
-        <p className="text-center text-gray-600 mb-6">{opportunities[0]?.description}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {opportunities.map((o) => (
-            <div key={o.id} className="bg-white rounded-xl shadow p-4 flex flex-col">
-              <div className="flex justify-between mb-2">
-                <Plane className="text-blue-600 w-5 h-5" />
-                <span className="text-xs text-red-600">Deadline: {new Date(o.deadline).toLocaleDateString()}</span>
+      {/* PROGRAMS */}
+      <motion.section
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="py-20 bg-white px-6"
+      >
+        <h2 className="text-center text-4xl font-extrabold mb-4">{programs[0]?.title}</h2>
+        <p className="text-center text-gray-800 mb-12 max-w-2xl mx-auto">{programs[0]?.description}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-25">
+          {programs.map((p, i) => (
+            <motion.div
+              key={p.id}
+              className="relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 duration-500 group"
+              variants={fadeUp}
+            >
+              <div className="h-125 w-full overflow-hidden">
+                <img
+                  src={programImages[i % programImages.length]}
+                  alt={p.card_title}
+                  className="w-full h-full object-cover object-center group-hover:scale-110 transition duration-700"
+                />
               </div>
-              <h3 className="text-sm font-bold">{o.card_title}</h3>
-              <p className="text-xs">Duration: {o.duration}</p>
-              <p className="text-xs">Benefits: {o.benefits}</p>
-              <p className="text-xs">Eligibility: {o.eligibility}</p>
-              <a href={o.url} className="mt-auto bg-blue-600 text-white text-xs px-4 py-2 rounded text-center hover:bg-blue-700">
-                {o.button_text}
-              </a>
-            </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div className="absolute bottom-0 p-6 text-white">
+                <h3 className="text-lg font-bold mb-1">{p.card_title}</h3>
+                <p className="text-sm mb-1">{p.card_desc}</p>
+                <p className="text-sm mb-1">Duration: {p.duration}</p>
+                <p className="text-sm mb-2">Participants: {p.participants}</p>
+                <ul className="text-sm list-disc pl-4 opacity-80">
+                  {p.benefits.split('\r\n').map((b, index) => <li key={index}>{b}</li>)}
+                </ul>
+              </div>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-10 px-4 text-center" style={{ backgroundColor: cta.background_color }}>
+      {/* OPPORTUNITIES */}
+      <motion.section
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="py-20 bg-gray-100 px-25"
+      >
+        <h2 className="text-center text-4xl font-extrabold mb-4">{opportunities[0]?.title}</h2>
+        <p className="text-center text-gray-700 mb-12 max-w-2xl mx-auto">{opportunities[0]?.description}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {opportunities.map((o, i) => (
+            <motion.div
+              key={o.id}
+              className="relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-2xl transition transform hover:-translate-y-2 duration-500 group"
+              variants={fadeUp}
+            >
+              <div className="h-68 opacity-80 w-full overflow-hidden">
+                <img
+                  src={opportunityImages[i % opportunityImages.length]}
+                  alt={o.card_title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+              <div className="absolute bottom-0 p-12 text-white">
+                <div className="flex justify-between items-center mb-2">
+                  <Plane className="w-4 h-4 text-white" />
+                  <span className="text-sm text-red-700">Deadline: {new Date(o.deadline).toLocaleDateString()}</span>
+                </div>
+                <h3 className="text-xl font-bold mb-1">{o.card_title}</h3>
+                <p className="text-sm mb-1">Duration: {o.duration}</p>
+                <p className="text-sm mb-1">Benefits: {o.benefits}</p>
+                <p className="text-sm mb-3">Eligibility: {o.elegibility}</p>
+                <a
+                  href={o.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block bg-white/20 backdrop-blur-md px-4 py-2 text-sm rounded-full hover:text-black hover:bg-white"
+                >
+                  {o.button_text}
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* CTA */}
+      <section className="py-20 px-4 text-center" style={{ backgroundColor: cta.background_color }}>
         <h2 className="text-3xl font-bold mb-2">{cta.title}</h2>
         <p className="text-gray-600 mb-4">{cta.description}</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <a href={cta.url1} className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">{cta.button1_text}</a>
-          <a href={cta.url2} className="border border-blue-600 text-blue-600 px-6 py-2 rounded hover:bg-blue-50">{cta.button2_text}</a>
+
+          <a href={cta.url1} className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700">{cta.button1_text}</a>
+          <a href={cta.url2} className="border border-blue-600 text-blue-600 px-6 py-2 rounded-xl hover:bg-blue-50">{cta.button2_text}</a>
         </div>
       </section>
     </div>

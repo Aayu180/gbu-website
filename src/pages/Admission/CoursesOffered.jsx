@@ -489,7 +489,7 @@ const CoursesOffered = () => {
         </div>
 
         {/* Schools Tabs */}
-        <Tabs defaultValue="Engineering" className="w-full">
+        <Tabs defaultValue="Engineering" className="w-full mb-5">
           <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 mb-8">
             {Object.keys(schoolCategories).map((school) => (
               <TabsTrigger key={school} value={school} className="text-xs lg:text-sm">
@@ -505,14 +505,14 @@ const CoursesOffered = () => {
           ))}
         </Tabs>
 
-        {/* CTA Section */}
-        <div className="mt-12 text-center bg-gradient-to-r from-blue-600 to-green-600 text-white p-8 rounded-lg">
+        
+        {/* <div className="mt-12 text-center bg-gradient-to-r from-blue-600 to-green-600 text-white p-8 rounded-lg">
           <h2 className="text-2xl font-bold mb-4">Ready to Apply?</h2>
           <p className="text-lg mb-6">Join thousands of students who have started their journey with us</p>
           <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
             Apply Now
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { Share2, Facebook, Twitter, Linkedin, MessageCircle } from 'lucide-react';
 import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
-// Button component
+// ✅ Button component
 const Button = ({ children, className = "", size = "md", variant = "default", ...props }) => {
   const sizeClasses = {
     sm: "px-3 py-1.5 text-sm",
@@ -23,7 +23,7 @@ const Button = ({ children, className = "", size = "md", variant = "default", ..
   );
 };
 
-// Popover system
+// ✅ Popover system
 const PopoverContext = React.createContext();
 
 const Popover = ({ children }) => {
@@ -31,7 +31,7 @@ const Popover = ({ children }) => {
   const triggerRef = useRef(null);
   return (
     <PopoverContext.Provider value={{ open, setOpen, triggerRef }}>
-      <div className="relative inline-block">{children}</div>
+      <div className="relative z-[1000] inline-block">{children}</div>
     </PopoverContext.Provider>
   );
 };
@@ -75,7 +75,7 @@ const PopoverContent = ({ children, className = "" }) => {
   return (
     <div
       ref={contentRef}
-      className={`absolute right-0 z-50 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl p-4 ${className}`}
+      className={`absolute right-0 z-50 mt-2 bg-white border border-gray-200 border-solid rounded-xl shadow-xl p-4${className}`}
       style={{ minWidth: "10rem" }}
     >
       {children}
@@ -83,7 +83,7 @@ const PopoverContent = ({ children, className = "" }) => {
   );
 };
 
-// ✅ Correct brand colors
+// ✅ SocialShare with fix applied
 const SocialShare = ({ url, title, className = "" }) => {
   const shareData = {
     whatsapp: `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`,
@@ -96,55 +96,46 @@ const SocialShare = ({ url, title, className = "" }) => {
     {
       name: 'WhatsApp',
       url: shareData.whatsapp,
-      color: 'bg-[#25D366] hover:bg-[#1DA851]', // WhatsApp green
+      color: 'bg-[#25D366] hover:bg-[#1DA851]',
       icon: <MessageCircle size={16} />
     },
     {
       name: 'Facebook',
       url: shareData.facebook,
-      color: 'bg-[#1877F2] hover:bg-[#155DBF]', // Facebook blue
+      color: 'bg-[#1877F2] hover:bg-[#155DBF]',
       icon: <Facebook size={16} />
     },
     {
       name: 'Twitter',
       url: shareData.twitter,
-      color: 'bg-[#1DA1F2] hover:bg-[#0d8ddb]', // Twitter blue
+      color: 'bg-[#1DA1F2] hover:bg-[#0d8ddb]',
       icon: <Twitter size={16} />
     },
     {
       name: 'LinkedIn',
       url: shareData.linkedin,
-      color: 'bg-[#0A66C2] hover:bg-[#004182]', // LinkedIn blue
+      color: 'bg-[#0A66C2] hover:bg-[#004182]',
       icon: <Linkedin size={16} />
     }
   ];
 
   return (
-    <SearchableWrapper>
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className={`flex items-center gap-2 ${className}`}>
-          <Share2 size={16} />
-          Share
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-48">
-        <div className="space-y-2">
-          {socialButtons.map((social) => (
-            <Button
-              key={social.name}
-              className={`w-full  flex items-center gap-2 justify-center ${social.color} transition-transform hover:scale-[1.02] active:scale-[0.98]`}
-              size="sm"
-              onClick={() => window.open(social.url, '_blank')}
-            >
-              {social.icon}
-              {social.name}
-            </Button>
-          ))}
-        </div>
-      </PopoverContent>
-    </Popover>
-    </SearchableWrapper>
+   
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="outline" size="sm">
+            <span className="flex items-center gap-2">
+              <Share2 size={16} />
+              Share
+            </span>
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div>Content here</div>
+        </PopoverContent>
+      </Popover>
+
+    
   );
 };
 

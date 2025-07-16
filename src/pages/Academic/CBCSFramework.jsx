@@ -170,13 +170,13 @@ const CBCSFramework = () => {
 
       {/* Call to Action */}
       {explore && (
-        <section className="py-16 text-white" style={{ backgroundColor: explore.background_color }}>
+        <section className="py-16 text-black" style={{ backgroundColor: explore.background_color }}>
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-bold mb-6">{explore.title}</h2>
             <p className="text-xl mb-8 max-w-3xl mx-auto">{explore.description}</p>
             <a
               href={explore.url}
-              className="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors"
+              className="border border-b-blue-600 text-black px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -69,7 +69,7 @@ const Badge = ({ children, className = "", variant = "solid", ...props }) => {
 // --- Solid Card ---
 const Card = ({ children, className = "", ...props }) => (
   <div
-    className={`bg-white rounded-2xl h-[500px] shadow-xl border border-gray-200 border-solid hover:shadow-2xl transition-shadow duration-300${className}`}
+    className={`bg-white rounded-2xl shadow-xl border border-gray-200 border-solid hover:shadow-2xl transition-shadow duration-300${className}`}
     {...props}
   >
     {children}
@@ -549,13 +549,13 @@ const getModeColor = () => 'bg-blue-600 text-white';
                 </Card>
               </TabsContent>
 
-              <TabsContent value="agenda">
+              <TabsContent value="agenda" className='h-auto'>
                 <Card>
                   <CardHeader>
                     <CardTitle>Event Schedule</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-5">
+                    <div className="space-y-5 ">
                       {agenda.map((item, index) => (
                         <div
                           key={index}
@@ -626,7 +626,7 @@ const getModeColor = () => 'bg-blue-600 text-white';
 
           <div className="space-y-8">
             <div className="sticky top-24">
-              <Card className="flex flex-col max-h-[calc(100vh-8rem)] overflow-y-auto">
+              <Card className="flex flex-col min-h-140  overflow-y-auto">
                 <CardHeader>
                   <CardTitle className="text-xl">Actions</CardTitle>
                 </CardHeader>

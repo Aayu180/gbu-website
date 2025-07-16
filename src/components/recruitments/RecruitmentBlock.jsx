@@ -37,7 +37,7 @@ const RecruitmentBlock = ({ title, type, icon }) => {
   whileHover={{ scale: 1.02 }}
 >
 
-      <div className="bg-gradient-to-r from-sky-600 to-sky-900 px-6 py-4 border-b text-white border-border">
+      <div className="bg-gradient-to-r from-sky-400 to-sky-600 px-6 py-4 border-b text-white border-border">
         <div className="flex items-center gap-3">
           <span className="text-3xl">{icon}</span>
           <h2 className="text-xl font-bold tracking-wide">{title}</h2>

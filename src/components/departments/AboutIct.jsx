@@ -1,88 +1,19 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Lightbulb,
-  Users,
-  Trophy,
-  Code,
-  Rocket,
-  Target,
-} from "lucide-react";
 
-// ✅ Dynamic Data (replace with API later)
-const aboutUsData = {
-  heading: "About Us",
-  subtitle: "School of Information and Communication Technology",
-  floatingIcons: [
-    { icon: <Code size={40} />, color: "text-blue-400", style: "top-20 left-10" },
-    { icon: <Lightbulb size={35} />, color: "text-purple-400", style: "top-32 right-20" },
-    { icon: <Rocket size={45} />, color: "text-indigo-400", style: "bottom-20 left-1/4" },
-  ],
-  cards: [
-    {
-      title: "Our Mission",
-      icon: <Target size={28} />,
-      bgGradient: "from-blue-500 to-purple-600",
-      content: (
-        <>
-          The{" "}
-          <span className="font-semibold text-blue-600">
-            School of Information and Communication Technology (SOICT/USICT)
-          </span>{" "}
-          is a premier institution committed to nurturing future-ready
-          technocrats, innovators, and entrepreneurs in the dynamic field of{" "}
-          <span className="font-semibold text-purple-600">
-            ICT (Information and Communication Technology)
-          </span>
-          .
-        </>
-      ),
-      highlight: (
-        <>
-          Guided by our vision of{" "}
-          <span className="font-semibold text-indigo-600">
-            excellence and ethics
-          </span>
-          , we empower students with cutting-edge knowledge, hands-on
-          experience, and a strong value system to thrive in the global digital
-          economy.
-        </>
-      ),
-    },
-    {
-      title: "Our Commitment",
-      icon: <Trophy size={28} />,
-      bgGradient: "from-purple-500 to-pink-600",
-      content: (
-        <>
-          At SOICT, we don't just teach technology—we inspire{" "}
-          <span className="font-semibold text-purple-600">
-            future pioneers
-          </span>
-          . Through{" "}
-          <span className="font-semibold text-indigo-600">
-            interdisciplinary research, hackathons, and mentorship
-          </span>
-          , we foster a culture of curiosity and excellence.
-        </>
-      ),
-      bullets: [
-        <span className="font-semibold text-gray-800">
-          Skilled, motivated, and ethically grounded professionals
-        </span>,
-        "Ready to tackle global challenges",
-        "Transform the ICT landscape",
-      ],
-    },
-  ],
-};
+const AboutUs = ({ data }) => {
+  const {
+    heading = "About Us",
+    subtitle = "",
+    floatingIcons = [],
+    cards = [],
+  } = data || {};
 
-const AboutUs = () => {
-  // Animations
+  // Framer Motion Animations
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.8, staggerChildren: 0.3 } },
+    visible: { opacity: 1, transition: { duration: 0.5, staggerChildren: 0.3 } },
   };
   const itemVariants = {
     hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
@@ -144,26 +75,26 @@ const AboutUs = () => {
         >
           <motion.div className="relative inline-block">
             <h2 className="text-5xl md:text-6xl font-bold text-blue-600 mb-4">
-              {aboutUsData.heading || "About Us"}
+              {heading}
             </h2>
             <motion.div
               className="absolute -bottom-2 left-0 h-1 bg-blue-500 rounded-full"
               variants={highlightVariants}
             />
           </motion.div>
-          {aboutUsData.subtitle && (
+          {subtitle && (
             <motion.p
               className="text-xl text-gray-600 mt-6 font-medium"
               variants={itemVariants}
             >
-              {aboutUsData.subtitle}
+              {subtitle}
             </motion.p>
           )}
         </motion.div>
 
         {/* Floating Icons */}
         <div className="absolute inset-0 pointer-events-none">
-          {aboutUsData.floatingIcons?.map((icon, i) => (
+          {floatingIcons.map((icon, i) => (
             <motion.div
               key={i}
               className={`absolute ${icon.style} ${icon.color} opacity-30`}
@@ -178,8 +109,8 @@ const AboutUs = () => {
         {/* Cards */}
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
-            {aboutUsData.cards?.length > 0 ? (
-              aboutUsData.cards.map((card, index) => (
+            {cards.length > 0 ? (
+              cards.map((card, index) => (
                 <motion.div
                   key={index}
                   className="relative group h-full"
@@ -221,7 +152,9 @@ const AboutUs = () => {
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.5, duration: 0.6 }}
                         >
-                          <p className="text-gray-700 italic">{card.highlight}</p>
+                          <p className="text-gray-700 italic">
+                            {card.highlight}
+                          </p>
                         </motion.div>
                       )}
                       {card.bullets && (
@@ -232,7 +165,10 @@ const AboutUs = () => {
                           transition={{ delay: 0.7, duration: 0.6 }}
                         >
                           {card.bullets.map((point, i) => (
-                            <div key={i} className="flex items-center space-x-3">
+                            <div
+                              key={i}
+                              className="flex items-center space-x-3"
+                            >
                               <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
                               <p className="text-gray-700">{point}</p>
                             </div>
@@ -244,7 +180,9 @@ const AboutUs = () => {
                 </motion.div>
               ))
             ) : (
-              <p className="text-center text-gray-500 col-span-2">No cards found.</p>
+              <p className="text-center text-gray-500 col-span-2">
+                No cards found.
+              </p>
             )}
           </div>
         </div>

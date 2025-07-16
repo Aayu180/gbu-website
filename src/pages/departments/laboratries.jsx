@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const laboratories = [
   {
@@ -173,7 +174,7 @@ const laboratories = [
   },
 ];
 
-const LaboratoryCards = () => {
+const LaboratoryCards = ({ laboratories }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredCard, setHoveredCard] = useState(null);
 
@@ -191,7 +192,7 @@ const LaboratoryCards = () => {
       {/* Dynamic Background */}
       <div className="fixed inset-0 bg-white">
         <div className="absolute inset-0 bg-gradient-to-t from-gray-50/50 via-transparent to-gray-50/30"></div>
-        
+
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -212,7 +213,7 @@ const LaboratoryCards = () => {
       </div>
 
       {/* Mouse follower */}
-      <div 
+      <div
         className="fixed w-96 h-96 bg-gradient-radial from-blue-400/10 via-blue-500/5 to-transparent rounded-full blur-3xl pointer-events-none z-10 transition-all duration-500 ease-out"
         style={{
           left: mousePosition.x - 192,
@@ -220,9 +221,9 @@ const LaboratoryCards = () => {
         }}
       ></div>
 
-      <div className="relative z-20 py-20 px-4 sm:px-8">
+      <div className="relative z-20">
         {/* Title Section */}
-        <div className="text-center mb-20">
+        {/* <div className="text-center mb-20">
           <div className="inline-block relative">
             <h1 className="text-7xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent mb-4 animate-pulse">
               LABORATORY
@@ -235,7 +236,50 @@ const LaboratoryCards = () => {
           <p className="text-gray-600 text-xl mt-8 font-light tracking-wide">
             State-of-the-art facilities for cutting-edge research
           </p>
-        </div>
+        </div> */}
+
+        <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white pt-25 pb-20 mb-20">
+          {/* Animated Background Orbs */}
+          <motion.div
+            className="absolute -top-20 -left-20 w-96 h-96 bg-indigo-500 opacity-20 rounded-full blur-3xl"
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 45, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 opacity-20 rounded-full blur-3xl"
+            animate={{ scale: [1, 1.3, 1], rotate: [0, -45, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          />
+
+          {/* Content */}
+          <div className="relative z-10 container mx-auto px-4 text-center">
+            <motion.h1
+              className="text-5xl md:text-6xl font-extrabold mb-6"
+              initial={{ opacity: 0, y: -40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              LABORATORY EXCELLENCE
+            </motion.h1>
+
+            <motion.p
+              className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              State-of-the-art facilities for cutting-edge research
+            </motion.p>
+
+            <motion.div
+              className="mt-8 flex justify-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 1 }}
+            >
+            </motion.div>
+          </div>
+        </section>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -255,14 +299,14 @@ const LaboratoryCards = () => {
                   relative w-full h-full transition-all duration-700 transform-style-preserve-3d
                   ${hoveredCard === index ? 'rotate-y-180' : ''}
                 `}>
-                  
+
                   {/* Front of card */}
                   <div className="absolute inset-0 w-full h-full backface-hidden">
                     <div className="relative h-full bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 rounded-3xl overflow-hidden shadow-2xl border border-blue-400/30 backdrop-blur-lg transform transition-all duration-500 hover:scale-105 hover:shadow-blue-400/50 hover:shadow-2xl">
-                      
+
                       {/* Glassmorphism overlay */}
                       <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent"></div>
-                      
+
                       {/* NEW badge with animation */}
                       {lab.isNew && (
                         <div className="absolute top-4 right-4 z-20">
@@ -277,7 +321,7 @@ const LaboratoryCards = () => {
 
                       {/* Category badge */}
                       <div className="absolute top-4 left-4 z-20">
-                        <div className="bg-black/30 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-white/20">
+                        <div className="bg-black/30 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full border border-white/20 border-solid">
                           {lab.category}
                         </div>
                       </div>
@@ -302,7 +346,7 @@ const LaboratoryCards = () => {
                           <h2 className="text-xl font-bold text-white mb-3 leading-tight line-clamp-2 group-hover:text-cyan-300 transition-colors duration-300">
                             {lab.name}
                           </h2>
-                          
+
                           <div className="w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-300 mb-4 transition-all duration-500 group-hover:w-24"></div>
                         </div>
 
@@ -312,7 +356,7 @@ const LaboratoryCards = () => {
                             <span className="font-medium">Faculty:</span>
                             <span className="text-white">{lab.faculty}</span>
                           </div>
-                          
+
                           <div className="flex items-center gap-2 text-blue-100 text-sm">
                             <div className="w-2 h-2 bg-cyan-300 rounded-full animate-pulse delay-200"></div>
                             <span className="font-medium">Support:</span>
@@ -345,15 +389,15 @@ const LaboratoryCards = () => {
                             <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                           </div>
                         </div>
-                        
+
                         <h3 className="text-white font-bold text-lg mb-2">Lab Details</h3>
                         <div className="space-y-2 text-blue-100 text-sm">
                           <p><span className="font-semibold text-cyan-200">Category:</span> {lab.category}</p>
                           <p><span className="font-semibold text-cyan-200">Status:</span> {lab.isNew ? 'Newly Established' : 'Active'}</p>
                           <p><span className="font-semibold text-cyan-200">Type:</span> Research & Development</p>
                         </div>
-                        
-                        <div className="mt-6 px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm border border-white/20">
+
+                        <div className="mt-6 px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm border border-white/20 border-solid">
                           <span className="text-white font-medium text-sm">Fully Equipped</span>
                         </div>
                       </div>
@@ -425,5 +469,9 @@ const LaboratoryCards = () => {
     </div>
   );
 };
+ 
+const Laboratory = () => {
+  return <LaboratoryCards laboratories={laboratories} />;
+};
 
-export default LaboratoryCards;
+export default Laboratory;

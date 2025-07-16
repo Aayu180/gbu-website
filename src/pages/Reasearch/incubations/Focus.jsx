@@ -49,7 +49,7 @@ const Focus = () => {
   ];
 
   return (
-    <section className="min-h-screen bg-gray-100 py-10 px-4">
+    <section className="min-h-[60vh] bg-gray-100 py-12 px-4">
       <h1 className="text-3xl font-bold text-center mb-10">
         FOCUS AND OBJECTIVE
       </h1>

@@ -2,81 +2,8 @@
 import { Badge } from "../ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const RecentPlacements = () => {
+const RecentPlacements = ({ data }) => {
   // 🔹 Dynamic Data Object
-  const data = {
-    heading: "Recent Placements",
-    subheading: "Our students securing positions at top companies",
-    sectionTitle: "Success Stories",
-    students: [
-      {
-        name: "Rahul Sharma",
-        company: "TCS",
-        package: "₹6.5 LPA",
-        department: "B.Tech CSE",
-        photo:
-          "https://images.unsplash.com/photo-1571945192246-4fcee13c27b1?w=200&h=200&fit=crop&crop=face",
-      },
-      {
-        name: "Priya Verma",
-        company: "BlackRock",
-        package: "₹16 LPA",
-        department: "B.Tech IT",
-        photo:
-          "https://images.unsplash.com/photo-1619346344241-3f6082489467?w=200&h=200&fit=crop&crop=face",
-      },
-      {
-        name: "Amit Kumar",
-        company: "Honda",
-        package: "₹8.2 LPA",
-        department: "B.Tech ME",
-        photo:
-          "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=200&h=200&fit=crop&crop=face",
-      },
-      {
-        name: "Neha Singh",
-        company: "HDFC Bank",
-        package: "₹7.5 LPA",
-        department: "MBA Finance",
-        photo:
-          "https://images.unsplash.com/photo-1619346344878-db3c555dab3a?w=200&h=200&fit=crop&crop=face",
-      },
-      {
-        name: "Aditya Patel",
-        company: "Paytm",
-        package: "₹12 LPA",
-        department: "B.Tech ECE",
-        photo:
-          "https://images.unsplash.com/photo-1634193295627-1cdddf751ebf?w=200&h=200&fit=crop&crop=face",
-      },
-      {
-        name: "Riya Gupta",
-        company: "HCL Technologies",
-        package: "₹7.8 LPA",
-        department: "MCA",
-        photo:
-          "https://images.unsplash.com/photo-1619346344878-db3c555dab3a?w=200&h=200&fit=crop&crop=face",
-      },
-      {
-        name: "Mohammed Siddiqui",
-        company: "Wipro",
-        package: "₹6.8 LPA",
-        department: "B.Tech CSE",
-        photo:
-          "https://images.unsplash.com/photo-1621784563330-caee0b138a00?w=200&h=200&fit=crop&crop=face",
-      },
-      {
-        name: "Ananya Reddy",
-        company: "OYO",
-        package: "₹9.5 LPA",
-        department: "MBA Marketing",
-        photo:
-          "https://images.unsplash.com/photo-1619346344878-db3c555dab3a?w=200&h=200&fit=crop&crop=face",
-      },
-    ],
-  };
-
-
   const [currentSlide, setCurrentSlide] = useState(0);
 const fallbackImage = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
 

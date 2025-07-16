@@ -159,7 +159,7 @@ const Footer = () => {
         <div>
           <p>
             Designed and developed by{" "}
-            <Link to="/" className="hover:text-white font-semibold">
+            <Link to="/dac" className="hover:text-white font-semibold">
               DAC
             </Link>{" "}
             and supported by{" "}

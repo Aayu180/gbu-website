@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
-import { Play, Users, Award } from 'lucide-react';
+import { Play, Users, Award, ArrowLeft  } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import SearchableWrapper from '../Searchbar/SearchableWrapper';
 const Button = ({ children, className = '', variant = 'default', size = 'md', ...props }) => {
   const base =
@@ -53,6 +55,15 @@ const ClubHero = ({ club }) => {
     <>
     <SearchableWrapper>
       <div className="relative bg-gradient-to-r from-blue-900 via-purple-900 to-blue-800 text-white overflow-hidden">
+        <div className="max-w-7xl  px-4 sm:px-6 lg:px-8 py-4 z-10 relative">
+          <Link 
+            to="/campus-life/clubs-societies" 
+            className="inline-flex items-center text-white hover:text-sky-300 transition-colors"
+          >
+            <ArrowLeft className="w-6 h-6 mr-2" />
+            
+          </Link>
+        </div>
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-black/20">
           <div className="absolute inset-0 opacity-50" style={{

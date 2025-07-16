@@ -1,4 +1,6 @@
- import { Link } from "react-router-dom";
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   ArrowLeft,
   Users,
@@ -11,684 +13,511 @@ import {
   CheckCircle,
 } from "lucide-react";
 
-const ResearchScholars = () => {
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20   bg-gradient-to-br from-purple-50 to-indigo-100">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6 animate-fade-in">
-            Our Research Community
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in">
-            Meet the exceptional Ph.D. scholars and research associates who are
-            pushing the boundaries of knowledge and innovation across various
-            engineering disciplines at TechVision.
-          </p>
-        </div>
-      </section>
-      {/* Stats Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          <div className="bg-white p-6 rounded-xl shadow-lg">
-            <GraduationCap className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">95</h3>
-            <p className="text-gray-600">Ph.D. Scholars</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-lg">
-            <Users className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">28</h3>
-            <p className="text-gray-600">Research Associates</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-lg">
-            <Award className="h-12 w-12 text-green-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">45</h3>
-            <p className="text-gray-600">Graduated Scholars</p>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-lg">
-            <Star className="h-12 w-12 text-orange-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">12</h3>
-            <p className="text-gray-600">Award Winners</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Scholars */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-            Featured Research Scholars
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Scholar 1 */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-6 rounded-xl">
-              <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                  AS
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  Arjun Sharma
-                </h3>
-                <p className="text-blue-600 font-semibold">
-                  Ph.D. Scholar (Final Year)
-                </p>
-                <p className="text-sm text-gray-600">
-                  Computer Science & Engineering
-                </p>
-              </div>
-
-              <div className="space-y-3 mb-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Research Area:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    Deep Learning for Medical Image Analysis
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Supervisor:
-                  </h4>
-                  <p className="text-sm text-gray-600">Dr. Rajesh Kumar</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Publications:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    8 (3 in top-tier conferences)
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-white p-3 rounded-lg">
-                <p className="text-xs text-gray-600 font-semibold mb-1">
-                  Recent Achievement:
-                </p>
-                <p className="text-xs text-gray-500">
-                  Best Paper Award at ICML 2024 for work on "Attention
-                  Mechanisms in Medical Imaging"
-                </p>
-              </div>
-            </div>
-
-            {/* Scholar 2 */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-xl">
-              <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-green-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                  PK
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  Priya Krishnan
-                </h3>
-                <p className="text-green-600 font-semibold">
-                  Ph.D. Scholar (3rd Year)
-                </p>
-                <p className="text-sm text-gray-600">
-                  Electronics & Communication
-                </p>
-              </div>
-
-              <div className="space-y-3 mb-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Research Area:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    5G/6G Wireless Communication Systems
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Supervisor:
-                  </h4>
-                  <p className="text-sm text-gray-600">Dr. Meera Krishnan</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Publications:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    6 (2 in IEEE journals)
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-white p-3 rounded-lg">
-                <p className="text-xs text-gray-600 font-semibold mb-1">
-                  Current Project:
-                </p>
-                <p className="text-xs text-gray-500">
-                  SERB funded project on "Massive MIMO for 6G Networks" - ₹18
-                  Lakhs
-                </p>
-              </div>
-            </div>
-
-            {/* Scholar 3 */}
-            <div className="bg-gradient-to-br from-purple-50 to-violet-100 p-6 rounded-xl">
-              <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                  RM
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">Rahul Mehta</h3>
-                <p className="text-purple-600 font-semibold">
-                  Research Associate
-                </p>
-                <p className="text-sm text-gray-600">Information Technology</p>
-              </div>
-
-              <div className="space-y-3 mb-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Research Area:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    Blockchain Security & Smart Contracts
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Principal Investigator:
-                  </h4>
-                  <p className="text-sm text-gray-600">Dr. Vikram Singh</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Publications:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    12 (5 in top cybersecurity journals)
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-white p-3 rounded-lg">
-                <p className="text-xs text-gray-600 font-semibold mb-1">
-                  Innovation:
-                </p>
-                <p className="text-xs text-gray-500">
-                  Developed secure voting system using blockchain - Patent filed
-                </p>
-              </div>
-            </div>
-
-            {/* Scholar 4 */}
-            <div className="bg-gradient-to-br from-orange-50 to-red-100 p-6 rounded-xl">
-              <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-orange-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                  SG
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">Sneha Gupta</h3>
-                <p className="text-orange-600 font-semibold">
-                  Ph.D. Scholar (2nd Year)
-                </p>
-                <p className="text-sm text-gray-600">
-                  Computer Science & Engineering
-                </p>
-              </div>
-
-              <div className="space-y-3 mb-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Research Area:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    Natural Language Processing & Chatbots
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Supervisor:
-                  </h4>
-                  <p className="text-sm text-gray-600">Dr. Priya Sharma</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Publications:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    4 (1 in ACL conference)
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-white p-3 rounded-lg">
-                <p className="text-xs text-gray-600 font-semibold mb-1">
-                  Internship:
-                </p>
-                <p className="text-xs text-gray-500">
-                  Google Research - Summer 2024, worked on multilingual chatbot
-                  systems
-                </p>
-              </div>
-            </div>
-
-            {/* Scholar 5 */}
-            <div className="bg-gradient-to-br from-teal-50 to-cyan-100 p-6 rounded-xl">
-              <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-teal-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                  AK
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">Amit Kumar</h3>
-                <p className="text-teal-600 font-semibold">
-                  Ph.D. Scholar (4th Year)
-                </p>
-                <p className="text-sm text-gray-600">
-                  Electronics & Communication
-                </p>
-              </div>
-
-              <div className="space-y-3 mb-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Research Area:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    VLSI Design for IoT Applications
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Supervisor:
-                  </h4>
-                  <p className="text-sm text-gray-600">Dr. Suresh Reddy</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Publications:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    10 (4 in IEEE VLSI journals)
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-white p-3 rounded-lg">
-                <p className="text-xs text-gray-600 font-semibold mb-1">
-                  Industry Collaboration:
-                </p>
-                <p className="text-xs text-gray-500">
-                  Intel partnership for low-power IoT chip design
-                </p>
-              </div>
-            </div>
-
-            {/* Scholar 6 */}
-            <div className="bg-gradient-to-br from-pink-50 to-rose-100 p-6 rounded-xl">
-              <div className="text-center mb-6">
-                <div className="w-24 h-24 bg-pink-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">
-                  NK
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">Neha Kapoor</h3>
-                <p className="text-pink-600 font-semibold">
-                  Ph.D. Scholar (1st Year)
-                </p>
-                <p className="text-sm text-gray-600">Information Technology</p>
-              </div>
-
-              <div className="space-y-3 mb-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Research Area:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    Cloud Computing Security & Privacy
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Supervisor:
-                  </h4>
-                  <p className="text-sm text-gray-600">Dr. Anita Gupta</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 text-sm">
-                    Background:
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    M.Tech from IIT Delhi (Gold Medalist)
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-white p-3 rounded-lg">
-                <p className="text-xs text-gray-600 font-semibold mb-1">
-                  Fellowship:
-                </p>
-                <p className="text-xs text-gray-500">
-                  CSIR Junior Research Fellowship recipient - ₹31,000/month
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Research Areas Distribution */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-            Research Areas Distribution
-          </h2>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Department-wise Scholar Distribution
-              </h3>
-
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">
-                      Computer Science & Engineering
-                    </h4>
-                    <p className="text-sm text-gray-600">
-                      AI/ML, Cybersecurity, Software Engineering
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-blue-600">42</span>
-                    <p className="text-xs text-gray-500">Scholars</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">
-                      Electronics & Communication
-                    </h4>
-                    <p className="text-sm text-gray-600">
-                      VLSI, Communication Systems, Signal Processing
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-green-600">
-                      35
-                    </span>
-                    <p className="text-xs text-gray-500">Scholars</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">
-                      Information Technology
-                    </h4>
-                    <p className="text-sm text-gray-600">
-                      Cloud Computing, Data Analytics, Web Technologies
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl font-bold text-purple-600">
-                      18
-                    </span>
-                    <p className="text-xs text-gray-500">Scholars</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Funding & Fellowship Status
-              </h3>
-
-              <div className="space-y-4">
-                <div className="border-l-4 border-blue-600 pl-4">
-                  <h4 className="font-semibold text-gray-900">
-                    CSIR Fellowship
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    25 scholars | ₹31,000-35,000/month
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    Includes contingency and HRA
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-green-600 pl-4">
-                  <h4 className="font-semibold text-gray-900">
-                    UGC Fellowship
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    20 scholars | ₹31,000-35,000/month
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    NET/GATE qualified scholars
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-purple-600 pl-4">
-                  <h4 className="font-semibold text-gray-900">
-                    SERB Fellowship
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    12 scholars | ₹31,000-35,000/month
-                  </p>
-                  <p className="text-xs text-gray-500">Project-based funding</p>
-                </div>
-
-                <div className="border-l-4 border-orange-600 pl-4">
-                  <h4 className="font-semibold text-gray-900">
-                    Industry Sponsored
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    15 scholars | ₹25,000-40,000/month
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    TCS, Infosys, Intel partnerships
-                  </p>
-                </div>
-
-                <div className="border-l-4 border-red-600 pl-4">
-                  <h4 className="font-semibold text-gray-900">Self-Funded</h4>
-                  <p className="text-sm text-gray-600">23 scholars</p>
-                  <p className="text-xs text-gray-500">
-                    Working professionals and international students
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Scholar Achievements */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-            Recent Achievements
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-yellow-50 to-orange-100 p-6 rounded-xl">
-              <Award className="h-12 w-12 text-yellow-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Best Thesis Award
-              </h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Arjun Sharma won the "Best Ph.D. Thesis Award" from Indian
-                Academy of Sciences for his work on medical image analysis.
-              </p>
-              <p className="text-xs text-gray-500">December 2024</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-6 rounded-xl">
-              <Star className="h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                International Conference
-              </h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Priya Krishnan presented her research at IEEE Global
-                Communications Conference (GLOBECOM) 2024 in Singapore.
-              </p>
-              <p className="text-xs text-gray-500">November 2024</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-xl">
-              <BookOpen className="h-12 w-12 text-green-600 mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                Publication Milestone
-              </h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Rahul Mehta published his 5th paper in a top-tier cybersecurity
-                journal with impact factor 8.2.
-              </p>
-              <p className="text-xs text-gray-500">October 2024</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Application Process */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-            Join Our Research Community
-          </h2>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Ph.D. Admission Requirements
-              </h3>
-
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <strong className="text-gray-900">
-                      Educational Qualification:
-                    </strong>
-                    <p className="text-sm text-gray-600">
-                      M.Tech/M.E./M.S. in relevant field with minimum 60% marks
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <strong className="text-gray-900">Entrance Test:</strong>
-                    <p className="text-sm text-gray-600">
-                      GATE/NET qualified or TechVision Research Aptitude Test
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <strong className="text-gray-900">
-                      Research Proposal:
-                    </strong>
-                    <p className="text-sm text-gray-600">
-                      2-3 page research proposal in chosen area
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="h-6 w-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <strong className="text-gray-900">Interview:</strong>
-                    <p className="text-sm text-gray-600">
-                      Technical interview with potential supervisors
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Application Timeline
-              </h3>
-
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <Calendar className="h-6 w-6 text-blue-600 mr-3" />
-                  <div>
-                    <strong className="text-gray-900">
-                      Application Period:
-                    </strong>
-                    <p className="text-sm text-gray-600">
-                      January 1 - March 31, 2025
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <Calendar className="h-6 w-6 text-green-600 mr-3" />
-                  <div>
-                    <strong className="text-gray-900">Entrance Test:</strong>
-                    <p className="text-sm text-gray-600">April 15, 2025</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <Calendar className="h-6 w-6 text-purple-600 mr-3" />
-                  <div>
-                    <strong className="text-gray-900">Interviews:</strong>
-                    <p className="text-sm text-gray-600">May 1-15, 2025</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <Calendar className="h-6 w-6 text-orange-600 mr-3" />
-                  <div>
-                    <strong className="text-gray-900">Results:</strong>
-                    <p className="text-sm text-gray-600">May 31, 2025</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-600 mb-2">
-                  <strong>Application Fee:</strong> ₹2,000 (₹1,000 for SC/ST)
-                </p>
-                <p className="text-sm text-gray-600">
-                  <strong>Annual Fee:</strong> ₹50,000 (Subject to revision)
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section className="py-16 px-4 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">
-            Connect with Our Research Community
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <Mail className="h-12 w-12 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Ph.D. Admissions</h3>
-              <p className="text-gray-300">phd.admissions@techvision.edu</p>
-              <p className="text-gray-300">+1 (555) 123-4576</p>
-            </div>
-            <div>
-              <Users className="h-12 w-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">
-                Research Coordinator
-              </h3>
-              <p className="text-gray-300">
-                research.coordinator@techvision.edu
-              </p>
-              <p className="text-gray-300">+1 (555) 123-4577</p>
-            </div>
-            <div>
-              <Award className="h-12 w-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Fellowship Office</h3>
-              <p className="text-gray-300">fellowships@techvision.edu</p>
-              <p className="text-gray-300">+1 (555) 123-4578</p>
-            </div>
-          </div>
-        </div>
-      </section>
+// Hero Section
+const HeroSection = ({ title, subtitle }) => (
+  <section className="py-30 bg-gradient-to-br from-purple-50 to-indigo-100">
+    <div className="container mx-auto px-4 text-center">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-5xl font-bold text-gray-900 mb-6"
+      >
+        {title}
+      </motion.h2>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-xl text-gray-600 max-w-3xl mx-auto"
+      >
+        {subtitle}
+      </motion.p>
     </div>
-  );
+  </section>
+);
+
+// Stats Section
+const StatsSection = ({ stats }) => (
+  <section className="py-16 px-4 bg-white">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+      {stats.map((stat, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 + i * 0.2 }}
+          className="bg-white p-6 rounded-xl shadow-lg text-center"
+        >
+          <stat.icon className={`h-12 w-12 ${stat.color} mx-auto mb-4`} />
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">{stat.count}</h3>
+          <p className="text-gray-600">{stat.label}</p>
+        </motion.div>
+      ))}
+    </div>
+  </section>
+);
+
+// Featured Scholars
+const FeaturedScholars = ({ scholars }) => (
+  <section className="py-16 px-4 bg-white">
+    <div className="max-w-7xl mx-auto">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl font-bold text-gray-900 mb-12 text-center"
+      >
+        Featured Research Scholars
+      </motion.h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {scholars.map((s, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 + i * 0.2 }}
+            className={`bg-gradient-to-br ${s.bg} p-6 rounded-xl`}
+          >
+            <div className="text-center mb-6">
+              <div
+                className={`w-24 h-24 ${s.avatarColor} rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold`}
+              >
+                {s.initials}
+              </div>
+              <h3 className="text-xl font-bold text-gray-900">{s.name}</h3>
+              <p className={`font-semibold ${s.textColor}`}>{s.designation}</p>
+              <p className="text-sm text-gray-600">{s.department}</p>
+            </div>
+
+            <div className="space-y-3 mb-4">
+              <div>
+                <h4 className="font-semibold text-gray-900 text-sm">
+                  Research Area:
+                </h4>
+                <p className="text-sm text-gray-600">{s.area}</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 text-sm">
+                  {s.supervisorTitle}:
+                </h4>
+                <p className="text-sm text-gray-600">{s.supervisor}</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 text-sm">
+                  {s.publicationsTitle}:
+                </h4>
+                <p className="text-sm text-gray-600">{s.publications}</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-3 rounded-lg">
+              <p className="text-xs text-gray-600 font-semibold mb-1">
+                {s.achievementTitle}:
+              </p>
+              <p className="text-xs text-gray-500">{s.achievement}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// Research Areas Distribution
+const DistributionSection = ({ departments, fellowships }) => (
+  <section className="py-16 px-4 bg-gray-50">
+    <div className="max-w-7xl mx-auto">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl font-bold text-gray-900 mb-12 text-center"
+      >
+        Research Areas Distribution
+      </motion.h2>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-white p-8 rounded-xl shadow-lg">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            Department-wise Scholar Distribution
+          </h3>
+          <div className="space-y-4">
+            {departments.map((d, i) => (
+              <div
+                key={i}
+                className={`flex items-center justify-between p-4 ${d.bg} rounded-lg`}
+              >
+                <div>
+                  <h4 className="font-semibold text-gray-900">{d.name}</h4>
+                  <p className="text-sm text-gray-600">{d.desc}</p>
+                </div>
+                <div className="text-right">
+                  <span className={`text-2xl font-bold ${d.color}`}>
+                    {d.count}
+                  </span>
+                  <p className="text-xs text-gray-500">Scholars</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-white p-8 rounded-xl shadow-lg">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            Funding & Fellowship Status
+          </h3>
+          <div className="space-y-4">
+            {fellowships.map((f, i) => (
+              <div
+                key={i}
+                className={`border-l-4 ${f.border} pl-4`}
+              >
+                <h4 className="font-semibold text-gray-900">{f.name}</h4>
+                <p className="text-sm text-gray-600">{f.detail}</p>
+                <p className="text-xs text-gray-500">{f.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// Achievements
+const AchievementsSection = ({ achievements }) => (
+  <section className="py-16 px-4 bg-white">
+    <div className="max-w-7xl mx-auto">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl font-bold text-gray-900 mb-12 text-center"
+      >
+        Recent Achievements
+      </motion.h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {achievements.map((a, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 + i * 0.2 }}
+            className={`bg-gradient-to-br ${a.bg} p-6 rounded-xl`}
+          >
+            <a.icon className={`h-12 w-12 ${a.color} mb-4`} />
+            <h3 className="text-xl font-bold text-gray-900 mb-3">{a.title}</h3>
+            <p className="text-sm text-gray-600 mb-4">{a.desc}</p>
+            <p className="text-xs text-gray-500">{a.date}</p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// Application Process
+const ApplicationProcess = ({ timeline, fee }) => (
+  <section className="py-16 px-4 bg-gray-50">
+    <div className="max-w-7xl mx-auto">
+      <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+        Join Our Research Community
+      </h2>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-white p-8 rounded-xl shadow-lg">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            Ph.D. Admission Requirements
+          </h3>
+          <ul className="space-y-4">
+            {[
+              {
+                title: "Educational Qualification",
+                desc:
+                  "M.Tech/M.E./M.S. in relevant field with minimum 60% marks",
+              },
+              {
+                title: "Entrance Test",
+                desc: "GATE/NET qualified or TechVision Research Aptitude Test",
+              },
+              {
+                title: "Research Proposal",
+                desc: "2-3 page research proposal in chosen area",
+              },
+              {
+                title: "Interview",
+                desc: "Technical interview with potential supervisors",
+              },
+            ].map((r, i) => (
+              <li key={i} className="flex items-start">
+                <CheckCircle className="h-6 w-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
+                <div>
+                  <strong className="text-gray-900">{r.title}:</strong>
+                  <p className="text-sm text-gray-600">{r.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="bg-white p-8 rounded-xl shadow-lg">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            Application Timeline
+          </h3>
+          <div className="space-y-4">
+            {timeline.map((t, i) => (
+              <div key={i} className="flex items-center">
+                <Calendar className={`h-6 w-6 ${t.color} mr-3`} />
+                <div>
+                  <strong className="text-gray-900">{t.title}:</strong>
+                  <p className="text-sm text-gray-600">{t.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+            <p className="text-sm text-gray-600 mb-2">
+              <strong>Application Fee:</strong> {fee.application}
+            </p>
+            <p className="text-sm text-gray-600">
+              <strong>Annual Fee:</strong> {fee.annual}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// Contact
+const ContactSection = ({ contacts }) => (
+  <section className="py-16 px-4 text-gray-900 bg-white">
+    <div className="max-w-7xl mx-auto text-center">
+      <h2 className="text-3xl font-bold mb-8">
+        Connect with Our Research Community
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {contacts.map((c, i) => (
+          <div key={i} className="shadow-2xl p-5 rounded-2xl border-gray-300 border-[1px] border-solid">
+            <c.icon className={`h-12 w-12 ${c.color} mx-auto mb-4`} />
+            <h3 className="text-xl font-semibold mb-2">{c.title}</h3>
+            <p >{c.email}</p>
+            <p >{c.phone}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// ✅ Featured Scholars Dummy Data
+const scholars = [
+  {
+    initials: "AJ",
+    name: "Amit Joshi",
+    designation: "Senior Research Scholar",
+    department: "Department of Computer Science",
+    area: "Artificial Intelligence & Machine Learning",
+    supervisorTitle: "Supervisor",
+    supervisor: "Dr. Neha Sharma",
+    publicationsTitle: "Publications",
+    publications: "8 international journals",
+    achievementTitle: "Notable Achievement",
+    achievement: "Received Best Paper Award at ICML 2024",
+    bg: "from-purple-100 to-purple-200",
+    avatarColor: "bg-purple-600",
+    textColor: "text-purple-600",
+  },
+  {
+    initials: "RS",
+    name: "Ritika Singh",
+    designation: "Junior Research Fellow",
+    department: "Department of Electronics",
+    area: "VLSI Design & Embedded Systems",
+    supervisorTitle: "Supervisor",
+    supervisor: "Prof. Rajeev Mehta",
+    publicationsTitle: "Publications",
+    publications: "5 IEEE conference papers",
+    achievementTitle: "Notable Achievement",
+    achievement: "Patent granted for IoT device prototype",
+    bg: "from-pink-100 to-pink-200",
+    avatarColor: "bg-pink-600",
+    textColor: "text-pink-600",
+  },
+  {
+    initials: "VK",
+    name: "Vikas Kumar",
+    designation: "Research Associate",
+    department: "Department of Mechanical Engineering",
+    area: "Renewable Energy Systems",
+    supervisorTitle: "Supervisor",
+    supervisor: "Dr. Anita Verma",
+    publicationsTitle: "Publications",
+    publications: "6 SCI-indexed journals",
+    achievementTitle: "Notable Achievement",
+    achievement: "Presented research at World Energy Congress",
+    bg: "from-green-100 to-green-200",
+    avatarColor: "bg-green-600",
+    textColor: "text-green-600",
+  },
+];
+
+// ✅ Department Distribution Dummy Data
+const departments = [
+  {
+    name: "Computer Science",
+    desc: "AI, ML, Data Science, IoT",
+    count: 40,
+    bg: "bg-purple-50",
+    color: "text-purple-600",
+  },
+  {
+    name: "Electronics",
+    desc: "VLSI, Embedded, Communication",
+    count: 25,
+    bg: "bg-pink-50",
+    color: "text-pink-600",
+  },
+  {
+    name: "Mechanical Engineering",
+    desc: "Energy, Robotics, Manufacturing",
+    count: 18,
+    bg: "bg-green-50",
+    color: "text-green-600",
+  },
+  {
+    name: "Civil Engineering",
+    desc: "Smart Cities, Structures",
+    count: 12,
+    bg: "bg-blue-50",
+    color: "text-blue-600",
+  },
+];
+
+// ✅ Fellowships Dummy Data
+const fellowships = [
+  {
+    name: "Junior Research Fellowship (JRF)",
+    detail: "Funded by UGC for meritorious scholars.",
+    note: "Applied through NET/JRF exam.",
+    border: "border-purple-600",
+  },
+  {
+    name: "Senior Research Fellowship (SRF)",
+    detail: "Awarded for advanced stage scholars.",
+    note: "Upgraded after review.",
+    border: "border-green-600",
+  },
+  {
+    name: "Institute Funded",
+    detail: "University funded assistantships.",
+    note: "Available for limited candidates.",
+    border: "border-blue-600",
+  },
+];
+
+// ✅ Achievements Dummy Data
+const achievements = [
+  {
+    icon: Award,
+    color: "text-green-600",
+    title: "Best Paper Award",
+    desc: "Our scholars won Best Paper Award at IEEE ICML 2024.",
+    date: "April 2024",
+    bg: "from-green-100 to-green-200",
+  },
+  {
+    icon: Star,
+    color: "text-yellow-600",
+    title: "Patent Granted",
+    desc: "Patent granted for IoT-based energy monitoring system.",
+    date: "Jan 2024",
+    bg: "from-yellow-100 to-yellow-200",
+  },
+  {
+    icon: BookOpen,
+    color: "text-purple-600",
+    title: "Publication Milestone",
+    desc: "Published over 50 papers in top journals in 2024.",
+    date: "May 2024",
+    bg: "from-purple-100 to-purple-200",
+  },
+];
+
+// ✅ Application Timeline Dummy Data
+const timeline = [
+  {
+    title: "Application Opens",
+    desc: "Applications open from 1st April 2024.",
+    color: "text-purple-600",
+  },
+  {
+    title: "Entrance Test",
+    desc: "Entrance exam scheduled for 15th May 2024.",
+    color: "text-blue-600",
+  },
+  {
+    title: "Interviews",
+    desc: "Shortlisted candidates interviewed in June 2024.",
+    color: "text-green-600",
+  },
+];
+
+// ✅ Application Fee Dummy Data
+const fee = {
+  application: "INR 1000 (non-refundable)",
+  annual: "INR 50,000 per year (approx.)",
 };
 
-export default ResearchScholars;
+// ✅ Contact Details Dummy Data
+const contacts = [
+  {
+    icon: Mail,
+    color: "text-purple-600",
+    title: "General Enquiry",
+    email: "research@techvision.edu",
+    phone: "+91 12345 67890",
+  },
+  {
+    icon: Mail,
+    color: "text-green-600",
+    title: "Ph.D. Admissions",
+    email: "admissions@techvision.edu",
+    phone: "+91 98765 43210",
+  },
+  {
+    icon: Mail,
+    color: "text-blue-600",
+    title: "Research Office",
+    email: "office.research@techvision.edu",
+    phone: "+91 11223 44556",
+  },
+];
+
+
+
+// Main Parent
+export default function ResearchScholars() {
+   return (
+    <div className="min-h-screen">
+      <HeroSection
+        title="Our Research Community"
+        subtitle="Meet the exceptional Ph.D. scholars and research associates who are pushing the boundaries of knowledge and innovation across various engineering disciplines at TechVision."
+      />
+      <StatsSection
+        stats={[
+          { icon: GraduationCap, color: "text-purple-600", count: 95, label: "Ph.D. Scholars" },
+          { icon: Users, color: "text-blue-600", count: 28, label: "Research Associates" },
+          { icon: Award, color: "text-green-600", count: 45, label: "Graduated Scholars" },
+          { icon: Star, color: "text-orange-600", count: 12, label: "Award Winners" },
+        ]}
+      />
+      <FeaturedScholars scholars={scholars} />
+      <DistributionSection departments={departments} fellowships={fellowships} />
+      <AchievementsSection achievements={achievements} />
+      <ApplicationProcess timeline={timeline} fee={fee} />
+      <ContactSection contacts={contacts} />
+    </div>
+  );
+}

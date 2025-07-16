@@ -17,35 +17,41 @@ const StartUp = () => {
       description:
         "One-on-one guidance from industry experts and successful entrepreneurs",
       icon: UserCog,
+      color: "bg-green-100 text-green-600",
     },
     {
       title: "Funding Support",
       description:
         "Access to seed funding, angel investors, and venture capital networks",
       icon: HandCoins,
+      color: "bg-yellow-100 text-yellow-600",
     },
     {
       title: "Technical Infrastructure",
       description: "State-of-the-art labs, equipment, and research facilities",
       icon: Settings,
+      color: "bg-indigo-100 text-indigo-600",
     },
     {
       title: "Legal & IP Support",
       description:
         "Patent filing, trademark registration, and legal compliance assistance",
       icon: Scale,
+      color: "bg-pink-100 text-pink-600",
     },
     {
       title: "Market Access",
       description:
         "Industry connections, customer introductions, and partnership opportunities",
       icon: Handshake,
+      color: "bg-blue-100 text-blue-600",
     },
     {
       title: "Skill Development",
       description:
         "Workshops, training programs, and business development courses",
       icon: GraduationCap,
+      color: "bg-purple-100 text-purple-600",
     },
   ];
 
@@ -77,9 +83,9 @@ const StartUp = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
-                className={`bg-white shadow-sm shadow-gray-300 hover:shadow-md transition rounded-lg p-6 text-center border-t-4 border-${stat.color}-600`}
+                className={`bg-white shadow-md hover:shadow-lg transition rounded-2xl p-6 text-center border-t-4 border-${stat.color}-500`}
               >
-                <div className={`text-4xl font-bold text-${stat.color}-700`}>
+                <div className={`text-4xl font-extrabold text-${stat.color}-600`}>
                   {stat.value}
                 </div>
                 <p className="text-gray-600 mt-2 text-sm font-medium tracking-wide">
@@ -93,7 +99,7 @@ const StartUp = () => {
 
       {/* Support Services */}
       <div className="text-center mb-10">
-        <h3 className="text-2xl text-primary font-semibold">
+        <h3 className="text-3xl text-primary font-bold">
           Startup Support Services
         </h3>
         <p className="text-gray-500">
@@ -112,15 +118,17 @@ const StartUp = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="bg-white rounded-lg shadow-sm shadow-gray-300 hover:shadow-md transition text-center p-6"
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition text-center p-6"
             >
-              <div className="w-20 h-20 mx-auto bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
-                <Icon className="text-primary w-8 h-8" />
+              <div className={`w-20 h-20 mx-auto ${service.color} rounded-full flex items-center justify-center mb-4`}>
+                <Icon className="w-8 h-8" />
               </div>
-              <h5 className="text-primary font-semibold mb-2">
+              <h5 className="text-lg font-semibold mb-2 text-gray-800">
                 {service.title}
               </h5>
-              <p className="text-gray-600 text-sm">{service.description}</p>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                {service.description}
+              </p>
             </motion.div>
           );
         })}
@@ -141,7 +149,7 @@ const StartUp = () => {
         {["Apply Online", "Evaluation", "Pitch Presentation", "Incubation"].map(
           (step, index) => {
             const colors = [
-              "bg-primary",
+              "bg-pink-400",
               "bg-green-600",
               "bg-sky-500",
               "bg-yellow-500",
@@ -166,8 +174,10 @@ const StartUp = () => {
                 >
                   <span className="font-bold text-xl">{index + 1}</span>
                 </div>
-                <h6 className="font-semibold">{step}</h6>
-                <p className="text-sm text-gray-500">{descriptions[index]}</p>
+                <h6 className="font-semibold text-gray-800">{step}</h6>
+                <p className="text-sm text-gray-500">
+                  {descriptions[index]}
+                </p>
               </motion.div>
             );
           }

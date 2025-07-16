@@ -49,6 +49,7 @@ const Navbar = () => {
     about: {
       dean: "/schools/ict/about/dean",
       coeidrone: "/schools/ict/about/coeidrone",
+      cyber:"/schools/ict/about/cyber",
       coeiraem: "/schools/ict/about/coeiraem",
       board: "/schools/ict/about/board",
       staff: "/schools/ict/about/staff",
@@ -77,6 +78,7 @@ const Navbar = () => {
       items: [
         { label: "Dean's Message", href: routes.about.dean },
         { label: "USICT COEIDrone Technologies", href: routes.about.coeidrone },
+        {label:"USICT Cyber Security Lab",href: routes.about.cyber},
         { label: "USICT COEIRAEM", href: routes.about.coeiraem },
         { label: "USICT Board of Studies", href: routes.about.board },
         { label: "USICT Staff Members", href: routes.about.staff },

@@ -64,16 +64,14 @@ const cn = (...classes) => classes.filter(Boolean).join(' ');
 const tabs = [
   { id: 'overview', label: 'Overview', icon: User },
   { id: 'qualifications', label: 'Qualifications', icon: GraduationCap },
+    { id: 'certifications', label: 'Certifications', icon: Badge },
   { id: 'teaching', label: 'Teaching', icon: BookOpen },
   { id: 'administration', label: 'Administration', icon: Settings },
   { id: 'research-projects', label: 'Research Projects', icon: Beaker },
-  { id: 'research-group', label: 'Research Group', icon: Users },
   { id: 'publications', label: 'Publications', icon: FileText },
-  { id: 'patents', label: 'Patents', icon: Award },
-  { id: 'certifications', label: 'Certifications', icon: Badge },
   { id: 'talks', label: 'Invited Talks', icon: Mic },
   { id: 'awards', label: 'Awards', icon: Trophy },
-  { id: 'social-impact', label: 'Social Impact', icon: Heart },
+  
 ];
 
 // ✅ Proper functional component with props

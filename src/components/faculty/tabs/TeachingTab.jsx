@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 // Minimal custom UI components styled with Tailwind CSS
-
+ 
 export const Card = ({ className = "", children, ...props }) => (
   <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm${className}`} {...props}>
     {children}
@@ -9,7 +9,7 @@ export const Card = ({ className = "", children, ...props }) => (
 );
 
 export const CardHeader = ({ className = "", children, ...props }) => (
-  <div className={`px-6 pt-6 pb-2 border-b border-gray-100 border-solid${className}`} {...props}>
+  <div className={`px-6 pt-6 pb-2 `} {...props}>
     {children}
   </div>
 );
@@ -161,7 +161,43 @@ export const TeachingTab = () => {
   const teachingPhilosophy = `Dr. Kumar believes in creating an interactive and engaging learning environment where students are encouraged to think critically and apply theoretical concepts to real-world problems. His teaching methodology emphasizes hands-on learning, collaborative projects, and industry-relevant case studies.`;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-gray-50">
+        {/* Teaching Statistics */}
+      <Card className="hover:shadow-lg transition-shadow duration-300">
+         
+        <CardHeader>
+          <CardTitle className="text-2xl text-gray-900 flex items-center">
+            <BookOpen  className="w-6 h-6 mr-2 text-blue-600" />
+             Teaching Statistics
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
+              <div className="text-2xl font-bold text-blue-600">{courses.length}</div>
+              <div className="text-sm text-blue-700">Total Courses</div>
+            </div>
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
+              <div className="text-2xl font-bold text-green-600">
+                {courses.reduce((sum, course) => sum + course.students, 0)}
+              </div>
+              <div className="text-sm text-green-700">Total Students</div>
+            </div>
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
+              <div className="text-2xl font-bold text-purple-600">
+                {courses.reduce((sum, course) => sum + course.credits, 0)}
+              </div>
+              <div className="text-sm text-purple-700">Total Credits</div>
+            </div>
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
+              <div className="text-2xl font-bold text-orange-600">
+                {courses.reduce((sum, course) => sum + course.slides.length, 0)}
+              </div>
+              <div className="text-sm text-orange-700">Lecture Slides</div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
       {/* Teaching Philosophy */}
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
@@ -282,38 +318,7 @@ export const TeachingTab = () => {
         </CardContent>
       </Card>
 
-      {/* Teaching Statistics */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-900">Teaching Statistics</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">{courses.length}</div>
-              <div className="text-sm text-blue-700">Total Courses</div>
-            </div>
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">
-                {courses.reduce((sum, course) => sum + course.students, 0)}
-              </div>
-              <div className="text-sm text-green-700">Total Students</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">
-                {courses.reduce((sum, course) => sum + course.credits, 0)}
-              </div>
-              <div className="text-sm text-purple-700">Total Credits</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">
-                {courses.reduce((sum, course) => sum + course.slides.length, 0)}
-              </div>
-              <div className="text-sm text-orange-700">Lecture Slides</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+    
     </div>
   );
 };

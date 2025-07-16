@@ -153,27 +153,29 @@ const SitemapMain = () => {
           </Card>
 
           {/* Events Card */}
-          <Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-            <CardHeader className="text-center pb-2 bg-white">
-              <div className="mx-auto w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-purple-200 transition-colors">
-                <Calendar className="w-6 h-6 text-purple-600" />
-              </div>
-              <CardTitle className="text-lg">Events</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center bg-white">
-              <CardDescription className="mb-4">
-                Stay updated with latest news, events, and announcements.
-              </CardDescription>
-              <Link to="/announcements/news-notifications">
-                <Button
-                  variant="ghost"
-                  className="text-purple-600 hover:text-purple-700"
-                >
-                  View Events →
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
+
+<Card className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+  <CardHeader className="text-center pb-2 bg-white">
+    <div className="mx-auto w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-purple-200 transition-colors">
+      <Calendar className="w-6 h-6 text-purple-600" />
+    </div>
+    <CardTitle className="text-lg">Events</CardTitle>
+  </CardHeader>
+  <CardContent className="text-center bg-white">
+    <CardDescription className="mb-4">
+      Stay updated with latest news, events, and announcements.
+    </CardDescription>
+    <Link to="/announcements/news-notifications">
+      <Button
+        variant="ghost"
+        className="text-purple-600 hover:text-purple-700"
+      >
+        View Events →
+      </Button>
+    </Link>
+  </CardContent>
+</Card>
+
 
 
           {/* Contact Card */}

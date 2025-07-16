@@ -2,27 +2,11 @@ import { useState, useEffect } from 'react';
 import { Badge } from './ui/Badge';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const StudentStartup = () => {
+const StudentStartup = ( {startupData={startups: [], stats: {}}}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Simulated dynamic data (replace with API later)
-  const startupData = {
-    startups: [
-      {
-        name: 'KOYAL FM',
-        founder: 'GBU Incubation Team',
-        description: 'Campus-based community radio initiative by students',
-        funding: 'University Supported',
-        status: 'Incubated',
-        image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop',
-        year: '2020',
-      },
-    ],
-    stats: {
-      totalFunding: '₹19.3L+',
-      totalDepartments: 4,
-    }
-  };
+
 
   const { startups, stats } = startupData;
 

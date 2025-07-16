@@ -7,7 +7,7 @@ const Card = ({ className = '', children }) => (
 );
 
 const CardHeader = ({ children, className = '' }) => (
-  <div className={`px-6 pt-6 pb-2 border-b border-gray-100 border-solid bg-gradient-to-r from-gray-50 to-white rounded-t-xl${className}`}>
+  <div className={`px-6 pt-6 pb-2   bg-gradient-to-r from-gray-50 to-white rounded-t-xl${className}`}>
     {children}
   </div>
 );
@@ -110,7 +110,38 @@ export const AdministrationTab = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-gray-50">
+        {/* Administrative Impact */}
+      <Card className="hover:shadow-lg transition-shadow duration-300">
+        <CardHeader>
+          <CardTitle className="text-2xl text-gray-900 flex items-center">
+            <Settings  className="w-6 h-6 mr-2 text-blue-600" />
+             Administrative Impact
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
+              <div className="text-2xl font-bold text-green-600">{administrativeRoles.length}</div>
+              <div className="text-sm text-green-700">Total Roles</div>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
+              <div className="text-2xl font-bold text-blue-600">
+                {administrativeRoles.filter(role => role.status === 'ongoing').length}
+              </div>
+              <div className="text-sm text-blue-700">Current Roles</div>
+            </div>
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
+              <div className="text-2xl font-bold text-purple-600">{committees.length}</div>
+              <div className="text-sm text-purple-700">Committees</div>
+            </div>
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
+              <div className="text-2xl font-bold text-orange-600">3+</div>
+              <div className="text-sm text-orange-700">Years Service</div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
       {/* Administrative Roles */}
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
@@ -185,34 +216,7 @@ export const AdministrationTab = () => {
         </CardContent>
       </Card>
 
-      {/* Administrative Impact */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-900">Administrative Impact</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">{administrativeRoles.length}</div>
-              <div className="text-sm text-green-700">Total Roles</div>
-            </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">
-                {administrativeRoles.filter(role => role.status === 'ongoing').length}
-              </div>
-              <div className="text-sm text-blue-700">Current Roles</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">{committees.length}</div>
-              <div className="text-sm text-purple-700">Committees</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">3+</div>
-              <div className="text-sm text-orange-700">Years Service</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+    
     </div>
   );
 };

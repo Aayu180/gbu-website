@@ -1,48 +1,68 @@
-
-
-import React from 'react';
-import { 
-  Download, 
-  CreditCard, 
-  FileText, 
+import React, { useState } from 'react';
+import {
+  Download,
+  CreditCard,
+  FileText,
   AlertCircle,
-  Award
+  Award,
+  Sparkles,
+  GraduationCap,
+  ChevronRight
 } from 'lucide-react';
 
-// --- Reusable UI Components ---
-const Card = ({ children, className = '' }) => (
-  <div className={`rounded-xl overflow-hidden bg-white ${className}`}>
-    {children}
+/* ---------------- Reusable UI Components ---------------- */
+
+const Card = ({ children, className = '', ...props }) => (
+  <div
+    className={`group relative rounded-3xl overflow-hidden bg-white/80 backdrop-blur-sm border border-white/20 border-solid shadow-lg hover:shadow-2xl transition-all duration-700 hover:-translate-y-1${className}`}
+    {...props}
+  >
+    <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="relative z-10">
+      {children}
+    </div>
   </div>
 );
 
 const CardHeader = ({ children, className = '' }) => (
-  <div className={`p-4 border-b border-gray-200 ${className}`}>{children}</div>
+  <div className={`px-8 py-6 bg-gradient-to-r from-slate-50/50 via-white/50 to-slate-50/50 backdrop-blur-sm border-b border-slate-100/50 border-solid${className}`}>
+    {children}
+  </div>
 );
 
 const CardTitle = ({ children, className = '' }) => (
-  <h3 className={`text-lg font-semibold ${className}`}>{children}</h3>
+  <h3 className={`text-xl font-bold text-slate-800 tracking-tight ${className}`}>{children}</h3>
 );
 
 const CardContent = ({ children, className = '' }) => (
-  <div className={`p-4 ${className}`}>{children}</div>
+  <div className={`px-8 py-6 ${className}`}>{children}</div>
 );
 
-const Badge = ({ children, className = '' }) => (
-  <span className={`inline-block text-xs font-medium rounded-full px-3 py-1 ${className}`}>
-    {children}
-  </span>
-);
-
-const Button = ({ children, className = '', variant = 'default', size = 'default', ...props }) => {
-  const base = 'inline-flex items-center justify-center rounded-md font-medium transition';
+const Badge = ({ children, className = '', variant = 'default' }) => {
   const variants = {
-    default: 'bg-red-600 text-white hover:bg-red-700',
-    outline: 'border border-red-600 text-red-600 hover:bg-red-600 hover:text-white',
+    default: 'bg-gradient-to-r from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-500/25',
+    outline: 'border-2 border-violet-200 text-violet-700 bg-violet-50/50',
+    success: 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/25'
+  };
+
+  return (
+    <span className={`inline-flex items-center text-sm font-semibold rounded-full px-4 py-2 transition-all duration-300 ${variants[variant]} ${className}`}>
+      {children}
+    </span>
+  );
+};
+
+const Button = ({ children, className = '', variant = 'primary', size = 'default', ...props }) => {
+  const base = 'inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95';
+  const variants = {
+    primary: 'bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white shadow-lg shadow-violet-500/25 hover:shadow-xl hover:shadow-violet-500/40',
+    outline: 'border-2 border-violet-200 text-violet-700 bg-white/50 hover:bg-violet-50 hover:border-violet-300',
+    ghost: 'text-slate-600 hover:text-violet-600 hover:bg-violet-50/50'
   };
   const sizes = {
-    default: 'px-4 py-2 text-sm',
-    sm: 'px-3 py-1 text-xs',
+    default: 'px-6 py-3 text-sm',
+    sm: 'px-4 py-2 text-xs',
+    lg: 'px-8 py-4 text-base'
   };
   return (
     <button className={`${base} ${variants[variant]} ${sizes[size]} ${className}`} {...props}>
@@ -51,354 +71,530 @@ const Button = ({ children, className = '', variant = 'default', size = 'default
   );
 };
 
-const Tabs = ({ children, defaultValue, className = '' }) => (
-  <div className={className}>{children}</div>
-);
-
-const TabsList = ({ children, className = '' }) => (
-  <div className={`flex space-x-2 ${className}`}>{children}</div>
-);
-
-const TabsTrigger = ({ children, value }) => (
+const TabButton = ({ children, isActive, onClick }) => (
   <button
-    className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-100"
-    onClick={() => {
-      const content = document.getElementById(`tab-${value}`);
-      document.querySelectorAll('[id^=tab-]').forEach(tab => tab.style.display = 'none');
-      if (content) content.style.display = 'block';
-    }}
+    className={`relative px-8 py-3 text-sm font-semibold rounded-sm transition-all duration-500 transform hover:scale-105 ${isActive
+        ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-sm shadow-black'
+        : 'text-slate-600 hover:text-violet-600 hover:bg-violet-50/50'
+      }`}
+    onClick={onClick}
   >
-    {children}
+    {isActive && (
+      <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-purple-600 rounded-full blur-lg opacity-30 animate-pulse" />
+    )}
+    <span className="relative z-10">{children}</span>
   </button>
 );
 
-const TabsContent = ({ children, value, className = '' }) => (
-  <div id={`tab-${value}`} className={`${className}`} style={{ display: value === 'fees' ? 'block' : 'none' }}>
-    {children}
-  </div>
-);
+/* ---------------- Data ---------------- */
+const ugFees = [
+  {
+    course: "B.Tech",
+    totalFee: "₹4,80,000",
+    yearlyFee: "₹1,20,000",
+    breakdown: {
+      tuition: "₹80,000",
+      hostel: "₹24,000",
+      mess: "₹12,000",
+      other: "₹4,000"
+    },
+    scholarships: "Merit-based scholarships available",
+    popular: true
+  },
+  {
+    course: "B.Sc",
+    totalFee: "₹1,80,000",
+    yearlyFee: "₹60,000",
+    breakdown: {
+      tuition: "₹45,000",
+      hostel: "₹24,000",
+      mess: "₹12,000",
+      other: "₹4,000"
+    },
+    scholarships: "Need-based scholarships available"
+  },
+  {
+    course: "B.Com",
+    totalFee: "₹1,50,000",
+    yearlyFee: "₹50,000",
+    breakdown: {
+      tuition: "₹35,000",
+      hostel: "₹24,000",
+      mess: "₹12,000",
+      other: "₹4,000"
+    },
+    scholarships: "Merit & need-based scholarships"
+  },
+  {
+    course: "B.A",
+    totalFee: "₹1,20,000",
+    yearlyFee: "₹40,000",
+    breakdown: {
+      tuition: "₹25,000",
+      hostel: "₹24,000",
+      mess: "₹12,000",
+      other: "₹4,000"
+    },
+    scholarships: "Government scholarships available"
+  }
+];
 
-// --- Data Constants ---
-  const ugFees = [
-    {
-      course: "B.Tech",
-      totalFee: "₹4,80,000",
-      yearlyFee: "₹1,20,000",
-      breakdown: {
-        tuition: "₹80,000",
-        hostel: "₹24,000",
-        mess: "₹12,000",
-        other: "₹4,000"
-      },
-      scholarships: "Merit-based scholarships available"
+const pgFees = [
+  {
+    course: "M.Tech",
+    totalFee: "₹3,20,000",
+    yearlyFee: "₹1,60,000",
+    breakdown: {
+      tuition: "₹1,20,000",
+      hostel: "₹24,000",
+      mess: "₹12,000",
+      other: "₹4,000"
     },
-    {
-      course: "B.Sc",
-      totalFee: "₹1,80,000",
-      yearlyFee: "₹60,000",
-      breakdown: {
-        tuition: "₹45,000",
-        hostel: "₹24,000",
-        mess: "₹12,000",
-        other: "₹4,000"
-      },
-      scholarships: "Need-based scholarships available"
+    scholarships: "Research assistantships available",
+    popular: true
+  },
+  {
+    course: "M.Sc",
+    totalFee: "₹2,00,000",
+    yearlyFee: "₹1,00,000",
+    breakdown: {
+      tuition: "₹60,000",
+      hostel: "₹24,000",
+      mess: "₹12,000",
+      other: "₹4,000"
     },
-    {
-      course: "B.Com",
-      totalFee: "₹1,50,000",
-      yearlyFee: "₹50,000",
-      breakdown: {
-        tuition: "₹35,000",
-        hostel: "₹24,000",
-        mess: "₹12,000",
-        other: "₹4,000"
-      },
-      scholarships: "Merit & need-based scholarships"
+    scholarships: "Merit-based scholarships"
+  },
+  {
+    course: "MBA",
+    totalFee: "₹6,00,000",
+    yearlyFee: "₹3,00,000",
+    breakdown: {
+      tuition: "₹2,50,000",
+      hostel: "₹30,000",
+      mess: "₹15,000",
+      other: "₹5,000"
     },
-    {
-      course: "B.A",
-      totalFee: "₹1,20,000",
-      yearlyFee: "₹40,000",
-      breakdown: {
-        tuition: "₹25,000",
-        hostel: "₹24,000",
-        mess: "₹12,000",
-        other: "₹4,000"
-      },
-      scholarships: "Government scholarships available"
-    }
-  ];
+    scholarships: "Industry-sponsored scholarships"
+  }
+];
 
-  const pgFees = [
-    {
-      course: "M.Tech",
-      totalFee: "₹3,20,000",
-      yearlyFee: "₹1,60,000",
-      breakdown: {
-        tuition: "₹1,20,000",
-        hostel: "₹24,000",
-        mess: "₹12,000",
-        other: "₹4,000"
-      },
-      scholarships: "Research assistantships available"
-    },
-    {
-      course: "M.Sc",
-      totalFee: "₹2,00,000",
-      yearlyFee: "₹1,00,000",
-      breakdown: {
-        tuition: "₹60,000",
-        hostel: "₹24,000",
-        mess: "₹12,000",
-        other: "₹4,000"
-      },
-      scholarships: "Merit-based scholarships"
-    },
-    {
-      course: "MBA",
-      totalFee: "₹6,00,000",
-      yearlyFee: "₹3,00,000",
-      breakdown: {
-        tuition: "₹2,50,000",
-        hostel: "₹30,000",
-        mess: "₹15,000",
-        other: "₹5,000"
-      },
-      scholarships: "Industry-sponsored scholarships"
-    }
-  ];
+const paymentOptions = [
+  {
+    method: "Digital Payment",
+    description: "Cards, UPI, Net Banking",
+    charges: "Instant & Secure",
+    icon: CreditCard,
+    color: "from-blue-500 to-cyan-500"
+  },
+  {
+    method: "Bank Transfer",
+    description: "Direct transfer to university",
+    charges: "No additional charges",
+    icon: CreditCard,
+    color: "from-emerald-500 to-teal-500"
+  },
+  {
+    method: "Demand Draft",
+    description: "Traditional payment method",
+    charges: "Bank charges apply",
+    icon: FileText,
+    color: "from-violet-500 to-purple-500"
+  }
+];
 
-  const paymentOptions = [
-    {
-      method: "Online Payment",
-      description: "Credit/Debit Cards, Net Banking, UPI",
-      charges: "Convenience charges may apply",
-      icon: CreditCard
-    },
-    {
-      method: "Demand Draft",
-      description: "Drawn in favor of 'University Name'",
-      charges: "Bank charges applicable",
-      icon: FileText
-    },
-    {
-      method: "Bank Transfer",
-      description: "Direct bank transfer to university account",
-      charges: "No additional charges",
-      icon: CreditCard
-    }
-  ];
+const scholarships = [
+  {
+    name: "Merit Excellence Award",
+    eligibility: "Top 10% academic performers",
+    amount: "₹50,000 - ₹1,00,000",
+    duration: "Full program duration",
+    icon: "🏆"
+  },
+  {
+    name: "Financial Aid Program",
+    eligibility: "Family income < ₹2 lakhs",
+    amount: "Up to 50% fee waiver",
+    duration: "Renewable annually",
+    icon: "🤝"
+  },
+  {
+    name: "Sports Excellence Grant",
+    eligibility: "State/National achievements",
+    amount: "₹25,000 - ₹75,000",
+    duration: "Performance based",
+    icon: "🏅"
+  },
+  {
+    name: "Research Fellowship",
+    eligibility: "PG/PhD research students",
+    amount: "₹15,000 - ₹25,000/month",
+    duration: "Project timeline",
+    icon: "🔬"
+  }
+];
 
-  const scholarships = [
-    {
-      name: "Merit Scholarship",
-      eligibility: "Top 10% students in each program",
-      amount: "₹50,000 - ₹1,00,000",
-      duration: "Throughout the program"
-    },
-    {
-      name: "Need-based Scholarship",
-      eligibility: "Family income < ₹2 lakhs per annum",
-      amount: "Up to 50% fee waiver",
-      duration: "Renewable annually"
-    },
-    {
-      name: "Sports Scholarship",
-      eligibility: "State/National level sports achievements",
-      amount: "₹25,000 - ₹75,000",
-      duration: "Based on performance"
-    },
-    {
-      name: "Research Assistantship",
-      eligibility: "PG/PhD students engaged in research",
-      amount: "₹15,000 - ₹25,000 per month",
-      duration: "Project duration"
-    }
-  ];
+const prospectusLinks = [
+  {
+    title: "Complete Prospectus 2024-25",
+    description: "Comprehensive admission guide with detailed information",
+    size: "2.5 MB",
+    pages: "48 pages",
+    gradient: "from-violet-500 to-purple-600"
+  },
+  {
+    title: "Fee Structure Guide",
+    description: "Detailed breakdown and payment schedules",
+    size: "1.2 MB",
+    pages: "12 pages",
+    gradient: "from-blue-500 to-cyan-600"
+  },
+  {
+    title: "Scholarship Handbook",
+    description: "Complete scholarship information and applications",
+    size: "800 KB",
+    pages: "8 pages",
+    gradient: "from-emerald-500 to-teal-600"
+  },
+  {
+    title: "Campus Life Guide",
+    description: "Hostel facilities, amenities, and campus culture",
+    size: "1.5 MB",
+    pages: "16 pages",
+    gradient: "from-pink-500 to-rose-600"
+  }
+];
 
-  const prospectusLinks = [
-    {
-      title: "Complete Prospectus 2024-25",
-      description: "Comprehensive guide with all course details, fees, and admission process",
-      size: "2.5 MB",
-      pages: "48 pages"
-    },
-    {
-      title: "Fee Structure Document",
-      description: "Detailed breakdown of all fees and payment schedules",
-      size: "1.2 MB",
-      pages: "12 pages"
-    },
-    {
-      title: "Scholarship Guidelines",
-      description: "Complete information about available scholarships and application process",
-      size: "800 KB",
-      pages: "8 pages"
-    },
-    {
-      title: "Hostel Information",
-      description: "Accommodation facilities, rules, and fee structure",
-      size: "1.5 MB",
-      pages: "16 pages"
-    }
-  ];
+/* ---------------- Enhanced Components ---------------- */
 
-// --- FeeCard Component ---
-const FeeCard = ({ course }) => (
-  <Card className="border border-gray-200">
-    <CardHeader className="flex flex-row justify-between items-center pb-2">
-      <CardTitle>{course.course}</CardTitle>
-      <Badge className="bg-green-100 text-green-800">{course.totalFee}</Badge>
+const FeeCard = ({ course, index }) => (
+  <Card className="relative overflow-hidden">
+    {/* {course.popular && (
+      <div className="absolute top-2 right-2 z-20">
+        <Badge variant="success" className="animate-pulse">
+          <Sparkles className="w-3 h-3 mr-1" />
+          Popular
+        </Badge>
+      </div>
+    )} */}
+
+    <CardHeader>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-3">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-r from-violet-500 to-purple-600 flex items-center justify-center">
+            <GraduationCap className="w-6 h-6 text-white" />
+          </div>
+          <CardTitle className="text-2xl">{course.course}</CardTitle>
+        </div>
+        <Badge className="text-lg font-bold">
+          {course.totalFee}
+        </Badge>
+      </div>
     </CardHeader>
-    <CardContent className="pt-0 space-y-4">
-      {/* Yearly & Total */}
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <p className="text-sm text-gray-500">Yearly Fee</p>
-          <p className="font-semibold text-gray-800">{course.yearlyFee}</p>
+
+    <CardContent className="space-y-6">
+      <div className="grid grid-cols-2 gap-6">
+        <div className="text-center p-4 rounded-2xl bg-gradient-to-br from-violet-50 to-purple-50">
+          <p className="text-sm text-slate-500 mb-1">Annual Fee</p>
+          <p className="text-xl font-bold text-slate-800">{course.yearlyFee}</p>
         </div>
-        <div>
-          <p className="text-sm text-gray-500">Total Program Fee</p>
-          <p className="font-semibold text-gray-800">{course.totalFee}</p>
-        </div>
-      </div>
-      {/* Breakdown */}
-      <div>
-        <p className="text-sm font-medium text-gray-700 mb-1">Fee Breakdown (Yearly):</p>
-        <div className="space-y-1 text-sm text-gray-600">
-          <div className="flex justify-between"><span>Tuition</span><span>{course.breakdown.tuition}</span></div>
-          <div className="flex justify-between"><span>Hostel</span><span>{course.breakdown.hostel}</span></div>
-          <div className="flex justify-between"><span>Mess</span><span>{course.breakdown.mess}</span></div>
-          <div className="flex justify-between"><span>Other</span><span>{course.breakdown.other}</span></div>
+        <div className="text-center p-4 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50">
+          <p className="text-sm text-slate-500 mb-1">Total Program</p>
+          <p className="text-xl font-bold text-slate-800">{course.totalFee}</p>
         </div>
       </div>
-      {/* Scholarship */}
+
+      <div className="space-y-3">
+        <p className="font-semibold text-slate-700 mb-3">Fee Breakdown</p>
+        {Object.entries(course.breakdown).map(([key, value], i) => (
+          <div key={key} className="flex justify-between items-center py-2 px-4 rounded-xl bg-slate-50/50 hover:bg-slate-100/50 transition-colors duration-300">
+            <span className="capitalize text-slate-600">{key}</span>
+            <span className="font-semibold text-slate-800">{value}</span>
+          </div>
+        ))}
+      </div>
+
       {course.scholarships && (
-        <div className="pt-3 border-t border-gray-200 flex items-center gap-2 text-sm text-blue-600 font-medium">
-          <Award className="w-4 h-4" />
-          {course.scholarships}
+        <div className="pt-4 border-t border-slate-100 border-solid">
+          <div className="flex items-center space-x-3 text-violet-600">
+            <Award className="w-5 h-5" />
+            <span className="text-sm font-medium">{course.scholarships}</span>
+          </div>
         </div>
       )}
     </CardContent>
   </Card>
 );
 
-// --- FeeStructure Page ---
-const FeeStructure = () => {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-20">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-5xl font-bold mb-6 animate-fade-in">Fee Structure & Prospectus</h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto animate-fade-in">
-              Complete fee details, payment options, and downloadable prospectus
-            </p>
+const PaymentCard = ({ option, index }) => (
+  <Card className="text-center group">
+    <CardContent className="py-8 text-center">
+      <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${option.color} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+        <option.icon className="w-8 h-8 text-white" />
+      </div>
+      <h4 className="text-xl font-bold text-slate-800 mb-3">{option.method}</h4>
+      <p className="text-slate-600 mb-2">{option.description}</p>
+      <p className="text-sm text-emerald-600 font-medium">{option.charges}</p>
+    </CardContent>
+  </Card>
+);
+
+const ScholarshipCard = ({ scholarship, index }) => (
+  <Card className="relative overflow-hidden">
+    <div className="absolute top-4 right-4 text-2xl opacity-20">
+      {scholarship.icon}
+    </div>
+    <CardHeader>
+      <CardTitle className="flex items-center space-x-3">
+        <span className="text-2xl">{scholarship.icon}</span>
+        <span>{scholarship.name}</span>
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="space-y-4">
+      <div className="space-y-3">
+        <div className="flex items-start space-x-3">
+          <div className="w-2 h-2 rounded-full bg-violet-500 mt-2 flex-shrink-0"></div>
+          <div>
+            <p className="text-sm font-medium text-slate-600">Eligibility</p>
+            <p className="text-slate-800">{scholarship.eligibility}</p>
           </div>
-        </section>
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        
+        </div>
+        <div className="flex items-start space-x-3">
+          <div className="w-2 h-2 rounded-full bg-emerald-500 mt-2 flex-shrink-0"></div>
+          <div>
+            <p className="text-sm font-medium text-slate-600">Amount</p>
+            <p className="text-slate-800 font-semibold">{scholarship.amount}</p>
+          </div>
+        </div>
+        <div className="flex items-start space-x-3">
+          <div className="w-2 h-2 rounded-full bg-blue-500 mt-2 flex-shrink-0"></div>
+          <div>
+            <p className="text-sm font-medium text-slate-600">Duration</p>
+            <p className="text-slate-800">{scholarship.duration}</p>
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
 
-        <Card className="mb-8 border-l-4 border-blue-500 bg-blue-50">
-          <CardContent className="p-6">
-            <div className="flex items-start space-x-3">
-              <AlertCircle className="w-6 h-6 text-blue-600 mt-0.5" />
-              <div>
-                <h3 className="font-semibold text-blue-900 mb-2">Fee Policy</h3>
-                <ul className="text-blue-800 space-y-1 text-sm">
-                  <li>• Fee structure is subject to revision by the university</li>
-                  <li>• Fees once paid are non-refundable except in exceptional cases</li>
-                  <li>• Late payment attracts a penalty of ₹100 per day</li>
-                  <li>• Fees can be paid in installments as per university guidelines</li>
-                </ul>
-              </div>
+const ProspectusCard = ({ document, index }) => (
+  <Card className="group py-10">
+    <CardContent className="p-8 ">
+      <div className="flex items-start space-x-4">
+        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${document.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+          <FileText className="w-7 h-7 text-white" />
+        </div>
+        <div className="flex-1">
+          <h4 className="text-xl font-bold text-slate-800 mb-2">{document.title}</h4>
+          <p className="text-slate-600 mb-4">{document.description}</p>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-4 text-md text-slate-800">
+              <span>{document.size}</span>
+              <span>•</span>
+              <span>{document.pages}</span>
             </div>
-          </CardContent>
-        </Card>
+            <Button size="sm">
+              <Download className="w-4 h-4 mr-2" />
+              Download
+            </Button>
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
 
-        <Tabs defaultValue="fees">
-          <TabsList className="grid grid-cols-4 gap-2 mb-6">
-            <TabsTrigger value="fees">Fee Structure</TabsTrigger>
-            <TabsTrigger value="payment">Payment Options</TabsTrigger>
-            <TabsTrigger value="scholarships">Scholarships</TabsTrigger>
-            <TabsTrigger value="prospectus">Prospectus</TabsTrigger>
-          </TabsList>
+/* ---------------- Main Component ---------------- */
 
-          {/* Fee Structure */}
-          <TabsContent value="fees" className="space-y-6">
-            <div className="grid lg:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Undergraduate Programs</h3>
-                {ugFees.map((c, i) => <FeeCard key={i} course={c} />)}
+const FeeStructure = () => {
+  const [activeTab, setActiveTab] = useState('fees');
+
+  const tabs = [
+    { id: 'fees', label: 'Fee Structure', icon: CreditCard },
+    { id: 'payment', label: 'Payment Options', icon: CreditCard },
+    { id: 'scholarships', label: 'Scholarships', icon: Award },
+    { id: 'prospectus', label: 'Prospectus', icon: FileText }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700"></div>
+        <div className="absolute inset-0 bg-[url(]'data:image/svg+xml,%3Csvg%20width=\'60\'%20height=\'60\'%20viewBox=\'0%200%2060%2060\'%20xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg%20fill=\'none\'%20fill-rule=\'evenodd\'%3E%3Cg%20fill=\'%23ffffff\'%20fill-opacity=\'0.05\'%3E%3Cpath%20d=\'M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+
+        <div className="relative z-10 container mx-auto px-6 py-20 text-center text-white">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold mb-3 bg-gradient-to-r from-white via-violet-100 to-white bg-clip-text text-transparent">
+              Fee Structure
+            </h1>
+            <p className="text-lg md:text-xl text-violet-100 mb-8 leading-relaxed">
+              Transparent pricing, flexible payments, and comprehensive support
+              for your academic journey
+            </p>
+            {/* <div className="flex justify-center">
+              <Button size="lg" className="bg-white/10 backdrop-blur-sm border border-white/20 border-solid hover:bg-white/20">
+                <Sparkles className="w-5 h-5 mr-2" />
+                Explore Programs
+                <ChevronRight className="w-5 h-5 ml-2" />
+              </Button>
+            </div> */}
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-6 py-10">
+        {/* Important Notice */}
+        <div className="mb-12">
+          <Card className="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-400 border-solid">
+            <CardContent className="flex items-start space-x-4 py-6">
+              <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                <AlertCircle className="w-5 h-5 text-amber-600" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">Postgraduate Programs</h3>
-                {pgFees.map((c, i) => <FeeCard key={i} course={c} />)}
-              </div>
-            </div>
-          </TabsContent>
-
-          {/* Payment Options */}
-          <TabsContent value="payment" className="space-y-6">
-            <h3 className="text-xl font-semibold">Payment Methods</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {paymentOptions.map((p, i) => (
-                <Card key={i}>
-                  <CardContent className="p-6 text-center">
-                    <p.icon className="w-10 h-10 text-blue-600 mx-auto mb-3" />
-                    <h4 className="font-semibold">{p.method}</h4>
-                    <p className="text-sm text-gray-600">{p.description}</p>
-                    <p className="text-xs text-gray-500 mt-1">{p.charges}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          {/* Scholarships */}
-          <TabsContent value="scholarships" className="grid md:grid-cols-2 gap-6">
-            {scholarships.map((s, i) => (
-              <Card key={i}>
-                <CardHeader>
-                  <CardTitle>{s.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm"><strong>Eligibility:</strong> {s.eligibility}</p>
-                  <p className="text-sm"><strong>Amount:</strong> {s.amount}</p>
-                  <p className="text-sm"><strong>Duration:</strong> {s.duration}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </TabsContent>
-
-          {/* Prospectus */}
-          <TabsContent value="prospectus" className="grid md:grid-cols-2 gap-6">
-            {prospectusLinks.map((d, i) => (
-              <Card key={i}>
-                <CardContent className="p-6 flex items-start space-x-4">
-                  <FileText className="w-8 h-8 text-blue-600 mt-1" />
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-gray-900 mb-1">{d.title}</h4>
-                    <p className="text-sm text-gray-600 mb-2">{d.description}</p>
-                    <div className="flex justify-between items-center">
-                      <div className="text-xs text-gray-500 space-x-3">
-                        <span>{d.size}</span>
-                        <span>{d.pages}</span>
-                      </div>
-                      <Button size="sm">
-                        <Download className="w-4 h-4 mr-2" />
-                        Download
-                      </Button>
-                    </div>
+                <h3 className="font-bold text-amber-800 mb-4">
+                  Important Fee Guidelines
+                </h3>
+                <div className="grid md:grid-cols-2 gap-3 text-sm text-amber-700">
+                  
+                    <div className="flex items-center space-x-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+                    <span>Fees subject to university revision</span>
                   </div>
-                </CardContent>
-              </Card>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+                    <span>Late payment fee: ₹100 per day</span>
+                  </div>
+                    
+                  <div className="flex items-center space-x-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+                    <span>Installment facility available</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+                    <span>Refund policy as per guidelines</span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Tabs */}
+        <div className="mb-20">
+          <div className="flex flex-wrap justify-center gap-4">
+            {tabs.map((tab) => (
+              <TabButton
+                key={tab.id}
+                isActive={activeTab === tab.id}
+                onClick={() => setActiveTab(tab.id)} 
+              >
+                <tab.icon className="w-4 h-4 mr-2 inline" />
+                {tab.label}
+              </TabButton>
             ))}
-          </TabsContent>
-        </Tabs>
+          </div>
+        </div>
+
+        {/* Tab Content */}
+        <div className="space-y-12 mb-20">
+          {activeTab === "fees" && (
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div className="space-y-6">
+                <div className="text-center lg:text-left">
+                  <h3 className="text-3xl font-bold text-slate-800 mb-3">
+                    Undergraduate Programs
+                  </h3>
+                  <p className="text-slate-600">
+                    Comprehensive undergraduate courses with modern curriculum
+                  </p>
+                </div>
+                <div className="space-y-10">
+                  {ugFees.map((course, index) => (
+                    <FeeCard key={index} course={course} />
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div className="text-center lg:text-left">
+                  <h3 className="text-3xl font-bold text-slate-800 mb-3">
+                    Postgraduate Programs
+                  </h3>
+                  <p className="text-slate-600">
+                    Advanced degrees for specialized career growth
+                  </p>
+                </div>
+                <div className="space-y-10">
+                  {pgFees.map((course, index) => (
+                    <FeeCard key={index} course={course} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === "payment" && (
+            <div>
+              <div className="text-center mb-12">
+                <h3 className="text-3xl font-bold text-slate-800 mb-4">
+                  Payment Options
+                </h3>
+                <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+                  Choose from multiple secure payment methods for your
+                  convenience
+                </p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-8">
+                {paymentOptions.map((option, index) => (
+                  <PaymentCard key={index} option={option} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === "scholarships" && (
+            <div>
+              <div className="text-center mb-12">
+                <h3 className="text-3xl font-bold text-slate-800 mb-4">
+                  Scholarships & Financial Aid
+                </h3>
+                <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+                  Supporting talented students with comprehensive scholarship
+                  programs
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-8">
+                {scholarships.map((scholarship, index) => (
+                  <ScholarshipCard key={index} scholarship={scholarship} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === "prospectus" && (
+            <div>
+              <div className="text-center mb-12">
+                <h3 className="text-3xl font-bold text-slate-800 mb-4">
+                  Download Prospectus
+                </h3>
+                <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+                  Get comprehensive information about our programs and admission
+                  process
+                </p>
+              </div>
+              <div className="grid md:grid-cols-2 gap-8">
+                {prospectusLinks.map((document, index) => (
+                  <ProspectusCard key={index} document={document} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
+
 };
 
 export default FeeStructure;

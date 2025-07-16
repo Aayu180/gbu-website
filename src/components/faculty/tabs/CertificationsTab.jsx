@@ -1,29 +1,28 @@
 import React from 'react';
 // Minimal UI components with styles matching usage in this file
-
-export const Card = ({ className = '', children, ...props }) => (
-  <div className={`rounded-xl bg-white border border-gray-200 border-solid${className}`} {...props}>
-    {children}
-  </div>
-);
-
-export const CardHeader = ({ className = '', children, ...props }) => (
-  <div className={`px-6 pt-6 pb-2 ${className}`} {...props}>
-    {children}
-  </div>
-);
-
-export const CardTitle = ({ className = '', children, ...props }) => (
-  <h2 className={`font-bold ${className}`} {...props}>
-    {children}
-  </h2>
-);
-
-export const CardContent = ({ className = '', children, ...props }) => (
-  <div className={`px-6 pb-6 ${className}`} {...props}>
-    {children}
-  </div>
-);
+ export const Card = ({ className = "", children, ...props }) => (
+   <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm${className}`} {...props}>
+     {children}
+   </div>
+ );
+ 
+ export const CardHeader = ({ className = "", children, ...props }) => (
+   <div className={`px-6 pt-6 pb-2  border-solid${className}`} {...props}>
+     {children}
+   </div>
+ );
+ 
+ export const CardTitle = ({ className = "", children, ...props }) => (
+   <h2 className={`font-bold ${className}`} {...props}>
+     {children}
+   </h2>
+ );
+ 
+ export const CardContent = ({ className = "", children, ...props }) => (
+   <div className={`px-6 py-4 ${className}`} {...props}>
+     {children}
+   </div>
+ );
 
 export const Badge = ({ className = '', variant = 'solid', children, ...props }) => {
   const base =

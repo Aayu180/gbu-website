@@ -251,7 +251,7 @@ const ResearchCenters = () => {
       <div className="max-w-6xl mx-auto mt-10 px-4">
        <div className="flex flex-wrap gap-4 items-center ">
     {/* School Filter */}
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
      
       <select
         className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -298,7 +298,7 @@ const ResearchCenters = () => {
   </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           {filteredCenters.length > 0 ? (
             filteredCenters.map((center) => (
               <div

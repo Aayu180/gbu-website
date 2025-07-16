@@ -11,54 +11,54 @@ const ConferenceCard = ({ title, details, date, index }) => {
     <motion.div
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ 
-        duration: 0.6, 
+      transition={{
+        duration: 0.6,
         delay: index * 0.1,
         type: "spring",
-        stiffness: 100
+        stiffness: 100,
       }}
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -8, scale: 1.02 }}
       className="group cursor-pointer"
     >
-      <div className="relative overflow-hidden bg-gradient-to-br from-white via-gray-50/50 to-indigo-50/30 backdrop-blur-sm border border-gray-200/60 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:border-indigo-200">
+      <div className="relative overflow-hidden bg-gradient-to-br from-white via-gray-50/50 to-indigo-50/30 backdrop-blur-sm border border-gray-200/60 border-solid rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:border-indigo-200">
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
+
         {/* Floating decoration */}
-        <motion.div 
+        <motion.div
           className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-xl"
-          animate={{ 
+          animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3]
+            opacity: [0.3, 0.6, 0.3],
           }}
-          transition={{ 
+          transition={{
             duration: 3,
             repeat: Infinity,
-            delay: index * 0.5
+            delay: index * 0.5,
           }}
         />
 
         <div className="relative p-8 space-y-6">
           {/* Header */}
           <div className="flex items-start gap-4">
-            <motion.div 
+            <motion.div
               className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg"
               whileHover={{ rotate: 360, scale: 1.1 }}
               transition={{ duration: 0.6 }}
             >
               <Briefcase className="w-6 h-6 text-white" />
             </motion.div>
-            
+
             <div className="flex-1">
-              <motion.h3 
+              <motion.h3
                 className="text-xl font-bold text-gray-900 leading-tight group-hover:text-indigo-700 transition-colors duration-300"
                 layout="position"
               >
                 {title}
               </motion.h3>
-              
-              <motion.div 
+
+              <motion.div
                 className="flex items-center gap-2 mt-3 text-sm font-medium text-gray-600"
                 initial={{ opacity: 0.7 }}
                 whileHover={{ opacity: 1 }}
@@ -70,7 +70,7 @@ const ConferenceCard = ({ title, details, date, index }) => {
           </div>
 
           {/* Content */}
-          <motion.div 
+          <motion.div
             className="text-gray-700 leading-relaxed"
             layout="position"
           >
@@ -92,7 +92,9 @@ const ConferenceCard = ({ title, details, date, index }) => {
                       transition={{ delay: idx * 0.1 }}
                       className="text-sm"
                     >
-                      {sentence.trim().endsWith('.') ? sentence.trim() : sentence.trim() + '.'}
+                      {sentence.trim().endsWith(".")
+                        ? sentence.trim()
+                        : sentence.trim() + "."}
                     </motion.p>
                   ))}
                 </motion.div>
@@ -131,7 +133,7 @@ const ConferenceCard = ({ title, details, date, index }) => {
         </div>
 
         {/* Bottom accent line */}
-        <motion.div 
+        <motion.div
           className="h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
@@ -143,119 +145,67 @@ const ConferenceCard = ({ title, details, date, index }) => {
   );
 };
 
-const Conferences = () => {
-  const conferenceData = [
-    {
-      title: "1st International Conference on Artificial Intelligence and Sustainable Computing for Smart Cities (AIS2C2: 2021)",
-      details:
-        "This conference brought together researchers and industry professionals to discuss cutting-edge developments in AI and sustainable urban infrastructure. It featured keynote speeches, paper presentations, and panel discussions on smart city frameworks, IoT, green computing, and ethical AI deployment.",
-      date: "March 22nd - 23rd, 2021",
-    },
-    {
-      title: "Two-Day Online International Conference on Rebuilding Bharat with Artificial Intelligence",
-      details:
-        "Focused on harnessing AI for nation-building post-pandemic, this event included sessions on AI in healthcare, agriculture, education, and governance. Participants shared case studies and innovations with potential to transform India's development landscape.",
-      date: "July 15th - 16th, 2021",
-    },
-    {
-      title: "National Conference on Emerging Trends in Computing and Communication",
-      details:
-        "This event highlighted emerging technologies in computing and telecommunications. Topics included 5G deployment, blockchain applications, quantum computing fundamentals, and the evolution of cybersecurity measures.",
-      date: "October 12th, 2021",
-    },
-    {
-      title: "International Symposium on Women in Data Science (WiDS)",
-      details:
-        "Part of the global WiDS initiative, this symposium featured inspiring talks from women leaders in data science, practical workshops, and networking sessions to promote diversity and mentorship in tech.",
-      date: "March 8th, 2022",
-    },
-    {
-      title: "TechXplore: Student Innovation Showcase",
-      details:
-        "TechXplore was a student-led event celebrating innovation in software and hardware projects. Final year students presented prototypes and demos, with mentorship from faculty and industry experts.",
-      date: "May 3rd, 2022",
-    },
-    {
-      title: "Global AI Ethics and Governance Forum",
-      details:
-        "This conference brought international scholars together to address policy and governance challenges in artificial intelligence. The event included expert panels, regulatory framework discussions, and cross-cultural AI ethics dialogues.",
-      date: "December 5th - 6th, 2022",
-    },
-  ];
-
+const Conferences = ({conferenceData}) => {
+ 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-indigo-50/30 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
+        <motion.div
           className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-indigo-200/40 to-purple-200/40 rounded-full blur-3xl"
-          animate={{ 
+          animate={{
             scale: [1, 1.2, 1],
-            rotate: [0, 180, 360]
+            rotate: [0, 180, 360],
           }}
-          transition={{ 
+          transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-pink-200/40 to-indigo-200/40 rounded-full blur-3xl"
-          animate={{ 
+          animate={{
             scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0]
+            rotate: [360, 180, 0],
           }}
-          transition={{ 
+          transition={{
             duration: 15,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
         />
       </div>
 
-      <div className="relative px-4 py-16 md:px-8 lg:px-12 xl:px-16 max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
-          className="text-center mb-16 space-y-6"
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+        className="text-center mb-10 space-y-6 bg-gradient-to-br from-blue-600 py-25 via-indigo-600 to-purple-600 text-white"
+      >
+        <motion.h1
+          className="text-5xl md:text-6xl lg:text-7xl font-black"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <motion.div
-            className="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-sm border border-indigo-200/60 rounded-full shadow-lg"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Sparkles className="w-5 h-5 text-indigo-600" />
-            <span className="text-indigo-600 font-semibold text-sm">Academic Excellence</span>
-          </motion.div>
+          Conferences
+        </motion.h1>
 
-          <motion.h1 
-            className="text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-indigo-800 to-purple-800"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Conferences
-          </motion.h1>
-          
-          <motion.p
-            className="text-xl md:text-2xl font-light text-gray-600 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <span className="font-semibold text-indigo-700">USICT</span> • Fostering Innovation Through Knowledge Exchange
-          </motion.p>
+        <motion.p
+          className="text-xl md:text-2xl font-light max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <span className="font-semibold">USICT</span> • Fostering Innovation
+          Through Knowledge Exchange
+        </motion.p>
 
-          <motion.div 
-            className="w-32 h-1 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-full mx-auto"
-            initial={{ width: 0 }}
-            animate={{ width: 128 }}
-            transition={{ duration: 1, delay: 0.6 }}
-          />
-        </motion.div>
-
+         
+      </motion.div>
+      <div className="relative px-4 py-16 md:px-8 lg:px-12 xl:px-16 mx-25 ">
         {/* Conference Grid */}
         <motion.div
           className="grid lg:grid-cols-2 gap-8 lg:gap-12"
@@ -292,14 +242,14 @@ const Conferences = () => {
         >
           <motion.div
             className="inline-block w-2 h-2 bg-indigo-600 rounded-full"
-            animate={{ 
+            animate={{
               scale: [1, 1.5, 1],
-              opacity: [0.5, 1, 0.5]
+              opacity: [0.5, 1, 0.5],
             }}
-            transition={{ 
+            transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           />
         </motion.div>
@@ -307,5 +257,50 @@ const Conferences = () => {
     </div>
   );
 };
+ const conferenceData = [
+    {
+      title:
+        "1st International Conference on Artificial Intelligence and Sustainable Computing for Smart Cities (AIS2C2: 2021)",
+      details:
+        "This conference brought together researchers and industry professionals to discuss cutting-edge developments in AI and sustainable urban infrastructure. It featured keynote speeches, paper presentations, and panel discussions on smart city frameworks, IoT, green computing, and ethical AI deployment.",
+      date: "March 22nd - 23rd, 2021",
+    },
+    {
+      title:
+        "Two-Day Online International Conference on Rebuilding Bharat with Artificial Intelligence",
+      details:
+        "Focused on harnessing AI for nation-building post-pandemic, this event included sessions on AI in healthcare, agriculture, education, and governance. Participants shared case studies and innovations with potential to transform India's development landscape.",
+      date: "July 15th - 16th, 2021",
+    },
+    {
+      title:
+        "National Conference on Emerging Trends in Computing and Communication",
+      details:
+        "This event highlighted emerging technologies in computing and telecommunications. Topics included 5G deployment, blockchain applications, quantum computing fundamentals, and the evolution of cybersecurity measures.",
+      date: "October 12th, 2021",
+    },
+    {
+      title: "International Symposium on Women in Data Science (WiDS)",
+      details:
+        "Part of the global WiDS initiative, this symposium featured inspiring talks from women leaders in data science, practical workshops, and networking sessions to promote diversity and mentorship in tech.",
+      date: "March 8th, 2022",
+    },
+    {
+      title: "TechXplore: Student Innovation Showcase",
+      details:
+        "TechXplore was a student-led event celebrating innovation in software and hardware projects. Final year students presented prototypes and demos, with mentorship from faculty and industry experts.",
+      date: "May 3rd, 2022",
+    },
+    {
+      title: "Global AI Ethics and Governance Forum",
+      details:
+        "This conference brought international scholars together to address policy and governance challenges in artificial intelligence. The event included expert panels, regulatory framework discussions, and cross-cultural AI ethics dialogues.",
+      date: "December 5th - 6th, 2022",
+    },
+  ];
 
-export default Conferences;
+ const App = () => {
+  return <Conferences conferenceData={conferenceData} />;
+};
+
+export default App;

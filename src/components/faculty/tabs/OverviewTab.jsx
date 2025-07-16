@@ -1,29 +1,32 @@
-
-
-import {useState} from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-
-// ✅ Basic enhanced Card components — fully local!
-const Card = ({ children, className = '' }) => (
-  <div className={`rounded-2xl border border-gray-200 border-solid bg-white p-6 ${className}`}>
-    {children}
-  </div>
-);
-
-const CardHeader = ({ children }) => (
-  <div className="mb-4">{children}</div>
-);
-
-const CardTitle = ({ children, className = '' }) => (
-  <h2 className={`text-xl font-bold ${className}`}>{children}</h2>
-);
-
-const CardContent = ({ children }) => (
-  <div>{children}</div>
-);
+import { useState } from "react";
+import { ChevronDown, ChevronUp, Info } from "lucide-react";
+ export const Card = ({ className = "", children, ...props }) => (
+   <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm${className}`} {...props}>
+     {children}
+   </div>
+ );
+ 
+ export const CardHeader = ({ className = "", children, ...props }) => (
+   <div className={`px-6 pt-6 pb-2  `} {...props}>
+     {children}
+   </div>
+ );
+ 
+ export const CardTitle = ({ className = "", children, ...props }) => (
+   <h2 className={`font-bold ${className}`} {...props}>
+     {children}
+   </h2>
+ );
+ 
+ export const CardContent = ({ className = "", children, ...props }) => (
+   <div className={`px-6 py-4 ${className}`} {...props}>
+     {children}
+   </div>
+ );
+ 
 
 // ✅ Local Button fallback if you don't have a Button component
-const Button = ({ children, onClick, className = '' }) => (
+const Button = ({ children, onClick, className = "" }) => (
   <button
     onClick={onClick}
     className={`inline-flex items-center text-sm font-medium ${className}`}
@@ -31,8 +34,7 @@ const Button = ({ children, onClick, className = '' }) => (
     {children}
   </button>
 );
- const OverviewTab = ({ activeTab, profile }) => {
- 
+const OverviewTab = ({ activeTab, profile }) => {
   if (!profile) {
     return (
       <div className="text-center text-gray-600 py-12">
@@ -43,25 +45,26 @@ const Button = ({ children, onClick, className = '' }) => (
 
   const [expanded, setExpanded] = useState(false);
 
-
-// ✅ Add default fallback
-const {
-  name,
-  shortBio,
-  fullBio,
-  researchAreas = [],
-  quickLinks = []
-} = profile;
-
-
+  // ✅ Add default fallback
+  const {
+    name,
+    shortBio,
+    fullBio,
+    researchAreas = [],
+    quickLinks = [],
+  } = profile;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-gray-50">
       {/* Bio Section */}
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
-          <CardTitle className="text-2xl text-gray-900">About {name}</CardTitle>
+          <CardTitle className="text-2xl text-gray-900 flex items-center">
+            <Info className="w-6 h-6 mr-2 text-blue-600" />
+            About {name}
+          </CardTitle>
         </CardHeader>
+        
         <CardContent>
           <div className="prose max-w-none">
             <p className="text-gray-700 leading-relaxed">
@@ -91,7 +94,9 @@ const {
       {/* Research Areas */}
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
-          <CardTitle className="text-xl text-gray-900">Research Areas</CardTitle>
+          <CardTitle className="text-xl text-gray-900">
+            Research Areas
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-4">
@@ -100,7 +105,9 @@ const {
                 key={index}
                 className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-100"
               >
-                <h3 className="font-semibold text-blue-900 mb-2">{area.title}</h3>
+                <h3 className="font-semibold text-blue-900 mb-2">
+                  {area.title}
+                </h3>
                 <p className="text-sm text-blue-700">{area.description}</p>
               </div>
             ))}

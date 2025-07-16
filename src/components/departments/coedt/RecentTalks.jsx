@@ -1,30 +1,19 @@
- import React from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Calendar, User, Youtube } from "lucide-react";
-import Talks from "../../../assets/Talks.png"; // Assuming you have a JSON file with talk data
-export default function RecentTalks() {
-  const talks = [
-    {
-      title: "How Drones Will Bring Big Disruptions in Industry and Jobs",
-      speaker: "Akash Sinha",
-      dateTime: "10th March 2022 · 3 PM",
-      venue: "Main Auditorium, GBU",
-      description:
-        "Mr. Aakash Sinha (Founder & CEO, Omnipresent Robot Tech) discussed how drone technology will transform industry and create new job opportunities.",
-      image: Talks,
-      youtubeLink: "https://youtu.be/B3W3wQ4ZRPQ?si=fFNMi3zv43gu1PoJ",
-    },
-    // You can add more talks here
-  ];
 
+export default function RecentTalks({
+  sectionTitle = "Recent Talks and Sessions",
+  talks = [],
+}) {
   return (
-    <section className=" bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
-      <div className="text-center  py-16">
-          <h2 className="text-4xl font-bold text-blue-800 mb-4">
-            Recent Talks and Session
-          </h2>
-          <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full" />
-        </div>
+    <section className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      <div className="text-center py-16">
+        <h2 className="text-4xl font-bold text-blue-800 mb-4">
+          {sectionTitle}
+        </h2>
+        <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full" />
+      </div>
 
       <div className="max-w-6xl mx-auto px-4 grid gap-8 md:grid-cols-2">
         {talks.map((talk, index) => (
@@ -33,7 +22,7 @@ export default function RecentTalks() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-white rounded-xl border border-gray-300 hover:shadow-lg transition overflow-hidden flex flex-col"
+            className="bg-white rounded-xl border border-gray-300 border-solid hover:shadow-lg transition overflow-hidden flex flex-col"
           >
             {/* Image */}
             <div className="w-full h-64">
@@ -41,6 +30,7 @@ export default function RecentTalks() {
                 src={talk.image}
                 alt={talk.title}
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
 

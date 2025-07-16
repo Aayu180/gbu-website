@@ -1,50 +1,25 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Eye, Download } from "lucide-react";
+import { Calendar, Eye } from "lucide-react";
 
-const EventGallery = () => {
+const EventGallery = ({
+  title = "RAEM Event Gallery",
+  subtitle = "Explore our events, workshops, and training sessions",
+  events = [],
+  categoryColors = {
+    Workshop: "bg-blue-100 text-blue-800",
+    Training: "bg-green-100 text-green-800",
+    Seminar: "bg-purple-100 text-purple-800",
+  }
+}) => {
   const [dialogImage, setDialogImage] = useState(null);
 
-  const events = [
-    {
-      id: 1,
-      title: "DMRC Visit",
-      date: "2024-09-10",
-      category: "Workshop",
-      images: [
-        {
-          url: "http://raem.gbu.ac.in/images/demo/gallery/square/IMG_20190423_134947.jpg",
-          caption: "Group Photo",
-        },
-        {
-          url: "http://raem.gbu.ac.in/images/demo/gallery/v_long/20190423_132338.jpg",
-          caption: "Discussion during visit",
-        },
-        {
-          url: "http://raem.gbu.ac.in/images/demo/gallery/long/samsung%20pics%20dec%202019%20197.jpg",
-          caption: "Hands-on demonstration",
-        },
-        {
-          url: "http://raem.gbu.ac.in/images/demo/gallery/square/nmrc1.jpg",
-          caption: "Interactive session",
-        },
-      ],
-    },
-  ];
-
-  const getCategoryColor = (category) => {
-    const colors = {
-      Workshop: "bg-blue-100 text-blue-800",
-      Training: "bg-green-100 text-green-800",
-      Seminar: "bg-purple-100 text-purple-800",
-    };
-    return colors[category] || "bg-gray-100 text-gray-800";
-  };
+  const getCategoryColor = (category) =>
+    categoryColors[category] || "bg-gray-100 text-gray-800";
 
   return (
     <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <motion.div
-        // This makes the whole section fade and slide in when visible
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
@@ -61,11 +36,9 @@ const EventGallery = () => {
         >
           <div className="text-center mb-8">
             <h2 className="text-3xl sm:text-4xl font-bold text-purple-800 mb-4">
-              RAEM Event Gallery
+              {title}
             </h2>
-            <p className="text-lg text-gray-600">
-              Explore our events, workshops, and training sessions
-            </p>
+            <p className="text-lg text-gray-600">{subtitle}</p>
             <div className="w-20 sm:w-24 h-1 bg-purple-500 mx-auto mt-2 rounded-full"></div>
           </div>
         </motion.div>
@@ -88,9 +61,9 @@ const EventGallery = () => {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
               }}
-              className="bg-white border border-gray-300 rounded-xl shadow hover:shadow-lg transition"
+              className="bg-white border border-gray-300 border-solid rounded-xl shadow hover:shadow-lg transition"
             >
-              <div className="p-6 border-b border-gray-200 flex flex-col sm:flex-row justify-between sm:items-center space-y-4 sm:space-y-0">
+              <div className="p-6 border-b border-gray-200 border-solid flex flex-col sm:flex-row justify-between sm:items-center space-y-4 sm:space-y-0">
                 <div>
                   <h3 className="font-semibold text-2xl text-gray-900">
                     {event.title}
@@ -125,7 +98,7 @@ const EventGallery = () => {
                       <img
                         src={image.url}
                         alt={image.caption}
-                        className="w-full h-32 object-cover rounded-lg border border-gray-200"
+                        className="w-full h-32 object-cover rounded-lg border border-gray-200 border-solid"
                       />
                       <motion.div
                         initial={{ opacity: 0 }}
@@ -138,14 +111,10 @@ const EventGallery = () => {
                   ))}
                 </div>
 
-                <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
+                <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200 border-solid">
                   <span className="text-sm text-gray-600">
                     {event.images.length} photos
                   </span>
-                  <button className="flex items-center gap-2 px-4 py-2 text-sm rounded border text-gray-700 bg-white hover:bg-gray-50">
-                    <Download className="h-4 w-4" />
-                    Download All
-                  </button>
                 </div>
               </div>
             </motion.div>
@@ -203,10 +172,6 @@ const EventGallery = () => {
                   <p className="text-gray-700 text-center sm:text-left">
                     {dialogImage.caption}
                   </p>
-                  <button className="flex items-center gap-2 px-4 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700 transition">
-                    <Download className="h-4 w-4" />
-                    Download
-                  </button>
                 </div>
               </div>
             </motion.div>
