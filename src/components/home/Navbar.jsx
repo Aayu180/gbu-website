@@ -85,12 +85,12 @@ const NAVIGATION_CONFIG = [
       { slug: "sports-fitness", label: "Sports" },
       { slug: "clubs-societies", label: "Clubs and Societies" },
       { slug: "meditation-center", label: "Meditation Centre" },
-      { 
-        slug: "NSS", 
+      {
+        slug: "NSS",
         label: "National Service Scheme (NSS)",
       },
-      { 
-        slug: "NCC", 
+      {
+        slug: "NCC",
         label: "National Cadet Corps (NCC)",
       },
     ],
@@ -123,6 +123,7 @@ const NAVIGATION_CONFIG = [
       { slug: "alumni-network", label: "Alumni Network" },
       { slug: "alumni-events", label: "Alumni Events" },
       { slug: "become-mentor", label: "Become a Mentor" },
+      { slug: "success-stories", label: "Success Stories" },
     ],
   },
 ];
@@ -133,7 +134,7 @@ const useScrollDetection = () => {
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
-    
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -155,7 +156,7 @@ const useDropdownMenu = () => {
     const handleClickOutside = (event) => {
       const isInsideMenu = Array.from(menuRefs.current.values())
         .some(ref => ref?.contains(event.target));
-      
+
       if (!isInsideMenu) {
         closeMenu();
       }
@@ -205,7 +206,7 @@ const useMobileMenu = () => {
 const MenuIcon = ({ icon: Icon, size = 16 }) => <Icon size={size} />;
 
 const DropdownMenuItem = ({ item, baseRoute, onClick }) => {
-  const linkProps = item.isExternal 
+  const linkProps = item.isExternal
     ? { href: item.slug, target: "_blank", rel: "noopener noreferrer" }
     : { to: `${baseRoute}/${item.slug}` };
 
@@ -261,7 +262,7 @@ const DesktopMenuItem = ({ menu, isActive, onToggle, menuRef, onMenuClose }) => 
         {menu.label}
         {isActive ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
       </button>
-      
+
       {isActive && (
         <DropdownMenu
           items={menu.items}
@@ -301,7 +302,7 @@ const MobileMenuItem = ({ menu, isExpanded, onToggle, onSubmenuToggle }) => {
         </span>
         {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
       </button>
-      
+
       {isExpanded && (
         <div className="bg-gray-50">
           {menu.items.map((item, index) => (
@@ -338,9 +339,8 @@ const Navbar = () => {
   return (
     <SearchableWrapper>
       <nav
-        className={`fixed top-9 left-0 w-full z-40 bg-white transition-all duration-300 ${
-          isScrolled ? "shadow-md" : "shadow"
-        }`}
+        className={`fixed top-9 left-0 w-full z-40 bg-white transition-all duration-300 ${isScrolled ? "shadow-md" : "shadow"
+          }`}
         role="navigation"
         aria-label="Main navigation"
       >

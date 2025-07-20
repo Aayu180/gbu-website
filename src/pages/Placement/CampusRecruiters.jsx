@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, Building, Users, Calendar, MapPin } from "lucide-react";
-
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
 const CampusRecruiters = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [hoveredCompany, setHoveredCompany] = useState(null);
@@ -148,6 +148,7 @@ const CampusRecruiters = () => {
   };
 
   return (
+    <SearchableWrapper>
     <div className="min-h-screen  pt-3 bg-gray-50">
       {/* Hero Section */}
       <section className="py-16">
@@ -214,7 +215,7 @@ const CampusRecruiters = () => {
             {getDisplayCompanies().map((company, index) => (
               <div
                 key={index}
-                className="relative group bg-white/80 backdrop-blur-sm border-0 shadow-2xl rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-105 cursor-pointer pt-3"
+                className="relative group bg-white/80 backdrop-blur-sm border-0 shadow-md rounded-lg overflow-hidden transition-all duration-300 transform hover:scale-105 cursor-pointer pt-3"
                 onMouseEnter={() => setHoveredCompany(company)}
                 onMouseLeave={() => setHoveredCompany(null)}
               >
@@ -345,6 +346,7 @@ const CampusRecruiters = () => {
         </div>
       </section>
     </div>
+     </SearchableWrapper>
   );
 };
 

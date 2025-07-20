@@ -1,28 +1,27 @@
-import React from 'react'
-import PlacementBrochure from './PlacementBrochure'
-import InternshipProgrammes from './InternshipProgrammes'
-import PlacementStatistics from './PlacementStatistics'
-import TrainingCareerServices from './TrainingCareerServices'
-import CampusRecruiters from './CampusRecruiters'
+import React from "react";
+import PlacementBrochure from "./PlacementBrochure";
+import InternshipProgrammes from "./InternshipProgrammes";
+import PlacementStatistics from "./PlacementStatistics";
+import TrainingCareerServices from "./TrainingCareerServices";
+import CampusRecruiters from "./CampusRecruiters";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
+import BannerSection from "../../components/HeroBanner";
 
 function Placement_home() {
   return (
-    <div>
-       <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6 animate-fade-in">Placement Cell</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto animate-fade-in">
-             Empowering students to excel with dynamic placement opportunities, strong industry collaborations, and a proven track record of success.
-          </p>
-        </div>
-      </section>
-      <PlacementBrochure/>
-      <InternshipProgrammes/>
-      <PlacementStatistics/>
-      <TrainingCareerServices/>
-      <CampusRecruiters/>
-    </div>
-  )
+    <SearchableWrapper>
+      <BannerSection
+        title="Placement Cell"
+        subtitle="Connecting students with opportunities."
+        bgTheme={1}
+      />
+      <PlacementBrochure />
+      <InternshipProgrammes />
+      <PlacementStatistics />
+      <TrainingCareerServices />
+      <CampusRecruiters />
+    </SearchableWrapper>
+  );
 }
 
-export default Placement_home
+export default Placement_home;

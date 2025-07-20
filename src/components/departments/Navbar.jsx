@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const handleClickOutside = (event) => {
     const isClickInsideAnyMenu = Object.values(menuRefs.current).some((ref) =>
-      ref?.contains(event.target),
+      ref?.contains(event.target)
     );
     if (!isClickInsideAnyMenu) {
       setOpenMenu(null);
@@ -46,10 +46,11 @@ const Navbar = () => {
   const routes = {
     home: "/schools/ict",
     faculty: "/schools/ict/faculty",
+
     about: {
       dean: "/schools/ict/about/dean",
       coeidrone: "/schools/ict/about/coeidrone",
-      cyber:"/schools/ict/about/cyber",
+      cyber: "/schools/ict/about/cyber",
       coeiraem: "/schools/ict/about/coeiraem",
       board: "/schools/ict/about/board",
       staff: "/schools/ict/about/staff",
@@ -61,6 +62,7 @@ const Navbar = () => {
       it: "/schools/ict/departments/it",
       ece: "/schools/ict/departments/ece",
     },
+    placement: "/schools/ict/placement",
     research: {
       profile: "/schools/ict/research/profile",
       consultancy: "/schools/ict/research/consultancy",
@@ -78,7 +80,7 @@ const Navbar = () => {
       items: [
         { label: "Dean's Message", href: routes.about.dean },
         { label: "USICT COEIDrone Technologies", href: routes.about.coeidrone },
-        {label:"USICT Cyber Security Lab",href: routes.about.cyber},
+        { label: "USICT Cyber Security Lab", href: routes.about.cyber },
         { label: "USICT COEIRAEM", href: routes.about.coeiraem },
         { label: "USICT Board of Studies", href: routes.about.board },
         { label: "USICT Staff Members", href: routes.about.staff },
@@ -273,6 +275,7 @@ const Navbar = () => {
             Faculty
           </Link>
         </motion.li>
+
         {dropdownMenus.map(({ key, label, items }) => (
           <motion.li
             key={key}
@@ -326,6 +329,14 @@ const Navbar = () => {
             </AnimatePresence>
           </motion.li>
         ))}
+        <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+          <Link
+            to={routes.placement}
+            className="hover:text-purple-700 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-purple-700 after:transition-all after:duration-300 hover:after:w-full"
+          >
+            Placement
+          </Link>
+        </motion.li>
         <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
           <Link
             to={routes.contact}

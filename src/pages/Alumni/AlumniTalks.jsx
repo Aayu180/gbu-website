@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import Navbar from '../../components/home/Navbar';
-// Minimal UI components for demo purposes, styled with Tailwind CSS
 
 export const Button = ({ children, className = '', variant, size, ...props }) => {
   let base =
@@ -82,7 +81,6 @@ export const CardContent = ({ children, className = '', ...props }) => (
 );
 
 // Tabs
-import { useState } from 'react';
 export const Tabs = ({ children, defaultValue, className = '' }) => {
   const [value, setValue] = useState(defaultValue);
   // Clone children and inject value/setValue
@@ -187,11 +185,10 @@ export const DialogTitle = ({ children, className = '', ...props }) => (
 export const DialogTrigger = ({ children, ...props }) => (
   <Fragment>{children}</Fragment>
 );
-import { toast } from '@/hooks/use-toast';
 import { Calendar, Clock, Users, Video, ExternalLink, Play, Star, MessageSquare } from 'lucide-react';
 
 // Sample talks data
-const upcomingTalks = [
+export const upcomingTalks = [
   {
     id: 1,
     title: "Breaking into Tech: A Product Manager's Journey",
@@ -224,7 +221,7 @@ const upcomingTalks = [
   }
 ];
 
-const pastTalks = [
+export const pastTalks = [
   {
     id: 3,
     title: "Entrepreneurship 101: From Idea to IPO",
@@ -272,7 +269,7 @@ const AlumniTalks = () => {
   });
   const [selectedTalk, setSelectedTalk] = useState<any>(null);
 
-  const handleRSVP = (talk: any) => {
+  const handleRSVP = (talk) => {
     setSelectedTalk(talk);
   };
 

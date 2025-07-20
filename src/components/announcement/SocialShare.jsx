@@ -1,8 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect, createContext } from "react";
 import { Share2, Facebook, Twitter, Linkedin, MessageCircle } from 'lucide-react';
-import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
-// ✅ Button component
+// ✅ Button Component
 const Button = ({ children, className = "", size = "md", variant = "default", ...props }) => {
   const sizeClasses = {
     sm: "px-3 py-1.5 text-sm",
@@ -15,7 +14,7 @@ const Button = ({ children, className = "", size = "md", variant = "default", ..
   };
   return (
     <button
-      className={`rounded transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-400 ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+      className={`rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
       {...props}
     >
       {children}
@@ -23,21 +22,21 @@ const Button = ({ children, className = "", size = "md", variant = "default", ..
   );
 };
 
-// ✅ Popover system
-const PopoverContext = React.createContext();
+// ✅ Popover System
+const PopoverContext = createContext();
 
 const Popover = ({ children }) => {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef(null);
   return (
     <PopoverContext.Provider value={{ open, setOpen, triggerRef }}>
-      <div className="relative z-[1000] inline-block">{children}</div>
+      <div className="relative  inline-block">{children}</div>
     </PopoverContext.Provider>
   );
 };
 
 const PopoverTrigger = ({ asChild, children }) => {
-  const { setOpen, triggerRef } = React.useContext(PopoverContext);
+  const { setOpen, triggerRef } = useContext(PopoverContext);
   const child = React.Children.only(children);
   const props = {
     ref: triggerRef,
@@ -52,12 +51,12 @@ const PopoverTrigger = ({ asChild, children }) => {
 };
 
 const PopoverContent = ({ children, className = "" }) => {
-  const { open, setOpen, triggerRef } = React.useContext(PopoverContext);
+  const { open, setOpen, triggerRef } = useContext(PopoverContext);
   const contentRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
-    const handleClick = (e) => {
+    const handleClickOutside = (e) => {
       if (
         contentRef.current &&
         !contentRef.current.contains(e.target) &&
@@ -67,75 +66,95 @@ const PopoverContent = ({ children, className = "" }) => {
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [open, setOpen, triggerRef]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
 
   if (!open) return null;
   return (
     <div
       ref={contentRef}
-      className={`absolute right-0 z-50 mt-2 bg-white border border-gray-200 border-solid rounded-xl shadow-xl p-4${className}`}
-      style={{ minWidth: "10rem" }}
+      className={`absolute right-0 z-[1050] mt-2 bg-white border border-gray-200 rounded-xl shadow-xl p-2 ${className}`}
     >
       {children}
     </div>
   );
 };
 
-// ✅ SocialShare with fix applied
-const SocialShare = ({ url, title, className = "" }) => {
-  const shareData = {
+// ✅ SocialShare Component
+const SocialShare = ({ url, title }) => {
+  const shareUrls = {
     whatsapp: `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
     twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
   };
 
-  const socialButtons = [
+  const icons = [
     {
       name: 'WhatsApp',
-      url: shareData.whatsapp,
-      color: 'bg-[#25D366] hover:bg-[#1DA851]',
-      icon: <MessageCircle size={16} />
+      url: shareUrls.whatsapp,
+      bg: 'bg-[#25D366]',
+      shadow: 'hover:shadow-[0_0_6px_#25D366]',
+      icon: <MessageCircle />
     },
     {
       name: 'Facebook',
-      url: shareData.facebook,
-      color: 'bg-[#1877F2] hover:bg-[#155DBF]',
-      icon: <Facebook size={16} />
+      url: shareUrls.facebook,
+      bg: 'bg-[#1877F2]',
+      shadow: 'hover:shadow-[0_0_6px_#1877F2]',
+      icon: <Facebook />
     },
     {
       name: 'Twitter',
-      url: shareData.twitter,
-      color: 'bg-[#1DA1F2] hover:bg-[#0d8ddb]',
-      icon: <Twitter size={16} />
+      url: shareUrls.twitter,
+      bg: 'bg-[#1DA1F2]',
+      shadow: 'hover:shadow-[0_0_6px_#1DA1F2]',
+      icon: <Twitter />
     },
     {
       name: 'LinkedIn',
-      url: shareData.linkedin,
-      color: 'bg-[#0A66C2] hover:bg-[#004182]',
-      icon: <Linkedin size={16} />
+      url: shareUrls.linkedin,
+      bg: 'bg-[#0A66C2]',
+      shadow: 'hover:shadow-[0_0_6px_#0A66C2]',
+      icon: <Linkedin />
     }
   ];
 
   return (
-   
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button variant="outline" size="sm">
-            <span className="flex items-center gap-2">
-              <Share2 size={16} />
-              Share
-            </span>
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent>
-          <div>Content here</div>
-        </PopoverContent>
-      </Popover>
-
-    
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm">
+          <span className="flex items-center gap-2">
+            <Share2 size={16} />
+            Share
+          </span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="flex gap-2">
+          {icons.map((item, idx) => (
+            <a
+              key={idx}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={item.name}
+              className={`
+                w-8 h-8 flex items-center justify-center rounded-full text-white 
+                transition-all duration-300 ${item.bg} ${item.shadow}
+                hover:text-black
+              `}
+            >
+              {React.cloneElement(item.icon, {
+                size: 16,
+                className: "transition-colors duration-300"
+              })}
+            </a>
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 };
 

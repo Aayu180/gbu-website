@@ -1,6 +1,5 @@
 
 import { useState } from 'react';
-import Header from '../../components/announcement/Header';
 import EventFilters from '../../components/announcement/EventFilters';
 import EventTabs from '../../components/announcement/EventTabs';
 import EnhancedPagination from '../../components/announcement/EnhancedPagination';
@@ -146,6 +145,7 @@ const mockEvents = [
 
 // Custom hook for event filtering and pagination
 import { useMemo } from 'react';
+import BannerSection from '../../components/HeroBanner';
 
 function useEventFiltering({ events, itemsPerPage }) {
   const [search, setSearch] = useState('');
@@ -239,14 +239,12 @@ const EventsPage = () => {
   return (
     <div className="min-h-screen w-full bg-gray-50">
       {/* <Header /> */}
-       <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6 animate-fade-in">Academic Events</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto animate-fade-in">
-            Discover upcoming and past academic events at GBU
-          </p>
-        </div>
-      </section>
+       
+      <BannerSection
+        title="Academic Events"
+        subtitle="Discover upcoming and past academic events at GBU"
+        bgTheme={4}
+      />
       
         
             <EventFilters

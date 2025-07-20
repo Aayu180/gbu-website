@@ -22,7 +22,7 @@ const RecruitmentSection = ({ sectionNumber, title, referenceNumber, date }) => 
           {sectionNumber} {title}
         </h3>
         <div className="bg-muted/30 rounded-lg px-4 py-2 inline-block shadow-inner">
-          <p className="text-muted-foreground text-sm font-medium">
+          <p className="text-muted-foreground text-red text-sm font-medium">
             {referenceNumber} | Dt: {date}
           </p>
         </div>

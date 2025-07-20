@@ -25,6 +25,7 @@ import NoticeDetail from "../pages/Announcements/NoticeDetail.jsx";
 import AlumniNetwork from "../pages/Alumni/AlumniNetwork.jsx";
 import EventsReunions from "../pages/Alumni/EventsReunions.jsx";
 import AlumniRegistration from "../pages/Alumni/AlumniRegistration.jsx";
+import SuccessStories from "../pages/Alumni/SuccessStories.jsx";
 
 import HostelDining from "../pages/campusLife/HostelDining.jsx";
 import HostelDetailed from "../pages/campusLife/HostelDetailed.jsx";
@@ -140,7 +141,7 @@ import LaboratoryCards from "../pages/departments/laboratries.jsx";
 // import MediaCoverage from "../pages/Announcements/MediaCoverage.jsx";
 import Placement_home from "../pages/Placement/Placement_home.jsx";
 
-
+import RecruitMain from "../pages/recruitments/RecruitMain.jsx";
 
 
 import BookingMain from "../pages/booking/BookingMain.jsx";
@@ -155,7 +156,8 @@ import Coedt from "../pages/departments/Coedt.jsx";
 import Raem from "../pages/departments/Raem.jsx";
 import CyberSecurity from "../pages/departments/CyberSecurity.jsx";
 
-import DAC from "../pages/dac/DAC.jsx";
+import DAC from "../pages/dac/DAC.jsx"; 
+import PlacementDashboard from "../pages/departments/PlacementDashboard.jsx";
 // import DACmain from "../pages/dac/DACmain.jsx";
 
 
@@ -224,7 +226,7 @@ export default function AppRouter() {
 
             {/* Faculty */}
             <Route path="faculty" element={<ICTFaculty />} />
-
+ <Route path="placement" element={<PlacementDashboard/>} />
             {/* About Section */}
             <Route
               path="about/coeidrone"
@@ -672,8 +674,8 @@ export default function AppRouter() {
           <Route path="/alumni/alumni-network" element={<AlumniNetwork />} />
           <Route path="/alumni/alumni-events" element={<EventsReunions />} />
           <Route
-            path="/alumni/alumni-achievements"
-            element={<h1>Alumni Achievements</h1>}
+            path="/alumni/success-stories"
+            element={<SuccessStories/>}
           />
           <Route
             path="/alumni/become-mentor"
@@ -742,7 +744,7 @@ export default function AppRouter() {
 
 
 
-
+        <Route path="/recruitments" element={<RecruitMain/>}/>
 
 
           <Route path="/sitemapMain" element={<SitemapMain />} />

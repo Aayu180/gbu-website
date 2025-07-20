@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
 
 const Card = ({ children, className = "" }) => (
   <div className={`rounded-xl overflow-hidden ${className}`}>{children}</div>
@@ -43,6 +44,7 @@ const Button = ({
 
 const PlacementStatistics = () => {
   return (
+    <SearchableWrapper>
     <div className="min-h-screen pt-3 bg-gradient-to-br from-gray-50 to-blue-50">
       {/* Hero Section */}
       <section className="py-16">
@@ -419,6 +421,7 @@ const PlacementStatistics = () => {
         </div>
       </section>
     </div>
+    </SearchableWrapper>
   );
 };
 
