@@ -152,8 +152,8 @@ const aboutData = {
   statistics: [
     { icon: MapPin, number: 511, numberText: "511+", title: "Acres Campus", iconColor: "#3b82f6" },
     { icon: Users, number: 6500, numberText: "6500+", title: "Students", iconColor: "#10b981" },
-    { icon: Award, number: 200, numberText: "200+", title: "Faculty Members", iconColor: "#8b5cf6" },
-    { icon: BookOpen, number: 150, numberText: "150+", title: "Programs", iconColor: "#f97316" },
+    { icon: Award, number: 200, title: "Faculty Members", iconColor: "#8b5cf6" },
+    { icon: BookOpen, number: 150, title: "Programs", iconColor: "#f97316" },
 
   ],
 

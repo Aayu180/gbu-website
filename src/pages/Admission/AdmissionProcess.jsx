@@ -1,6 +1,8 @@
 import React from 'react';
 import { FileText, Calendar, CheckCircle, Clock, Download, Users, GraduationCap, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import HeroBanner from '../../components/HeroBanner';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 const AdmissionProcess = () => {
   const processSteps = [
@@ -33,15 +35,12 @@ const AdmissionProcess = () => {
   ];
 
   return (
+    <SearchableWrapper>
     <div className="min-h-screen bg-white text-gray-900">
-      <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-20">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-5xl font-bold mb-6 animate-fade-in">Admission Process</h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto animate-fade-in">
-              Your complete guide to joining our university
-            </p>
-          </div>
-        </section>
+       
+        <HeroBanner  title="Admission Process"
+        subtitle="Your complete guide to joining our university"
+        bgTheme={1}/>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
        
 
@@ -123,6 +122,7 @@ const AdmissionProcess = () => {
         </div>
       </div>
     </div>
+    </SearchableWrapper>
   );
 };
 

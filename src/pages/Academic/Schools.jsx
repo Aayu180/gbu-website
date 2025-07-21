@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Users, BookOpen, Award, Globe } from 'lucide-react';
 
+import BannerSection from "../../components/HeroBanner.jsx";
+import StatsCard from "../../components/StatsCard.jsx";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+
 const GlobalStyles = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -61,29 +65,29 @@ const GlobalStyles = () => (
   `}</style>
 );
 
-const StatsCard = ({ icon: Icon, number, label }) => (
-  <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 text-center text-white border border-white/30">
-    <Icon className="w-8 h-8 mx-auto mb-3 text-white/90" />
-    <div className="text-3xl font-bold mb-1">{number}</div>
-    <div className="text-sm opacity-90">{label}</div>
-  </div>
-);
+// const StatsCard = ({ icon: Icon, number, label }) => (
+//   <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 text-center text-white border border-white/30">
+//     <Icon className="w-8 h-8 mx-auto mb-3 text-white/90" />
+//     <div className="text-3xl font-bold mb-1">{number}</div>
+//     <div className="text-sm opacity-90">{label}</div>
+//   </div>
+// );
 
 const SchoolCard = ({ imageUrl, label, description, path, features }) => {
   return (
-    <Link 
+    <Link
       to={path}
       className="school-card card-hover group cursor-pointer rounded-2xl overflow-hidden relative block no-underline"
     >
       {/* Image Section */}
       <div className="relative h-64 overflow-hidden">
-        <img 
-          src={imageUrl} 
+        <img
+          src={imageUrl}
           alt={label}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        
+
         {/* Floating Badge */}
         <div className="absolute top-4 right-4 glass-effect text-white px-3 py-1 rounded-full text-xs font-medium">
           Explore
@@ -95,7 +99,7 @@ const SchoolCard = ({ imageUrl, label, description, path, features }) => {
         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors">
           {label}
         </h3>
-        
+
         <p className="text-gray-600 text-sm mb-4 line-clamp-3">
           {description}
         </p>
@@ -121,10 +125,10 @@ const SchoolCard = ({ imageUrl, label, description, path, features }) => {
 
 const HoverCards = () => {
   const stats = [
-    { icon: Users, number: "15K+", label: "Students" },
-    { icon: BookOpen, number: "8", label: "Schools" },
-    { icon: Award, number: "200+", label: "Programs" },
-    { icon: Globe, number: "50+", label: "Countries" }
+    { icon: Users, numberText: "15K+", title: "Students" },
+    { icon: BookOpen, number: 8, title: "Schools" },
+    { icon: Award, numberText: "200+", title: "Programs" },
+    { icon: Globe, numberText: "50+", title: "Countries" }
   ];
 
   const schools = [
@@ -187,91 +191,64 @@ const HoverCards = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <GlobalStyles />
-      
-      {/* Hero Section */}
-      <section className="hero-gradient py-24 px-6 relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="floating-animation absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
-          <div className="floating-animation absolute bottom-20 right-10 w-48 h-48 bg-white/5 rounded-full blur-2xl" style={{animationDelay: '2s'}}></div>
-          <div className="floating-animation absolute top-1/2 left-1/3 w-24 h-24 bg-white/10 rounded-full blur-lg" style={{animationDelay: '4s'}}></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Our <span className="text-yellow-300">Schools</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light">
-              Discover excellence across 8 distinguished schools, where innovation meets tradition and knowledge transforms into wisdom
-            </p>
+    <SearchableWrapper>
+      <div className="min-h-screen bg-gray-50">
+        <GlobalStyles />
+
+        {/* Hero Section */}
+        <BannerSection
+          title="Our Schools"
+          subtitle="Discover excellence across 8 distinguished schools, where innovation meets tradition and knowledge transforms into wisdom"
+          bgTheme={1}
+        />
+
+        {/* New StatsCard */}
+        <StatsCard stats={stats} />
+
+        {/* Schools Grid Section */}
+        <section className="py-20 px-6 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Explore Our <span className="gradient-text">Academic Excellence</span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Each school represents a commitment to academic rigor, research innovation, and preparing students for tomorrow's challenges
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {schools.map((school, index) => (
+                <SchoolCard
+                  key={index}
+                  {...school}
+                />
+              ))}
+            </div>
           </div>
+        </section>
 
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-16 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 border border-purple-100 group-hover:shadow-lg transition-all duration-300">
-                  <stat.icon className="w-12 h-12 mx-auto mb-4 text-purple-600" />
-                  <div className="text-4xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Schools Grid Section */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Explore Our <span className="gradient-text">Academic Excellence</span>
+        {/* Call to Action Section */}
+        <section className="bg-gradient-to-r from-purple-600 to-blue-600 py-20 px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Ready to Begin Your Journey?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Each school represents a commitment to academic rigor, research innovation, and preparing students for tomorrow's challenges
+            <p className="text-xl text-white/90 mb-8">
+              Join thousands of students who have chosen excellence. Explore our admission process and find your perfect academic home.
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
+                Apply Now
+              </button>
+              <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors">
+                Schedule a Visit
+              </button>
+            </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {schools.map((school, index) => (
-              <SchoolCard
-                key={index}
-                {...school}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-blue-600 py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Begin Your Journey?
-          </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Join thousands of students who have chosen excellence. Explore our admission process and find your perfect academic home.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
-              Apply Now
-            </button>
-            <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors">
-              Schedule a Visit
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </SearchableWrapper>
   );
 };
 

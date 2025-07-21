@@ -13,8 +13,16 @@ import {
   CheckCircle,
   AlertCircle,
   Phone,
-  Mail
+  Mail,
+  Workflow,
+  Headphones,
+  DollarSign
 } from 'lucide-react';
+import StatsCard from '../../components/StatsCard';
+import ButtonGroup from "../../components/TabsData";
+import HeroBanner from '../../components/HeroBanner';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
+
 const Card = ({ children, className }) => (
   <div className={`rounded-lg shadow bg-white border-gray-300 ${className || ""}`}>{children}</div>
 );
@@ -271,60 +279,65 @@ const InternationalAdmissions = () => {
       hours: "Mon-Sat: 8:00 AM - 8:00 PM IST"
     }
   ];
-
+const statsData = [
+  {
+    icon: Globe,
+    numberText: "50+",
+    title: "Countries",
+    iconColor: "#2563eb",  // blue-600
+  },
+  {
+    icon: Users,
+    numberText: "2,500+",
+    title: "International Students",
+    iconColor: "#16a34a",  // green-600
+  },
+  {
+    icon: GraduationCap,
+    numberText: "100+",
+    title: "Programs Available",
+    iconColor: "#7e22ce",  // purple-600
+  },
+  {
+    icon: CheckCircle,
+    numberText: "95%",
+    title: "Visa Success Rate",
+    iconColor: "#ea580c",  // orange-600
+  },
+];const tabButtons = [
+  { id: "eligibility", label: "Eligibility", icon: <GraduationCap size={18} /> },
+  { id: "process", label: "Process", icon: <Workflow size={18} /> },
+  { id: "fees", label: "Fees", icon: <DollarSign size={18} /> },
+  { id: "support", label: "Support", icon: <Headphones size={18} /> },
+  { id: "contact", label: "Contact", icon: <Mail size={18} /> },
+];
   return (
+    <SearchableWrapper>
     <div className="min-h-screen bg-gray-50">
-
-      <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6 animate-fade-in">International Admissions</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto animate-fade-in">
-            Welcome students from around the world to join our diverse academic community
-          </p>
-        </div>
-      </section>
+<HeroBanner
+        title="International Admissions"
+        subtitle="Welcome students from around the world to join our diverse academic community"
+        bgTheme={1}
+      />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <Globe className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900">50+</h3>
-              <p className="text-gray-600">Countries</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <Users className="w-12 h-12 text-green-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900">2,500+</h3>
-              <p className="text-gray-600">International Students</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <GraduationCap className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900">100+</h3>
-              <p className="text-gray-600">Programs Available</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <CheckCircle className="w-12 h-12 text-orange-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900">95%</h3>
-              <p className="text-gray-600">Visa Success Rate</p>
-            </CardContent>
-          </Card>
-        </div>
+      <StatsCard stats={statsData} />
 
         <Tabs value={activeTab} onValueChange={setActiveTab} defaultValue="eligibility" className="w-full">
-          <TabsList className="grid w-full text-xl grid-cols-5 mb-8">
-            <TabsTrigger value="eligibility">Eligibility</TabsTrigger>
-            <TabsTrigger value="process">Process</TabsTrigger>
-            <TabsTrigger value="fees">Fees</TabsTrigger>
-            <TabsTrigger value="support">Support</TabsTrigger>
-            <TabsTrigger value="contact">Contact</TabsTrigger>
-          </TabsList>
+  
+ <ButtonGroup
+   buttons={tabButtons}
+  onClick={setActiveTab}
+  activeButton={activeTab}
+  size="lg"
+  fullWidth={true}
+  rounded="xl"
+  animated={true}
+  gap
+  className="mb-8 flex-wrap justify-center"
+/>
 
           <TabsContent value="eligibility" className="space-y-6">
             <div className="mb-6">
@@ -537,6 +550,7 @@ const InternationalAdmissions = () => {
         </Tabs>
       </div>
     </div>
+    </SearchableWrapper>
   );
 };
 

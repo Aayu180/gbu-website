@@ -10,6 +10,10 @@ import {
   BookOpen,
 } from 'lucide-react';
 
+import BannerSection from "../../components/HeroBanner.jsx";
+import StatsCard from "../../components/StatsCard.jsx";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+
 // ✅ Local icon map for dynamic matching
 const iconMap = {
   'cyber security': Shield,
@@ -47,7 +51,7 @@ const CentersOfExcellence = () => {
             alt: img.title,
           }))
         );
-        
+
         setCtaData(joinRes.data[0]);
       } catch (error) {
         console.error('Error fetching Centers of Excellence data:', error);
@@ -59,50 +63,47 @@ const CentersOfExcellence = () => {
 
   if (!heroData || !ctaData) return <div className="text-center py-10">Loading...</div>;
 
+  const stats = [
+    {
+      number: heroData.coe_count || 0,
+      title: "Centers of Excellence",
+      icon: Award,
+      iconColor: "#7c3aed", // purple-600
+    },
+    {
+      number: heroData.ResearchAndstudents || 0,
+      numberText: `${heroData.ResearchAndstudents}+`,
+      title: "Researchers & Students",
+      icon: Users,
+      iconColor: "#2563eb", // blue-600
+    },
+    {
+      number: heroData.projects_count || 0,
+      numberText: `${heroData.projects_count}+`,
+      title: "Research Projects",
+      icon: BookOpen,
+      iconColor: "#16a34a", // green-600
+    },
+    {
+      number: heroData.memberrs_count || 0,
+      title: "Faculty Members",
+      icon: Shield,
+      iconColor: "#f97316", // orange-500
+    },
+  ];
+
   return (
+    <SearchableWrapper>
     <>
       {/* Hero Section */}
-      <section
-        className="text-white py-20"
-        style={{ backgroundColor: heroData.background_color }}
-      >
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6">{heroData.title}</h1>
-          <p className="text-xl text-purple-100 max-w-3xl mx-auto">{heroData.description}</p>
-        </div>
-      </section>
+      <BannerSection
+        title={heroData.title}
+        subtitle={heroData.description}
+        bgTheme={heroData.bgTheme || 6} // fallback if not set
+      />
 
       {/* Statistics */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <StatCard
-              icon={<Award className="w-8 h-8 text-purple-600" />}
-              value={heroData.coe_count}
-              label="Centers of Excellence"
-              bg="bg-purple-100"
-            />
-            <StatCard
-              icon={<Users className="w-8 h-8 text-blue-600" />}
-              value={`${heroData.ResearchAndstudents}+`}
-              label="Researchers & Students"
-              bg="bg-blue-100"
-            />
-            <StatCard
-              icon={<BookOpen className="w-8 h-8 text-green-600" />}
-              value={`${heroData.projects_count}+`}
-              label="Research Projects"
-              bg="bg-green-100"
-            />
-            <StatCard
-              icon={<Shield className="w-8 h-8 text-orange-600" />}
-              value={heroData.memberrs_count}
-              label="Faculty Members"
-              bg="bg-orange-100"
-            />
-          </div>
-        </div>
-      </section>
+      <StatsCard stats={stats} />
 
       {/* Centers Grid */}
       <section className="py-20 bg-gray-50">
@@ -229,6 +230,7 @@ const CentersOfExcellence = () => {
         </div>
       </section>
     </>
+    </SearchableWrapper>
   );
 };
 

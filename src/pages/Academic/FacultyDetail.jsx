@@ -7,6 +7,8 @@ import FacultyTabs from '../../components/faculty/FacultyTabs';
 import TabContent from '../../components/faculty/TabContent';
 import { TrendingUp, BookOpenCheck, Presentation, FolderOpen } from 'lucide-react';
 
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+
 const FacultyDetail = () => {
   const { id } = useParams(); // 👈 get id from URL
   const [faculty, setFaculty] = useState(null);
@@ -95,11 +97,13 @@ const FacultyDetail = () => {
   ];
 
   return (
+    <SearchableWrapper>
     <SimpleLayout>
       <FacultyHeader faculty={faculty} />
       <FacultyTabs tabItems={tabItems} activeTab={activeTab} onTabChange={setActiveTab} />
       <TabContent activeTab={activeTab} profile={faculty} />
     </SimpleLayout>
+    </SearchableWrapper>
   );
 };
 

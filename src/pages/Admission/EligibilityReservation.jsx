@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-
+import HeroBanner from '../../components/HeroBanner';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
+import ButtonGroup from "../../components/TabsData";
 const EligibilityReservation = () => {
   const [activeTab, setActiveTab] = useState('eligibility');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -238,18 +240,20 @@ const EligibilityReservation = () => {
       </div>
     </div>
   );
+const tabButtons = [
+  { id: 'eligibility', label: 'Eligibility' },
+  { id: 'reservation', label: 'Reservation' },
+  { id: 'special', label: 'Special' },
+];
 
   return (
+    <SearchableWrapper>
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-
-      <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-20">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-5xl font-bold mb-6 animate-fade-in">Eligibility & Reservation</h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto animate-fade-in">
-              Complete information about admission criteria and reservation policy
-            </p>
-          </div>
-        </section>
+         <HeroBanner
+                title="Eligibility & Reservation"
+                subtitle="Complete information about admission criteria and reservation policy"
+                bgTheme={1}
+              />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
 
@@ -272,44 +276,17 @@ const EligibilityReservation = () => {
 
         {/* Tabs */}
         <div className="w-full">
-          <div className="grid grid-cols-3 mb-8 bg-white shadow-sm rounded-lg p-1">
-            <button
-              onClick={() => setActiveTab('eligibility')}
-              className={`flex items-center justify-center space-x-2 py-3 px-4 rounded-md font-medium transition-colors ${
-                activeTab === 'eligibility'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-              }`}
-            >
-              <BookOpenIcon />
-              <span className="hidden sm:inline">Eligibility Criteria</span>
-              <span className="sm:hidden">Eligibility</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('reservation')}
-              className={`flex items-center justify-center space-x-2 py-3 px-4 rounded-md font-medium transition-colors ${
-                activeTab === 'reservation'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-              }`}
-            >
-              <UsersIcon />
-              <span className="hidden sm:inline">Reservation Policy</span>
-              <span className="sm:hidden">Reservation</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('special')}
-              className={`flex items-center justify-center space-x-2 py-3 px-4 rounded-md font-medium transition-colors ${
-                activeTab === 'special'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
-              }`}
-            >
-              <AwardIcon />
-              <span className="hidden sm:inline">Special Categories</span>
-              <span className="sm:hidden">Special</span>
-            </button>
-          </div>
+          <ButtonGroup
+  buttons={tabButtons}
+  onClick={setActiveTab}
+  activeButton={activeTab}
+  size="lg"
+  fullWidth={true}
+  rounded="xl"
+  animated={true}
+  gap
+  className="mb-8 flex-wrap justify-center"
+/>
           
           {/* Tab Content */}
           {activeTab === 'eligibility' && (
@@ -376,16 +353,9 @@ const EligibilityReservation = () => {
             </div>
           )}
         </div>
-
-        {/* Footer */}
-        {/* <div className="mt-12 pt-8 border-t border-gray-200 border-solid">
-          <div className="text-center text-gray-600">
-            <p className="mb-2">For more information, contact the admissions office</p>
-            <p className="text-sm">Last updated: June 2025</p>
-          </div>
-        </div> */}
       </div>
     </div>
+    </SearchableWrapper>
   );
 };
 

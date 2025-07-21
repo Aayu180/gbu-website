@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
   GraduationCap,
   BookOpen,
@@ -14,16 +14,19 @@ import {
   Monitor,
   Heart,
   Brain,
-  Cpu
-} from 'lucide-react';
-
+  Cpu,
+} from "lucide-react";
+import HeroBanner from "../../components/HeroBanner";
+import StatsCard from '../../components/StatsCard';
+import ButtonGroup from "../../components/TabsData";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
 // Mock Navbar component
-
-
 
 // UI Components
 const Card = ({ children, className = "" }) => (
-  <div className={`bg-white rounded-lg shadow-sm border border-gray-200 border-solid${className}`}>
+  <div
+    className={`bg-white rounded-lg shadow-sm border border-gray-200 border-solid${className}`}
+  >
     {children}
   </div>
 );
@@ -41,20 +44,20 @@ const CardTitle = ({ children, className = "" }) => (
 );
 
 const CardContent = ({ children, className = "" }) => (
-  <div className={`px-6 py-4 ${className}`}>
-    {children}
-  </div>
+  <div className={`px-6 py-4 ${className}`}>{children}</div>
 );
 
 const Badge = ({ children, variant = "default", className = "" }) => {
   const variants = {
     default: "bg-blue-100 text-blue-800",
     secondary: "bg-gray-100 text-gray-800",
-    outline: "border border-gray-300 text-gray-700 bg-white"
+    outline: "border border-gray-300 text-gray-700 bg-white",
   };
 
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${variants[variant]} ${className}`}>
+    <span
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${variants[variant]} ${className}`}
+    >
       {children}
     </span>
   );
@@ -63,11 +66,13 @@ const Badge = ({ children, variant = "default", className = "" }) => {
 const Button = ({ children, size = "default", className = "" }) => {
   const sizes = {
     default: "px-4 py-2 text-sm",
-    lg: "px-6 py-3 text-base"
+    lg: "px-6 py-3 text-base",
   };
 
   return (
-    <button className={`inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${sizes[size]} ${className}`}>
+    <button
+      className={`inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${sizes[size]} ${className}`}
+    >
       {children}
     </button>
   );
@@ -78,7 +83,7 @@ const Tabs = ({ children, defaultValue, className = "" }) => {
 
   return (
     <div className={`w-full ${className}`} data-active-tab={activeTab}>
-      {React.Children.map(children, child =>
+      {React.Children.map(children, (child) =>
         React.cloneElement(child, { activeTab, setActiveTab })
       )}
     </div>
@@ -86,32 +91,40 @@ const Tabs = ({ children, defaultValue, className = "" }) => {
 };
 
 const TabsList = ({ children, className = "", activeTab, setActiveTab }) => (
-  <div className={`inline-flex h-10 items-center justify-center rounded-md bg-gray-100 p-1 text-gray-500 ${className}`}>
-    {React.Children.map(children, child =>
+  <div
+    className={`inline-flex h-10 items-center justify-center rounded-md bg-gray-100 p-1 text-gray-500 ${className}`}
+  >
+    {React.Children.map(children, (child) =>
       React.cloneElement(child, { activeTab, setActiveTab })
     )}
   </div>
 );
 
-const TabsTrigger = ({ children, value, className = "", activeTab, setActiveTab }) => (
+const TabsTrigger = ({
+  children,
+  value,
+  className = "",
+  activeTab,
+  setActiveTab,
+}) => (
   <button
-    className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${activeTab === value
-        ? 'bg-white text-gray-900 shadow-sm'
-        : 'text-gray-600 hover:text-gray-900'
-      } ${className}`}
+    className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
+      activeTab === value
+        ? "bg-white text-gray-900 shadow-sm"
+        : "text-gray-600 hover:text-gray-900"
+    } ${className}`}
     onClick={() => setActiveTab(value)}
   >
     {children}
   </button>
 );
 
-const TabsContent = ({ children, value, className = "", activeTab }) => (
-  activeTab === value ? <div className={className}>{children}</div> : null
-);
+const TabsContent = ({ children, value, className = "", activeTab }) =>
+  activeTab === value ? <div className={className}>{children}</div> : null;
 
 // School Categories Data
 const schoolCategories = {
-  "Engineering": {
+  Engineering: {
     icon: Cpu,
     color: "from-blue-600 to-blue-800",
     image: "photo-1581091226825-a6a2a5aee158",
@@ -119,12 +132,22 @@ const schoolCategories = {
       Undergraduate: [
         {
           name: "Bachelor of Technology (B.Tech)",
-          specializations: ["Computer Science", "Electronics", "Mechanical", "Civil", "Chemical"],
+          specializations: [
+            "Computer Science",
+            "Electronics",
+            "Mechanical",
+            "Civil",
+            "Chemical",
+          ],
           duration: "4 years",
           seats: 240,
           eligibility: "12th with PCM, JEE Main",
-          highlights: ["Industry partnerships", "Internship guaranteed", "Placement assistance"]
-        }
+          highlights: [
+            "Industry partnerships",
+            "Internship guaranteed",
+            "Placement assistance",
+          ],
+        },
       ],
       Postgraduate: [
         {
@@ -133,8 +156,12 @@ const schoolCategories = {
           duration: "2 years",
           seats: 60,
           eligibility: "B.Tech with valid GATE score",
-          highlights: ["Research opportunities", "Industry exposure", "Advanced labs"]
-        }
+          highlights: [
+            "Research opportunities",
+            "Industry exposure",
+            "Advanced labs",
+          ],
+        },
       ],
       Doctoral: [
         {
@@ -143,10 +170,14 @@ const schoolCategories = {
           duration: "3-5 years",
           seats: 20,
           eligibility: "M.Tech/M.E with research experience",
-          highlights: ["Research fellowship", "Publication support", "Conference funding"]
-        }
-      ]
-    }
+          highlights: [
+            "Research fellowship",
+            "Publication support",
+            "Conference funding",
+          ],
+        },
+      ],
+    },
   },
   "Information Technology": {
     icon: Monitor,
@@ -156,12 +187,20 @@ const schoolCategories = {
       Undergraduate: [
         {
           name: "Bachelor of Computer Applications (BCA)",
-          specializations: ["Software Development", "Web Technologies", "Mobile Apps"],
+          specializations: [
+            "Software Development",
+            "Web Technologies",
+            "Mobile Apps",
+          ],
           duration: "3 years",
           seats: 120,
           eligibility: "12th with Mathematics",
-          highlights: ["Industry projects", "Internship program", "Skill certification"]
-        }
+          highlights: [
+            "Industry projects",
+            "Internship program",
+            "Skill certification",
+          ],
+        },
       ],
       Postgraduate: [
         {
@@ -170,13 +209,17 @@ const schoolCategories = {
           duration: "2 years",
           seats: 60,
           eligibility: "Bachelor's with Mathematics/Statistics",
-          highlights: ["Industry mentorship", "Live projects", "Placement support"]
-        }
+          highlights: [
+            "Industry mentorship",
+            "Live projects",
+            "Placement support",
+          ],
+        },
       ],
-      Doctoral: []
-    }
+      Doctoral: [],
+    },
   },
-  "Management": {
+  Management: {
     icon: Briefcase,
     color: "from-purple-600 to-indigo-600",
     image: "photo-1507003211169-0a1dd7228f2d",
@@ -188,18 +231,32 @@ const schoolCategories = {
           duration: "3 years",
           seats: 100,
           eligibility: "12th from any stream",
-          highlights: ["Industry internships", "Case study method", "Leadership development"]
-        }
+          highlights: [
+            "Industry internships",
+            "Case study method",
+            "Leadership development",
+          ],
+        },
       ],
       Postgraduate: [
         {
           name: "Master of Business Administration (MBA)",
-          specializations: ["Finance", "Marketing", "HR", "Operations", "International Business"],
+          specializations: [
+            "Finance",
+            "Marketing",
+            "HR",
+            "Operations",
+            "International Business",
+          ],
           duration: "2 years",
           seats: 120,
           eligibility: "Bachelor's degree with entrance exam",
-          highlights: ["Industry visits", "Global exposure", "100% placement record"]
-        }
+          highlights: [
+            "Industry visits",
+            "Global exposure",
+            "100% placement record",
+          ],
+        },
       ],
       Doctoral: [
         {
@@ -208,12 +265,16 @@ const schoolCategories = {
           duration: "3-5 years",
           seats: 15,
           eligibility: "MBA/M.Com with research aptitude",
-          highlights: ["Research grants", "International conferences", "Publication support"]
-        }
-      ]
-    }
+          highlights: [
+            "Research grants",
+            "International conferences",
+            "Publication support",
+          ],
+        },
+      ],
+    },
   },
-  "Biotechnology": {
+  Biotechnology: {
     icon: Microscope,
     color: "from-emerald-600 to-green-700",
     image: "photo-1582719471384-894fbb16e074",
@@ -221,27 +282,43 @@ const schoolCategories = {
       Undergraduate: [
         {
           name: "Bachelor of Science in Biotechnology",
-          specializations: ["Medical Biotech", "Agricultural Biotech", "Industrial Biotech"],
+          specializations: [
+            "Medical Biotech",
+            "Agricultural Biotech",
+            "Industrial Biotech",
+          ],
           duration: "3 years",
           seats: 60,
           eligibility: "12th with PCB",
-          highlights: ["Advanced laboratories", "Research projects", "Industry collaboration"]
-        }
+          highlights: [
+            "Advanced laboratories",
+            "Research projects",
+            "Industry collaboration",
+          ],
+        },
       ],
       Postgraduate: [
         {
           name: "Master of Science in Biotechnology",
-          specializations: ["Molecular Biology", "Bioinformatics", "Pharmacology"],
+          specializations: [
+            "Molecular Biology",
+            "Bioinformatics",
+            "Pharmacology",
+          ],
           duration: "2 years",
           seats: 30,
           eligibility: "B.Sc in Life Sciences",
-          highlights: ["Research opportunities", "Industry internships", "Publication support"]
-        }
+          highlights: [
+            "Research opportunities",
+            "Industry internships",
+            "Publication support",
+          ],
+        },
       ],
-      Doctoral: []
-    }
+      Doctoral: [],
+    },
   },
-  "Law": {
+  Law: {
     icon: Gavel,
     color: "from-red-600 to-red-800",
     image: "photo-1589829545856-d10d557cf95f",
@@ -249,12 +326,20 @@ const schoolCategories = {
       Undergraduate: [
         {
           name: "Bachelor of Laws (LLB)",
-          specializations: ["Corporate Law", "Criminal Law", "Constitutional Law"],
+          specializations: [
+            "Corporate Law",
+            "Criminal Law",
+            "Constitutional Law",
+          ],
           duration: "3 years",
           seats: 80,
           eligibility: "Bachelor's degree in any discipline",
-          highlights: ["Moot court competitions", "Legal aid clinic", "Internship program"]
-        }
+          highlights: [
+            "Moot court competitions",
+            "Legal aid clinic",
+            "Internship program",
+          ],
+        },
       ],
       Postgraduate: [
         {
@@ -263,13 +348,17 @@ const schoolCategories = {
           duration: "1 year",
           seats: 40,
           eligibility: "LLB degree",
-          highlights: ["Specialized curriculum", "Research opportunities", "Bar preparation"]
-        }
+          highlights: [
+            "Specialized curriculum",
+            "Research opportunities",
+            "Bar preparation",
+          ],
+        },
       ],
-      Doctoral: []
-    }
+      Doctoral: [],
+    },
   },
-  "Humanities": {
+  Humanities: {
     icon: Heart,
     color: "from-pink-600 to-rose-600",
     image: "photo-1481627834876-b7833e8f5570",
@@ -281,8 +370,12 @@ const schoolCategories = {
           duration: "3 years",
           seats: 100,
           eligibility: "12th from any stream",
-          highlights: ["Research projects", "Cultural activities", "Skill development"]
-        }
+          highlights: [
+            "Research projects",
+            "Cultural activities",
+            "Skill development",
+          ],
+        },
       ],
       Postgraduate: [
         {
@@ -291,11 +384,15 @@ const schoolCategories = {
           duration: "2 years",
           seats: 50,
           eligibility: "Bachelor's in relevant field",
-          highlights: ["Research methodology", "Thesis writing", "Academic excellence"]
-        }
+          highlights: [
+            "Research methodology",
+            "Thesis writing",
+            "Academic excellence",
+          ],
+        },
       ],
-      Doctoral: []
-    }
+      Doctoral: [],
+    },
   },
   "Buddhist Studies": {
     icon: Brain,
@@ -305,16 +402,24 @@ const schoolCategories = {
       Undergraduate: [
         {
           name: "Bachelor in Buddhist Studies",
-          specializations: ["Buddhist Philosophy", "Meditation Studies", "Buddhist Literature"],
+          specializations: [
+            "Buddhist Philosophy",
+            "Meditation Studies",
+            "Buddhist Literature",
+          ],
           duration: "3 years",
           seats: 40,
           eligibility: "12th from any stream",
-          highlights: ["Meditation practice", "Philosophy seminars", "Cultural studies"]
-        }
+          highlights: [
+            "Meditation practice",
+            "Philosophy seminars",
+            "Cultural studies",
+          ],
+        },
       ],
       Postgraduate: [],
-      Doctoral: []
-    }
+      Doctoral: [],
+    },
   },
   "Vocational Training": {
     icon: Building,
@@ -324,20 +429,62 @@ const schoolCategories = {
       Undergraduate: [
         {
           name: "Diploma in Various Trades",
-          specializations: ["Electrical", "Mechanical", "Electronics", "Computer Applications"],
+          specializations: [
+            "Electrical",
+            "Mechanical",
+            "Electronics",
+            "Computer Applications",
+          ],
           duration: "1-2 years",
           seats: 200,
           eligibility: "10th/12th as per course",
-          highlights: ["Hands-on training", "Industry certification", "Job placement"]
-        }
+          highlights: [
+            "Hands-on training",
+            "Industry certification",
+            "Job placement",
+          ],
+        },
       ],
       Postgraduate: [],
-      Doctoral: []
-    }
-  }
+      Doctoral: [],
+    },
+  },
 };
-
+const educationStatsData = [
+  {
+    icon: GraduationCap,
+    numberText: "8",
+    title: "Schools",
+    iconColor: "#2563eb", // blue-600
+  },
+  {
+    icon: BookOpen,
+    numberText: "50+",
+    title: "Programs",
+    iconColor: "#16a34a", // green-600
+  },
+  {
+    icon: Award,
+    numberText: "1000+",
+    title: "Total Seats",
+    iconColor: "#9333ea", // purple-600
+  },
+  {
+    icon: Globe,
+    numberText: "95%",
+    title: "Placement Rate",
+    iconColor: "#f97316", // orange-600
+  },
+];
 const CoursesOffered = () => {
+  const [activeSchool, setActiveSchool] = useState("Engineering");
+
+  const schoolButtons = Object.keys(schoolCategories).map((school) => ({
+    id: school,
+    label: school.split(" ")[0],
+    tooltip: school,
+  }));
+
   const CourseCard = ({ course }) => (
     <Card className="h-full hover:shadow-lg transition-shadow">
       <CardHeader>
@@ -391,130 +538,107 @@ const CoursesOffered = () => {
     </Card>
   );
 
-  const ProgramSection = ({ programs, schoolName, schoolData }) => (
-    <div className="space-y-8">
-      {/* School Header */}
-      <div className="relative rounded-lg overflow-hidden">
-        <img
-          src={`https://images.unsplash.com/${schoolData.image}?auto=format&fit=crop&w=1200&h=300`}
-          alt={schoolName}
-          className="w-full h-48 object-cover"
-        />
-        <div className={`absolute inset-0 bg-gradient-to-r ${schoolData.color} opacity-80`}></div>
-        <div className="absolute inset-0 flex items-center justify-center text-white">
-          <div className="text-center">
-            <schoolData.icon className="w-16 h-16 mx-auto mb-4" />
-            <h2 className="text-3xl font-bold">{schoolName}</h2>
+  const ProgramSection = ({ programs, schoolName, schoolData }) => {
+    const [activeProgram, setActiveProgram] = useState("Undergraduate");
+
+    const programButtons = [
+      { id: "Undergraduate", label: "UG", tooltip: "Undergraduate Programs" },
+      { id: "Postgraduate", label: "PG", tooltip: "Postgraduate Programs" },
+      { id: "Doctoral", label: "Doctoral", tooltip: "Doctoral Programs" },
+    ];
+
+    return (
+      <div className="space-y-8">
+        {/* School Banner */}
+        <div className="relative rounded-lg overflow-hidden">
+          <img
+            src={`https://images.unsplash.com/${schoolData.image}?auto=format&fit=crop&w=1200&h=300`}
+            alt={schoolName}
+            className="w-full h-48 object-cover"
+          />
+          <div className={`absolute inset-0 bg-gradient-to-r ${schoolData.color} opacity-80`} />
+          <div className="absolute inset-0 flex items-center justify-center text-white">
+            <div className="text-center">
+              <schoolData.icon className="w-16 h-16 mx-auto mb-4" />
+              <h2 className="text-3xl font-bold">{schoolName}</h2>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Program Level Tabs */}
-      <Tabs defaultValue="Undergraduate" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-6">
-          <TabsTrigger value="Undergraduate">Undergraduate</TabsTrigger>
-          <TabsTrigger value="Postgraduate">Postgraduate</TabsTrigger>
-          <TabsTrigger value="Doctoral">Doctoral</TabsTrigger>
-        </TabsList>
+        {/* UG/PG/Doctoral ButtonGroup */}
+        <ButtonGroup
+          buttons={programButtons}
+          onClick={setActiveProgram}
+          activeButton={activeProgram}
+          size="md"
+          fullWidth={true}
+          rounded="xl"
+          animated={true}
+          gap
+          className="flex-wrap justify-center"
+        />
 
+        {/* Program Level Content */}
         {Object.entries(programs).map(([level, courses]) => (
-          <TabsContent key={level} value={level} className="space-y-6">
-            {courses.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {courses.map((course, index) => (
-                  <CourseCard key={index} course={course} />
-                ))}
-              </div>
-            ) : (
-              <Card className="p-8 text-center">
-                <CardContent>
-                  <div className="text-gray-500">
-                    <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg">No {level} programs available in this school</p>
-                    <p className="text-sm mt-2">Please check other program levels or contact admissions</p>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-          </TabsContent>
+          activeProgram === level && (
+            <div key={level} className="space-y-6">
+              {courses.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {courses.map((course, index) => (
+                    <CourseCard key={index} course={course} />
+                  ))}
+                </div>
+              ) : (
+                <Card className="p-8 text-center">
+                  <CardContent>
+                    <div className="text-gray-500">
+                      <BookOpen className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                      <p className="text-lg">No {level} programs available in this school</p>
+                      <p className="text-sm mt-2">Please check other program levels or contact admissions</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          )
         ))}
-      </Tabs>
-    </div>
-  );
+      </div>
+    );
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <section className="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6 animate-fade-in">Courses Offered</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto animate-fade-in">
-            Explore our diverse academic programs across multiple schools and degree levels
-          </p>
-        </div>
-      </section>
+    <SearchableWrapper>
+    <div className="min-h-screen bg-gray-50 pb-10">
+      <HeroBanner
+        title="Courses Offered"
+        subtitle="Explore our diverse academic programs across multiple schools and degree levels"
+        bgTheme={5}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  mb-8">
+        <StatsCard stats={educationStatsData} />
 
+        {/* School Tabs */}
+        <ButtonGroup
+          buttons={schoolButtons}
+          onClick={setActiveSchool}
+          activeButton={activeSchool}
+          size="lg"
+          fullWidth={true}
+          rounded="2xl"
+          animated={true}
+          className="mb-8 flex-wrap justify-center"
+        />
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <GraduationCap className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900">8</h3>
-              <p className="text-gray-600">Schools</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <BookOpen className="w-12 h-12 text-green-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900">50+</h3>
-              <p className="text-gray-600">Programs</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <Award className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900">1000+</h3>
-              <p className="text-gray-600">Total Seats</p>
-            </CardContent>
-          </Card>
-          <Card className="text-center">
-            <CardContent className="p-6">
-              <Globe className="w-12 h-12 text-orange-600 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900">95%</h3>
-              <p className="text-gray-600">Placement Rate</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Schools Tabs */}
-        <Tabs defaultValue="Engineering" className="w-full mb-5">
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 mb-8">
-            {Object.keys(schoolCategories).map((school) => (
-              <TabsTrigger key={school} value={school} className="text-xs lg:text-sm">
-                {school.split(' ')[0]}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          {Object.entries(schoolCategories).map(([schoolName, schoolData]) => (
-            <TabsContent key={schoolName} value={schoolName} className="space-y-6">
-              <ProgramSection programs={schoolData.programs} schoolName={schoolName} schoolData={schoolData} />
-            </TabsContent>
-          ))}
-        </Tabs>
-
-        
-        {/* <div className="mt-12 text-center bg-gradient-to-r from-blue-600 to-green-600 text-white p-8 rounded-lg">
-          <h2 className="text-2xl font-bold mb-4">Ready to Apply?</h2>
-          <p className="text-lg mb-6">Join thousands of students who have started their journey with us</p>
-          <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-            Apply Now
-          </Button>
-        </div> */}
+        {/* Program Tabs + Content */}
+        <ProgramSection
+          programs={schoolCategories[activeSchool].programs}
+          schoolName={activeSchool}
+          schoolData={schoolCategories[activeSchool]}
+        />
       </div>
     </div>
+    </SearchableWrapper>
   );
 };
 

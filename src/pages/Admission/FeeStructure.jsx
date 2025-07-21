@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Download,
   CreditCard,
@@ -7,65 +7,88 @@ import {
   Award,
   Sparkles,
   GraduationCap,
-  ChevronRight
-} from 'lucide-react';
-
+  ChevronRight,
+  DollarSign
+} from "lucide-react";
+import HeroBanner from '../../components/HeroBanner';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
+import ButtonGroup from "../../components/TabsData";
 /* ---------------- Reusable UI Components ---------------- */
 
-const Card = ({ children, className = '', ...props }) => (
+const Card = ({ children, className = "", ...props }) => (
   <div
     className={`group relative rounded-3xl overflow-hidden bg-white/80 backdrop-blur-sm border border-white/20 border-solid shadow-lg hover:shadow-2xl transition-all duration-700 hover:-translate-y-1${className}`}
     {...props}
   >
     <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-    <div className="relative z-10">
-      {children}
-    </div>
+    <div className="relative z-10">{children}</div>
   </div>
 );
 
-const CardHeader = ({ children, className = '' }) => (
-  <div className={`px-8 py-6 bg-gradient-to-r from-slate-50/50 via-white/50 to-slate-50/50 backdrop-blur-sm border-b border-slate-100/50 border-solid${className}`}>
+const CardHeader = ({ children, className = "" }) => (
+  <div
+    className={`px-8 py-6 bg-gradient-to-r from-slate-50/50 via-white/50 to-slate-50/50 backdrop-blur-sm border-b border-slate-100/50 border-solid${className}`}
+  >
     {children}
   </div>
 );
 
-const CardTitle = ({ children, className = '' }) => (
-  <h3 className={`text-xl font-bold text-slate-800 tracking-tight ${className}`}>{children}</h3>
+const CardTitle = ({ children, className = "" }) => (
+  <h3
+    className={`text-xl font-bold text-slate-800 tracking-tight ${className}`}
+  >
+    {children}
+  </h3>
 );
 
-const CardContent = ({ children, className = '' }) => (
+const CardContent = ({ children, className = "" }) => (
   <div className={`px-8 py-6 ${className}`}>{children}</div>
 );
 
-const Badge = ({ children, className = '', variant = 'default' }) => {
+const Badge = ({ children, className = "", variant = "default" }) => {
   const variants = {
-    default: 'bg-gradient-to-r from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-500/25',
-    outline: 'border-2 border-violet-200 text-violet-700 bg-violet-50/50',
-    success: 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/25'
+    default:
+      "bg-gradient-to-r from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-500/25",
+    outline: "border-2 border-violet-200 text-violet-700 bg-violet-50/50",
+    success:
+      "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/25",
   };
 
   return (
-    <span className={`inline-flex items-center text-sm font-semibold rounded-full px-4 py-2 transition-all duration-300 ${variants[variant]} ${className}`}>
+    <span
+      className={`inline-flex items-center text-sm font-semibold rounded-full px-4 py-2 transition-all duration-300 ${variants[variant]} ${className}`}
+    >
       {children}
     </span>
   );
 };
 
-const Button = ({ children, className = '', variant = 'primary', size = 'default', ...props }) => {
-  const base = 'inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95';
+const Button = ({
+  children,
+  className = "",
+  variant = "primary",
+  size = "default",
+  ...props
+}) => {
+  const base =
+    "inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95";
   const variants = {
-    primary: 'bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white shadow-lg shadow-violet-500/25 hover:shadow-xl hover:shadow-violet-500/40',
-    outline: 'border-2 border-violet-200 text-violet-700 bg-white/50 hover:bg-violet-50 hover:border-violet-300',
-    ghost: 'text-slate-600 hover:text-violet-600 hover:bg-violet-50/50'
+    primary:
+      "bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white shadow-lg shadow-violet-500/25 hover:shadow-xl hover:shadow-violet-500/40",
+    outline:
+      "border-2 border-violet-200 text-violet-700 bg-white/50 hover:bg-violet-50 hover:border-violet-300",
+    ghost: "text-slate-600 hover:text-violet-600 hover:bg-violet-50/50",
   };
   const sizes = {
-    default: 'px-6 py-3 text-sm',
-    sm: 'px-4 py-2 text-xs',
-    lg: 'px-8 py-4 text-base'
+    default: "px-6 py-3 text-sm",
+    sm: "px-4 py-2 text-xs",
+    lg: "px-8 py-4 text-base",
   };
   return (
-    <button className={`${base} ${variants[variant]} ${sizes[size]} ${className}`} {...props}>
+    <button
+      className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
+      {...props}
+    >
       {children}
     </button>
   );
@@ -73,10 +96,11 @@ const Button = ({ children, className = '', variant = 'primary', size = 'default
 
 const TabButton = ({ children, isActive, onClick }) => (
   <button
-    className={`relative px-8 py-3 text-sm font-semibold rounded-sm transition-all duration-500 transform hover:scale-105 ${isActive
-        ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-sm shadow-black'
-        : 'text-slate-600 hover:text-violet-600 hover:bg-violet-50/50'
-      }`}
+    className={`relative px-8 py-3 text-sm font-semibold rounded-sm transition-all duration-500 transform hover:scale-105 ${
+      isActive
+        ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-sm shadow-black"
+        : "text-slate-600 hover:text-violet-600 hover:bg-violet-50/50"
+    }`}
     onClick={onClick}
   >
     {isActive && (
@@ -96,10 +120,10 @@ const ugFees = [
       tuition: "₹80,000",
       hostel: "₹24,000",
       mess: "₹12,000",
-      other: "₹4,000"
+      other: "₹4,000",
     },
     scholarships: "Merit-based scholarships available",
-    popular: true
+    popular: true,
   },
   {
     course: "B.Sc",
@@ -109,9 +133,9 @@ const ugFees = [
       tuition: "₹45,000",
       hostel: "₹24,000",
       mess: "₹12,000",
-      other: "₹4,000"
+      other: "₹4,000",
     },
-    scholarships: "Need-based scholarships available"
+    scholarships: "Need-based scholarships available",
   },
   {
     course: "B.Com",
@@ -121,9 +145,9 @@ const ugFees = [
       tuition: "₹35,000",
       hostel: "₹24,000",
       mess: "₹12,000",
-      other: "₹4,000"
+      other: "₹4,000",
     },
-    scholarships: "Merit & need-based scholarships"
+    scholarships: "Merit & need-based scholarships",
   },
   {
     course: "B.A",
@@ -133,10 +157,10 @@ const ugFees = [
       tuition: "₹25,000",
       hostel: "₹24,000",
       mess: "₹12,000",
-      other: "₹4,000"
+      other: "₹4,000",
     },
-    scholarships: "Government scholarships available"
-  }
+    scholarships: "Government scholarships available",
+  },
 ];
 
 const pgFees = [
@@ -148,10 +172,10 @@ const pgFees = [
       tuition: "₹1,20,000",
       hostel: "₹24,000",
       mess: "₹12,000",
-      other: "₹4,000"
+      other: "₹4,000",
     },
     scholarships: "Research assistantships available",
-    popular: true
+    popular: true,
   },
   {
     course: "M.Sc",
@@ -161,9 +185,9 @@ const pgFees = [
       tuition: "₹60,000",
       hostel: "₹24,000",
       mess: "₹12,000",
-      other: "₹4,000"
+      other: "₹4,000",
     },
-    scholarships: "Merit-based scholarships"
+    scholarships: "Merit-based scholarships",
   },
   {
     course: "MBA",
@@ -173,10 +197,10 @@ const pgFees = [
       tuition: "₹2,50,000",
       hostel: "₹30,000",
       mess: "₹15,000",
-      other: "₹5,000"
+      other: "₹5,000",
     },
-    scholarships: "Industry-sponsored scholarships"
-  }
+    scholarships: "Industry-sponsored scholarships",
+  },
 ];
 
 const paymentOptions = [
@@ -185,22 +209,22 @@ const paymentOptions = [
     description: "Cards, UPI, Net Banking",
     charges: "Instant & Secure",
     icon: CreditCard,
-    color: "from-blue-500 to-cyan-500"
+    color: "from-blue-500 to-cyan-500",
   },
   {
     method: "Bank Transfer",
     description: "Direct transfer to university",
     charges: "No additional charges",
     icon: CreditCard,
-    color: "from-emerald-500 to-teal-500"
+    color: "from-emerald-500 to-teal-500",
   },
   {
     method: "Demand Draft",
     description: "Traditional payment method",
     charges: "Bank charges apply",
     icon: FileText,
-    color: "from-violet-500 to-purple-500"
-  }
+    color: "from-violet-500 to-purple-500",
+  },
 ];
 
 const scholarships = [
@@ -209,29 +233,29 @@ const scholarships = [
     eligibility: "Top 10% academic performers",
     amount: "₹50,000 - ₹1,00,000",
     duration: "Full program duration",
-    icon: "🏆"
+    icon: "🏆",
   },
   {
     name: "Financial Aid Program",
     eligibility: "Family income < ₹2 lakhs",
     amount: "Up to 50% fee waiver",
     duration: "Renewable annually",
-    icon: "🤝"
+    icon: "🤝",
   },
   {
     name: "Sports Excellence Grant",
     eligibility: "State/National achievements",
     amount: "₹25,000 - ₹75,000",
     duration: "Performance based",
-    icon: "🏅"
+    icon: "🏅",
   },
   {
     name: "Research Fellowship",
     eligibility: "PG/PhD research students",
     amount: "₹15,000 - ₹25,000/month",
     duration: "Project timeline",
-    icon: "🔬"
-  }
+    icon: "🔬",
+  },
 ];
 
 const prospectusLinks = [
@@ -240,29 +264,29 @@ const prospectusLinks = [
     description: "Comprehensive admission guide with detailed information",
     size: "2.5 MB",
     pages: "48 pages",
-    gradient: "from-violet-500 to-purple-600"
+    gradient: "from-violet-500 to-purple-600",
   },
   {
     title: "Fee Structure Guide",
     description: "Detailed breakdown and payment schedules",
     size: "1.2 MB",
     pages: "12 pages",
-    gradient: "from-blue-500 to-cyan-600"
+    gradient: "from-blue-500 to-cyan-600",
   },
   {
     title: "Scholarship Handbook",
     description: "Complete scholarship information and applications",
     size: "800 KB",
     pages: "8 pages",
-    gradient: "from-emerald-500 to-teal-600"
+    gradient: "from-emerald-500 to-teal-600",
   },
   {
     title: "Campus Life Guide",
     description: "Hostel facilities, amenities, and campus culture",
     size: "1.5 MB",
     pages: "16 pages",
-    gradient: "from-pink-500 to-rose-600"
-  }
+    gradient: "from-pink-500 to-rose-600",
+  },
 ];
 
 /* ---------------- Enhanced Components ---------------- */
@@ -286,9 +310,7 @@ const FeeCard = ({ course, index }) => (
           </div>
           <CardTitle className="text-2xl">{course.course}</CardTitle>
         </div>
-        <Badge className="text-lg font-bold">
-          {course.totalFee}
-        </Badge>
+        <Badge className="text-lg font-bold">{course.totalFee}</Badge>
       </div>
     </CardHeader>
 
@@ -307,7 +329,10 @@ const FeeCard = ({ course, index }) => (
       <div className="space-y-3">
         <p className="font-semibold text-slate-700 mb-3">Fee Breakdown</p>
         {Object.entries(course.breakdown).map(([key, value], i) => (
-          <div key={key} className="flex justify-between items-center py-2 px-4 rounded-xl bg-slate-50/50 hover:bg-slate-100/50 transition-colors duration-300">
+          <div
+            key={key}
+            className="flex justify-between items-center py-2 px-4 rounded-xl bg-slate-50/50 hover:bg-slate-100/50 transition-colors duration-300"
+          >
             <span className="capitalize text-slate-600">{key}</span>
             <span className="font-semibold text-slate-800">{value}</span>
           </div>
@@ -329,7 +354,9 @@ const FeeCard = ({ course, index }) => (
 const PaymentCard = ({ option, index }) => (
   <Card className="text-center group">
     <CardContent className="py-8 text-center">
-      <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${option.color} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+      <div
+        className={`w-16 h-16 rounded-full bg-gradient-to-r ${option.color} flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}
+      >
         <option.icon className="w-8 h-8 text-white" />
       </div>
       <h4 className="text-xl font-bold text-slate-800 mb-3">{option.method}</h4>
@@ -382,11 +409,15 @@ const ProspectusCard = ({ document, index }) => (
   <Card className="group py-10">
     <CardContent className="p-8 ">
       <div className="flex items-start space-x-4">
-        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${document.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+        <div
+          className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${document.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+        >
           <FileText className="w-7 h-7 text-white" />
         </div>
         <div className="flex-1">
-          <h4 className="text-xl font-bold text-slate-800 mb-2">{document.title}</h4>
+          <h4 className="text-xl font-bold text-slate-800 mb-2">
+            {document.title}
+          </h4>
           <p className="text-slate-600 mb-4">{document.description}</p>
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4 text-md text-slate-800">
@@ -408,42 +439,27 @@ const ProspectusCard = ({ document, index }) => (
 /* ---------------- Main Component ---------------- */
 
 const FeeStructure = () => {
-  const [activeTab, setActiveTab] = useState('fees');
-
-  const tabs = [
-    { id: 'fees', label: 'Fee Structure', icon: CreditCard },
-    { id: 'payment', label: 'Payment Options', icon: CreditCard },
-    { id: 'scholarships', label: 'Scholarships', icon: Award },
-    { id: 'prospectus', label: 'Prospectus', icon: FileText }
-  ];
+ 
+const [activeTab, setActiveTab] = useState("fees");
+ 
+const feeTabs = [
+  { id: "fees", label: "Fee Structure", icon: <CreditCard size={18} />, tooltip: "View fee structure" },
+  { id: "payment", label: "Payment Options", icon: <DollarSign size={18} />, tooltip: "Available payment methods" },
+  { id: "scholarship", label: "Scholarships", icon: <Award size={18} />, tooltip: "Scholarship opportunities" },
+  { id: "prospectus", label: "Prospectus", icon: <FileText size={18} />, tooltip: "Download prospectus" },
+];
 
   return (
+     <SearchableWrapper>
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50">
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700"></div>
-        <div className="absolute inset-0 bg-[url(]'data:image/svg+xml,%3Csvg%20width=\'60\'%20height=\'60\'%20viewBox=\'0%200%2060%2060\'%20xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg%20fill=\'none\'%20fill-rule=\'evenodd\'%3E%3Cg%20fill=\'%23ffffff\'%20fill-opacity=\'0.05\'%3E%3Cpath%20d=\'M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
 
-        <div className="relative z-10 container mx-auto px-6 py-20 text-center text-white">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-3 bg-gradient-to-r from-white via-violet-100 to-white bg-clip-text text-transparent">
-              Fee Structure
-            </h1>
-            <p className="text-lg md:text-xl text-violet-100 mb-8 leading-relaxed">
-              Transparent pricing, flexible payments, and comprehensive support
-              for your academic journey
-            </p>
-            {/* <div className="flex justify-center">
-              <Button size="lg" className="bg-white/10 backdrop-blur-sm border border-white/20 border-solid hover:bg-white/20">
-                <Sparkles className="w-5 h-5 mr-2" />
-                Explore Programs
-                <ChevronRight className="w-5 h-5 ml-2" />
-              </Button>
-            </div> */}
-          </div>
-        </div>
-      </section>
-
+      <HeroBanner
+        title=" Fee Structure"
+        subtitle="Transparent pricing, flexible payments, and comprehensive support
+              for your academic journey"
+        bgTheme={5}
+      />
       <div className="max-w-7xl mx-auto px-6 py-10">
         {/* Important Notice */}
         <div className="mb-12">
@@ -457,8 +473,7 @@ const FeeStructure = () => {
                   Important Fee Guidelines
                 </h3>
                 <div className="grid md:grid-cols-2 gap-3 text-sm text-amber-700">
-                  
-                    <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
                     <span>Fees subject to university revision</span>
                   </div>
@@ -466,7 +481,7 @@ const FeeStructure = () => {
                     <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
                     <span>Late payment fee: ₹100 per day</span>
                   </div>
-                    
+
                   <div className="flex items-center space-x-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
                     <span>Installment facility available</span>
@@ -482,21 +497,18 @@ const FeeStructure = () => {
         </div>
 
         {/* Tabs */}
-        <div className="mb-20">
-          <div className="flex flex-wrap justify-center gap-4">
-            {tabs.map((tab) => (
-              <TabButton
-                key={tab.id}
-                isActive={activeTab === tab.id}
-                onClick={() => setActiveTab(tab.id)} 
-              >
-                <tab.icon className="w-4 h-4 mr-2 inline" />
-                {tab.label}
-              </TabButton>
-            ))}
-          </div>
-        </div>
-
+  
+ <ButtonGroup
+   buttons={feeTabs}
+  onClick={setActiveTab}
+  activeButton={activeTab}
+  size="lg"
+  fullWidth={true}
+  rounded="xl"
+  animated={true}
+  gap
+  className="mb-8 flex-wrap justify-center"
+/>
         {/* Tab Content */}
         <div className="space-y-12 mb-20">
           {activeTab === "fees" && (
@@ -553,7 +565,7 @@ const FeeStructure = () => {
             </div>
           )}
 
-          {activeTab === "scholarships" && (
+          {activeTab === "scholarship" && (
             <div>
               <div className="text-center mb-12">
                 <h3 className="text-3xl font-bold text-slate-800 mb-4">
@@ -593,8 +605,8 @@ const FeeStructure = () => {
         </div>
       </div>
     </div>
+    </SearchableWrapper>
   );
-
 };
 
 export default FeeStructure;

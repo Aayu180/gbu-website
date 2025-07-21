@@ -103,7 +103,7 @@ const SelectItem = ({ value, children, onValueChange }) => (
   </div>
 );
 
-// Main EnhancedPagination
+// Main Pagination - FIXED VERSION
 const EnhancedPagination = ({
   currentPage,
   totalPages,
@@ -113,118 +113,143 @@ const EnhancedPagination = ({
   onItemsPerPageChange,
   showItemsPerPage = true,
 }) => {
+  // Add validation to prevent errors
+  const validCurrentPage = Math.max(1, Math.min(currentPage || 1, totalPages || 1));
+  const validTotalPages = Math.max(1, totalPages || 1);
+  
   const getVisiblePages = () => {
     const pages = [];
     const maxVisible = 5;
 
-    if (totalPages <= maxVisible) {
-      for (let i = 1; i <= totalPages; i++) {
+    if (validTotalPages <= maxVisible) {
+      for (let i = 1; i <= validTotalPages; i++) {
         pages.push(i);
       }
     } else {
-      if (currentPage <= 3) {
+      if (validCurrentPage <= 3) {
         for (let i = 1; i <= 4; i++) {
           pages.push(i);
         }
         pages.push("...");
-        pages.push(totalPages);
-      } else if (currentPage >= totalPages - 2) {
+        pages.push(validTotalPages);
+      } else if (validCurrentPage >= validTotalPages - 2) {
         pages.push(1);
         pages.push("...");
-        for (let i = totalPages - 3; i <= totalPages; i++) {
+        for (let i = validTotalPages - 3; i <= validTotalPages; i++) {
           pages.push(i);
         }
       } else {
         pages.push(1);
         pages.push("...");
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+        for (let i = validCurrentPage - 1; i <= validCurrentPage + 1; i++) {
           pages.push(i);
         }
         pages.push("...");
-        pages.push(totalPages);
+        pages.push(validTotalPages);
       }
     }
 
     return pages;
   };
 
-  const startItem = (currentPage - 1) * itemsPerPage + 1;
-  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+  const startItem = (validCurrentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(validCurrentPage * itemsPerPage, totalItems);
+
+  // Fixed navigation handlers
+  const handlePreviousPage = () => {
+    if (validCurrentPage > 1) {
+      onPageChange(validCurrentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (validCurrentPage < validTotalPages) {
+      onPageChange(validCurrentPage + 1);
+    }
+  };
+
+  const handlePageClick = (page) => {
+    if (page >= 1 && page <= validTotalPages && page !== validCurrentPage) {
+      onPageChange(page);
+    }
+  };
 
   return (
     <SearchableWrapper>
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mt-10 bg-gradient-to-r from-white via-blue-50 to-white p-6 rounded-2xl shadow-lg border border-blue-100">
-      {/* Items Info */}
-      <div className="text-sm text-gray-700 font-medium bg-blue-50 px-4 py-2 rounded-lg shadow-inner">
-        Showing <span className="font-bold text-blue-600">{startItem}-{endItem}</span> of{" "}
-        <span className="font-bold text-blue-600">{totalItems}</span> results
-      </div>
-
-      {/* Pagination Controls */}
-      <div className="flex items-center gap-2">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="!rounded-full"
-        >
-          <ChevronLeft size={18} className="mr-1" />
-          <span className="hidden sm:inline">Previous</span>
-        </Button>
-
-        <div className="flex items-center gap-1">
-          {getVisiblePages().map((page, index) => (
-            <div key={index}>
-              {page === "..." ? (
-                <div className="px-2 py-2 flex items-center justify-center">
-                  <MoreHorizontal size={18} className="text-gray-400" />
-                </div>
-              ) : (
-                <Button
-                  variant={currentPage === page ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => onPageChange(Number(page))}
-                  className={`min-w-[40px] ${currentPage === page ? "shadow-lg scale-105" : ""}`}
-                  active={currentPage === page}
-                >
-                  {page}
-                </Button>
-              )}
-            </div>
-          ))}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 mt-10 bg-gradient-to-r from-white via-blue-50 to-white p-6 rounded-2xl shadow-lg border border-blue-100">
+        {/* Items Info */}
+        <div className="text-sm text-gray-700 font-medium bg-blue-50 px-4 py-2 rounded-lg shadow-inner">
+          Showing <span className="font-bold text-blue-600">{startItem}-{endItem}</span> of{" "}
+          <span className="font-bold text-blue-600">{totalItems}</span> results
         </div>
 
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="!rounded-full"
-        >
-          <span className="hidden sm:inline">Next</span>
-          <ChevronRight size={18} className="ml-1" />
-        </Button>
-      </div>
-
-      {/* Items per page selector */}
-      {showItemsPerPage && onItemsPerPageChange && (
+        {/* Pagination Controls */}
         <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-600 font-medium">Show:</span>
-          <Select
-            value={itemsPerPage.toString()}
-            onValueChange={(value) => onItemsPerPageChange(parseInt(value))}
+          {/* FIXED Previous Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handlePreviousPage}
+            disabled={validCurrentPage <= 1 || validTotalPages <= 1}
+            className="!rounded-full"
           >
-            <SelectTrigger className="w-24" />
-            <SelectContent>
-              <SelectItem value="10">10 / page</SelectItem>
-              <SelectItem value="20">20 / page</SelectItem>
-              <SelectItem value="50">50 / page</SelectItem>
-            </SelectContent>
-          </Select>
+            <ChevronLeft size={18} className="mr-1" />
+            <span className="hidden sm:inline">Previous</span>
+          </Button>
+
+          <div className="flex items-center gap-1">
+            {getVisiblePages().map((page, index) => (
+              <div key={index}>
+                {page === "..." ? (
+                  <div className="px-2 py-2 flex items-center justify-center">
+                    <MoreHorizontal size={18} className="text-gray-400" />
+                  </div>
+                ) : (
+                  <Button
+                    variant={validCurrentPage === page ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handlePageClick(Number(page))}
+                    className={`min-w-[40px] ${validCurrentPage === page ? "shadow-lg scale-105" : ""}`}
+                    active={validCurrentPage === page}
+                  >
+                    {page}
+                  </Button>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* FIXED Next Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleNextPage}
+            disabled={validCurrentPage >= validTotalPages || validTotalPages <= 1}
+            className="!rounded-full"
+          >
+            <span className="hidden sm:inline">Next</span>
+            <ChevronRight size={18} className="ml-1" />
+          </Button>
         </div>
-      )}
-    </div>
+
+        {/* Items per page selector */}
+        {showItemsPerPage && onItemsPerPageChange && (
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600 font-medium">Show:</span>
+            <Select
+              value={itemsPerPage.toString()}
+              onValueChange={(value) => onItemsPerPageChange(parseInt(value))}
+            >
+              <SelectTrigger className="w-24" />
+              <SelectContent>
+                <SelectItem value="9">9 / page</SelectItem>
+                <SelectItem value="18">18 / page</SelectItem>
+                <SelectItem value="27">27 / page</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+      </div>
     </SearchableWrapper>
   );
 };
