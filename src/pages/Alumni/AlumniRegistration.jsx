@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 import { Upload, CheckCircle , AlertCircle} from 'lucide-react';
-import { toast } from '../../hooks/use-toast';
+import { toast } from '../../hooks/use-toast'; 
+import BannerSection from '../../components/HeroBanner';
 
 // Minimal versions of reused UI components
 const Button = ({ children, ...props }) => (
@@ -179,14 +180,11 @@ const AlumniRegistration = () => {
 
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Join Our Alumni Network</h1>
-          <p className="text-xl md:text-2xl mb-8">
-            Connect with fellow graduates and help current students succeed in their careers.
-          </p>
-        </div>
-      </div>
+<BannerSection
+  title="Join Our Alumni Network"
+  subtitle="Connect with fellow graduates and help current students succeed in their careers."
+  bgTheme={2} // or any other theme number from 1 to 10
+/>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Card className="shadow-lg border border-gray-200">

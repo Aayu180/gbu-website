@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-
+import HeroBanner from "../../components/HeroBanner";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
 const Card = ({ children, className = "", ...props }) => (
   <div
     className={`rounded-xl bg-white shadow-md hover:shadow-xl transition-transform duration-300 cursor-pointer overflow-hidden ${className}`}
@@ -66,18 +67,14 @@ const HostelDetailed = () => {
   };
 
   return (
+    <SearchableWrapper>
     <section className="pb-20 bg-gray-50">
-      <div className="text-center mb-10 bg-blue-200 flex flex-col justify-center h-[30vh] px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-2 md:mb-3">
-          Hostel Life
-        </h2>
-        <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto">
-          Explore our hostels with modern amenities and comfortable living.
-        </p>
-      </div>
-
+      <HeroBanner
+        title="Hostel Life"
+        subtitle="Explore our hostels with modern amenities and comfortable living."
+        bgTheme={1}
+      />
       <div className="container mx-auto px-4 md:px-8 lg:px-30">
-
         {/* === Category Cards === */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-8">
           {categories.map((cat) => (
@@ -87,10 +84,11 @@ const HostelDetailed = () => {
               onClick={() => handleCategoryClick(cat)}
             >
               <Card
-                className={`${currentCategory?.id === cat.id
-                  ? "ring-4 ring-blue-500 ring-opacity-50"
-                  : ""
-                  }`}
+                className={`${
+                  currentCategory?.id === cat.id
+                    ? "ring-4 ring-blue-500 ring-opacity-50"
+                    : ""
+                }`}
               >
                 <div className="relative aspect-[4/3]">
                   <img
@@ -260,6 +258,7 @@ const HostelDetailed = () => {
         )}
       </div>
     </section>
+    </SearchableWrapper>
   );
 };
 

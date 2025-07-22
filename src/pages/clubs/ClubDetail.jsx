@@ -11,6 +11,7 @@ import ClubJoin from '../../components/clubs/ClubJoin';
 import ClubReports from '../../components/clubs/ClubReports';
 import ClubNavigation from '../../components/clubs/ClubNavigation';
 import { clubsData } from '../../components/clubs/data/clubsData';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 const ClubDetail = () => {
   const { clubId } = useParams();
@@ -30,6 +31,7 @@ const ClubDetail = () => {
   }
 
   return (
+    <SearchableWrapper>
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <ClubHero club={club} />
@@ -74,6 +76,7 @@ const ClubDetail = () => {
         </div>
       </div>
     </div>
+    </SearchableWrapper>
   );
 };
 

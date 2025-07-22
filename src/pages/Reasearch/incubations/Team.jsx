@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 import { Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
 
+import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
+
 const teamMembers = [
   {
     name: 'Dr. Shakti Sahi',
@@ -75,6 +77,7 @@ export default function TeamSlider() {
   };
 
   return (
+    <SearchableWrapper>
     <section className="py-10 bg-gray-50 overflow-hidden">
       <h1 className="text-3xl font-bold text-center mb-8">MEET OUR TEAM</h1>
 
@@ -131,5 +134,6 @@ export default function TeamSlider() {
         </motion.div>
       </div>
     </section>
+    </SearchableWrapper>
   );
 }

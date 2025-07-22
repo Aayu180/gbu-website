@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useToast } from '../../hooks/use-toast';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 // ====== UI COMPONENTS (INLINE) ======
 
 // Button
@@ -160,6 +161,7 @@ const handleClubClick = (club) => {
   };
 
   return (
+    <SearchableWrapper>
     <section id="clubs-events" className="py-20 bg-white">
   <div className="container mx-auto px-4">
     <div className="text-center mb-16">
@@ -312,6 +314,7 @@ const handleClubClick = (club) => {
         </Dialog>
       </div>
     </section>
+    </SearchableWrapper>
   );
 };
 

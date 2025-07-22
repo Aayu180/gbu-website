@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
 
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+
 function SitemapAbout() {
   return (
+    <SearchableWrapper>
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Breadcrumb */}
@@ -33,6 +36,7 @@ function SitemapAbout() {
         </div>
       </div>
     </div>
+    </SearchableWrapper>
   );
 }
 

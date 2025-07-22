@@ -3,6 +3,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
+
 const successStories = [
   {
     name: "AgroSense Technologies",
@@ -60,6 +62,7 @@ const SuccessStoriesCarousel = () => {
   };
 
   return (
+    <SearchableWrapper>
     <div className="bg-gray-100 rounded-lg p-8 mb-16">
       <Slider {...settings}>
         {successStories.map((story, idx) => (
@@ -93,6 +96,7 @@ const SuccessStoriesCarousel = () => {
         ))}
       </Slider>
     </div>
+    </SearchableWrapper>
   );
 };
 

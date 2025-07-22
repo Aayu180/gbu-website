@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { Eye, Download, Filter } from "lucide-react";
+import { Eye, Download, Filter, BookOpen, FileSignature, Star, Award, Search, ChevronLeft, ChevronRight, Calendar, User, Building } from "lucide-react";
+
+import StatsCard from "../../../components/StatsCard.jsx";
+import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.jsx";
+import ButtonGroup from '../../../components/TabsData.jsx';
 
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("publications");
@@ -10,7 +14,7 @@ const Publications = () => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
 
   const schools = [
     "Biotechnology",
@@ -239,355 +243,382 @@ const Publications = () => {
       ? Math.ceil(filteredPublications.length / itemsPerPage)
       : Math.ceil(filteredPatents.length / itemsPerPage);
 
+  const tabButtons = [
+    { id: "publications", label: "Research Publications" },
+    { id: "patents", label: "Patents" },
+  ];
+
+  const statsData = [
+    {
+      icon: BookOpen,
+      number: 500,
+      title: "Total Publications",
+      iconColor: "#2563eb", // blue-600
+    },
+    {
+      icon: FileSignature,
+      number: 75,
+      title: "Patents Filed",
+      iconColor: "#16a34a", // green-600
+    },
+    {
+      icon: Star,
+      number: 25.5,
+      title: "Avg Impact Factor",
+      iconColor: "#0891b2", // cyan-600
+    },
+    {
+      icon: Award,
+      number: 1000,
+      numberText: "1000+", // If you want the + sign instead of counting up
+      title: "Total Citations",
+      iconColor: "#facc15", // yellow-500
+    },
+  ];
+
+  const cardStyle = {
+    transform: 'translateY(0px)',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+  };
+
+  const cardHoverStyle = {
+    transform: 'translateY(-4px)',
+    boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)'
+  };
+
   return (
-    <div className="container mx-auto px-10 py-20">
-      <div className="bg-gradient-to-b from-white to-blue-50">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-blue-700 mb-2">
-            Publications & Patents
-          </h1>
-          <p className="text-gray-600 text-lg">
-            Explore our research and innovation footprint
-          </p>
-        </div>
-        <div className="py-12 bg-gradient-to-b from-white to-blue-50">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-              {/* Total Publications */}
-              <div className="bg-white shadow-sm hover:shadow-md transition rounded-lg p-6 text-center border-t-4 border-blue-600">
-                <div className="text-4xl font-bold text-blue-700">500+</div>
-                <p className="text-gray-600 mt-2 text-sm font-medium tracking-wide">
-                  Total Publications
-                </p>
-              </div>
-
-              {/* Patent Filed */}
-              <div className="bg-white shadow-sm hover:shadow-md transition rounded-lg p-6 text-center border-t-4 border-green-600">
-                <div className="text-4xl font-bold text-green-700">75+</div>
-                <p className="text-gray-600 mt-2 text-sm font-medium tracking-wide">
-                  Patents Filed
-                </p>
-              </div>
-
-              {/* Avg Impact Factor */}
-              <div className="bg-white shadow-sm hover:shadow-md transition rounded-lg p-6 text-center border-t-4 border-cyan-600">
-                <div className="text-4xl font-bold text-cyan-700">25.5</div>
-                <p className="text-gray-600 mt-2 text-sm font-medium tracking-wide">
-                  Avg Impact Factor
-                </p>
-              </div>
-
-              {/* Total Citations */}
-              <div className="bg-white shadow-sm hover:shadow-md transition rounded-lg p-6 text-center border-t-4 border-yellow-500">
-                <div className="text-4xl font-bold text-yellow-600">1000+</div>
-                <p className="text-gray-600 mt-2 text-sm font-medium tracking-wide">
-                  Total Citations
-                </p>
-              </div>
-            </div>
+    <SearchableWrapper>
+      <div>
+        <div className="bg-gradient-to-b from-white to-blue-50">
+          <div className="text-center mt-15">
+            <h1 className="text-4xl font-semibold text-black/70">
+              Publications & Patents
+            </h1>
           </div>
-        </div>
-      </div>
 
-      {/* Tabs */}
-      <div className="grid grid-cols-2 gap-0 mb-8 border border-gray-300 rounded-md overflow-hidden">
-        {/* Research Publications Tab */}
-        <button
-          onClick={() => {
-            setActiveTab("publications");
-            setCurrentPage(1);
-          }}
-          className={`w-full py-3 text-sm sm:text-base font-semibold transition ${
-            activeTab === "publications"
-              ? "bg-blue-700 text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-          }`}
-        >
-          Research Publications
-        </button>
+          <StatsCard stats={statsData} />
 
-        {/* Patents Tab */}
-        <button
-          onClick={() => {
-            setActiveTab("patents");
-            setCurrentPage(1);
-          }}
-          className={`w-full py-3 text-sm sm:text-base font-semibold transition ${
-            activeTab === "patents"
-              ? "bg-blue-700 text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-          }`}
-        >
-          Patents
-        </button>
-      </div>
-
-      {/* Filters */}
-
-      <div className="flex flex-wrap gap-4 items-center justify-start">
-        {/* School Filter */}
-        <div className="w-full sm:w-auto">
-          <select
-            value={selectedSchool}
-            onChange={(e) => setSelectedSchool(e.target.value)}
-            className="w-full sm:w-48 px-4 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="">All Schools</option>
-            {schools.map((s, i) => (
-              <option key={i} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
         </div>
 
-        {activeTab === "publications" && (
-          <>
-            {/* Year Input */}
-            <div className="w-full sm:w-auto">
-              <input
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
-                placeholder="e.g. 2024"
-                className="w-full sm:w-32 px-4 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              />
+        <div className="px-30 pb-10">
+          {/* Tabs */}
+          <ButtonGroup
+            buttons={tabButtons}
+            onClick={(btnId) => {
+              setActiveTab(btnId);
+              setCurrentPage(1);
+            }}
+            activeButton={activeTab}
+            size="lg"
+            fullWidth={true}
+            rounded="lg"
+            theme="primary"
+            animated={true}
+          />
+
+          {/* Filters */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
+            <div className="flex items-center gap-2 mb-6">
+              <Filter size={20} className="text-blue-600" />
+              <h2 className="text-lg font-semibold text-gray-900">Filter Projects</h2>
             </div>
 
-            {/* Type Filter */}
-            <div className="w-full sm:w-auto">
-              <select
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full sm:w-44 px-4 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">All Types</option>
-                {types.map((t, i) => (
-                  <option key={i} value={t}>
-                    {t}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* School Filter */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">School</label>
+                <select
+                  value={selectedSchool}
+                  onChange={(e) => setSelectedSchool(e.target.value)}
+                  className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
+                >
+                  <option value="">All Schools</option>
+                  {schools.map((s, i) => (
+                    <option key={i} value={s}>{s}</option>
+                  ))}
+                </select>
+              </div>
 
-            {/* Search Input */}
-            <div className="flex-1 min-w-[200px]">
-              <input
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Title, Author, Journal..."
-                className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-          </>
-        )}
+              {/* Category Filter */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Category</label>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
+                >
+                  <option value="">All Categories</option>
+                  <option value="Climate Research">Climate Research</option>
+                  <option value="Biotechnology">Biotechnology</option>
+                  <option value="Energy Systems">Energy Systems</option>
+                </select>
+              </div>
 
-        {activeTab === "patents" && (
-          <>
-            {/* Status Filter */}
-            <div className="w-full sm:w-auto">
-              <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="w-full sm:w-44 px-4 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">All Statuses</option>
-                {statuses.map((s, i) => (
-                  <option key={i} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
-            </div>
+              {/* Status Filter */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Status</label>
+                <select
+                  value={selectedStatus}
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                  className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
+                >
+                  <option value="">All Status</option>
+                  <option value="Ongoing">Ongoing</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Final Phase">Final Phase</option>
+                </select>
+              </div>
 
-            {/* Search by Name or Title */}
-            <div className="flex-1 min-w-[200px]">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search by title/inventor"
-                className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-          </>
-        )}
-      </div>
-
-      {/* Publication Cards */}
-      {activeTab === "publications" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {currentItems.length > 0 ? (
-            currentItems.map((pub) => (
-              <div
-                key={pub.id}
-                className="relative bg-white rounded-xl shadow-md hover:shadow-lg transition p-6"
-              >
-                {/* School badge on top-right */}
-                <div className="absolute top-4 right-4 bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
-                  {pub.school}
-                </div>
-
-                {/* Title */}
-                <h3 className="text-lg font-bold text-blue-900 mb-1">
-                  {pub.title}
-                </h3>
-
-                {/* Authors */}
-                <p className="text-gray-600 text-sm mb-1">
-                  <b>Authors:</b> {pub.authors}
-                </p>
-
-                {/* Journal, Year */}
-                <p className="text-sm text-gray-700">
-                  <b>Journal:</b> {pub.journal}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <b>Year:</b> {pub.year} | <b>Type:</b> {pub.type}
-                </p>
-
-                {/* Impact/Citations */}
-                <p className="text-sm text-gray-700">
-                  <b>Impact Factor:</b> {pub.impact} | <b>Citations:</b>{" "}
-                  {pub.citations}
-                </p>
-
-                {/* IDs */}
-                <p className="text-sm text-gray-700">
-                  <b>Scopus ID:</b> {pub.scopusId} | <b>DOI:</b> {pub.doi}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <b>ISSN/ISBN:</b> {pub.issn}
-                </p>
-
-                {/* Indexing & Quartile */}
-                <p className="text-sm text-gray-700">
-                  <b>Indexing:</b> {pub.indexing} | <b>Quartile:</b>{" "}
-                  {pub.quartile}
-                </p>
-
-                {/* Actions */}
-                <div className="flex items-center gap-4 pt-4">
-                  <button className="flex items-center gap-1 text-blue-600 hover:underline text-sm">
-                    <Eye size={16} />
-                    View
-                  </button>
-                  <button className="flex items-center gap-1 text-green-600 hover:underline text-sm">
-                    <Download size={16} />
-                    Download
-                  </button>
+              {/* Search Input */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Search</label>
+                <div className="relative">
+                  <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search projects..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
+                  />
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="text-gray-500 text-center col-span-full">
-              No publications found.
             </div>
-          )}
-        </div>
-      )}
 
-      {/* Patent Cards */}
-      {activeTab === "patents" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {currentItems.length > 0 ? (
-            currentItems.map((p) => (
-              <div
-                key={p.id}
-                className="relative bg-white rounded-xl shadow-md hover:shadow-lg transition p-6"
-              >
-                {/* School Badge */}
-                <div className="absolute top-4 right-4 bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
-                  {p.school}
-                </div>
+          </div>
 
-                {/* Title */}
-                <h3 className="text-lg font-bold text-blue-800 mb-1">
-                  {p.title}
-                </h3>
-
-                {/* Inventors */}
-                <p className="text-gray-700 text-sm mb-1">
-                  <b>Inventors:</b> {p.inventors}
-                </p>
-
-                {/* Patent No and Date */}
-                <p className="text-sm text-gray-700">
-                  <b>Patent No:</b> {p.patentNo}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <b>Filing Date:</b> {p.filingDate}
-                </p>
-
-                {/* Status */}
-                <p className="text-sm text-gray-700">
-                  <b>Status:</b>{" "}
-                  <span
-                    className={`font-semibold ${
-                      p.status === "Granted"
-                        ? "text-green-600"
-                        : p.status === "Filed"
-                        ? "text-yellow-600"
-                        : p.status === "Under Review"
-                        ? "text-orange-500"
-                        : "text-blue-600"
-                    }`}
+          {/* Publication Cards */}
+          {activeTab === "publications" && (
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+              {currentItems.length > 0 ? (
+                currentItems.map((pub, index) => (
+                  <div
+                    key={pub.id}
+                    className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
+                    style={{
+                      ...cardStyle,
+                      animationDelay: `${index * 100}ms`,
+                      animationFillMode: 'both'
+                    }}
+                    onMouseEnter={(e) => {
+                      Object.assign(e.currentTarget.style, cardHoverStyle);
+                    }}
+                    onMouseLeave={(e) => {
+                      Object.assign(e.currentTarget.style, cardStyle);
+                    }}
                   >
-                    {p.status}
-                  </span>
-                </p>
+                    {/* Gradient Background Effect */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                {/* Actions */}
-                <div className="flex gap-4 pt-4">
-                  <button className="flex items-center gap-1 text-blue-600 hover:underline text-sm">
-                    <Eye size={16} />
-                    View
-                  </button>
-                  <button className="flex items-center gap-1 text-green-600 hover:underline text-sm">
-                    <Download size={16} />
-                    Download
-                  </button>
+                    {/* School Badge */}
+                    <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
+                      {pub.school}
+                    </div>
+
+                    {/* Content Container */}
+                    <div className="relative z-10">
+                      {/* Title */}
+                      <h3 className="text-lg font-bold text-gray-900 mb-4 mt-9 pr-20 leading-tight group-hover:text-blue-700 transition-colors duration-300">
+                        {pub.title}
+                      </h3>
+
+                      {/* Authors */}
+                      <div className="mb-4">
+                        <p className="text-gray-700 text-sm font-medium mb-1">Authors</p>
+                        <p className="text-gray-600 text-sm leading-relaxed">{pub.authors}</p>
+                      </div>
+
+                      {/* Journal & Year */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                          <p className="text-gray-700 text-sm font-medium mb-1">Journal</p>
+                          <p className="text-gray-600 text-sm">{pub.journal}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-700 text-sm font-medium mb-1">Year & Type</p>
+                          <p className="text-gray-600 text-sm">{pub.year} • {pub.type}</p>
+                        </div>
+                      </div>
+
+                      {/* Metrics */}
+                      <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 border border-green-100">
+                          <p className="text-green-700 text-xs font-medium mb-1">Impact Factor</p>
+                          <p className="text-green-800 text-lg font-bold">{pub.impact}</p>
+                        </div>
+                        <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-3 border border-purple-100">
+                          <p className="text-purple-700 text-xs font-medium mb-1">Citations</p>
+                          <p className="text-purple-800 text-lg font-bold">{pub.citations}</p>
+                        </div>
+                      </div>
+
+                      {/* Additional Info */}
+                      <div className="space-y-3 mb-6">
+                        <div className="flex flex-wrap gap-2 text-xs">
+                          <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded font-medium">Quartile:  {pub.quartile}</span>
+                          <span className="bg-gray-50 text-gray-700 px-2 py-1 rounded">Indexing: {pub.indexing}</span>
+                        </div>
+                        <div className="text-xs text-gray-500 space-y-1">
+                          <p><span className="font-medium">DOI:</span> {pub.doi}</p>
+                          <p><span className="font-medium">Scopus ID:</span> {pub.scopusId}</p>
+                        </div>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+                        <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
+                          <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                          View Details
+                        </button>
+                        <button className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
+                          <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                          Download
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-16">
+                  <div className="text-gray-400 text-lg mb-2">No publications found</div>
+                  <p className="text-gray-500 text-sm">Check back later for updates</p>
                 </div>
-              </div>
-            ))
-          ) : (
-            <div className="text-gray-500 text-center col-span-full">
-              No patents found.
+              )}
+            </div>
+          )}
+
+          {/* Patent Cards */}
+          {activeTab === "patents" && (
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+              {currentItems.length > 0 ? (
+                currentItems.map((patent, index) => (
+                  <div
+                    key={patent.id}
+                    className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
+                    style={{
+                      ...cardStyle,
+                      animationDelay: `${index * 100}ms`,
+                      animationFillMode: 'both'
+                    }}
+                    onMouseEnter={(e) => {
+                      Object.assign(e.currentTarget.style, cardHoverStyle);
+                    }}
+                    onMouseLeave={(e) => {
+                      Object.assign(e.currentTarget.style, cardStyle);
+                    }}
+                  >
+                    {/* Gradient Background Effect */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                    {/* School Badge */}
+                    <div className="absolute top-3 right-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
+                      {patent.school}
+                    </div>
+
+                    {/* Content Container */}
+                    <div className="relative z-10">
+                      {/* Title */}
+                      <h3 className="text-xl font-bold text-gray-900 mb-4 mt-10 pr-30 leading-tight group-hover:text-indigo-700 transition-colors duration-300">
+                        {patent.title}
+                      </h3>
+
+                      {/* Inventors */}
+                      <div className="mb-4">
+                        <p className="text-gray-700 text-sm font-medium mb-1">Inventors</p>
+                        <p className="text-gray-600 text-sm leading-relaxed">{patent.inventors}</p>
+                      </div>
+
+                      {/* Patent Details */}
+                      <div className="space-y-4 mb-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-gray-700 text-sm font-medium mb-1">Patent Number</p>
+                            <p className="text-gray-900 text-sm font-mono bg-gray-50 px-3 py-2 rounded border">{patent.patentNo}</p>
+                          </div>
+                          <div>
+                            <p className="text-gray-700 text-sm font-medium mb-1">Filing Date</p>
+                            <p className="text-gray-600 text-sm">{patent.filingDate}</p>
+                          </div>
+                        </div>
+
+                        {/* Status */}
+                        <div>
+                          <p className="text-gray-700 text-sm font-medium mb-2">Status</p>
+                          <span
+                            className={`inline-flex items-center px-3 py-2 rounded-full text-sm font-semibold shadow-sm ${patent.status === "Granted"
+                              ? "bg-green-100 text-green-800 border border-green-200"
+                              : patent.status === "Filed"
+                                ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
+                                : patent.status === "Under Review"
+                                  ? "bg-orange-100 text-orange-800 border border-orange-200"
+                                  : "bg-blue-100 text-blue-800 border border-blue-200"
+                              }`}
+                          >
+                            <div className={`w-2 h-2 rounded-full mr-2 ${patent.status === "Granted" ? "bg-green-500" :
+                              patent.status === "Filed" ? "bg-yellow-500" :
+                                patent.status === "Under Review" ? "bg-orange-500" : "bg-blue-500"
+                              }`}></div>
+                            {patent.status}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+                        <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
+                          <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                          View Details
+                        </button>
+                        <button className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
+                          <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                          Download
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-16">
+                  <div className="text-gray-400 text-lg mb-2">No patents found</div>
+                  <p className="text-gray-500 text-sm">Check back later for updates</p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-8 space-x-2">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-1 bg-gray-200 rounded"
+              >
+                Previous
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`px-3 py-1 rounded ${currentPage === i + 1 ? "bg-blue-700 text-white" : "bg-gray-200"
+                    }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 bg-gray-200 rounded"
+              >
+                Next
+              </button>
             </div>
           )}
         </div>
-      )}
+      </div>
 
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center mt-8 space-x-2">
-          <button
-            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-            disabled={currentPage === 1}
-            className="px-3 py-1 bg-gray-200 rounded"
-          >
-            Previous
-          </button>
-          {Array.from({ length: totalPages }, (_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentPage(i + 1)}
-              className={`px-3 py-1 rounded ${
-                currentPage === i + 1 ? "bg-blue-700 text-white" : "bg-gray-200"
-              }`}
-            >
-              {i + 1}
-            </button>
-          ))}
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-            disabled={currentPage === totalPages}
-            className="px-3 py-1 bg-gray-200 rounded"
-          >
-            Next
-          </button>
-        </div>
-      )}
-    </div>
+    </SearchableWrapper>
   );
 };
 

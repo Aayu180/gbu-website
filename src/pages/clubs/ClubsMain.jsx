@@ -1,9 +1,17 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Calendar, Trophy, ExternalLink } from 'lucide-react';
-import { clubsData } from '../../components/clubs/data/clubsData';
-
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  Users,
+  Calendar,
+  Trophy,
+  ExternalLink,
+  Star,
+} from "lucide-react";
+import { clubsData } from "../../components/clubs/data/clubsData";
+import HeroBanner from "../../components/HeroBanner";
+import StatsCard from "../../components/StatsCard";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
 // Card component
 const Card = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-md ${className}`}>{children}</div>
@@ -33,10 +41,8 @@ const Button = ({
     "inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
   const variants = {
     primary: "bg-blue-600 text-white hover:bg-blue-700",
-    outline:
-      "border border-gray-300 bg-white text-gray-900 hover:bg-gray-100",
-    secondary:
-      "bg-white text-blue-600 border border-blue-600 hover:bg-blue-50",
+    outline: "border border-gray-300 bg-white text-gray-900 hover:bg-gray-100",
+    secondary: "bg-white text-blue-600 border border-blue-600 hover:bg-blue-50",
   };
   const sizes = {
     md: "px-4 py-2 text-base",
@@ -62,100 +68,95 @@ const Badge = ({ children, className = "" }) => (
     {children}
   </span>
 );
-  // import { clubsData } from '../../components/clubs/data/clubsData';
+// import { clubsData } from '../../components/clubs/data/clubsData';
 
 const ClubsMain = () => {
   const getCategoryColor = (category) => {
     switch (category) {
-      case 'Technical': return 'bg-blue-500 hover:bg-blue-600';
-      case 'Cultural': return 'bg-purple-500 hover:bg-purple-600';
-      case 'Sports': return 'bg-green-500 hover:bg-green-600';
-      case 'Social': return 'bg-orange-500 hover:bg-orange-600';
-      default: return 'bg-gray-500 hover:bg-gray-600';
+      case "Technical":
+        return "bg-blue-500 hover:bg-blue-600";
+      case "Cultural":
+        return "bg-purple-500 hover:bg-purple-600";
+      case "Sports":
+        return "bg-green-500 hover:bg-green-600";
+      case "Social":
+        return "bg-orange-500 hover:bg-orange-600";
+      default:
+        return "bg-gray-500 hover:bg-gray-600";
     }
   };
-
+  const statsData = [
+    {
+      icon: Users,
+      numberText: "15+",
+      title: "Active Clubs",
+      iconColor: "#2563eb", // blue-600
+    },
+    {
+      icon: Users,
+      numberText: "500+",
+      title: "Student Members",
+      iconColor: "#9333ea", // purple-600
+    },
+    {
+      icon: Calendar,
+      numberText: "100+",
+      title: "Events This Year",
+      iconColor: "#16a34a", // green-600
+    },
+    {
+      icon: Star,
+      numberText: "25+",
+      title: "Achievements",
+      iconColor: "#f97316", // orange-600
+    },
+  ];
   return (
+    <SearchableWrapper>
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-     
-
-      {/* Hero Section */}
-      <div className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Discover Your 
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Passion</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Explore vibrant student clubs and societies at GBU. From technical innovation to cultural expression, 
-            find your community and make lasting connections.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" className="gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-              <Users className="w-5 h-5" />
-              Explore Clubs
-            </Button>
-            <Button variant="outline" size="lg" className="gap-2">
-              <Calendar className="w-5 h-5" />
-              Upcoming Events
-            </Button>
-          </div>
-        </div>
-      </div>
-
+      <HeroBanner
+        title="Explore Clubs"
+        subtitle="From tech to culture, find your community and build lasting connections."
+        bgTheme={2}
+      />
       {/* Statistics */}
-      <div className="py-16 bg-white/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-blue-600">15+</div>
-              <div className="text-gray-600">Active Clubs</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-purple-600">500+</div>
-              <div className="text-gray-600">Student Members</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-green-600">100+</div>
-              <div className="text-gray-600">Events This Year</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-orange-600">25+</div>
-              <div className="text-gray-600">Achievements</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <StatsCard stats={statsData} />
 
       {/* Featured Clubs */}
       <div className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Student Clubs & Societies</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Student Clubs & Societies
+            </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
             {clubsData.map((club) => (
-              <Card key={club.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
+              <Card
+                key={club.id}
+                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
+              >
                 <div className="relative">
-                  <img 
-                    src={club.banner} 
+                  <img
+                    src={club.banner}
                     alt={club.name}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className={`${getCategoryColor(club.category)} text-white`}>
+                    <Badge
+                      className={`${getCategoryColor(
+                        club.category
+                      )} text-white`}
+                    >
                       {club.category}
                     </Badge>
                   </div>
                   <div className="absolute top-4 right-4">
                     <div className="bg-white/90 backdrop-blur-sm rounded-full object-cover p-2">
-                      <img 
-                        src={club.logo} 
+                      <img
+                        src={club.logo}
                         alt={`${club.name} logo`}
                         className="w-8 h-8 rounded-full object-cover"
                       />
@@ -204,24 +205,23 @@ const ClubsMain = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Make Your Mark?</h2>
           <p className="text-xl mb-8 opacity-90">
-            Join a community of passionate students and start your journey of growth, learning, and leadership.
+            Join a community of passionate students and start your journey of
+            growth, learning, and leadership.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button size="lg" variant="secondary" className="gap-2">
               <Users className="w-5 h-5" />
               Find Your Club
             </Button>
-            <Button size="lg" variant="secondary"  >
+            <Button size="lg" variant="secondary">
               <ExternalLink className="w-5 h-5" />
               Contact Us
             </Button>
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-     
     </div>
+    </SearchableWrapper>
   );
 };
 

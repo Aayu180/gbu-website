@@ -1,6 +1,8 @@
 import React from 'react';
 import { Lightbulb, Search, Calendar, Users, Send, Link2 } from 'lucide-react';
 
+import SearchableWrapper from '../../../components/Searchbar/SearchableWrapper';
+
 const objectives = [
   {
     icon: <Lightbulb className="text-orange-500 w-8 h-8" />,
@@ -36,14 +38,15 @@ const objectives = [
 
 const IPRObjectives = () => {
   return (
-    <section className="container mx-auto px-10 py-10">
+    <SearchableWrapper>
+    <section className="container mx-auto px-30 pb-20 py-10">
        
        <h1 className="text-3xl font-bold text-center mb-8">Objectives of IPR Cell</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {objectives.map((obj, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow hover:shadow-lg p-6 transition-transform transform hover:scale-105 cursor-pointer"
+            className="bg-white rounded-xl shadow-xl hover:shadow-2xl p-6 transition-transform transform hover:scale-105 cursor-pointer"
           >
             <div className="flex items-center mb-4">{obj.icon}</div>
             <h3 className="text-xl font-semibold mb-2 text-gray-800">{obj.title}</h3>
@@ -52,6 +55,7 @@ const IPRObjectives = () => {
         ))}
       </div>
     </section>
+    </SearchableWrapper>
   );
 };
 

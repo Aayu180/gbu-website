@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { Play, Calendar } from 'lucide-react';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 // === Dialog Components ===
 const DialogContext = React.createContext();
@@ -140,6 +141,7 @@ const VirtualTour = () => {
   ];
 
   return (
+    <SearchableWrapper>
     <section id="campus-tour" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
@@ -266,6 +268,7 @@ const VirtualTour = () => {
         </div>
       </div>
     </section>
+    </SearchableWrapper>
   );
 };
 

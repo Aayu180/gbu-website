@@ -1,7 +1,9 @@
 import React from 'react';
 import { Download, ExternalLink } from 'lucide-react';
 
-// Refined Button component with subtle animations & accessible focus
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+
+// ✅ Refined Button — modern hover, active, focus ring
 const Button = ({
   children,
   onClick,
@@ -10,11 +12,12 @@ const Button = ({
   className = '',
 }) => {
   const base =
-    'inline-flex items-center justify-center rounded-md font-medium transition-all focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 active:scale-[0.97]';
+    'inline-flex items-center justify-center rounded-md font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 active:scale-[0.97] disabled:opacity-50';
   const variants = {
-    default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+    default:
+      'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm',
     outline:
-      'border border-border text-foreground hover:bg-muted hover:text-foreground',
+      'border border-gray-300 text-gray-700 hover:bg-gray-100',
   };
   const sizes = {
     sm: 'h-8 px-3 text-sm',
@@ -56,7 +59,7 @@ const TenderRow = ({ tender }) => {
   const statusBadge = () => {
     if (isPastDue(tender.closingDate)) {
       return (
-        <span className="ml-2 inline-block rounded-full bg-destructive/20 px-2 py-0.5 text-xs font-semibold text-destructive">
+        <span className="ml-2 inline-block rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-600">
           Closed
         </span>
       );
@@ -72,24 +75,25 @@ const TenderRow = ({ tender }) => {
   };
 
   return (
-    <tr className="hover:bg-muted/40 transition-colors">
-      <td className="px-6 py-4 text-sm text-muted-foreground">
+    <SearchableWrapper>
+    <tr className="group transition hover:bg-gray-50">
+      <td className="px-6 py-4 text-sm text-gray-500">
         #{String(tender.id).padStart(3, '0')}
       </td>
       <td className="px-6 py-4">
         <a
           href="#"
-          className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 hover:underline transition-colors focus:outline-none focus:ring-2 focus:ring-ring rounded-sm"
+          className="inline-flex items-center gap-1 text-sm font-medium text-indigo-600 hover:text-indigo-800 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded-sm"
         >
           {tender.title}
           <ExternalLink className="h-4 w-4" />
         </a>
       </td>
-      <td className="px-6 py-4 text-sm text-muted-foreground max-w-md">
+      <td className="px-6 py-4 text-sm text-gray-600 max-w-md">
         {tender.description}
       </td>
       <td className="px-6 py-4">
-        <span className="text-sm font-medium text-foreground">
+        <span className="text-sm font-medium text-gray-800">
           {formatDate(tender.closingDate)}
         </span>
         {statusBadge()}
@@ -106,6 +110,7 @@ const TenderRow = ({ tender }) => {
         </Button>
       </td>
     </tr>
+    </SearchableWrapper>
   );
 };
 

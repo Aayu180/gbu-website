@@ -130,7 +130,7 @@ const Carousel = ({ children, className = '' }) => (
 );
 
 const CarouselContent = ({ children }) => (
-  <div className="flex overflow-x-auto gap-4 pb-2">{children}</div>
+  <div className="flex   gap-4 pb-2">{children}</div>
 );
 
 const CarouselItem = ({ children, className = '' }) => (
@@ -143,6 +143,7 @@ const CarouselNext = () => null;
 import { Coffee } from 'lucide-react';
 
 import { useToast } from '../../hooks/use-toast';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 const Button = ({ children, className = '', variant = 'default', ...props }) => {
   const baseStyle =
@@ -162,7 +163,7 @@ const Button = ({ children, className = '', variant = 'default', ...props }) => 
 
 const Card = ({ className = "", children, ...props }) => (
   <div
-    className={`rounded-lg border bg-white text-black shadow-sm ${className}`}
+    className={`rounded-lg border-gray-300 bg-white text-black shadow-sm ${className}`}
     {...props}
   >
     {children}
@@ -250,6 +251,7 @@ const CafesFood = () => {
   };
 
   return (
+    <SearchableWrapper>
     <section id="cafes-food" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
@@ -394,6 +396,7 @@ const CafesFood = () => {
         )}
       </div>
     </section>
+    </SearchableWrapper>
   );
 };
 

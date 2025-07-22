@@ -32,18 +32,16 @@ import {
   Zap,
   Shield,
   Smile,
-
-  MessageCircle, 
+  MessageCircle,
   Send,
-   Home, 
-  Info, 
-  Settings
-} from 'lucide-react';
-import BannerSection from '../../components/HeroBanner';
+  Home,
+  Info,
+  Settings,
+} from "lucide-react";
+import BannerSection from "../../components/HeroBanner";
 import { FaUser, FaCog, FaEnvelope } from "react-icons/fa";
-import StatsCard from '../../components/StatsCard';
-import ButtonGroup from '../../components/TabsData';
-
+import StatsCard from "../../components/StatsCard";
+import ButtonGroup from "../../components/TabsData";
 
 import img1 from "../../assets/meditation/image1.png";
 import img2 from "../../assets/meditation/image2.png";
@@ -58,6 +56,7 @@ import img10 from "../../assets/meditation/image10.png";
 import img11 from "../../assets/meditation/image11.png";
 import img12 from "../../assets/meditation/image12.png";
 import ImageGallery from "./ImageGallery";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
 const images = [
   img1,
   img2,
@@ -88,13 +87,34 @@ const MeditationCenter = () => {
     videoUrl: "https://www.youtube.com/embed/8VwufJrUhic",
   };
 
-const [activeButton, setActiveButton] = useState("home");
-  
+  const [activeButton, setActiveButton] = useState("home");
+
   const navigationButtons = [
-    { id: "home", label: "Home", icon: <Home size={18} />, tooltip: "Go to home" },
-    { id: "about", label: "About", icon: <Info size={18} />, tooltip: "About us" },
-    { id: "services", label: "Services", icon: <Settings size={18} />, tooltip: "Our services", badge: "New" },
-    { id: "contact", label: "Contact", icon: <Mail size={18} />, tooltip: "Contact us" }
+    {
+      id: "home",
+      label: "Home",
+      icon: <Home size={18} />,
+      tooltip: "Go to home",
+    },
+    {
+      id: "about",
+      label: "About",
+      icon: <Info size={18} />,
+      tooltip: "About us",
+    },
+    {
+      id: "services",
+      label: "Services",
+      icon: <Settings size={18} />,
+      tooltip: "Our services",
+      badge: "New",
+    },
+    {
+      id: "contact",
+      label: "Contact",
+      icon: <Mail size={18} />,
+      tooltip: "Contact us",
+    },
   ];
   const scheduleData = [
     {
@@ -391,7 +411,6 @@ const [activeButton, setActiveButton] = useState("home");
     },
   ];
 
-
   const statsData = [
     {
       title: "Students Benefited",
@@ -417,21 +436,16 @@ const [activeButton, setActiveButton] = useState("home");
       icon: Calendar,
       iconColor: "#ef4444", // Red
     },
-
   ];
-
 
   // Effects
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-
-
   // Vision & Mission Section
   const VisionMissionSection = () => (
     <section id="about" className="py-24 bg-white">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className={`transition-all duration-1000 ease-out ${
@@ -739,37 +753,41 @@ const [activeButton, setActiveButton] = useState("home");
       >
         <div className="p-8 flex flex-col md:flex-row items-center gap-12 md:gap-16">
           {/* Faculty Details */}
+
           <div className="flex-1 text-center md:text-left">
-            <div className="mb-6 flex items-center justify-between pr-10">
+            <div className="flex-shrink-0 w-36 h-46 m-2 mr-4 relative float-left">
+               
+              {!facultyData.image ? (
+                <div className="absolute inset-0  flex items-center justify-center bg-blue-100 rounded">
+                  <User size={60} className="text-blue-600" />
+                </div>
+              ) : (
+                <img
+                  src={facultyData.image}
+                  alt={facultyData.name}
+                  className="w-36 h-46 rounded  object-cover shadow-lg border-4 border-blue-200"
+                />
+              )} 
+            </div>
+            <div className="flex-1 items-center justify-around ">
               <h3 className="text-3xl font-bold text-gray-900 mb-2">
                 {facultyData.name}
               </h3>
-              <div className="relative w-32 h-32">
-                {/* Fallback icon when image is not available */}
-                {!facultyData.image ? (
-                  <div className="absolute inset-0 flex items-center justify-center bg-blue-100 rounded-full">
-                    <User size={60} className="text-blue-600" />
-                  </div>
-                ) : (
-                  <img
-                    src={facultyData.image}
-                    alt={facultyData.name}
-                    className="w-32 h-32 rounded-full object-cover shadow-lg border-4 border-blue-200"
-                  />
-                )}
-              </div>
-            </div>
-            <p className="text-xl text-blue-600 mb-2 flex items-center justify-center md:justify-start gap-2">
-              <Award size={18} /> {facultyData.position}
-            </p>
-            <p className="text-lg text-gray-700 mb-2 flex items-center justify-center md:justify-start gap-2">
-              <BookOpen size={18} /> {facultyData.school}
-            </p>
-            <p className="text-lg text-gray-600 mb-4 flex items-center justify-center md:justify-start gap-2">
-              <Brain size={18} /> {facultyData.experience}
-            </p>
-            <p className="text-gray-700 mb-6">{facultyData.bio}</p>
 
+              <p className="text-xl text-blue-600 mb-2 flex items-center gap-2">
+                <Award size={18} /> {facultyData.position}
+              </p>
+
+              <p className="text-lg text-gray-700 mb-2 flex items-center gap-2">
+                <BookOpen size={18} /> {facultyData.school}
+              </p>
+
+              <p className="text-lg text-gray-600 mb-4 flex items-center gap-2">
+                <Brain size={18} /> {facultyData.experience}
+              </p>
+
+              <p className="text-gray-700  mb-4 flex items-center gap-2 ">{facultyData.bio}</p>
+            </div>
             {/* Achievements & Expertise */}
             <div className="bg-white rounded-2xl p-6 shadow-lg mb-6">
               <h4 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -903,16 +921,15 @@ const [activeButton, setActiveButton] = useState("home");
 
   // Main Render
   return (
+    <SearchableWrapper>
     <div className="min-h-screen bg-gray-50">
       {/* Hero Banner */}
-
 
       <BannerSection
         title="Mahatma Jyotiba Phule Dhyan Kendra"
         subtitle="A Sacred Space for Inner Peace and Mindful Living"
         bgTheme={10}
       />
-
 
       {/* Statistics Section */}
       <StatsCard stats={statsData} />
@@ -933,9 +950,9 @@ const [activeButton, setActiveButton] = useState("home");
       </section>
       {/*Image Gallery*/}
       <div className="min-h-[50vh] md:h-[780px] bg-blue-50 w-full ">
-          <h2 className=" text-center pt-10 text-4xl md:text-5xl font-bold text-gray-900 mb-12">
-            Photo Gallery
-          </h2>
+        <h2 className=" text-center pt-10 text-4xl md:text-5xl font-bold text-gray-900 mb-12">
+          Photo Gallery
+        </h2>
         <ImageGallery images={images} autoPlayInterval={4000} />
       </div>
       {/* Benefits Section */}
@@ -1180,6 +1197,7 @@ const [activeButton, setActiveButton] = useState("home");
         </div>
       </section>
     </div>
+    </SearchableWrapper>
   );
 };
 

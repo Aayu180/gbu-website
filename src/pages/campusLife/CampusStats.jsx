@@ -1,5 +1,6 @@
  import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 const CampusStats = () => {
   const [stats, setStats] = useState([]);
@@ -20,6 +21,7 @@ const CampusStats = () => {
   if (stats.length === 0) return null;
 
   return (
+    <SearchableWrapper>
     <div className="mt-16 mb-12">
       <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Campus Life Statistics</h3>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -35,6 +37,7 @@ const CampusStats = () => {
         ))}
       </div>
     </div>
+    </SearchableWrapper>
   );
 };
 

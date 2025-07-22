@@ -1,4 +1,6 @@
- import React from 'react';
+import React from 'react';
+
+import SearchableWrapper from '../../../components/Searchbar/SearchableWrapper';
 
 const iprCourses = [
   {
@@ -41,29 +43,31 @@ const iprCourses = [
 
 export default function IprCourses() {
   return (
-    <section className="py-16 bg-gradient-to-r   to-white">
-      <div className="container mx-auto px-4">
-       
- <h1 className="text-3xl font-bold text-center mb-8">IPR Courses Offered</h1>
-        <div className="flex flex-wrap justify-center gap-6">
-          {iprCourses.map((course, index) => (
-            <div key={index} className="w-full md:w-[30%] bg-white shadow-md rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-t-4 border-blue-500">
-              <h2 className="text-lg font-semibold text-purple-700 mb-2">{course.school}</h2>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">{course.courseName}</h3>
-              <p className="text-sm text-gray-600 mb-2">{course.credit} | {course.offeredIn}</p>
+    <SearchableWrapper>
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-30">
 
-              <div>
-                <h4 className="text-md font-semibold mb-2 text-blue-600">Objectives:</h4>
-                <ul className="list-disc pl-5 text-gray-700 space-y-1 text-sm">
-                  {course.objectives.map((obj, idx) => (
-                    <li key={idx}>{obj}</li>
-                  ))}
-                </ul>
+          <h1 className="text-3xl font-bold text-center mb-8">IPR Courses Offered</h1>
+          <div className="flex flex-wrap justify-center gap-6">
+            {iprCourses.map((course, index) => (
+              <div key={index} className="w-full md:w-[30%] bg-white shadow-md rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-t-4 border-blue-500">
+                <h2 className="text-lg font-semibold text-purple-700 mb-2">{course.school}</h2>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">{course.courseName}</h3>
+                <p className="text-sm text-gray-600 mb-2">{course.credit} | {course.offeredIn}</p>
+
+                <div>
+                  <h4 className="text-md font-semibold mb-2 text-blue-600">Objectives:</h4>
+                  <ul className="list-disc pl-5 text-gray-700 space-y-1 text-sm">
+                    {course.objectives.map((obj, idx) => (
+                      <li key={idx}>{obj}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </SearchableWrapper>
   );
 }

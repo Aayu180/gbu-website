@@ -101,7 +101,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <SearchableWrapper>
-    <div className="flex items-center justify-center gap-2 mt-10">
+    <div className="flex items-center justify-center gap-2 my-10">
       <Button
         variant="outline"
         size="sm"

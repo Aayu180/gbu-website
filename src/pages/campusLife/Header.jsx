@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, Home, Map, Calendar, Book, Coffee, Leaf, LogIn } from 'lucide-react';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 const Button = ({ children, className = '', variant = 'default', ...props }) => {
   const baseStyle =
     'px-4 py-2 rounded-lg font-semibold transition-all duration-300 focus:outline-none';
@@ -41,6 +42,7 @@ const Header = () => {
   };
 
   return (
+    <SearchableWrapper>
     <header className="fixed top-30 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
@@ -92,6 +94,7 @@ const Header = () => {
         )}
       </div>
     </header>
+    </SearchableWrapper>
   );
 };
 

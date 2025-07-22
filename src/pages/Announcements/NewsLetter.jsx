@@ -1,55 +1,57 @@
 import { useState } from 'react';
-import { Download, FileText } from 'lucide-react';
+import { Download, FileText, Calendar, Eye, Share2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
-import SearchFilter from '../../components/announcement/SearchFilter';
-import SocialShare from '../../components/announcement/SocialShare';
 import Pagination from '../../components/announcement/Pagination';
 import { useToast } from '../../hooks/use-toast';
+import BannerSection from '../../components/HeroBanner';
+import StatsCard from '../../components/StatsCard';
 
-// === Card ===
+// === Modern Card Components ===
 const Card = ({ children, className = "" }) => (
   <motion.div
-    whileHover={{ scale: 1.03, y: -5 }}
-    transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-    className={`bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col relative ${className}`}
+    whileHover={{ y: -8 }}
+    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+    className={`bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 ${className}`}
   >
     {children}
   </motion.div>
 );
 
-const CardHeader = ({ children }) => (
-  <div className="p-5 border-b border-gray-100 bg-gradient-to-r from-blue-50/60 to-white">{children}</div>
+const CardHeader = ({ children, className = "" }) => (
+  <div className={`p-4 ${className}`}>{children}</div>
 );
 
 const CardTitle = ({ children, className = "" }) => (
-  <h3 className={`text-xl font-bold text-gray-800 tracking-tight ${className}`}>{children}</h3>
+  <h3 className={`text-lg font-bold text-gray-900 leading-tight mb-2 ${className}`}>{children}</h3>
 );
 
 const CardDescription = ({ children, className = "" }) => (
-  <p className={`text-gray-500 ${className}`}>{children}</p>
+  <p className={`text-sm text-gray-600 line-clamp-2 ${className}`}>{children}</p>
 );
 
-const CardContent = ({ children }) => (
-  <div className="p-5 flex flex-col flex-grow">{children}</div>
+const CardContent = ({ children, className = "" }) => (
+  <div className={`p-4 pt-0 ${className}`}>{children}</div>
 );
 
-// === Button ===
+// === Modern Button Component ===
 const Button = ({ children, type = "button", variant = "primary", size = "md", className = "", ...props }) => {
-  const base = "inline-flex items-center justify-center font-semibold rounded-xl transition focus:outline-none focus:ring-2 focus:ring-blue-500";
+  const base = "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2";
   const variants = {
-    primary: "bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-700 hover:to-blue-600 shadow-md",
-    secondary: "bg-white text-blue-600 border border-blue-600 hover:bg-blue-50 shadow",
-    outline: "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 shadow",
+    primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow-md",
+    secondary: "bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200",
+    outline: "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:border-gray-400",
+    ghost: "bg-transparent text-gray-600 hover:bg-gray-100 hover:text-gray-900",
   };
   const sizes = {
-    sm: "px-4 py-2 text-sm",
-    md: "px-5 py-2.5 text-base",
+    sm: "px-3 py-2 text-sm",
+    md: "px-4 py-2.5 text-sm",
+    lg: "px-6 py-3 text-base",
   };
   return (
     <button
       type={type}
-      className={`${base} ${variants[variant] || ""} ${sizes[size] || ""} ${className}`}
+      className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {children}
@@ -57,26 +59,21 @@ const Button = ({ children, type = "button", variant = "primary", size = "md", c
   );
 };
 
-// === Input ===
-const Input = ({ className = "", ...props }) => (
-  <input className={`block w-full rounded-xl border border-gray-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80 shadow-inner ${className}`} {...props} />
-);
-
-// === Badge ===
-const Badge = ({ children, variant = "outline", className = "" }) => {
+// === Modern Badge Component ===
+const Badge = ({ children, variant = "default", className = "" }) => {
   const variants = {
-    outline: "border border-blue-600 text-blue-600 bg-white",
-    new: "bg-gradient-to-r from-green-400 to-green-600 text-white animate-pulse shadow-lg",
+    default: "bg-blue-50 text-blue-700 border border-blue-200",
+    new: "bg-green-500 text-white shadow-lg animate-pulse",
+    outline: "bg-white text-blue-600 border border-blue-300",
   };
   return (
-    <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold tracking-wide ${variants[variant] || ""} ${className}`}>
+    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${variants[variant]} ${className}`}>
       {children}
     </span>
   );
 };
 
-// === Mock Newsletters ===
-// ✅ 12 fresh tested Unsplash images
+// === Mock Newsletters Data ===
 const mockNewsletters = [
   {
     id: 1,
@@ -85,7 +82,9 @@ const mockNewsletters = [
     date: "2025-03-15",
     coverImage: "https://cdn.thedecorjournalindia.com/wp-content/uploads/2022/11/9_Modern-day-marvel-Gautam-Buddha-University-by-CP-Kukreja-architects-transpires-fresh-vibe-and-ancient-wisdom.jpg?lossy=1&resize=1920%2C1357&ssl=1&strip=all",
     excerpt: "Highlights of GBU's Spring Fest — cultural nights, competitions, and student showcases.",
-    pdfLink: "/newsletters/spring-fest-2025.pdf"
+    pdfLink: "/newsletters/spring-fest-2025.pdf",
+    views: 1245,
+    category: "Events"
   },
   {
     id: 2,
@@ -94,7 +93,9 @@ const mockNewsletters = [
     date: "2024-12-10",
     coverImage: "https://www.ic3ecsbhi.com/Events/IMG-20231224-WA0082.jpg",
     excerpt: "GBU's 14th Convocation ceremony highlights and graduate stories.",
-    pdfLink: "/newsletters/convocation-2024.pdf"
+    pdfLink: "/newsletters/convocation-2024.pdf",
+    views: 892,
+    category: "Academic"
   },
   {
     id: 3,
@@ -103,7 +104,9 @@ const mockNewsletters = [
     date: "2024-09-20",
     coverImage: "https://gburif.org/images/intro-carousel/gautam-buddha-university-3.jpg",
     excerpt: "Breakthrough research, industry tie-ups, and student-led innovations at GBU.",
-    pdfLink: "/newsletters/research-summit-2024.pdf"
+    pdfLink: "/newsletters/research-summit-2024.pdf",
+    views: 1567,
+    category: "Research"
   },
   {
     id: 4,
@@ -112,7 +115,9 @@ const mockNewsletters = [
     date: "2024-06-15",
     coverImage: "https://www.gbu.ac.in/Content/img/sports/banner1.jpg",
     excerpt: "National Sports Meet 2024 hosted by GBU: winners, records, and sportsmanship.",
-    pdfLink: "/newsletters/sports-meet-2024.pdf"
+    pdfLink: "/newsletters/sports-meet-2024.pdf",
+    views: 743,
+    category: "Sports"
   },
   {
     id: 5,
@@ -121,7 +126,9 @@ const mockNewsletters = [
     date: "2024-04-10",
     coverImage: "https://www.ux4g.gov.in/assets/img/awareness-workshop/gbu-19-11-24/900x1.webp",
     excerpt: "GBU students transform ideas into startups during Entrepreneurship Week.",
-    pdfLink: "/newsletters/entrepreneurship-week-2024.pdf"
+    pdfLink: "/newsletters/entrepreneurship-week-2024.pdf",
+    views: 1123,
+    category: "Business"
   },
   {
     id: 6,
@@ -130,7 +137,9 @@ const mockNewsletters = [
     date: "2024-02-25",
     coverImage: "https://tennews.in/wp-content/uploads/2022/11/WhatsApp-Image-2022-11-22-at-8.24.01-PM-e1669129715871.jpeg",
     excerpt: "GBU's biggest hackathon yet — innovation, collaboration, and solutions.",
-    pdfLink: "/newsletters/tech-symposium-2024.pdf"
+    pdfLink: "/newsletters/tech-symposium-2024.pdf",
+    views: 2156,
+    category: "Technology"
   },
   {
     id: 7,
@@ -139,7 +148,9 @@ const mockNewsletters = [
     date: "2023-11-10",
     coverImage: "https://images.unsplash.com/photo-1599491126263-3db86d7c3626?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     excerpt: "Vibrant cultural diversity with music, dance, and art performances.",
-    pdfLink: "/newsletters/cultural-night-2023.pdf"
+    pdfLink: "/newsletters/cultural-night-2023.pdf",
+    views: 891,
+    category: "Culture"
   },
   {
     id: 8,
@@ -148,7 +159,9 @@ const mockNewsletters = [
     date: "2023-09-05",
     coverImage: "https://images.unsplash.com/photo-1581090700224-81b1b0b59f6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     excerpt: "GBU's sustainability drive: plantation, waste management, and green tech.",
-    pdfLink: "/newsletters/green-campus-2023.pdf"
+    pdfLink: "/newsletters/green-campus-2023.pdf",
+    views: 654,
+    category: "Environment"
   },
   {
     id: 9,
@@ -157,7 +170,9 @@ const mockNewsletters = [
     date: "2023-07-20",
     coverImage: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     excerpt: "GBU alumni reconnect, share stories, and inspire students at the meet.",
-    pdfLink: "/newsletters/alumni-meet-2023.pdf"
+    pdfLink: "/newsletters/alumni-meet-2023.pdf",
+    views: 1432,
+    category: "Alumni"
   },
   {
     id: 10,
@@ -166,7 +181,9 @@ const mockNewsletters = [
     date: "2023-05-10",
     coverImage: "https://images.unsplash.com/photo-1584697964192-8d161b891f74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     excerpt: "Record-breaking placements with top companies and success stories.",
-    pdfLink: "/newsletters/placement-drive-2023.pdf"
+    pdfLink: "/newsletters/placement-drive-2023.pdf",
+    views: 1876,
+    category: "Career"
   },
   {
     id: 11,
@@ -175,7 +192,9 @@ const mockNewsletters = [
     date: "2023-03-18",
     coverImage: "https://images.unsplash.com/photo-1583321573717-7c1b746f0cb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     excerpt: "Students showcase creativity through art and photography exhibitions.",
-    pdfLink: "/newsletters/art-photography-2023.pdf"
+    pdfLink: "/newsletters/art-photography-2023.pdf",
+    views: 567,
+    category: "Arts"
   },
   {
     id: 12,
@@ -184,13 +203,13 @@ const mockNewsletters = [
     date: "2023-01-25",
     coverImage: "https://images.unsplash.com/photo-1588195533091-c89fa1b4e3b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     excerpt: "New students explore GBU's clubs and societies to join and grow.",
-    pdfLink: "/newsletters/clubs-orientation-2023.pdf"
+    pdfLink: "/newsletters/clubs-orientation-2023.pdf",
+    views: 923,
+    category: "Student Life"
   },
 ];
 
-
-
-// === Main ===
+// === Main Component ===
 const NewsLetter = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [email, setEmail] = useState('');
@@ -200,108 +219,165 @@ const NewsLetter = () => {
   const totalPages = Math.ceil(mockNewsletters.length / itemsPerPage);
   const currentNewsletters = mockNewsletters.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email) {
-      toast({
-        title: "Subscribed!",
-        description: "You'll receive our latest newsletters.",
-      });
-      setEmail('');
-    }
-  };
-
   const latestId = mockNewsletters[0].id;
 
+  const getCategoryColor = (category) => {
+    const colors = {
+      Events: 'bg-purple-50 text-purple-700 border-purple-200',
+      Academic: 'bg-blue-50 text-blue-700 border-blue-200',
+      Research: 'bg-green-50 text-green-700 border-green-200',
+      Sports: 'bg-orange-50 text-orange-700 border-orange-200',
+      Business: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+      Technology: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+      Culture: 'bg-pink-50 text-pink-700 border-pink-200',
+      Environment: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+      Alumni: 'bg-teal-50 text-teal-700 border-teal-200',
+      Career: 'bg-violet-50 text-violet-700 border-violet-200',
+      Arts: 'bg-rose-50 text-rose-700 border-rose-200',
+      'Student Life': 'bg-amber-50 text-amber-700 border-amber-200'
+    };
+    return colors[category] || 'bg-gray-50 text-gray-700 border-gray-200';
+  };
+
   return (
-    <>
-      <motion.section
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-20 text-center"
-      >
-        <h1 className="text-5xl font-bold mb-4">GBU Newsletter</h1>
-        <p className="text-xl">Stay updated with the latest campus highlights</p>
-      </motion.section>
+    <div className="min-h-screen bg-gray-50">
+      <BannerSection
+        title="Newsletter"
+        subtitle="Stay updated with the latest campus highlights"
+        bgTheme={3}
+      />
 
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.15 } },
-        }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 lg:mx-40 md:mx-30 sm:mx-10 my-10 "
-      >
-        {currentNewsletters.map((n) => (
-          <motion.div
-            key={n.id}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          >
-            <Card className='min-h-170'>
-              {n.id === latestId && (
-                <Badge variant="new" className="absolute top-4 right-4">New</Badge>
-              )}
-              <img src={n.coverImage} alt={n.title} className="w-full h-90 object-cover" />
-              <CardHeader>
-                <div className="flex justify-between mb-2">
-                  <Badge>{n.issueNumber}</Badge>
-                  <span className="text-sm text-gray-500">{format(new Date(n.date), 'MMM yyyy')}</span>
+      {/* Stats Section */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <StatsCard
+          stats={[
+            { number: mockNewsletters.length, title: "Total Issues", icon: FileText, iconColor: "#4F46E5" },
+            { number: 12, title: "Categories", icon: Calendar, iconColor: "#10B981" },
+            { numberText: "15K+", title: "Total Views", icon: Eye, iconColor: "#465797" },
+            { number: 2025, title: "Latest Year", icon: Calendar, iconColor: "#EF4444" }
+          ]}
+        />
+
+        {/* Results Summary */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Newsletter Archive</h2>
+
+          </div>
+        </div>
+
+        {/* Newsletter Grid */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.1 } },
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+        >
+          {currentNewsletters.map((newsletter) => (
+            <motion.div
+              key={newsletter.id}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              <Card className="h-full flex flex-col relative group">
+                {/* New Badge */}
+                {newsletter.id === latestId && (
+                  <Badge variant="new" className="absolute top-3 right-3 z-10">
+                    NEW
+                  </Badge>
+                )}
+
+                {/* Cover Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={newsletter.coverImage}
+                    alt={newsletter.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      e.target.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=600&q=80';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>
-                <CardTitle>{n.title}</CardTitle>
-                <CardDescription>Published {format(new Date(n.date), 'MMMM dd, yyyy')}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700 mb-5">{n.excerpt}</p>
-                <div className="mt-auto flex flex-col gap-2">
-                  <Button
-                    size="sm"
-                    onClick={() => window.open(n.pdfLink, "_blank")}
-                  >
-                    <FileText size={18} className="mr-2" />
-                    Read Online
-                  </Button>
-                  <div className="flex gap-2">
-                    <Button size="sm" variant="outline" className="flex-1">
-                      <Download size={16} className="mr-2" />
-                      Download PDF
-                    </Button>
-                    <SocialShare url={n.pdfLink} title={n.title} />
+
+                {/* Card Header */}
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-3">
+                    <Badge className={getCategoryColor(newsletter.category)}>
+                      {newsletter.category}
+                    </Badge>
+                    <span className="text-xs text-gray-500 font-medium">
+                      {newsletter.issueNumber}
+                    </span>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </motion.div>
 
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+                  <CardTitle className="group-hover:text-blue-600 transition-colors">
+                    {newsletter.title}
+                  </CardTitle>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="bg-blue-600 text-white py-10 px-6 rounded-3xl text-center mt-12"
-      >
-        <h2 className="text-3xl font-bold mb-3">Subscribe for Updates</h2>
-        <p className="mb-5">Never miss out on important events and announcements.</p>
-        <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-          <Input
-            type="email"
-            placeholder="Your email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required className='text-gray-900'
-          />
-          <Button type="submit" variant="secondary">Subscribe</Button>
-        </form>
-      </motion.div>
-    </>
+                  {/* Meta Information */}
+                  <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                    <div className="flex items-center gap-1">
+                      <Calendar size={12} />
+                      <span>{format(new Date(newsletter.date), 'MMM dd, yyyy')}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Eye size={12} />
+                      <span>{newsletter.views}</span>
+                    </div>
+                  </div>
+
+                  <CardDescription>
+                    {newsletter.excerpt}
+                  </CardDescription>
+                </CardHeader>
+
+                {/* Card Content - Actions */}
+                <CardContent className="mt-auto">
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      onClick={() => window.open(newsletter.pdfLink, "_blank")}
+                      className="flex-1"
+                    >
+                      <FileText size={14} className="mr-1.5" />
+                      Read
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => window.open(newsletter.pdfLink, "_blank")}
+                    >
+                      <Download size={14} className="mr-1.5" />
+                      PDF
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="px-3"
+                    >
+                      <Share2 size={14} />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
+    </div>
   );
 };
 

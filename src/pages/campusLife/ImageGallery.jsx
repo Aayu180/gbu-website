@@ -1,5 +1,6 @@
  import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
 
 const ImageGallery = ({ images, autoPlayInterval = 2000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,6 +29,7 @@ const ImageGallery = ({ images, autoPlayInterval = 2000 }) => {
   const bottomThumbs = images.slice(half - 1);
 
   return (
+    <SearchableWrapper>
     <div className="flex flex-col items-center justify-center p-4 mx-auto">
       <div className="flex flex-col md:flex-row relative md:mr-[128px]">
         
@@ -114,6 +116,7 @@ const ImageGallery = ({ images, autoPlayInterval = 2000 }) => {
         </div>
       </div>
     </div>
+    </SearchableWrapper>
   );
 };
 

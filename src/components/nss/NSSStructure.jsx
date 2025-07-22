@@ -2,6 +2,7 @@
 import React from "react";
 import { Mail, Phone } from "lucide-react";
 import { motion } from "framer-motion";
+import SearchableWrapper from "../Searchbar/SearchableWrapper";
 
 // Card, Header, Title, Content, Badge Components
 const Card = ({ className = "", children }) => (
@@ -173,7 +174,8 @@ const NSSStructure = () => {
   };
 
   return (
-    <div className="space-y-12 mx-20">
+    <SearchableWrapper>
+    <div className="space-y-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Program Officer Section */}
       <motion.div variants={fadeIn} initial="hidden" animate="visible">
 
@@ -285,7 +287,7 @@ const NSSStructure = () => {
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
           Volunteer Leadership Team
         </h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {volunteerLeaders.map((leader, index) => (
             <motion.div
               key={index}
@@ -304,7 +306,7 @@ const NSSStructure = () => {
                   <img
                     src={leader.image}
                     alt={leader.name}
-                    className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-blue-200"
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover mx-auto mb-4 border-4 border-blue-200"
                   />
 
                   <h3 className="text-xl font-bold text-gray-900 mb-1">
@@ -346,7 +348,7 @@ const NSSStructure = () => {
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
           NSS Units
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {units.map((unit, index) => (
             <motion.div
               key={index}
@@ -372,7 +374,7 @@ const NSSStructure = () => {
                   <div className="text-sm text-gray-600 mb-4">
                     Active Volunteers
                   </div>
-                  <Badge className="bg-blue-100 text-blue-800">
+                  <Badge className="w-full bg-blue-100 text-blue-800">
                     {unit.focus}
                   </Badge>
 
@@ -435,6 +437,7 @@ const NSSStructure = () => {
         </Card>
       </motion.div>
     </div>
+    </SearchableWrapper>
   );
 };
 

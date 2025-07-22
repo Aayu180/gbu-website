@@ -1,6 +1,7 @@
  import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, UserPlus } from 'lucide-react';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 // Simple toast fallback
 const useToast = () => {
@@ -89,6 +90,7 @@ const NSSRegistration = () => {
   ];
 
   return (
+    <SearchableWrapper>
     <motion.div
       initial="hidden"
       animate="visible"
@@ -373,6 +375,7 @@ const NSSRegistration = () => {
         </motion.div>
       </div>
     </motion.div>
+    </SearchableWrapper>
   );
 };
 

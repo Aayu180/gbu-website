@@ -1,13 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// 🟢 Basic Card component with Motion
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+import ButtonGroup from '../TabsData.jsx';
+
+// ✅ Modern Card with subtle lift effect on hover
 const Card = ({ children, className = '' }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
+    whileHover={{ y: -4, boxShadow: '0 12px 24px rgba(0,0,0,0.1)' }}
     transition={{ duration: 0.4, ease: 'easeOut' }}
-    className={`rounded-xl border shadow-md hover:shadow-xl transition duration-300 ${className}`}
+    className={`rounded-2xl border shadow-sm transition duration-300 ${className}`}
   >
     {children}
   </motion.div>
@@ -17,7 +21,7 @@ const CardContent = ({ children, className = '' }) => (
   <div className={`p-6 ${className}`}>{children}</div>
 );
 
-// 🟢 Tabs
+// ✅ Tabs
 const Tabs = ({ children, defaultValue, className = '' }) => {
   const [active, setActive] = React.useState(defaultValue);
   const triggers = React.Children.toArray(children).filter(
@@ -37,13 +41,27 @@ const Tabs = ({ children, defaultValue, className = '' }) => {
   );
 };
 
-const TabsList = ({ children, active, setActive, className = '' }) => (
-  <div className={`flex ${className}`}>
-    {React.Children.map(children, (child) =>
-      React.cloneElement(child, { active, setActive })
-    )}
+const tabButtons = [
+  { id: "current", label: "Current Opportunities", tooltip: "View current opportunities" },
+  { id: "archived", label: "Archived Opportunities", tooltip: "View archived opportunities" },
+];
+
+const TabsList = ({ active, setActive }) => (
+  <div className="flex justify-center mb-8">
+    <ButtonGroup
+      buttons={tabButtons}
+      onClick={setActive}
+      activeButton={active}
+      theme="primary"
+      size="lg"
+      fullWidth={false}
+      rounded="lg"
+      gap={true}
+      animated={true}
+    />
   </div>
 );
+
 
 const TabsTrigger = ({ value, children, active, setActive, className = '' }) => {
   const isActive = active === value;
@@ -51,9 +69,10 @@ const TabsTrigger = ({ value, children, active, setActive, className = '' }) => 
   return (
     <button
       onClick={() => setActive(value)}
-      className={`px-4 py-2 text-sm font-semibold border-b-2 transition-colors w-1/2 rounded-xl
-        ${isActive ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white' : 'bg-gray-50 text-gray-700'}
-        hover:bg-gradient-to-r hover:from-indigo-700 hover:to-purple-700 hover:text-white duration-300
+      className={`px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base font-semibold rounded-full transition-colors duration-300 
+        ${isActive
+          ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md'
+          : 'bg-gray-100 text-gray-700 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white'}
         ${className}`}
     >
       {children}
@@ -75,7 +94,7 @@ const TabsContent = ({ value, active, children, className = '' }) => {
   );
 };
 
-// 🟢 Sample data
+// ✅ Sample data stays same
 const currentTenders = [
   {
     id: 1,
@@ -122,10 +141,10 @@ const archivedTenders = [
   },
 ];
 
-// 🟢 Card for each tender with vivid accent
+// ✅ Card for each tender
 const TenderCard = ({ tender, index, variant = 'current' }) => (
   <Card
-    className={`mb-4 ${
+    className={`mb-5 ${
       variant === 'archived'
         ? 'bg-gradient-to-r from-gray-50 to-gray-100 border-gray-200'
         : 'bg-gradient-to-br from-white to-teal-50 border-teal-200'
@@ -139,15 +158,15 @@ const TenderCard = ({ tender, index, variant = 'current' }) => (
       >
         {index + 1}. {tender.title}
       </h3>
-      <p className="text-sm text-gray-600 mb-2">{tender.description}</p>
+      <p className="text-sm text-gray-600 mb-3">{tender.description}</p>
       <p className="text-sm mb-2">
         <span className="font-semibold">Closing Date:</span> {tender.closingDate}
       </p>
       <a
         href={tender.documentUrl}
-        className={`text-sm font-semibold underline transition-colors ${
+        className={`inline-block text-sm font-semibold underline transition-colors duration-200 ${
           variant === 'archived'
-            ? 'text-orange-600 hover:text-orange-700'
+            ? 'text-orange-600 hover:text-orange-800'
             : 'text-teal-600 hover:text-teal-800'
         }`}
         target="_blank"
@@ -159,7 +178,7 @@ const TenderCard = ({ tender, index, variant = 'current' }) => (
   </Card>
 );
 
-// 🟢 Cards Container with stagger
+// ✅ Container with stagger effect
 const TenderTable = ({ tenders, variant }) => (
   <motion.div
     initial="hidden"
@@ -187,30 +206,29 @@ const TenderTable = ({ tenders, variant }) => (
   </motion.div>
 );
 
-// 🟢 Main Component
+// ✅ Final TendersTable
 const TendersTable = () => {
   return (
-    <div className="w-full shadow-2xl border-3 p-10 border-gray-300 rounded-xl">
-      <Tabs defaultValue="current" className="w-full">
-        <TabsList className="w-full mb-6 flex flex-row justify-between border-b">
-          <TabsTrigger value="current">Current Opportunities</TabsTrigger>
-          <TabsTrigger value="archived">Archived Opportunities</TabsTrigger>
-        </TabsList>
+    <SearchableWrapper>
+      <div className="w-full bg-white shadow-xl border border-gray-200 p-8 sm:p-10 rounded-2xl">
+        <Tabs defaultValue="current" className="w-full ">
+            <TabsList />
 
-        <TabsContent value="current" className="mt-0">
-          <TenderTable tenders={currentTenders} variant="current" />
-        </TabsContent>
+          <TabsContent value="current">
+            <TenderTable tenders={currentTenders} variant="current" />
+          </TabsContent>
 
-        <TabsContent value="archived" className="mt-5">
-          <TenderTable tenders={archivedTenders} variant="archived" />
-          <div className="mt-4 p-4 bg-gray-100 rounded-lg border-l-4 border-orange-400">
-            <p className="text-sm text-gray-600 italic">
-              These tenders are no longer active and are shown for reference purposes.
-            </p>
-          </div>
-        </TabsContent>
-      </Tabs>
-    </div>
+          <TabsContent value="archived">
+            <TenderTable tenders={archivedTenders} variant="archived" />
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg border-l-4 border-orange-400">
+              <p className="text-sm text-gray-600 italic">
+                These tenders are no longer active and are shown for reference only.
+              </p>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </SearchableWrapper>
   );
 };
 

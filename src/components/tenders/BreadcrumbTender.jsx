@@ -1,8 +1,11 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
 
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+
 const BreadcrumbTender = ({ items }) => {
   return (
+    <SearchableWrapper>
     <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-6">
       {items.map((item, index) => (
         <React.Fragment key={index}>
@@ -26,6 +29,7 @@ const BreadcrumbTender = ({ items }) => {
         </React.Fragment>
       ))}
     </nav>
+    </SearchableWrapper>
   );
 };
 

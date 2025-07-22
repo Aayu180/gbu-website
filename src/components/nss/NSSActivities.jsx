@@ -237,7 +237,7 @@ const NSSActivities = () => {
   return (
 
     <motion.div
-      className="space-y-8 py-10 px-4 mx-20 sm:px-6 lg:px-8 bg-gray-50"
+      className="space-y-8 py-10 px-4 sm:px-6 lg:px-20 mx-auto bg-gray-50"
       initial="hidden"
       animate="visible"
       variants={{
@@ -261,7 +261,8 @@ const NSSActivities = () => {
         </p>
       </motion.div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
         {activities.map((activity) => (
           <motion.div
             key={activity.id}
@@ -334,7 +335,8 @@ const NSSActivities = () => {
                         <span>Share</span>
                       </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="bg-white rounded-lg shadow-lg max-w-md w-full p-6"
+>
                       <DialogHeader>
                         <DialogTitle>Share Activity</DialogTitle>
                       </DialogHeader>
@@ -365,27 +367,7 @@ const NSSActivities = () => {
             </Card>
           </motion.div>
         ))}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, type: 'spring', stiffness: 100, damping: 15 }}
-        >
-          <Card className="border-2 border-dashed border-gray-300 hover:border-blue-400 transition-colors">
-            <CardContent className="flex flex-col items-center justify-center py-12">
-              <Upload className="h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-semibold text-gray-600 mb-2">
-                Add New Activity
-              </h3>
-              <p className="text-gray-500 text-center mb-4">
-                Upload event details, photos, and documents
-              </p>
-              <Button className="bg-blue-600 hover:bg-blue-700">
-                <Upload className="h-4 w-4 mr-2" />
-                Add Activity
-              </Button>
-            </CardContent>
-          </Card>
-        </motion.div>
+       
       </div>
     </motion.div>
   );

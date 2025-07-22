@@ -2,6 +2,7 @@ import React, { useState, createContext, useContext } from "react";
 import { motion } from "framer-motion";
 import RecruitmentBlock from "../../components/recruitments/RecruitmentBlock";
 import RecruitmentContent from "../../components/recruitments/RecruitmentContent";
+import BannerSection from "../../components/HeroBanner";
 
 // ✅ Utility
 function cn(...classes) {
@@ -89,16 +90,12 @@ const RecruitMain = () => {
       {/* ✅ Fixed background image */}
       <div className="fixed inset-0 z-0 opacity-10 pointer-events-none bg-white bg-center bg-no-repeat bg-cover" />
 
-      <div className="bg-gradient-to-r from-sky-400 to-sky-600 py-24">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-extrabold text-foreground mb-5 tracking-tight">
-            RECRUITMENTS
-          </h1>
-          <p className="text-xl font-semibold text-muted-foreground">
-            Faculty/Staff Recruitment
-          </p>
-        </div>
-      </div>
+<BannerSection
+  title="RECRUITMENTS"
+  subtitle="Faculty/Staff Recruitment"
+  bgTheme={9} // or any theme number from 1–10, choose based on design preference
+/>
+
 
       <div className="container w-8/10 mx-auto px-4 py-12">
         <Tabs defaultValue="current">

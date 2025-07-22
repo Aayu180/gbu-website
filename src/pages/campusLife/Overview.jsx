@@ -10,9 +10,11 @@ import Library from './Library';
 import SportsCultural from "./SportsCultural";
 import CafesFood from "./CafesFood";
 import EcoCampus from "./EcoCampus";
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 const Overview = () => {
   return (
+    <SearchableWrapper>
    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       {/* <Header /> */}
       <main className="relative">
@@ -20,7 +22,7 @@ const Overview = () => {
       <VirtualTour/>
       <CampusStats />
       <HostelDining/>
-      <ClubsCouncils/>
+       
       <Library/>
       <SportsCultural/>
       <CafesFood/>
@@ -28,6 +30,7 @@ const Overview = () => {
       <StudentTestimonials />
       </main>
     </div>
+    </SearchableWrapper>
   );
 };
 

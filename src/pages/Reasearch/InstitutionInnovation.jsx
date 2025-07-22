@@ -11,6 +11,10 @@ import {
     Compass, Map, Navigation, Plane, Car, Train, Ship, Home, Building2
 } from 'lucide-react';
 
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
+import BannerSection from "../../components/HeroBanner.jsx";
+import StatsCard from "../../components/StatsCard.jsx";
+
 const InstitutionInnovation = () => {
     const [activeSection, setActiveSection] = useState('home');
     const [scrollY, setScrollY] = useState(0);
@@ -40,10 +44,34 @@ const InstitutionInnovation = () => {
     }, []);
 
     const stats = [
-        { number: "2700+", label: "Institutions", icon: <Building className="w-8 h-8" />, color: "from-blue-500 to-cyan-500" },
-        { number: "9232", label: "Certificate No.", icon: <Award className="w-8 h-8" />, color: "from-green-500 to-emerald-500" },
-        { number: "100+", label: "Events Organized", icon: <Calendar className="w-8 h-8" />, color: "from-purple-500 to-pink-500" },
-        { number: "5000+", label: "Students Impacted", icon: <Users className="w-8 h-8" />, color: "from-orange-500 to-red-500" }
+        {
+            icon: Users,
+            number: 1200,
+            title: "Members",
+            subtitle: "Active innovators",
+            iconColor: "#3b82f6", // Tailwind blue-500
+        },
+        {
+            icon: BookOpen,
+            number: 50,
+            title: "Publications",
+            subtitle: "Research papers",
+            iconColor: "#9333ea", // purple-600
+        },
+        {
+            icon: Award,
+            numberText: "25+",
+            title: "Awards",
+            subtitle: "National & State",
+            iconColor: "#eab308", // yellow-500
+        },
+        {
+            icon: Globe,
+            number: 10,
+            title: "Collaborations",
+            subtitle: "International",
+            iconColor: "#10b981", // green-500
+        },
     ];
 
     const functions = [
@@ -248,324 +276,270 @@ const InstitutionInnovation = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-            {/* Hero Section */}
-            <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900"></div>
-                <div className="absolute inset-0 bg-black/20"></div>
+        <SearchableWrapper>
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+                {/* Hero Section */}
+                <BannerSection
+                    title={
+                        <>
+                            Institution's  Innovation Council
 
-                {/* Animated Background Elements */}
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full animate-pulse"></div>
-                    <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full animate-pulse delay-1000"></div>
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-500/10 rounded-full animate-pulse delay-500"></div>
-                </div>
+                        </>
+                    }
+                    subtitle="Fostering Innovation & Entrepreneurship Culture"
+                    bgTheme={6} // or pick any theme number 1–10
+                />
 
-                <div className="relative container mx-auto px-4 text-center">
-                    {/* <div className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-md rounded-full text-white text-sm font-medium mb-8 animate-fadeIn">
-            <Star className="w-5 h-5 mr-2 text-yellow-400" />
-            Certificate No. 9232 | IASHE Code: U-0514
-        </div> */}
+                <StatsCard stats={stats} />
 
-                    <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
-                        Institution's
-                        <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent ml-2">
-                            Innovation Council
-                        </span>
-                    </h1>
-
-                    <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-                        Fostering Innovation & Entrepreneurship Culture at
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button
-                            onClick={() => setActiveSection('about')}
-                            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group"
-                        >
-                            Explore Innovation
-                            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                        <button
-                            onClick={() => setActiveSection('events')}
-                            className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold hover:bg-white/20 transition-all duration-300"
-                        >
-                            View Events
-                        </button>
-                    </div>
-                </div>
-
-            </section>
-
-            <section className="py-20 bg-gray-50">
-                <div className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-                    {stats.map((stat, index) => (
-                        <div
-                            key={index}
-                            className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                        >
-                            <div
-                                className={`w-16 h-16 mx-auto mb-5 bg-gradient-to-br ${stat.color} rounded-full flex items-center justify-center text-white text-2xl`}
-                            >
-                                {stat.icon}
-                            </div>
-                            <h3 className="text-4xl font-bold text-gray-800 mb-2">{stat.number}</h3>
-                            <p className="text-gray-500 text-sm uppercase tracking-wide font-medium">{stat.label}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-
-
-            {/* About Section */}
-            <section className="py-20 bg-white/80 backdrop-blur-sm">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            About IIC
-                        </h2>
-                        <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                            The Ministry of Education (MoE), Government of India has established 'MoE's Innovation Cell (MIC)'
-                            to systematically foster the culture of Innovation among all Higher Education Institutions (HEIs).
-                        </p>
-                    </div>
-
-                    <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-                        <div className="space-y-8">
-                            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300">
-                                <div className="flex items-center mb-6">
-                                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mr-4">
-                                        <Target className="w-6 h-6 text-white" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-blue-600">Our Mission</h3>
-                                </div>
-                                <p className="text-gray-700 leading-relaxed">
-                                    To encourage, inspire and nurture young students by supporting them to work with new ideas
-                                    and transform them into prototypes during their formative years.
-                                </p>
-                            </div>
-
-                            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300">
-                                <div className="flex items-center mb-6">
-                                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
-                                        <Eye className="w-6 h-6 text-white" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold text-purple-600">Our Vision</h3>
-                                </div>
-                                <p className="text-gray-700 leading-relaxed">
-                                    To create a vibrant innovation ecosystem that promotes entrepreneurship and transforms
-                                    innovative ideas into successful startups.
-                                </p>
-                            </div>
+                {/* About Section */}
+                <section className="pb-20 pt-10 px-30 bg-white/80 backdrop-blur-sm">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-16">
+                            <h2 className="text-30xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                About IIC
+                            </h2>
+                            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                                The Ministry of Education (MoE), Government of India has established 'MoE's Innovation Cell (MIC)'
+                                to systematically foster the culture of Innovation among all Higher Education Institutions (HEIs).
+                            </p>
                         </div>
 
-                        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300">
-                            <h3 className="text-2xl font-bold mb-8 text-emerald-600 flex items-center">
-                                <Compass className="w-8 h-8 mr-3" />
-                                Major Focus Areas
-                            </h3>
-                            <div className="space-y-6">
-                                {focusAreas.map((area, index) => (
-                                    <div key={index} className="flex items-start space-x-4 group">
-                                        <div className="w-10 h-10 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                                            {area.icon}
+                        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+                            <div className="space-y-8">
+                                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                                    <div className="flex items-center mb-6">
+                                        <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mr-4">
+                                            <Target className="w-6 h-6 text-white" />
                                         </div>
-                                        <div>
-                                            <h4 className="font-semibold text-gray-800 mb-1">{area.title}</h4>
-                                            <p className="text-gray-600 text-sm">{area.description}</p>
-                                        </div>
+                                        <h3 className="text-2xl font-bold text-blue-600">Our Mission</h3>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Achievements */}
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {achievements.map((achievement, index) => (
-                            <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white mb-4">
-                                    {achievement.icon}
+                                    <p className="text-gray-700 leading-relaxed">
+                                        To encourage, inspire and nurture young students by supporting them to work with new ideas
+                                        and transform them into prototypes during their formative years.
+                                    </p>
                                 </div>
-                                <h3 className="text-lg font-bold text-gray-800 mb-2">{achievement.title}</h3>
-                                <p className="text-gray-600 text-sm">{achievement.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
-            {/* Functions Section */}
-            <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            Functions of IIC
-                        </h2>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                            Our comprehensive approach to fostering innovation and entrepreneurship
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {functions.map((func, index) => (
-                            <div key={index} className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group">
-                                <div className={`w-16 h-16 bg-gradient-to-r ${func.color} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform`}>
-                                    {func.icon}
+                                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                                    <div className="flex items-center mb-6">
+                                        <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
+                                            <Eye className="w-6 h-6 text-white" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-purple-600">Our Vision</h3>
+                                    </div>
+                                    <p className="text-gray-700 leading-relaxed">
+                                        To create a vibrant innovation ecosystem that promotes entrepreneurship and transforms
+                                        innovative ideas into successful startups.
+                                    </p>
                                 </div>
-                                <h3 className="text-xl font-bold mb-4 text-gray-800">{func.title}</h3>
-                                <p className="text-gray-600 leading-relaxed mb-6">{func.description}</p>
-                                <div className="space-y-2">
-                                    {func.features.map((feature, fIndex) => (
-                                        <div key={fIndex} className="flex items-center text-sm text-gray-500">
-                                            <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
-                                            {feature}
+                            </div>
+
+                            <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                                <h3 className="text-2xl font-bold mb-8 text-emerald-600 flex items-center">
+                                    <Compass className="w-8 h-8 mr-3" />
+                                    Major Focus Areas
+                                </h3>
+                                <div className="space-y-6">
+                                    {focusAreas.map((area, index) => (
+                                        <div key={index} className="flex items-start space-x-4 group">
+                                            <div className="w-10 h-10 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                                                {area.icon}
+                                            </div>
+                                            <div>
+                                                <h4 className="font-semibold text-gray-800 mb-1">{area.title}</h4>
+                                                <p className="text-gray-600 text-sm">{area.description}</p>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Featured Events Carousel */}
-            <section className="py-20 bg-gradient-to-r from-blue-900 to-purple-900">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white">
-                            Featured Events
-                        </h2>
-                        <p className="text-xl text-blue-200 max-w-2xl mx-auto">
-                            Highlighting our most impactful innovation and entrepreneurship events
-                        </p>
-                    </div>
-
-                    <div className="relative">
-                        <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12">
-                            <div className="grid md:grid-cols-2 gap-12 items-center">
-                                <div>
-                                    <div className="text-8xl mb-6">{featuredEvents[currentEventIndex].image}</div>
-                                    <div className="flex items-center mb-4">
-                                        <span className={`px-4 py-2 rounded-full text-sm font-medium ${featuredEvents[currentEventIndex].type === 'Keynote Lecture' ? 'bg-blue-500/20 text-blue-300' :
-                                            featuredEvents[currentEventIndex].type === 'Celebration' ? 'bg-purple-500/20 text-purple-300' :
-                                                'bg-green-500/20 text-green-300'
-                                            }`}>
-                                            {featuredEvents[currentEventIndex].type}
-                                        </span>
-                                    </div>
-                                    <h3 className="text-3xl font-bold text-white mb-4">{featuredEvents[currentEventIndex].title}</h3>
-                                    <p className="text-blue-200 text-lg mb-2">{featuredEvents[currentEventIndex].speaker}</p>
-                                    <p className="text-blue-300 mb-4">{featuredEvents[currentEventIndex].designation}</p>
-                                    <p className="text-gray-300 leading-relaxed">{featuredEvents[currentEventIndex].description}</p>
-                                </div>
-
-                                <div className="space-y-6">
-                                    <div className="flex items-center text-blue-200">
-                                        <Calendar className="w-5 h-5 mr-3" />
-                                        <span>{featuredEvents[currentEventIndex].date}</span>
-                                    </div>
-                                    <div className="flex items-center text-blue-200">
-                                        <Users className="w-5 h-5 mr-3" />
-                                        <span>{featuredEvents[currentEventIndex].attendees}</span>
-                                    </div>
-                                    <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
-                                        Learn More
-                                        <ExternalLink className="w-5 h-5 ml-2" />
-                                    </button>
-                                </div>
-                            </div>
                         </div>
 
-                        {/* Carousel Indicators */}
-                        <div className="flex justify-center mt-8 space-x-2">
-                            {featuredEvents.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setCurrentEventIndex(index)}
-                                    className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentEventIndex ? 'bg-white' : 'bg-white/30'
-                                        }`}
-                                />
+                        {/* Achievements */}
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            {achievements.map((achievement, index) => (
+                                <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white mb-4">
+                                        {achievement.icon}
+                                    </div>
+                                    <h3 className="text-lg font-bold text-gray-800 mb-2">{achievement.title}</h3>
+                                    <p className="text-gray-600 text-sm">{achievement.description}</p>
+                                </div>
                             ))}
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* All Events Section */}
-            <section className="py-20 bg-white/80 backdrop-blur-sm">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                            All Events
-                        </h2>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                            Comprehensive list of our innovation and entrepreneurship activities
-                        </p>
-                    </div>
+                {/* Functions Section */}
+                <section className="py-15 bg-gradient-to-br px-30 from-blue-50 to-indigo-100">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                Functions of IIC
+                            </h2>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                Our comprehensive approach to fostering innovation and entrepreneurship
+                            </p>
+                        </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {allEvents.map((event, index) => (
-                            <div key={index} className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                                <div className="flex items-center justify-between mb-4">
-                                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${event.type === 'Lecture' ? 'bg-blue-100 text-blue-800' :
-                                        event.type === 'Workshop' ? 'bg-green-100 text-green-800' :
-                                            event.type === 'Training' ? 'bg-purple-100 text-purple-800' :
-                                                event.type === 'Competition' ? 'bg-yellow-100 text-yellow-800' :
-                                                    'bg-orange-100 text-orange-800'
-                                        }`}>
-                                        {event.type}
-                                    </span>
-                                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                                        {event.category}
-                                    </span>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {functions.map((func, index) => (
+                                <div key={index} className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 group">
+                                    <div className={`w-16 h-16 bg-gradient-to-r ${func.color} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform`}>
+                                        {func.icon}
+                                    </div>
+                                    <h3 className="text-xl font-bold mb-4 text-gray-800">{func.title}</h3>
+                                    <p className="text-gray-600 leading-relaxed mb-6">{func.description}</p>
+                                    <div className="space-y-2">
+                                        {func.features.map((feature, fIndex) => (
+                                            <div key={fIndex} className="flex items-center text-sm text-gray-500">
+                                                <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
+                                                {feature}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-
-                                <h3 className="text-lg font-bold mb-3 text-gray-800 leading-tight">{event.title}</h3>
-                                <p className="text-blue-600 font-medium mb-2 text-sm">{event.speaker}</p>
-                                <p className="text-gray-600 text-sm mb-2 flex items-center">
-                                    <Calendar className="w-4 h-4 mr-1" />
-                                    {event.date}
-                                </p>
-                                <p className="text-gray-500 text-sm mb-3 flex items-center">
-                                    <Users className="w-4 h-4 mr-1" />
-                                    {event.attendees}
-                                </p>
-                                <p className="text-gray-600 text-sm">{event.description}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Call to Action */}
-            <section className="py-20 bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900">
-                <div className="container mx-auto px-4 text-center">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-                            Join the Innovation Journey
-                        </h2>
-                        <p className="text-xl mb-8 text-blue-200 leading-relaxed">
-                            Be part of GBU's thriving innovation ecosystem and transform your ideas into reality.
-                            Connect with like-minded innovators, access cutting-edge resources, and build the future.
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                            <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group">
-                                Get Involved
-                                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                            </button>
-                            <button className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold hover:bg-white/20 transition-all duration-300">
-                                Contact Us
-                            </button>
+                            ))}
                         </div>
                     </div>
-                </div>
-            </section >
-        </div>
-    )
-        ;
+                </section>
+
+                {/* Featured Events Carousel */}
+                <section className="py-15 bg-gradient-to-r px-20 from-blue-900 to-purple-900">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">
+                                Featured Events
+                            </h2>
+                            <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+                                Highlighting our most impactful innovation and entrepreneurship events
+                            </p>
+                        </div>
+
+                        <div className="relative">
+                            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12">
+                                <div className="grid md:grid-cols-2 gap-12 items-center">
+                                    <div>
+                                        <div className="text-8xl mb-6">{featuredEvents[currentEventIndex].image}</div>
+                                        <div className="flex items-center mb-4">
+                                            <span className={`px-4 py-2 rounded-full text-sm font-medium ${featuredEvents[currentEventIndex].type === 'Keynote Lecture' ? 'bg-blue-500/20 text-blue-300' :
+                                                featuredEvents[currentEventIndex].type === 'Celebration' ? 'bg-purple-500/20 text-purple-300' :
+                                                    'bg-green-500/20 text-green-300'
+                                                }`}>
+                                                {featuredEvents[currentEventIndex].type}
+                                            </span>
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-white mb-4">{featuredEvents[currentEventIndex].title}</h3>
+                                        <p className="text-blue-200 text-lg mb-2">{featuredEvents[currentEventIndex].speaker}</p>
+                                        <p className="text-blue-300 mb-4">{featuredEvents[currentEventIndex].designation}</p>
+                                        <p className="text-gray-300 leading-relaxed">{featuredEvents[currentEventIndex].description}</p>
+                                    </div>
+
+                                    <div className="space-y-6">
+                                        <div className="flex items-center text-blue-200">
+                                            <Calendar className="w-5 h-5 mr-3" />
+                                            <span>{featuredEvents[currentEventIndex].date}</span>
+                                        </div>
+                                        <div className="flex items-center text-blue-200">
+                                            <Users className="w-5 h-5 mr-3" />
+                                            <span>{featuredEvents[currentEventIndex].attendees}</span>
+                                        </div>
+                                        <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
+                                            Learn More
+                                            <ExternalLink className="w-5 h-5 ml-2" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Carousel Indicators */}
+                            <div className="flex justify-center mt-8 space-x-2">
+                                {featuredEvents.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setCurrentEventIndex(index)}
+                                        className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentEventIndex ? 'bg-white' : 'bg-white/30'
+                                            }`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* All Events Section */}
+                <section className="py-15 px-30 bg-white/80 backdrop-blur-sm">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                All Events
+                            </h2>
+                            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                                Comprehensive list of our innovation and entrepreneurship activities
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {allEvents.map((event, index) => (
+                                <div key={index} className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${event.type === 'Lecture' ? 'bg-blue-100 text-blue-800' :
+                                            event.type === 'Workshop' ? 'bg-green-100 text-green-800' :
+                                                event.type === 'Training' ? 'bg-purple-100 text-purple-800' :
+                                                    event.type === 'Competition' ? 'bg-yellow-100 text-yellow-800' :
+                                                        'bg-orange-100 text-orange-800'
+                                            }`}>
+                                            {event.type}
+                                        </span>
+                                        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                                            {event.category}
+                                        </span>
+                                    </div>
+
+                                    <h3 className="text-lg font-bold mb-3 text-gray-800 leading-tight">{event.title}</h3>
+                                    <p className="text-blue-600 font-medium mb-2 text-sm">{event.speaker}</p>
+                                    <p className="text-gray-600 text-sm mb-2 flex items-center">
+                                        <Calendar className="w-4 h-4 mr-1" />
+                                        {event.date}
+                                    </p>
+                                    <p className="text-gray-500 text-sm mb-3 flex items-center">
+                                        <Users className="w-4 h-4 mr-1" />
+                                        {event.attendees}
+                                    </p>
+                                    <p className="text-gray-600 text-sm">{event.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Call to Action */}
+                <section className="py-15 bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900">
+                    <div className="container mx-auto px-4 text-center">
+                        <div className="max-w-4xl mx-auto">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                                Join the Innovation Journey
+                            </h2>
+                            <p className="text-xl mb-8 text-blue-200 leading-relaxed">
+                                Be part of GBU's thriving innovation ecosystem and transform your ideas into reality.
+                                Connect with like-minded innovators, access cutting-edge resources, and build the future.
+                            </p>
+
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                                <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group">
+                                    Get Involved
+                                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                                </button>
+                                <button className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold hover:bg-white/20 transition-all duration-300">
+                                    Contact Us
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section >
+            </div>
+        </SearchableWrapper>
+    );
 };
 
 export default InstitutionInnovation;

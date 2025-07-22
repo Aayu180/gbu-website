@@ -1,6 +1,8 @@
  import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Users, FileText, Share2, Shield, Target } from 'lucide-react';
+import { Calendar, MapPin, Users, FileText, Share2, Shield, Target, ShieldCheck, Percent } from 'lucide-react';
+import StatsCard from '../StatsCard';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 // Reusable card components
 const Card = ({ children, className = "", ...props }) => (
@@ -195,9 +197,38 @@ const NCCTraining = () => {
       default: return 'bg-gray-100 text-gray-800';
     }
   };
-
+const trainingImpactStats = [
+  {
+    icon: Calendar,
+    number: 120,
+    numberText: '120',
+    title: 'Training Periods/Year',
+    iconColor: '#3b82f6', // blue
+  },
+  {
+    icon: ShieldCheck,
+    number: 25,
+    numberText: '25+',
+    title: 'Camps Organized',
+    iconColor: '#f59e0b', // amber
+  },
+  {
+    icon: Users,
+    number: 200,
+    numberText: '200+',
+    title: 'Cadets Trained',
+    iconColor: '#10b981', // green
+  },
+  {
+    icon: Percent,
+    numberText: '95%',
+    title: 'Completion Rate',
+    iconColor: '#ef4444', // red
+  },
+];
   return (
-    <div className="space-y-8 mx-20">
+    <SearchableWrapper>
+    <div className="space-y-8 px-4 sm:px-6 lg:px-20">
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Training & Camps</h2>
@@ -205,14 +236,14 @@ const NCCTraining = () => {
           Comprehensive military training programs to develop discipline, leadership, and character
         </p>
       </div>
-
+<StatsCard stats={trainingImpactStats} />
       {/* Training Camps */}
       <div>
         <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
           <Shield className="h-6 w-6 mr-2 text-blue-900" />
           Training Camps
         </h3>
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
           {camps.map((camp) => (
             <Card key={camp.id} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <CardHeader>
@@ -317,7 +348,7 @@ const NCCTraining = () => {
           <Target className="h-6 w-6 mr-2 text-orange-600" />
           Training Modules
         </h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {trainingModules.map((module, index) => (
             <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-6">
@@ -338,30 +369,7 @@ const NCCTraining = () => {
         </div>
       </div>
 
-      {/* Training Statistics */}
-      <Card className="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
-        <CardContent className="p-8">
-          <h3 className="text-2xl font-bold mb-6 text-center">Training Impact</h3>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-4xl font-bold mb-2">120</div>
-              <div className="text-blue-100">Training Periods/Year</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">25+</div>
-              <div className="text-blue-100">Camps Organized</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">200+</div>
-              <div className="text-blue-100">Cadets Trained</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">95%</div>
-              <div className="text-blue-100">Completion Rate</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+       
 
       {/* Guidelines */}
       <Card>
@@ -369,7 +377,7 @@ const NCCTraining = () => {
           <CardTitle className="text-xl">Training Guidelines</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Before Training</h4>
               <ul className="space-y-2 text-sm text-gray-700">
@@ -394,6 +402,7 @@ const NCCTraining = () => {
         </CardContent>
       </Card>
     </div>
+    </SearchableWrapper>
   );
 };
 

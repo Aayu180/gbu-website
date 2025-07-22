@@ -1,6 +1,8 @@
  import React from "react";
 import { motion } from "framer-motion";
 
+import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
+
 // Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -49,7 +51,8 @@ const Focus = () => {
   ];
 
   return (
-    <section className="min-h-[60vh] bg-gray-100 py-12 px-4">
+    <SearchableWrapper>
+    <section className="min-h-[60vh] bg-gray-100 py-20 px-4">
       <h1 className="text-3xl font-bold text-center mb-10">
         FOCUS AND OBJECTIVE
       </h1>
@@ -59,6 +62,7 @@ const Focus = () => {
         ))}
       </div>
     </section>
+    </SearchableWrapper>
   );
 };
 

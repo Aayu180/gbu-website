@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 const testimonials = [
   {
@@ -37,6 +38,7 @@ const StudentTestimonials = () => {
   }, []);
 
   return (
+    <SearchableWrapper>
     <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
@@ -113,6 +115,7 @@ const StudentTestimonials = () => {
         </div>
       </div>
     </section>
+    </SearchableWrapper>
   );
 };
 

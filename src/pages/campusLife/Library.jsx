@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Clock, Wifi, Globe, BookOpen, Book, Armchair } from 'lucide-react';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 // Dialog components
 const Dialog = ({ open, onOpenChange, children }) => {
@@ -40,7 +41,7 @@ const DialogTitle = ({ className = "", children, ...props }) => (
 );
 
 const Card = ({ className = "", children, ...props }) => (
-  <div className={`rounded-lg border bg-white text-black shadow-sm ${className}`} {...props}>
+  <div className={`rounded-lg border-gray-300 bg-white text-black shadow-sm ${className}`} {...props}>
     {children}
   </div>
 );
@@ -89,6 +90,7 @@ const Library = () => {
   }, [BASE_URL]);
 
   return (
+    <SearchableWrapper>
     <section id="library" className="py-20 bg-gradient-to-br from-purple-50 to-blue-50">
       <div className="container mx-auto px-4">
         {/* Dynamic Title & Description */}
@@ -179,6 +181,7 @@ const Library = () => {
         )}
       </div>
     </section>
+    </SearchableWrapper>
   );
 };
 

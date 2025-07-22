@@ -1,6 +1,8 @@
  import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 
+import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
+
 Modal.setAppElement("#root");
 
 const images = [
@@ -46,6 +48,7 @@ export default function GallerySlider() {
   const currentImage = images[mainIndex];
 
   return (
+    <SearchableWrapper>
     <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 py-15 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-5">
@@ -157,5 +160,6 @@ export default function GallerySlider() {
         }
       `}</style>
     </div>
+    </SearchableWrapper>
   );
 }

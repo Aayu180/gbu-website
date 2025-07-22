@@ -7,7 +7,12 @@ import {
   Eye,
   Download,
   Shield,
+  CalendarDays,
+  Video,
+  Image,
 } from 'lucide-react';
+import StatsCard from '../StatsCard';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 /* UI Components */
 
@@ -220,7 +225,32 @@ const NCCGallery = () => {
     },
     // Add more items as you like
   ];
-
+const galleryStatsData = [
+  {
+    icon: Image,
+    numberText: "800+",
+    title: "Total Photos",
+   iconColor: '#3b82f6',
+  },
+  {
+    icon: CalendarDays,
+    numberText: "75+",
+    title: "Events Documented",
+      iconColor: '#f97316'
+  },
+  {
+    icon: Video,
+    numberText: "30+",
+    title: "Training Videos",
+     iconColor: '#10b981',
+  },
+  {
+    icon: Eye,
+    numberText: "15K+",
+    title: "Total Views",
+   iconColor: '#8b5cf6'
+  },
+];
   const filteredItems = galleryItems.filter((item) => {
     const yearMatch = selectedYear === 'all' || item.year === selectedYear;
     const categoryMatch = selectedCategory === 'all' || item.category === selectedCategory;
@@ -239,12 +269,12 @@ const NCCGallery = () => {
   };
 const [dialogImage, setDialogImage] = useState(null);
   return (
-
+<SearchableWrapper>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="space-y-8 mx-20"
+      className="space-y-8 px-4 sm:px-6 md:px-10 lg:px-20"
     >
       {/* HEADER */}
       <motion.div
@@ -258,7 +288,7 @@ const [dialogImage, setDialogImage] = useState(null);
           Capturing moments of discipline, training, and camaraderie
         </p>
       </motion.div>
-
+<StatsCard stats={galleryStatsData}/>
       {/* FILTERS */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -267,7 +297,7 @@ const [dialogImage, setDialogImage] = useState(null);
       >
         <Card>
           <CardContent className="p-6">
-            <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex flex-wrap gap-3 items-center justify-center sm:justify-start">
               <div className="flex items-center space-x-2">
                 <Filter className="h-4 w-4 text-gray-600" />
                 <span className="text-sm font-medium text-gray-700">Filter by:</span>
@@ -300,90 +330,7 @@ const [dialogImage, setDialogImage] = useState(null);
         </Card>
       </motion.div>
 
-      {/* GALLERY GRID */}
-
-      {/* <div className="space-y-8">
-
-        {filteredItems.map((item) => (
-          <motion.div
-            key={item.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ scale: 1.01 }}
-          >
-            <Card className="overflow-hidden">
-              <CardHeader>
-                <div className="flex justify-between items-start">
-                  <div>
-                    <CardTitle className="text-xl text-gray-900">{item.title}</CardTitle>
-                    <p className="text-gray-600 mt-1">
-                      {new Date(item.date).toLocaleDateString('en-IN', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </p>
-                  </div>
-                  <div className="flex space-x-2">
-                    <Badge className={getCategoryColor(item.category)}>
-                      {item.category}
-                    </Badge>
-                    <Badge variant="outline">{item.year}</Badge>
-                  </div>
-
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {item.images.map((image, index) => (
-                    <Dialog key={index}>
-                      <DialogTrigger asChild>
-                        <motion.div
-                          whileHover={{ scale: 1.05 }}
-                          className="relative group cursor-pointer"
-                        >
-                          <img
-                            src={image.url}
-                            alt={image.caption}
-                            className="w-full h-32 object-cover rounded-lg"
-                          />
-                          <div className="absolute field inset-0  bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                            <Eye className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          </div>
-                        </motion.div>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-4xl mb-5">
-                        <div className="space-y-4">
-                          <img
-                            src={image.url}
-                            alt={image.caption}
-                            className="w-full h-auto rounded-lg"
-                          />
-                          <div className="flex justify-between items-center">
-                            <p className="text-gray-700">{image.caption}</p>
-                            <Button variant="outline" size="sm">
-                              <Download className="h-4 w-4 mr-2" />
-                              Download
-                            </Button>
-                          </div>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  ))}
-                </div>
-                <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
-                  <span className="text-sm text-gray-600">{item.images.length} photos</span>
-                  <Button variant="outline" size="sm">
-                    <Download className="h-4 w-4 mr-2" />
-                    Download All
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div> */}
+      
 {/* GALLERY GRID */}
       <motion.div
         className="space-y-8"
@@ -404,7 +351,7 @@ const [dialogImage, setDialogImage] = useState(null);
             className="bg-white rounded-lg shadow overflow-hidden"
           >
             <div className="p-4 border-b border-gray-200">
-              <div className="flex justify-between items-start">
+              <div className="flex flex-col sm:flex-row justify-between items-start gap-2">
                 <div>
                   <h3 className="font-semibold text-xl text-gray-900">{item.title}</h3>
                   <p className="text-gray-600 mt-1">
@@ -431,7 +378,7 @@ const [dialogImage, setDialogImage] = useState(null);
             </div>
 
             <div className="p-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {item.images.map((image, index) => (
                   <motion.div
                     key={index}
@@ -457,10 +404,7 @@ const [dialogImage, setDialogImage] = useState(null);
 
               <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
                 <span className="text-sm text-gray-600">{item.images.length} photos</span>
-                <button className="flex items-center gap-2 px-4 py-2 text-sm border rounded text-gray-700 bg-white hover:bg-gray-50">
-                  <Download className="h-4 w-4" />
-                  Download All
-                </button>
+                
               </div>
             </div>
 
@@ -518,10 +462,7 @@ const [dialogImage, setDialogImage] = useState(null);
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
                   <p className="text-gray-700 text-center sm:text-left">{dialogImage.caption}</p>
-                  <button className="flex items-center gap-2 px-4 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700 transition">
-                    <Download className="h-4 w-4" />
-                    Download
-                  </button>
+                  
                 </div>
               </div>
             </motion.div>
@@ -543,7 +484,7 @@ const [dialogImage, setDialogImage] = useState(null);
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {[
                 { title: 'Drill Training Highlights', duration: '5:30', views: '2.1K' },
                 { title: 'Adventure Camp Documentary', duration: '12:45', views: '3.5K' },
@@ -570,58 +511,8 @@ const [dialogImage, setDialogImage] = useState(null);
           </CardContent>
         </Card>
       </motion.div>
-
-      {/* STATISTICS */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Card className="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
-          <CardContent className="p-8">
-            <h3 className="text-2xl font-bold mb-6 text-center">Gallery Statistics</h3>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-              <div>
-                <div className="text-4xl font-bold mb-2">800+</div>
-                <div className="text-blue-100">Total Photos</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold mb-2">75+</div>
-                <div className="text-blue-100">Events Documented</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold mb-2">30+</div>
-                <div className="text-blue-100">Training Videos</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold mb-2">15K+</div>
-                <div className="text-blue-100">Total Views</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
-
-      {/* UPLOAD SECTION */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Card className="border-2 border-dashed border-gray-300 hover:border-orange-400 transition-colors">
-          <CardContent className="flex flex-col items-center justify-center py-12">
-            <Shield className="h-12 w-12 text-gray-400 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-600 mb-2">Add New Media</h3>
-            <p className="text-gray-500 text-center mb-4">
-              Upload photos or videos of recent events to enrich the gallery.
-            </p>
-            <Button>
-              Upload Media
-            </Button>
-          </CardContent>
-        </Card>
-      </motion.div>
     </motion.div>
+    </SearchableWrapper>
   );
 };
 

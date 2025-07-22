@@ -1,6 +1,9 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+
+import ButtonGroup from "../../../components/TabsData.jsx";
+import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.jsx";
 
 const categories = ["All", "Workshops", "Seminars", "Hackathons"];
 
@@ -91,129 +94,133 @@ export default function EventsGrid() {
       ? events
       : events.filter((e) => e.category === selectedCategory);
 
+  const categoryButtons = categories.map((cat) => ({
+    id: cat,
+    label: cat,
+  }));
+
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="text-center mb-5">
-        <h1 className="text-3xl font-bold text-center mb-8">EVENT GALLERY</h1>
-      </div>
+    <SearchableWrapper>
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="text-center mb-5">
+          <h1 className="text-3xl font-bold text-center mb-8">EVENT GALLERY</h1>
+        </div>
 
-      {/* Tabs */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`px-4 py-1 rounded-full border ${
-              selectedCategory === cat
-                ? "bg-blue-600 text-white border-blue-600"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-            } transition`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+        {/* Tabs */}
+        <div className="text-center mb-5">
+          <ButtonGroup
+            buttons={categoryButtons}
+            onClick={setSelectedCategory}
+            activeButton={selectedCategory}
+            size="md"
+            theme="primary"
+            gap={true}      // allows spacing between buttons
+            rounded="full"  // makes them pill-shaped like your old buttons
+          />
+        </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {filteredEvents.map((event, idx) => (
-          <motion.div
-            key={idx}
-            custom={idx}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            onClick={() => setSelectedEvent(event)}
-            className="bg-white rounded-2xl shadow-md shadow-gray-300 border border-gray-100 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-transform duration-300 overflow-hidden"
-          >
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <div className="flex items-center justify-between mb-2">
-                <p className="text-xs text-gray-500">{event.date}</p>
-                {event.category && (
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
-                    {event.category}
-                  </span>
-                )}
-              </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-1">
-                {event.title}
-              </h3>
-              <p className="text-sm text-gray-600 line-clamp-2">
-                {event.description}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Modal */}
-      <AnimatePresence>
-        {selectedEvent && (
-          <motion.div
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedEvent(null)}
-          >
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {filteredEvents.map((event, idx) => (
             <motion.div
-              className="bg-white max-w-3xl w-full rounded-xl overflow-hidden relative shadow-xl shadow-gray-400"
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
+              key={idx}
+              custom={idx}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              onClick={() => setSelectedEvent(event)}
+              className="bg-white rounded-2xl shadow-md shadow-gray-300 border border-gray-100 cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-transform duration-300 overflow-hidden"
             >
-              <button
-                onClick={() => setSelectedEvent(null)}
-                className="absolute top-3 right-3 text-gray-600 hover:text-black"
-              >
-                <X className="w-6 h-6" />
-              </button>
-              {selectedEvent.images?.length ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {selectedEvent.images.map((src, i) => (
-                    <img
-                      key={i}
-                      src={src}
-                      alt={`${selectedEvent.title} ${i + 1}`}
-                      className="w-full h-48 object-cover"
-                    />
-                  ))}
+              <img
+                src={event.image}
+                alt={event.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs text-gray-500">{event.date}</p>
+                  {event.category && (
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
+                      {event.category}
+                    </span>
+                  )}
                 </div>
-              ) : (
-                <img
-                  src={selectedEvent.image}
-                  alt={selectedEvent.title}
-                  className="w-full h-64 object-cover"
-                />
-              )}
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                  {selectedEvent.title}
+                <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                  {event.title}
                 </h3>
-                <p className="text-sm text-gray-500 mb-4">
-                  {selectedEvent.date}
+                <p className="text-sm text-gray-600 line-clamp-2">
+                  {event.description}
                 </p>
-                <p className="text-sm text-gray-700 whitespace-pre-line">
-                  {selectedEvent.detailedDescription || selectedEvent.description}
-                </p>
-                {selectedEvent.category && (
-                  <span className="inline-block mt-4 text-xs px-2 py-1 rounded bg-blue-100 text-blue-700">
-                    {selectedEvent.category}
-                  </span>
-                )}
               </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+          ))}
+        </div>
+
+        {/* Modal */}
+        <AnimatePresence>
+          {selectedEvent && (
+            <motion.div
+              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedEvent(null)}
+            >
+              <motion.div
+                className="bg-white max-w-3xl w-full rounded-xl overflow-hidden relative shadow-xl shadow-gray-400"
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setSelectedEvent(null)}
+                  className="absolute top-3 right-3 text-gray-600 hover:text-black"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+                {selectedEvent.images?.length ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {selectedEvent.images.map((src, i) => (
+                      <img
+                        key={i}
+                        src={src}
+                        alt={`${selectedEvent.title} ${i + 1}`}
+                        className="w-full h-48 object-cover"
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <img
+                    src={selectedEvent.image}
+                    alt={selectedEvent.title}
+                    className="w-full h-64 object-cover"
+                  />
+                )}
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                    {selectedEvent.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-4">
+                    {selectedEvent.date}
+                  </p>
+                  <p className="text-sm text-gray-700 whitespace-pre-line">
+                    {selectedEvent.detailedDescription || selectedEvent.description}
+                  </p>
+                  {selectedEvent.category && (
+                    <span className="inline-block mt-4 text-xs px-2 py-1 rounded bg-blue-100 text-blue-700">
+                      {selectedEvent.category}
+                    </span>
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </SearchableWrapper>
   );
 }

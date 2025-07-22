@@ -1,4 +1,10 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
+
+import { BookOpen, Users, DollarSign, Award } from "lucide-react";
+
+import BannerSection from "../../components/HeroBanner.jsx";
+import StatsCard from "../../components/StatsCard.jsx";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
 const ResearchCenters = () => {
   const centers = [
@@ -181,219 +187,193 @@ const ResearchCenters = () => {
     return matchesSchool && matchesTechnology && matchesSearch;
   });
 
+  const statsData = [
+    {
+      icon: BookOpen,
+      number: 20,
+      title: "Research Centers",
+      iconColor: "#2563eb", // blue-600
+    },
+    {
+      icon: Users,
+      number: 150,
+      title: "Research Faculty",
+      iconColor: "#16a34a", // green-600
+    },
+    {
+      icon: DollarSign,
+      numberText: "₹50Cr+",
+      title: "Research Funding",
+      iconColor: "#0891b2", // cyan-600
+    },
+    {
+      icon: Award,
+      number: 300,
+      title: "Active Projects",
+      iconColor: "#eab308", // yellow-500
+    },
+  ];
+
+
   return (
-    <div className="min-h-screen bg-gray-50 pb-16">
-      {/* Hero Section */}
+    <SearchableWrapper>
+      <div className="min-h-screen bg-gray-50 pb-16">
+        {/* Hero Section */}
+        <BannerSection
+          title="Center of Excellence & Laboratories"
+          subtitle="World-class research facilities driving innovation across disciplines"
+          bgTheme={2}
+        />
 
-      <section className="relative h-96 bg-gradient-to-r from-cyan-900 via-blue-800 to-purple-800 overflow-hidden">
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{
-            backgroundImage:
-              'url("https://www.gburif.org/Photo%20Gallery/img/img-12.jpg")',
-          }}
-        ></div>
-        <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4">
-              Center of Excellence & Laboratories
-            </h1>
-            <p className="text-xl opacity-90">
-              World-class research facilities driving innovation across
-              disciplines
-            </p>
-          </div>
-        </div>
-      </section>
+        {/* Stats */}
+        <StatsCard stats={statsData} />
+        {/* Filters */}
+        <div className="max-w-6xl mx-auto mt-10 px-4">
+          <div className="flex flex-wrap gap-4 items-center ">
+            {/* School Filter */}
+            <div className="flex flex-col ">
 
-      {/* Stats */}
-
-      <div className="py-12 mb-10 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {/* Startups Incubated */}
-            <div className="bg-white shadow-sm hover:shadow-md transition rounded-lg p-6 text-center border-t-4 border-blue-600">
-              <div className="text-4xl font-bold text-blue-700">20+</div>
-              <p className="text-gray-600 mt-2 text-sm font-medium tracking-wide">
-                Research Centers
-              </p>
-            </div>
-
-            {/* Funding Raised */}
-            <div className="bg-white shadow-sm hover:shadow-md transition rounded-lg p-6 text-center border-t-4 border-green-600">
-              <div className="text-4xl font-bold text-green-700">150+</div>
-              <p className="text-gray-600 mt-2 text-sm font-medium tracking-wide">
-                Research Faculty
-              </p>
-            </div>
-
-            {/* Jobs Created */}
-            <div className="bg-white shadow-sm hover:shadow-md transition rounded-lg p-6 text-center border-t-4 border-cyan-600">
-              <div className="text-4xl font-bold text-cyan-700">₹50Cr+</div>
-              <p className="text-gray-600 mt-2 text-sm font-medium tracking-wide">
-                Research Funding
-              </p>
-            </div>
-
-            {/* Success Rate */}
-            <div className="bg-white shadow-sm hover:shadow-md transition rounded-lg p-6 text-center border-t-4 border-yellow-500">
-              <div className="text-4xl font-bold text-yellow-600">300+</div>
-              <p className="text-gray-600 mt-2 text-sm font-medium tracking-wide">
-                Active Projects
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Filters */}
-      <div className="max-w-6xl mx-auto mt-10 px-4">
-       <div className="flex flex-wrap gap-4 items-center ">
-    {/* School Filter */}
-    <div className="flex flex-col ">
-     
-      <select
-        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        value={selectedSchool}
-        onChange={(e) => setSelectedSchool(e.target.value)}
-      >
-        <option value="all">All Schools</option>
-        {schools.map((school, idx) => (
-          <option key={idx} value={school}>
-            {school}
-          </option>
-        ))}
-      </select>
-    </div>
-
-    {/* Technology Filter */}
-    <div className="flex flex-col">
-       
-      <select
-        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        value={selectedTechnology}
-        onChange={(e) => setSelectedTechnology(e.target.value)}
-      >
-        <option value="all">All Technologies</option>
-        {technologies.map((tech, idx) => (
-          <option key={idx} value={tech}>
-            {tech}
-          </option>
-        ))}
-      </select>
-    </div>
-
-    {/* Search Bar */}
-    <div className="flex flex-col flex-grow min-w-[200px]">
-       
-      <input
-        type="text"
-        placeholder="Search by name..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
-  </div>
-
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-          {filteredCenters.length > 0 ? (
-            filteredCenters.map((center) => (
-              <div
-                key={center.id}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-6 flex flex-col"
+              <select
+                className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={selectedSchool}
+                onChange={(e) => setSelectedSchool(e.target.value)}
               >
-                <div className="relative mb-4">
-                  <img
-                    src={center.image}
-                    alt={center.name}
-                    className="w-full h-52 object-cover rounded-xl"
-                  />
-                  <span className="absolute top-3 right-3 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                    Est. {center.established}
-                  </span>
-                </div>
+                <option value="all">All Schools</option>
+                {schools.map((school, idx) => (
+                  <option key={idx} value={school}>
+                    {school}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-                <h3 className="text-lg font-semibold text-blue-700">
-                  {center.name}
-                </h3>
-                <p className="text-sm text-gray-500 mb-2">{center.shortName}</p>
+            {/* Technology Filter */}
+            <div className="flex flex-col">
+
+              <select
+                className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={selectedTechnology}
+                onChange={(e) => setSelectedTechnology(e.target.value)}
+              >
+                <option value="all">All Technologies</option>
+                {technologies.map((tech, idx) => (
+                  <option key={idx} value={tech}>
+                    {tech}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Search Bar */}
+            <div className="flex flex-col flex-grow min-w-[200px]">
+
+              <input
+                type="text"
+                placeholder="Search by name..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            {filteredCenters.length > 0 ? (
+              filteredCenters.map((center) => (
                 <div
-                  className={`inline-block mb-2 text-xs font-semibold px-2 py-1 rounded-full ${
-                    schoolColors[center.school]
-                  }`}
+                  key={center.id}
+                  className="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-6 flex flex-col"
                 >
-                  {center.school}
-                </div>
-                <p className="text-gray-600 text-sm mb-4">
-                  {center.description}
-                </p>
+                  <div className="relative mb-4">
+                    <img
+                      src={center.image}
+                      alt={center.name}
+                      className="w-full h-52 object-cover rounded-xl"
+                    />
+                    <span className="absolute top-3 right-3 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      Est. {center.established}
+                    </span>
+                  </div>
 
-                <div className="text-sm text-gray-700 mb-4 space-y-1">
-                  <p>
-                    <span className="font-semibold text-blue-600">Head:</span>{" "}
-                    {center.head}
+                  <h3 className="text-lg font-semibold text-blue-700">
+                    {center.name}
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-2">{center.shortName}</p>
+                  <div
+                    className={`inline-block mb-2 text-xs font-semibold px-3 py-2 rounded-full ${schoolColors[center.school]
+                      }`}
+                  >
+                    {center.school}
+                  </div>
+                  <p className="text-gray-600 text-sm mb-4">
+                    {center.description}
                   </p>
-                  <p>
-                    <span className="font-semibold text-blue-600">
-                      Location:
-                    </span>{" "}
-                    {center.location}
-                  </p>
-                </div>
 
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-blue-600 mb-1">
-                    Key Facilities:
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {center.facilities.map((facility, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full"
-                      >
-                        {facility}
-                      </span>
-                    ))}
+                  <div className="text-sm text-gray-700 mb-4 space-y-1">
+                    <p>
+                      <span className="font-semibold text-blue-600">Head:</span>{" "}
+                      {center.head}
+                    </p>
+                    <p>
+                      <span className="font-semibold text-blue-600">
+                        Location:
+                      </span>{" "}
+                      {center.location}
+                    </p>
+                  </div>
+
+                  <div className="mb-4">
+                    <h4 className="text-sm font-semibold text-blue-600 mb-1">
+                      Key Facilities:
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {center.facilities.map((facility, idx) => (
+                        <span
+                          key={idx}
+                          className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full"
+                        >
+                          {facility}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-blue-600 mb-1">
+                      Research Areas:
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {center.researchAreas.map((area, idx) => (
+                        <span
+                          key={idx}
+                          className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
+                        >
+                          {area}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-auto flex gap-3">
+                    <button className="bg-blue-600 text-white text-sm px-4 py-2 rounded-md w-full hover:bg-blue-700">
+                      Visit Lab
+                    </button>
+                    <button className="border border-blue-600 text-blue-600 text-sm px-4 py-2 rounded-md w-full hover:bg-blue-50">
+                      Contact
+                    </button>
                   </div>
                 </div>
-
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-blue-600 mb-1">
-                    Research Areas:
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {center.researchAreas.map((area, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
-                      >
-                        {area}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-auto flex gap-3">
-                  <button className="bg-blue-600 text-white text-sm px-4 py-2 rounded-md w-full hover:bg-blue-700">
-                    Visit Lab
-                  </button>
-                  <button className="border border-blue-600 text-blue-600 text-sm px-4 py-2 rounded-md w-full hover:bg-blue-50">
-                    Contact
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p className="text-center text-gray-500 col-span-2">
-              No research centers found matching your criteria.
-            </p>
-          )}
+              ))
+            ) : (
+              <p className="text-center text-gray-500 col-span-2">
+                No research centers found matching your criteria.
+              </p>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </SearchableWrapper>
   );
 };
 

@@ -1,5 +1,7 @@
  import React from "react";
 
+ import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
+
 const importantLinks = [
   {
     id: 1,
@@ -35,7 +37,8 @@ const importantLinks = [
 
 export default function ImportantLinks() {
   return (
-    <section className="py-16  px-8   to-white">
+    <SearchableWrapper>
+    <section className="py-16 px-30 bg-white">
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-bold text-center mb-8">
           Important Links
@@ -45,7 +48,7 @@ export default function ImportantLinks() {
           {importantLinks.map((item) => (
             <div
               key={item.id}
-              className="bg-white shadow-lg rounded-xl p-6 flex flex-col justify-between hover:shadow-2xl transition-shadow duration-300 border border-gray-100"
+              className="bg-white rounded-xl p-6 flex flex-col justify-between shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-100"
             >
               <div>
                 <h3 className="text-xl font-bold text-gray-700 mb-2">
@@ -60,7 +63,7 @@ export default function ImportantLinks() {
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors text-center"
+                className="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-center"
               >
                 Visit
               </a>
@@ -69,5 +72,6 @@ export default function ImportantLinks() {
         </div>
       </div>
     </section>
+    </SearchableWrapper>
   );
 }

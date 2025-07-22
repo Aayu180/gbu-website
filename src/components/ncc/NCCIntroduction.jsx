@@ -25,14 +25,11 @@ const CardContent = ({ className = "", children }) => (
   <div className={`px-6 pb-6 ${className}`}>{children}</div>
 );
 import { Shield, Target, Users, Award, Star, Flag } from 'lucide-react';
-
+import StatsCard from "../StatsCard";
+import SearchableWrapper from "../Searchbar/SearchableWrapper";
+ 
 const NCCIntroduction = () => {
-  const stats = [
-    { icon: Users, label: 'Enrolled Cadets', value: '300+', color: 'text-blue-600' },
-    { icon: Shield, label: 'Training Camps', value: '25+', color: 'text-orange-600' },
-    { icon: Award, label: 'Certificates Earned', value: '100+', color: 'text-green-600' },
-    { icon: Star, label: 'RDC Selections', value: '15+', color: 'text-purple-600' },
-  ];
+ 
 
   const objectives = [
     {
@@ -64,9 +61,40 @@ const NCCIntroduction = () => {
     intakeCapacity: 150,
     establishedYear: 2015
   };
+const nccStatsData = [
+  {
+    icon: Users,
+    number: 300,
+    numberText: '300+',
+    title: 'Enrolled Cadets',
+    iconColor: '#3b82f6', // blue
+  },
+  {
+    icon: Shield,
+    number: 25,
+    numberText: '25+',
+    title: 'Training Camps',
+    iconColor: '#f97316', // orange
+  },
+  {
+    icon: Award,
+    number: 100,
+    numberText: '100+',
+    title: 'Certificates Earned',
+    iconColor: '#10b981', // green
+  },
+  {
+    icon: Star,
+    number: 15,
+    numberText: '15+',
+    title: 'RDC Selections',
+    iconColor: '#8b5cf6', // purple
+  },
+];
 
   return (
-    <div className="space-y-8 mx-20">
+    <SearchableWrapper>
+    <div className="space-y-8 px-4 sm:px-6 md:px-10 lg:px-20">
       {/* Mission Statement */}
       <Card className="border-l-4 border-l-orange-600">
         <CardHeader>
@@ -91,7 +119,7 @@ const NCCIntroduction = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="text-center">
               <div className="text-3xl font-bold mb-2">{unitDetails.wing}</div>
               <div className="text-blue-100">Affiliated Wing</div>
@@ -121,22 +149,11 @@ const NCCIntroduction = () => {
       </Card>
 
       {/* Statistics */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => (
-          <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
-            <CardContent className="pt-6">
-              <stat.icon className={`h-12 w-12 mx-auto mb-4 ${stat.color}`} />
-              <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
-              <div className="text-sm text-gray-600">{stat.label}</div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
+      <StatsCard stats={nccStatsData} />
       {/* Objectives */}
       <div>
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">NCC Objectives</h2>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {objectives.map((objective, index) => (
             <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <CardContent className="p-6">
@@ -177,7 +194,7 @@ const NCCIntroduction = () => {
           <p className="text-xl mb-6">
             Be part of a disciplined force that builds character, leadership, and patriotism.
           </p>
-          <div className="flex justify-center space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <button className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
               Apply Now
             </button>
@@ -188,6 +205,7 @@ const NCCIntroduction = () => {
         </CardContent>
       </Card>
     </div>
+    </SearchableWrapper>
   );
 };
 

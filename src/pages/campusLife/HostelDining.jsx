@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useToast } from '../../hooks/use-toast';
+import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 // === Minimal UI elements ===
 const Button = ({ children, className = '', ...props }) => (
@@ -24,7 +25,7 @@ const Label = ({ htmlFor, children }) => (
 );
 
 const Card = ({ children, className = '', ...props }) => (
-  <div className={`rounded-lg border bg-white shadow-sm ${className}`} {...props}>
+  <div className={`rounded-lg border-gray-300 bg-white shadow-sm ${className}`} {...props}>
     {children}
   </div>
 );
@@ -243,6 +244,7 @@ const HostelLife = () => {
   if (hostels.length === 0) return <div className="text-center py-20">Loading...</div>;
 
   return (
+    <SearchableWrapper>
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
@@ -301,6 +303,7 @@ const HostelLife = () => {
         />
       </div>
     </section>
+    </SearchableWrapper>
   );
 };
 

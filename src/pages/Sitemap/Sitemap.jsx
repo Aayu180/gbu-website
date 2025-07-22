@@ -11,46 +11,71 @@ import {
   Calendar,
   Briefcase,
   Heart,
-  Phone
+  Phone,
 } from "lucide-react";
 
-// Card, CardContent, CardHeader, CardTitle
+import { motion } from "framer-motion";
+
+import BannerSection from "../../components/HeroBanner.jsx";
+import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+
+// 💠 Basic Card with motion lift
 const Card = ({ children, className = "" }) => (
-  <div className={`rounded-xl shadow bg-white ${className}`}>{children}</div>
+  <motion.div
+    variants={fadeIn}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+    whileHover={{
+      y: -6,
+      boxShadow: "0 12px 40px rgba(0,0,0,0.08)",
+      backgroundColor: "rgba(255,255,255,0.98)",
+    }}
+    className={`rounded-2xl bg-white/80 backdrop-blur-lg transition-all duration-300 ${className}`}
+  >
+    {children}
+  </motion.div>
 );
 const CardHeader = ({ children, className = "" }) => (
-  <div className={`px-6 pt-6 pb-2 ${className}`}>{children}</div>
+  <div className={`px-8 pt-8 pb-3 ${className}`}>{children}</div>
 );
 const CardTitle = ({ children, className = "" }) => (
-  <div className={`text-xl font-semibold ${className}`}>{children}</div>
+  <h2 className={`text-xl font-semibold tracking-tight ${className}`}>{children}</h2>
 );
 const CardContent = ({ children, className = "" }) => (
-  <div className={`px-6 pb-6 ${className}`}>{children}</div>
+  <div className={`px-8 pb-8 ${className}`}>{children}</div>
 );
 
 // Input
 const Input = ({ className = "", ...props }) => (
   <input
-    className={`block w-full rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-100 outline-none transition px-3 py-2 text-base ${className}`}
+    className={`block w-full rounded-xl border border-gray-300 focus:border-blue-600 focus:ring focus:ring-blue-100 outline-none transition px-4 py-3 text-base font-medium ${className}`}
     {...props}
   />
 );
 
-// Collapsible, CollapsibleContent, CollapsibleTrigger
-import { useState as useLocalState } from "react";
-const Collapsible = ({ open, onOpenChange, children }) => {
-  return <div>{children}</div>;
-};
+// Collapsible
+const Collapsible = ({ children }) => <div>{children}</div>;
 const CollapsibleTrigger = ({ children, className = "", ...props }) => (
   <button
     type="button"
-    className={`flex w-full items-center justify-between focus:outline-none ${className}`}
+    className={`flex w-full items-center justify-between text-left focus:outline-none ${className}`}
     {...props}
   >
     {children}
   </button>
 );
 const CollapsibleContent = ({ children }) => <div>{children}</div>;
+
+// Motion
+const fadeIn = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 const sitemapAbout = [
   {
@@ -179,135 +204,128 @@ const Sitemap = () => {
 
   const filteredData = searchTerm
     ? sitemapAbout
-        .map((section) => ({
-          ...section,
-          children: section.children?.filter(
-            (child) =>
-              child.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              section.title.toLowerCase().includes(searchTerm.toLowerCase())
-          ),
-        }))
-        .filter(
-          (section) =>
-            section.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            (section.children && section.children.length > 0)
-        )
+      .map((section) => ({
+        ...section,
+        children: section.children?.filter(
+          (child) =>
+            child.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            section.title.toLowerCase().includes(searchTerm.toLowerCase())
+        ),
+      }))
+      .filter(
+        (section) =>
+          section.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (section.children && section.children.length > 0)
+      )
     : sitemapAbout;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
-        <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
-          <Link to="/" className="flex items-center hover:text-blue-600 transition-colors">
-            <Home className="w-4 h-4 mr-1" />
-            Home
-          </Link>
-          <ChevronRight className="w-4 h-4" />
-          <span className="font-medium text-gray-900">Sitemap</span>
-        </nav>
+    <SearchableWrapper>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 font-sans">
+        {/* <nav className="flex items-center space-x-2 pt-6 pl-8 text-sm text-gray-600 mb-8">
+        <Link to="/" className="flex items-center hover:text-blue-600 transition-colors">
+          <Home className="w-4 h-4 mr-1" />
+          Home
+        </Link>
+        <ChevronRight className="w-4 h-4" />
+        <span className="font-medium text-gray-900">Sitemap</span>
+      </nav> */}
 
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Website Sitemap</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Navigate through our comprehensive website structure. Find all pages and sections organized by category.
-          </p>
-        </div>
+        <BannerSection
+          title="Website Sitemap"
+          subtitle="Easily navigate all pages & sections. Find what you need instantly."
+          bgTheme={8}
+        />
 
-        <div className="max-w-md mx-auto mb-8">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <Input
-              type="text"
-              placeholder="Search pages..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-3 w-full border-2 border-gray-200 focus:border-blue-500 rounded-lg shadow-sm"
-            />
-          </div>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredData.map((section) => (
-            <Card
-              key={section.title}
-              className="group hover:shadow-xl transition-all duration-300 border-0 shadow-lg bg-white/80 backdrop-blur-sm hover:bg-white/95"
-            >
-              <CardHeader>
-                <Collapsible
-                  open={openSections[section.title] ?? true}
-                  onOpenChange={() => toggleSection(section.title)}
-                >
-                  <CollapsibleTrigger className="w-full">
-                    <CardTitle className="flex items-center justify-between text-left group-hover:text-blue-600 transition-colors">
-                      <div className="flex items-center space-x-3">
-                        {section.icon && <section.icon className="w-6 h-6 text-blue-600" />}
-                        <span className="text-lg font-semibold">{section.title}</span>
-                      </div>
-                      {openSections[section.title] ?? true ? (
-                        <ChevronDown className="w-5 h-5 text-gray-400 transition-transform duration-200" />
-                      ) : (
-                        <ChevronRight className="w-5 h-5 text-gray-400 transition-transform duration-200" />
-                      )}
-                    </CardTitle>
-                  </CollapsibleTrigger>
-                </Collapsible>
-              </CardHeader>
-
-              <Collapsible
-                open={openSections[section.title] ?? true}
-                onOpenChange={() => toggleSection(section.title)}
-              >
-                <CollapsibleContent>
-                  <CardContent className="pt-0">
-                    <div className="space-y-2">
-                      <Link
-                        to={section.path}
-                        className="block p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors duration-200 border-l-4 border-blue-500"
-                      >
-                        <span className="font-medium text-blue-700 hover:text-blue-800">
-                          {section.title} Overview
-                        </span>
-                      </Link>
-
-                      {section.children?.map((child) => (
-                        <Link
-                          key={child.path}
-                          to={child.path}
-                          className="block p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 border-l-2 border-transparent hover:border-gray-300 ml-4"
-                        >
-                          <span className="text-gray-700 hover:text-gray-900">{child.title}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  </CardContent>
-                </CollapsibleContent>
-              </Collapsible>
-            </Card>
-          ))}
-        </div>
-
-        {searchTerm && filteredData.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-400 mb-4">
-              <Search className="w-16 h-16 mx-auto" />
+        <motion.div
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="container mx-auto px-6 py-14 max-w-7xl"
+        >
+          <div className="max-w-md mx-auto mb-12">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Input
+                type="text"
+                placeholder="Search pages..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-12 pr-4 py-4 w-full border-2 border-gray-200 focus:border-blue-500 rounded-xl shadow-sm"
+              />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No pages found</h3>
-            <p className="text-gray-600">
-              Try searching with different keywords or browse all sections above.
-            </p>
           </div>
-        )}
 
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center space-x-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-gray-200">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-gray-600">
-              {getAllLinks(sitemapAbout).length + sitemapAbout.length} total pages available
-            </span>
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+            {filteredData.map((section) => (
+              <Card key={section.title} className="group">
+                <CardHeader>
+                  <Collapsible>
+                    <CollapsibleTrigger onClick={() => toggleSection(section.title)}>
+                      <CardTitle className="flex items-center justify-between">
+                        <span className="flex items-center space-x-3">
+                          {section.icon && <section.icon className="w-6 h-6 text-blue-600" />}
+                          <span className="font-semibold text-gray-800 group-hover:text-blue-700 transition-colors">
+                            {section.title}
+                          </span>
+                        </span>
+                        {(openSections[section.title] ?? true) ? (
+                          <ChevronDown className="w-5 h-5 text-gray-400" />
+                        ) : (
+                          <ChevronRight className="w-5 h-5 text-gray-400" />
+                        )}
+                      </CardTitle>
+                    </CollapsibleTrigger>
+                  </Collapsible>
+                </CardHeader>
+
+                {(openSections[section.title] ?? true) && (
+                  <CollapsibleContent>
+                    <CardContent className="pt-0">
+                      <div className="space-y-3">
+                        <Link
+                          to={section.path}
+                          className="block p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition border-l-4 border-blue-500"
+                        >
+                          <span className="font-medium text-blue-700">{section.title} Overview</span>
+                        </Link>
+                        {section.children?.map((child) => (
+                          <Link
+                            key={child.path}
+                            to={child.path}
+                            className="block p-3 rounded-lg hover:bg-gray-50 border-l-2 border-transparent hover:border-gray-300 ml-5"
+                          >
+                            <span className="text-gray-700">{child.title}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </CollapsibleContent>
+                )}
+              </Card>
+            ))}
           </div>
-        </div>
+
+          {searchTerm && filteredData.length === 0 && (
+            <div className="text-center py-14">
+              <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No pages found</h3>
+              <p className="text-gray-600">Try different keywords or browse all sections above.</p>
+            </div>
+          )}
+
+          <div className="mt-14 text-center">
+            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-600">
+                {getAllLinks(sitemapAbout).length + sitemapAbout.length} pages available
+              </span>
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </SearchableWrapper>
   );
 };
 

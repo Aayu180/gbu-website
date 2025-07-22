@@ -8,6 +8,7 @@ import {
   ExternalLink,
   Shield
 } from "lucide-react";
+import SearchableWrapper from "../Searchbar/SearchableWrapper";
 
 // Card Component (with hover scaling)
 const Card = ({ className = "", children }) => (
@@ -107,7 +108,8 @@ const NCCResources = () => {
   };
 
   return (
-    <div className="space-y-10 mx-20 px-4 md:px-8 pb-16">
+    <SearchableWrapper>
+    <div className="space-y-10 px-4 sm:px-6 md:px-10 lg:px-20 pb-16">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -136,7 +138,7 @@ const NCCResources = () => {
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
-          className="grid md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           {manuals.map((manual, i) => (
             <motion.div key={i} custom={i} variants={fadeInUp}>
@@ -181,7 +183,7 @@ const NCCResources = () => {
           initial="hidden"
           animate="visible"
           variants={fadeInUp}
-          className="grid md:grid-cols-3 gap-6 mb-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"
         >
           {certificates.map((cert, i) => (
             <motion.div key={i} custom={i} variants={fadeInUp}>
@@ -352,6 +354,7 @@ const NCCResources = () => {
         </motion.div>
       </section>
     </div>
+    </SearchableWrapper>
   );
 };
 

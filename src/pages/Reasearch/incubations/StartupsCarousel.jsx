@@ -1,5 +1,7 @@
  import React from "react";
 
+import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
+
 const logos = [
   { name: "Amazon", logo: "https://mailmeteor.com/logos/assets/PNG/Microsoft_Logo_256px.png" },
   { name: "Apple", logo: "https://mailmeteor.com/logos/assets/PNG/Microsoft_Logo_256px.png" },
@@ -11,6 +13,7 @@ const logos = [
 
 export default function StartupsCarousel() {
   return (
+    <SearchableWrapper>
     <div className="bg-gray-50 py-10 mt-10 mr-15 ml-20">
       <h2 className="text-3xl font-bold text-center mb-6">STARTUPS/INCUBATEES</h2>
       
@@ -41,5 +44,6 @@ export default function StartupsCarousel() {
         </style>
       </div>
     </div>
+    </SearchableWrapper>
   );
 }

@@ -14,6 +14,10 @@ import {
 import ImportantLinks from "./ImportantLinks";
 import ContactDetails from "./ContactDetails";
 
+import SearchableWrapper from '../../../components/Searchbar/SearchableWrapper';
+import BannerSection from "../../../components/HeroBanner.jsx";
+import StatsCard from "../../../components/StatsCard.jsx";
+
 const Ipr = () => {
   const policies = [
     {
@@ -27,142 +31,125 @@ const Ipr = () => {
     },
   ];
   return (
-    <div>
-      {/* Banner Section */}
-      <section className="relative h-96 bg-gradient-to-r from-cyan-900 via-blue-800 to-purple-800 overflow-hidden">
-        <div className="absolute inset-0 bg-black/50"></div>
+    <SearchableWrapper>
+      <div>
+        {/* Banner Section */}
+        <BannerSection
+          title="IPR Cell"
+          subtitle="Your Partner in Intellectual Property Protection."
+          bgTheme={7} // You can change this to 1–10 to pick a theme
+        />
+
+        {/* About Section */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{
-            backgroundImage:
-              'url("https://www.gburif.org/Photo%20Gallery/img/img-12.jpg")',
-          }}
-        ></div>
-        <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4">IPR Cell</h1>
-            <p className="text-xl opacity-90">
-              Your Partner in Intellectual Property Protection.
-            </p>
-          </div>
-        </div>
-      </section>
+          id="about"
+          className="bg-white pb-12 sm:py-16 sm:px-10 md:px-20"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-transparent text-center bg-clip-text bg-gradient-to-r from-green-600 via-blue-700 to-red-500 mb-8">
+                About Us
+              </h2>
+          <div className="flex flex-col md:flex-row items-center px-30 gap-8 md:gap-12">
+            
+            {/* Text Section - Wider */}
+            <div className="md:w-2/3 text-center md:text-left">
+              
+              <p className="text-gray-700 text-base sm:text-lg mb-4">
+                Gautam Buddha University was established in the year 2008 by the
+                Uttar Pradesh Act (9) of 2002. The University is recognized by the
+                University Grants Commission of India under section 2(f) of UGC
+                Act 1956 and approved by UGC under section 12-B. The University
+                had initiated research activities since its inception with the
+                help of qualified faculty members and ambitious students. The
+                University aspires to conduct R&D in diverse areas aiming to cover
+                the full spectrum, from fundamental and theoretical studies,
+                through research of relevance to business and industry with
+                practice-based studies in Science, Engineering, Management, and
+                allied areas.
+              </p>
+              <p className="text-gray-700 text-base sm:text-lg mb-4">
+                The focus of the University in promoting interdisciplinary
+                research is to bring together experts from a variety of
+                disciplines to identify challenges and deliver practical
+                solutions. University also guides and encourages the faculty
+                members to propose new research projects and ideas to carry out
+                innovative research, apply for externally funded research projects
+                to different national and international funding agencies, and also
+                in helping the researchers in filing the Intellectual Properties
+                (IPs) generated and protecting their rights.
+              </p>
+              
+            </div>
 
-      {/* About Section */}
-      <div
-        id="about"
-        className="bg-white py-12 px-6 sm:py-16 sm:px-10 md:px-20"
-      >
-        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-          {/* Text Section - Wider */}
-          <div className="md:w-2/3 text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-blue-700 to-red-500 mb-6">
-              About Us
-            </h2>
-            <p className="text-gray-700 text-base sm:text-lg mb-4">
-              Gautam Buddha University was established in the year 2008 by the
-              Uttar Pradesh Act (9) of 2002. The University is recognized by the
-              University Grants Commission of India under section 2(f) of UGC
-              Act 1956 and approved by UGC under section 12-B. The University
-              had initiated research activities since its inception with the
-              help of qualified faculty members and ambitious students. The
-              University aspires to conduct R&D in diverse areas aiming to cover
-              the full spectrum, from fundamental and theoretical studies,
-              through research of relevance to business and industry with
-              practice-based studies in Science, Engineering, Management, and
-              allied areas.
-            </p>
-            <p className="text-gray-700 text-base sm:text-lg mb-4">
-              The focus of the University in promoting interdisciplinary
-              research is to bring together experts from a variety of
-              disciplines to identify challenges and deliver practical
-              solutions. University also guides and encourages the faculty
-              members to propose new research projects and ideas to carry out
-              innovative research, apply for externally funded research projects
-              to different national and international funding agencies, and also
-              in helping the researchers in filing the Intellectual Properties
-              (IPs) generated and protecting their rights.
-            </p>
-            <p className="text-gray-700 text-base sm:text-lg mb-4">
-              Intellectual Property Rights given to the inventor(s) to control
-              the use of his/her new creations or inventions for a limited
-              period of time are vital for the socio- economic prosperity of the
-              nation. These rights help in promoting creativity and
-              inventiveness through dissemination of new knowledge or products
-              and encourage fair competition.
-            </p>
-          </div>
-
-          {/* Image Section - Smaller */}
-          <div className="relative md:w-1/3 w-full mt-8 md:mt-0">
-            <img
-              src="https://www.gburif.org/images/intro-carousel/dsf8939-b-copy.jpg"
-              alt="Library"
-              className="rounded-xl shadow-xl w-full object-cover"
-            />
-            <div className="absolute bottom-4 right-4 bg-orange-600 text-white text-center px-5 py-3 rounded-lg shadow-lg text-sm sm:text-base">
-              <div className="text-xl sm:text-2xl font-bold">15+</div>
-              <div>Years of Excellence</div>
+            {/* Image Section - Smaller */}
+            <div className="relative md:w-1/3 w-full mt-8 md:mt-0">
+              <img
+                src="https://www.gburif.org/images/intro-carousel/dsf8939-b-copy.jpg"
+                alt="Library"
+                className="rounded-xl shadow-xl w-full object-cover"
+              />
+              <div className="absolute bottom-4 right-4 bg-orange-600 text-white text-center px-5 py-3 rounded-lg shadow-lg text-sm sm:text-base">
+                <div className="text-xl sm:text-2xl font-bold">15+</div>
+                <div>Years of Excellence</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <IPRObjectives />
-      <Team />
-      <IprCourses />
-      <section className="py-16  to-white">
-        <div className="container mx-auto px-4">
-          
-          <h1 className="text-3xl font-bold text-center mb-8 ">GBU IPR Policy</h1>
-          <div
-            className={`${
-              policies.length === 1
-                ? "flex justify-center"
-                : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            } gap-8`}
-          >
-            {policies.map((policy, index) => (
-              <div
-                key={index}
-                className="group bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-              >
-                <div className="p-8">
-                  <div
-                    className={`w-16 h-16 bg-gradient-to-br ${policy.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <policy.icon className="w-8 h-8 text-white" />
-                  </div>
+        <IPRObjectives />
+        <Team />
+        <IprCourses />
+        <section className="py-16  to-white">
+          <div className="container mx-auto px-4">
 
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-gray-800 group-hover:text-teal-600 transition-colors">
-                      {policy.title}
-                    </h3>
-                    <div className="flex items-center text-sm text-gray-500">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {policy.year}
+            <h1 className="text-3xl font-bold text-center mb-8 ">GBU IPR Policy</h1>
+            <div
+              className={`${policies.length === 1
+                  ? "flex justify-center"
+                  : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                } gap-8`}
+            >
+              {policies.map((policy, index) => (
+                <div
+                  key={index}
+                  className="group bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                >
+                  <div className="p-8">
+                    <div
+                      className={`w-16 h-16 bg-gradient-to-br ${policy.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                    >
+                      <policy.icon className="w-8 h-8 text-white" />
+                    </div>
+
+                    <div className="flex justify-between items-start mb-4">
+                      <h3 className="text-xl font-bold text-gray-800 group-hover:text-teal-600 transition-colors">
+                        {policy.title}
+                      </h3>
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {policy.year}
+                      </div>
+                    </div>
+
+                    <p className="text-gray-600 mb-6">{policy.description}</p>
+
+                    <div className="flex justify-between items-center">
+                      <span className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium capitalize">
+                        {policy.category}
+                      </span>
+                      <button className="flex items-center text-teal-600 hover:text-teal-800 font-semibold transition-colors">
+                        <Download className="w-4 h-4 mr-2" />
+                        Download
+                      </button>
                     </div>
                   </div>
-
-                  <p className="text-gray-600 mb-6">{policy.description}</p>
-
-                  <div className="flex justify-between items-center">
-                    <span className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium capitalize">
-                      {policy.category}
-                    </span>
-                    <button className="flex items-center text-teal-600 hover:text-teal-800 font-semibold transition-colors">
-                      <Download className="w-4 h-4 mr-2" />
-                      Download
-                    </button>
-                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-      <ImportantLinks />
-      <ContactDetails/>
-    </div>
+        </section>
+        <ImportantLinks />
+        <ContactDetails />
+      </div>
+    </SearchableWrapper>
   );
 };
 

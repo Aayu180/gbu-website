@@ -1,13 +1,15 @@
  import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
+import SearchableWrapper from '../Searchbar/SearchableWrapper';
  
 const Card = ({ children, className = "" }) => (
   <div className={`bg-white rounded-lg shadow  border-gray-300 ${className}`}>{children}</div>
 );
 
 const CardHeader = ({ children, className = "" }) => (
-  <div className={`border border-gray-300 px-6 py-4 ${className}`}>{children}</div>
+  <div className={`border border-gray-300 px-4 md:px-6 py-4
+ ${className}`}>{children}</div>
 );
 
 const CardTitle = ({ children, className = "" }) => (
@@ -222,6 +224,8 @@ const NSSEvents = () => {
   };
 
   return (
+<SearchableWrapper>
+
 
     <motion.div
       initial="hidden"
@@ -230,7 +234,7 @@ const NSSEvents = () => {
         hidden: {},
         visible: { transition: { staggerChildren: 0.1 } }
       }}
-      className="space-y-8 mx-20"
+      className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto"
     >
 
       {/* Header */}
@@ -256,7 +260,8 @@ const NSSEvents = () => {
       >
         <Card>
           <CardContent className="p-6">
-            <div className="flex flex-wrap gap-4 items-center">
+          <div className="flex flex-wrap gap-4 items-center justify-center md:justify-start">
+
               <div className="flex items-center space-x-2">
                 <Filter className="h-4 w-4 text-gray-600" />
                 <span className="text-sm font-medium text-gray-700">Filters:</span>
@@ -268,7 +273,8 @@ const NSSEvents = () => {
         </Card>
       </motion.div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
         {/* Calendar */}
         <motion.div
           variants={{
@@ -315,7 +321,8 @@ const NSSEvents = () => {
             visible: { opacity: 1, x: 0 }
           }}
         >
-          <Card className="h-[600px] flex flex-col">
+          <Card className="h-[500px] md:h-[600px] flex flex-col">
+
             <CardHeader>
               <CardTitle>Upcoming Events</CardTitle>
             </CardHeader>
@@ -363,6 +370,7 @@ const NSSEvents = () => {
         </motion.div>
       </div>
     </motion.div>
+    </SearchableWrapper>
   );
 };
 

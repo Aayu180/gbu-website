@@ -1,6 +1,8 @@
 // src/components/IncubationNav.jsx
 import React from "react";
 
+import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
+
 const IncubationNav = () => {
   const navItems = [
     { label: "About", href: "#about" },
@@ -14,6 +16,7 @@ const IncubationNav = () => {
   ];
 
   return (
+    <SearchableWrapper>
     <nav className="bg-white shadow sticky top-0 z-30">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-center flex-wrap items-center gap-6 py-4">
@@ -29,6 +32,7 @@ const IncubationNav = () => {
         </div>
       </div>
     </nav>
+    </SearchableWrapper>
   );
 };
 
