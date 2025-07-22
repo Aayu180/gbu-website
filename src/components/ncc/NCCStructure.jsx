@@ -112,7 +112,7 @@ const NCCStructure = () => {
 
   return (
     <SearchableWrapper>
-      <div className="space-y-10 px-4 sm:px-6 lg:px-20 pb-16">
+      <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
 
         {/* ANO Section */}
         <Card className="overflow-hidden">

@@ -130,7 +130,7 @@ const NSSSocialMedia = () => {
 
   return (
     <SearchableWrapper>
-      <div className="space-y-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

@@ -232,7 +232,7 @@ const NCCAchievements = () => {
   ];
   return (
     <SearchableWrapper>
-    <div className="space-y-8 sm:space-y-12 px-4 mx-4 sm:mx-8 lg:mx-20 md:px-8 pb-16">
+    <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

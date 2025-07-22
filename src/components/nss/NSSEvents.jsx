@@ -234,7 +234,7 @@ const NSSEvents = () => {
         hidden: {},
         visible: { transition: { staggerChildren: 0.1 } }
       }}
-      className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto"
+      className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl"
     >
 
       {/* Header */}

@@ -153,7 +153,7 @@ const NSSGallery = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto"
+        className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl"
       >
         {/* Header */}
         <motion.div

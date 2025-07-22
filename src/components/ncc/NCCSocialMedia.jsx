@@ -104,7 +104,7 @@ const NCCSocialMedia = () => {
   return (
     <SearchableWrapper>
       <motion.div
-        className="space-y-12 px-4 sm:px-6 md:px-10 lg:px-20 pb-16"
+        className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}

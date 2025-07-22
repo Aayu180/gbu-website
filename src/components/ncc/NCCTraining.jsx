@@ -228,7 +228,7 @@ const trainingImpactStats = [
 ];
   return (
     <SearchableWrapper>
-    <div className="space-y-8 px-4 sm:px-6 lg:px-20">
+    <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Training & Camps</h2>

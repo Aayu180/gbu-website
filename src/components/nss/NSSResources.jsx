@@ -181,7 +181,7 @@ const NSSResources = () => {
   return (
 <SearchableWrapper>
     <motion.div
-      className="space-y-12 mx-4 md:mx-20"
+      className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl"
       initial="hidden"
       animate="visible"
       variants={{

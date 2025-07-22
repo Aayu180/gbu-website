@@ -274,7 +274,7 @@ const [dialogImage, setDialogImage] = useState(null);
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="space-y-8 px-4 sm:px-6 md:px-10 lg:px-20"
+      className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl"
     >
       {/* HEADER */}
       <motion.div

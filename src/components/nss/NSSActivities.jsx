@@ -237,7 +237,7 @@ const NSSActivities = () => {
   return (
 
     <motion.div
-      className="space-y-8 py-10 px-4 sm:px-6 lg:px-20 mx-auto bg-gray-50"
+      className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl bg-gray-50"
       initial="hidden"
       animate="visible"
       variants={{

@@ -109,7 +109,7 @@ const NCCResources = () => {
 
   return (
     <SearchableWrapper>
-    <div className="space-y-10 px-4 sm:px-6 md:px-10 lg:px-20 pb-16">
+    <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
