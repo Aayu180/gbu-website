@@ -12,6 +12,7 @@ import {
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import BannerSection from "../../components/HeroBanner.jsx";
 import ButtonGroup from "../../components/TabsData.jsx";
+import OrgTree from "./OrgnisationTree.jsx";
 
 const data = {
   academic: [
@@ -352,143 +353,6 @@ const governanceData = {
   },
 };
 
-const organizationalStructure = [
-  {
-    name: "Chancellor",
-    person: "Shri Yogi Adityanath",
-    color: "bg-gradient-to-r from-red-100 to-red-200 border-red-300",
-    icon: <Crown className="w-7 h-7 text-red-600" />,
-    children: [
-      {
-        name: "Vice Chancellor",
-        person: "Prof. R.K. Singh",
-        color: "bg-gradient-to-r from-blue-100 to-blue-200 border-blue-300",
-        icon: <User className="w-7 h-7 text-blue-600" />,
-        children: [
-          {
-            name: "Dean, Engineering",
-            person: "Dr. Kirti Pal",
-            color:
-              "bg-gradient-to-r from-green-100 to-green-200 border-green-300",
-            icon: <Building className="w-6 h-6 text-green-600" />,
-          },
-          {
-            name: "Dean, Management",
-            person: "Dr. Indu Uprety",
-            color:
-              "bg-gradient-to-r from-yellow-100 to-yellow-200 border-yellow-300",
-            icon: <Building className="w-6 h-6 text-yellow-600" />,
-          },
-          {
-            name: "Dean, Humanities",
-            person: "Prof. Bandana Pandey",
-            color: "bg-gradient-to-r from-pink-100 to-pink-200 border-pink-300",
-            icon: <Building className="w-6 h-6 text-pink-600" />,
-          },
-
-          {
-            name: "Dean, ICT",
-            person: "Dr. Arpit Bhardwaj",
-            color: "bg-gradient-to-r from-blue-100 to-blue-200 border-blue-300",
-            icon: <Building className="w-6 h-6 text-blue-600" />,
-          },
-          {
-            name: "Dean, Biotechnology",
-            person: "Dr. N.P. Melkania",
-            color: "bg-gradient-to-r from-teal-100 to-teal-200 border-teal-300",
-            icon: <Building className="w-6 h-6 text-teal-600" />,
-          },
-          {
-            name: "Dean, Buddhist Studies & Civilization",
-            person: "Prof. Shweta Anand",
-            color:
-              "bg-gradient-to-r from-purple-100 to-purple-200 border-purple-300",
-            icon: <Building className="w-6 h-6 text-purple-600" />,
-          },
-          {
-            name: "Dean, Law, Justice & Governance",
-            person: "Dr. Krishna Kant Dwivedi",
-            color:
-              "bg-gradient-to-r from-indigo-100 to-indigo-200 border-indigo-300",
-            icon: <Building className="w-6 h-6 text-indigo-600" />,
-          },
-          {
-            name: "Dean, Vocational & Applied Sciences",
-            person: "Prof. N.P. Melkania",
-            color:
-              "bg-gradient-to-r from-orange-100 to-orange-200 border-orange-300",
-            icon: <Building className="w-6 h-6 text-orange-600" />,
-          },
-        ],
-      },
-    ],
-  },
-];
-
-const OrgNode = ({ node }) => (
-  <div className="flex flex-col items-center relative ">
-    <div
-      className={`rounded-2xl sm:h-2 sm:w-2 border-2 shadow-xl px-8 py-5 mb-2 transition-all duration-300
-        ${node.color} hover:scale-105 hover:shadow-2xl`}
-      style={{
-        height: 190,
-        width: 240,
-        zIndex: 10,
-        boxShadow: "0 4px 24px 0 rgba(80,80,180,0.10)",
-      }}
-    >
-      <div className="flex items-center  gap-3 mb-1">
-        {node.icon}
-        <span className="font-bold text-lg md:text-xl text-gray-800">
-          {node.name}
-        </span>
-      </div>
-      <div className="text-gray-700 font-medium text-base md:text-lg">
-        {node.person}
-      </div>
-    </div>
-
-    {node.children && (
-      <div className="flex flex-col items-center">
-        <div className="w-1 h-6 bg-gradient-to-b from-gray-300 to-gray-400"></div>
-        <div className="mt-2 w-full">
-          <div className="flex justify-center flex-wrap md:flex-nowrap md:overflow-x-auto gap-6">
-            {node.children.map((child, idx) => (
-              <OrgNode key={idx} node={child} />
-            ))}
-          </div>
-        </div>
-      </div>
-    )}
-  </div>
-);
-
-const OrgNodeHorizontal = ({ node }) => (
-  <div className="flex flex-col items-center relative min-w-[140px] md:min-w-[200px]">
-    <div
-      className={`rounded-xl border-2 shadow-lg px-3 py-2 md:px-6 md:py-4 mb-2 transition-all duration-300
-        ${node.color} hover:scale-105 hover:shadow-2xl`}
-      style={{
-        minWidth: 120,
-        minHeight: 140,
-        width: 120,
-        zIndex: 10,
-        boxShadow: "0 2px 12px 0 rgba(80,80,180,0.10)",
-      }}
-    >
-      <div className="flex items-center gap-1 md:gap-2 mb-1">
-        {/* {node.icon} */}
-        <span className="font-semibold text-xs md:text-base text-gray-800">
-          {node.name}
-        </span>
-      </div>
-      <div className="text-gray-700 font-medium text-xs md:text-base">
-        {node.person}
-      </div>
-    </div>
-  </div>
-);
-
 const UniversityGovernance = () => {
   const [activeTab, setActiveTab] = useState("executive");
   const [currentPage, setCurrentPage] = useState(1);
@@ -642,8 +506,8 @@ const UniversityGovernance = () => {
                       key={index}
                       onClick={() => setCurrentPage(index + 1)}
                       className={`px-3 py-2 rounded font-semibold ${currentPage === index + 1
-                          ? "bg-blue-600 text-white"
-                          : "bg-gray-200 text-black hover:bg-gray-300"
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-200 text-black hover:bg-gray-300"
                         }`}
                     >
                       {index + 1}
@@ -665,42 +529,9 @@ const UniversityGovernance = () => {
           </div>
 
           {/* Organizational Structure */}
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="lg:text-4xl sm:text-2xl font-bold text-gray-800 my-1 text-center">
-              Organizational Structure
-            </h2>
-
-            {/* Large screen: show full tree with deans in single row */}
-            <div className="hidden md:flex justify-center scale-[0.60]">
-              <OrgNode node={organizationalStructure[0]} />
-            </div>
-
-            {/* Small screen: vertical scroll for full structure */}
-            <div className="md:hidden w-full mt-4">
-              <div className="flex flex-row items-center gap-4 min-w-max pb-2">
-                <OrgNodeHorizontal
-                  node={{
-                    ...organizationalStructure[0],
-                    children: undefined,
-                  }}
-                />
-                <OrgNodeHorizontal
-                  node={{
-                    ...organizationalStructure[0].children[0],
-                    children: undefined,
-                  }}
-                />
-                <div className="flex flex-col">
-                  {organizationalStructure[0].children[0].children.map(
-                    (dean, idx) => (
-                      <OrgNodeHorizontal key={idx} node={dean} />
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+         <OrgTree/>
         </div>
+          
       </div>
     </SearchableWrapper>
   );

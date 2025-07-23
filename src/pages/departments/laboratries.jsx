@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import BannerSection from "../../components/HeroBanner";
 
 const laboratories = [
   {
@@ -221,66 +222,13 @@ const LaboratoryCards = ({ laboratories }) => {
         }}
       ></div>
 
-      <div className="relative z-20">
-        {/* Title Section */}
-        {/* <div className="text-center mb-20">
-          <div className="inline-block relative">
-            <h1 className="text-7xl font-black bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 bg-clip-text text-transparent mb-4 animate-pulse">
-              LABORATORY
-            </h1>
-            <div className="text-5xl font-light text-blue-600 tracking-[0.3em] animate-pulse delay-300">
-              EXCELLENCE
-            </div>
-            <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent animate-pulse"></div>
-          </div>
-          <p className="text-gray-600 text-xl mt-8 font-light tracking-wide">
-            State-of-the-art facilities for cutting-edge research
-          </p>
-        </div> */}
+      <BannerSection
+        title="Laboratories"
+        subtitle="Explore Our Cutting-Edge Facilities"
+        bgTheme={3}
+      />
 
-        <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white pt-25 pb-20 mb-20">
-          {/* Animated Background Orbs */}
-          <motion.div
-            className="absolute -top-20 -left-20 w-96 h-96 bg-indigo-500 opacity-20 rounded-full blur-3xl"
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 45, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          />
-          <motion.div
-            className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 opacity-20 rounded-full blur-3xl"
-            animate={{ scale: [1, 1.3, 1], rotate: [0, -45, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          />
-
-          {/* Content */}
-          <div className="relative z-10 container mx-auto px-4 text-center">
-            <motion.h1
-              className="text-5xl md:text-6xl font-extrabold mb-6"
-              initial={{ opacity: 0, y: -40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-            >
-              LABORATORY EXCELLENCE
-            </motion.h1>
-
-            <motion.p
-              className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            >
-              State-of-the-art facilities for cutting-edge research
-            </motion.p>
-
-            <motion.div
-              className="mt-8 flex justify-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 1 }}
-            >
-            </motion.div>
-          </div>
-        </section>
-
+      <div className="relative z-20 mt-10">
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {laboratories.map((lab, index) => (
@@ -469,7 +417,7 @@ const LaboratoryCards = ({ laboratories }) => {
     </div>
   );
 };
- 
+
 const Laboratory = () => {
   return <LaboratoryCards laboratories={laboratories} />;
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Download, ExternalLink } from 'lucide-react';
 
-import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+// import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
 // ✅ Refined Button — modern hover, active, focus ring
 const Button = ({
@@ -75,7 +75,7 @@ const TenderRow = ({ tender }) => {
   };
 
   return (
-    <SearchableWrapper>
+    // <SearchableWrapper>
     <tr className="group transition hover:bg-gray-50">
       <td className="px-6 py-4 text-sm text-gray-500">
         #{String(tender.id).padStart(3, '0')}
@@ -110,7 +110,7 @@ const TenderRow = ({ tender }) => {
         </Button>
       </td>
     </tr>
-    </SearchableWrapper>
+    // </SearchableWrapper>
   );
 };
 

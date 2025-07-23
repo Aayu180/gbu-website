@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Lightbulb,
   Users,
@@ -84,7 +85,7 @@ const Button = ({ children, className = "", size = "md", variant = "primary", ..
 // Enhanced Card component with hover effects
 const Card = ({ children, className = "", hover = true, ...props }) => (
   <div
-    className={`bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50 transition-all duration-300 ${hover ? 'hover:shadow-2xl hover:scale-105 hover:bg-white/90' : ''} ${className}`}
+    className={`bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50 border-solid transition-all duration-300${hover ? 'hover:shadow-2xl hover:scale-105 hover:bg-white/90' : ''} ${className}`}
     {...props}
   >
     {children}
@@ -151,8 +152,8 @@ const aboutData = {
 
   statistics: [
     { icon: MapPin, number: 511, numberText: "511+", title: "Acres Campus", iconColor: "#3b82f6" },
-    { icon: Users, number: 6500, numberText: "6500+", title: "Students", iconColor: "#10b981" },
-    { icon: Award, number: 200, title: "Faculty Members", iconColor: "#8b5cf6" },
+    { icon: Users, numberText: "4K+", title: "Students", iconColor: "#10b981" },
+    { icon: Award, numberText: "200+", title: "Faculty Members", iconColor: "#8b5cf6" },
     { icon: BookOpen, number: 150, title: "Programs", iconColor: "#f97316" },
 
   ],
@@ -181,36 +182,126 @@ const aboutData = {
   },
 
   governance: [
-    { icon: "Users", title: "Chancellor", subtitle: "Chief Minister of UP" },
-    { icon: "Award", title: "Vice Chancellor", subtitle: "Academic Leadership" },
-    { icon: "GraduationCap", title: "Deans of Schools", subtitle: "Academic Departments" },
-    { icon: "BookOpen", title: "Registrar", subtitle: "Administrative Affairs" }
-  ],
+    {
+      icon: "Users",
+      title: "Chancellor",
+      subtitle: "Chief Minister of UP",
+      link: "/about-us/chancellor-message"
+    },
+    {
+      icon: "Award",
+      title: "Vice Chancellor",
+      subtitle: "Academic Leadership",
+      link: "/about-us/vice-chancellor-message"
+    },
+    {
+      icon: "GraduationCap",
+      title: "Deans of Schools",
+      subtitle: "Academic Departments",
+      link: "/deans-of-schools"
+    },
+    {
+      icon: "BookOpen",
+      title: "Registrar",
+      subtitle: "Administrative Affairs",
+      link: "/registrar"
+    }
+  ]
+  ,
 
   schools: [
-    { name: "School of Engineering", icon: "Cpu", summary: "Technology-led UG/PG courses" },
-    { name: "School of ICT", icon: "Monitor", summary: "Computing & Information Technology" },
-    { name: "School of Management", icon: "Briefcase", summary: "Business & Management Studies" },
-    { name: "School of Biotechnology", icon: "Microscope", summary: "Life Sciences & Research" },
-    { name: "School of Law", icon: "Scale", summary: "Legal Studies & Practice" },
-    { name: "School of Architecture", icon: "Building", summary: "Design & Planning" },
-    { name: "School of Buddhist Studies", icon: "Flame", summary: "Philosophy & Spirituality" },
-    { name: "School of Humanities", icon: "Book", summary: "Liberal Arts & Literature" }
+    {
+      name: "School of Engineering",
+      icon: "Cpu",
+      summary: "Technology-led UG/PG courses",
+      link: "/schools/engineering"
+    },
+    {
+      name: "School of ICT",
+      icon: "Monitor",
+      summary: "Computing & Information Technology",
+      link: "/schools/ict"
+    },
+    {
+      name: "School of Management",
+      icon: "Briefcase",
+      summary: "Business & Management Studies",
+      link: "/schools/management"
+    },
+    {
+      name: "School of Biotechnology",
+      icon: "Microscope",
+      summary: "Life Sciences & Research",
+      link: "/schools/biotechnology"
+    },
+    {
+      name: "School of Law",
+      icon: "Scale",
+      summary: "Legal Studies & Practice",
+      link: "/schools/law"
+    },
+    {
+      name: "School of Vocational Studies & Applied Sciences",
+      icon: "Building",
+      summary: "Design & Planning",
+      link: "/schools/vocational"
+    },
+    {
+      name: "School of Buddhist Studies",
+      icon: "Flame",
+      summary: "Philosophy & Spirituality",
+      link: "/schools/buddhist"
+    },
+    {
+      name: "School of Humanities",
+      icon: "Book",
+      summary: "Liberal Arts & Literature",
+      link: "/schools/humanities"
+    }
   ],
 
   facilities: [
-    { title: "Central Library", icon: "Library", summary: "Digital collections & research facilities" },
-    { title: "Modern Auditoriums", icon: "Mic", summary: "Advanced audio-visual systems" },
-    { title: "Smart Classrooms", icon: "Monitor", summary: "Technology-enabled learning spaces" },
-    { title: "Research Labs", icon: "Microscope", summary: "State-of-the-art equipment" },
-    { title: "Computer Centers", icon: "Cpu", summary: "High-speed connectivity" },
-    { title: "Conference Halls", icon: "Building", summary: "Professional meeting spaces" }
+    {
+      title: "Central Library",
+      icon: "Library",
+      summary: "Digital collections & research facilities",
+      link: "#"
+    },
+    {
+      title: "Modern Auditoriums",
+      icon: "Mic",
+      summary: "Advanced audio-visual systems",
+      link: "#"
+    },
+    {
+      title: "Smart Classrooms",
+      icon: "Monitor",
+      summary: "Technology-enabled learning spaces",
+      link: "#"
+    },
+    {
+      title: "Research Labs",
+      icon: "Microscope",
+      summary: "State-of-the-art equipment",
+      link: "/research/research-centers"
+    },
+    {
+      title: "Computer Centers",
+      icon: "Cpu",
+      summary: "High-speed connectivity",
+      link: "#"
+    },
+    {
+      title: "Conference Halls",
+      icon: "Building",
+      summary: "Professional meeting spaces",
+      link: "#"
+    }
   ],
 
   hostelFeatures: [
     { text: "18+ Modern Hostels", icon: "Home" },
     { text: "Wi-Fi Enabled Campus", icon: "Wifi" },
-    { text: "Biometric Access Control", icon: "Shield" },
     { text: "In-house Dining Facilities", icon: "Utensils" },
     { text: "24×7 Medical Support", icon: "Heart" },
     { text: "Banking & ATM Services", icon: "CreditCard" }
@@ -232,18 +323,35 @@ const aboutData = {
   ],
 
   researchStats: [
-    { value: 700, suffix: "+", label: "Publications", color: "blue" },
+    { value: 3500, suffix: "+", label: "Publications", color: "blue" },
     { value: 82, suffix: "", label: "Ph.D.s Awarded", color: "green" },
     { label: "DST, CSIR", sublabel: "Sponsored Research", color: "purple" },
     { label: "AI, Cyber", sublabel: "Centers of Excellence", color: "orange" }
   ],
 
   studentLife: [
-    { title: "30+ Clubs & Societies", icon: "Users" },
-    { title: "NSS/NCC Programs", icon: "Award" },
-    { title: "Tech & Cultural Fests", icon: "Sparkles" },
-    { title: "Campus Amenities", icon: "Home" }
-  ]
+  { 
+    title: "30+ Clubs & Societies", 
+    icon: "Users",
+    link: "/campus-life/clubs-societies"
+  },
+  { 
+    title: "NSS/NCC Programs", 
+    icon: "Award",
+    link: "/campus-life/NSS"
+  },
+  { 
+    title: "Tech & Cultural Fests", 
+    icon: "Sparkles",
+    link: "/announcements/event-calendar"
+  },
+  { 
+    title: "Campus Amenities", 
+    icon: "Home",
+    link: "#"
+  }
+]
+
 };
 
 // Icon mapping for dynamic icon rendering
@@ -306,10 +414,10 @@ const AboutGbu = () => {
                 <p className="text-lg text-gray-700 mb-8 leading-relaxed">
                   {aboutData.overview.description}
                 </p>
-                <Button className="group">
+                <Link to="/aboutUs/GBUHistory"><Button className="group">
                   Learn More About Our History
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                </Button></Link>
               </div>
             </div>
           </div>
@@ -375,23 +483,21 @@ const AboutGbu = () => {
             {/* Grid */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
               {aboutData.governance.map((leader, index) => (
-                <Card
-                  key={index}
-                  className="text-center group bg-white/60 backdrop-blur-md rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                >
-                  <CardContent className="p-8">
-                    <div className="mb-6 flex justify-center">
-                      <div className="p-4 rounded-full bg-gradient-to-br from-sky-300 to-blue-800 shadow-lg transition-transform transform group-hover:scale-110">
-                        <div className="text-white">
-                          {renderIcon(leader.icon, "w-8 h-8")}
+                <Link key={index} to={leader.link} className="block">
+                  <Card className="text-center group bg-white/60 backdrop-blur-md rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <CardContent className="p-8">
+                      <div className="mb-6 flex justify-center">
+                        <div className="p-4 rounded-full bg-gradient-to-br from-sky-300 to-blue-800 shadow-lg transition-transform transform group-hover:scale-110">
+                          <div className="text-white">
+                            {renderIcon(leader.icon, "w-8 h-8")}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <h3 className="font-semibold text-gray-900 text-lg mb-1">{leader.title}</h3>
-                    <p className="text-gray-600 text-sm">{leader.subtitle}</p>
-                  </CardContent>
-                </Card>
-
+                      <h3 className="font-semibold text-gray-900 text-lg mb-1">{leader.title}</h3>
+                      <p className="text-gray-600 text-sm">{leader.subtitle}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>
@@ -416,25 +522,29 @@ const AboutGbu = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {aboutData.schools.map((school, index) => (
-                <Card key={index} className="group cursor-pointer">
-                  <CardContent className="p-6 text-center">
-                    <div className="mb-4 flex justify-center">
-                      <div className="p-3 bg-gradient-to-r from-purple-300 to-purple-700 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
-                        {renderIcon(school.icon, "w-8 h-8")}
+                <Link key={index} to={school.link} className="block">
+                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 h-48 flex flex-col">
+                    <CardContent className="p-4 text-center flex flex-col justify-between h-full">
+                      <div className="mb-3 flex justify-center">
+                        <div className="p-2 bg-gradient-to-r from-purple-300 to-purple-700 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
+                          {renderIcon(school.icon, "w-6 h-6")}
+                        </div>
                       </div>
-                    </div>
-                    <h3 className="font-bold text-gray-900 mb-2 text-lg">{school.name}</h3>
-                    <p className="text-gray-600 text-sm">{school.summary}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
 
-            <div className="text-center mt-12">
-              <Button size="lg" className="group">
-                Explore All Programs
-                <ExternalLink className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+                      <div className="flex-1 flex flex-col justify-center">
+                        <h3 className={`font-bold text-gray-900 mb-2 leading-tight ${school.name.length > 20 ? 'text-sm' : 'text-base'
+                          }`}>
+                          {school.name}
+                        </h3>
+                        <p className={`text-gray-600 leading-tight ${school.summary.length > 30 ? 'text-xs' : 'text-sm'
+                          }`}>
+                          {school.summary}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -454,17 +564,19 @@ const AboutGbu = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {aboutData.facilities.map((facility, index) => (
-                <Card key={index} className="group">
-                  <CardContent className="p-8 text-center">
-                    <div className="mb-6 flex justify-center">
-                      <div className="p-4 bg-gradient-to-r from-green-500 to-teal-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
-                        {renderIcon(facility.icon, "w-8 h-8")}
+                <Link key={index} to={facility.link} className="block">
+                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105">
+                    <CardContent className="p-8 text-center">
+                      <div className="mb-6 flex justify-center">
+                        <div className="p-4 bg-gradient-to-r from-green-500 to-teal-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
+                          {renderIcon(facility.icon, "w-8 h-8")}
+                        </div>
                       </div>
-                    </div>
-                    <h3 className="font-bold text-gray-900 mb-3 text-lg">{facility.title}</h3>
-                    <p className="text-gray-600">{facility.summary}</p>
-                  </CardContent>
-                </Card>
+                      <h3 className="font-bold text-gray-900 mb-3 text-lg">{facility.title}</h3>
+                      <p className="text-gray-600">{facility.summary}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>
@@ -520,55 +632,62 @@ const AboutGbu = () => {
 
         {/* Meditation & Wellness Section */}
         <section className="py-20 bg-gradient-to-r from-green-100 via-blue-100 to-purple-100">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div className="flex items-center justify-center ">
-                <img src="/assets/meditation.jpg" alt="Meditation" className="w-96 h-96 rounded-full" />
+          <div className="max-w-7xl mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-16 items-center bg-white rounded-3xl shadow-lg p-8">
+           
+
+              <div className="flex items-center justify-center group">
+                <img
+                  src="/assets/meditation.jpg"
+                  alt="Meditation"
+                  className="w-80 h-80 md:w-96 md:h-96 rounded-2xl shadow-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                />
               </div>
 
-
-              <Card className="backdrop-blur-sm bg-white/80">
-                <CardContent className="p-10">
-                  <Badge color="green" className="mb-6">
-                    <Heart className="w-4 h-4 mr-2" />
+              <Card className="shadow-none bg-transparent">
+                <CardContent className="p-8 md:p-12">
+                  <Badge color="green" className="mb-6 inline-flex items-center gap-2 text-lg font-semibold ">
+                    <Heart className="w-5 h-5" />
                     Wellness
                   </Badge>
-                  <h2 className="text-4xl font-bold text-gray-900 mb-8">
+
+                  <h2 className="text-4xl font-extrabold text-gray-900 mb-8">
                     Meditation & Wellness Center
                   </h2>
 
-                  <div className="flex justify-center space-x-8 mb-8">
+                  <div className="flex justify-center md:justify-start space-x-12 mb-8">
                     {[
                       { icon: "Activity", label: "Yoga" },
                       { icon: "Smile", label: "Meditation" },
                       { icon: "Leaf", label: "Wellness" }
                     ].map((item, index) => (
-                      <div key={index} className="text-center">
-                        <div className="p-3 bg-gradient-to-r from-green-500 to-teal-600 rounded-full text-white mb-2 mx-auto w-fit">
+                      <div key={index} className="text-center md:text-left">
+                        <div className="p-3 bg-gradient-to-r from-green-600 to-teal-700 rounded-full text-white mb-3 mx-auto md:mx-0 w-12 h-12 flex items-center justify-center shadow-md ">
                           {renderIcon(item.icon, "w-6 h-6")}
                         </div>
-                        <p className="text-sm text-gray-600 font-medium">{item.label}</p>
+                        <p className="text-sm text-gray-700 font-medium">{item.label}</p>
                       </div>
                     ))}
                   </div>
 
-                  <p className="text-lg text-gray-700 mb-8 leading-relaxed text-center">
+                  <p className="text-lg text-gray-700 mb-8 leading-relaxed text-center md:text-left">
                     Our dedicated wellness center offers yoga sessions, mindfulness practices,
                     and spiritual guidance to nurture the holistic development of our students.
                     Experience tranquility in our serene meditation dome.
                   </p>
 
-                  <div className="text-center">
-                    <Button className="group">
+                  <div className="text-center md:text-left ">
+                    <Link to="/campus-life/meditation-center"><Button className="group/btn inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl ">
                       Explore Wellness Programs
-                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                      <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button></Link>
                   </div>
                 </CardContent>
               </Card>
-            </div>
+           
           </div>
         </section>
+
+
         {/* Section 10: Green Eco-Friendly Campus */}
 
         <section className="py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 relative overflow-hidden">
@@ -629,7 +748,7 @@ const AboutGbu = () => {
           <div className="max-w-7xl mx-auto px-4">
             {/* Header */}
             <div className="text-center mb-16">
-              <Badge color="purple" className="mb-4 bg-purple-100 text-purple-700 border border-purple-200">
+              <Badge color="purple" className="mb-4 bg-purple-100 text-purple-700 border border-purple-200 border-solid">
                 <Trophy className="w-4 h-4 mr-2" />
                 Athletics Excellence
               </Badge>
@@ -646,7 +765,7 @@ const AboutGbu = () => {
               {aboutData.sportsFeatures.map((sport, index) => (
                 <Card
                   key={index}
-                  className="bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 group rounded-lg"
+                  className="bg-white border border-gray-200 border-solid shadow-sm hover:shadow-md transition-all duration-300 group rounded-lg"
                 >
                   <CardContent className="p-8 text-center">
                     <div className="mb-6 flex justify-center">
@@ -665,14 +784,14 @@ const AboutGbu = () => {
 
             {/* Call to Action */}
             <div className="text-center">
-              <Button
+              <Link to="/campus-life/sports-fitness"><Button
                 variant="outline"
                 size="lg"
-                className="group border-purple-500 text-purple-600 hover:bg-purple-50 transition-all"
+                className="group border-purple-500 border-[1px] border-solid text-purple-600 hover:bg-purple-50 transition-all"
               >
                 Explore Sports Programs
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              </Button></Link>
             </div>
           </div>
         </section>
@@ -722,73 +841,42 @@ const AboutGbu = () => {
         </section>
 
         {/* Section 13: Student Life & Community */}
-        {/* Section 13: Student Life & Community */}
         <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-100/30 to-purple-100/30"></div>
-          <div className="max-w-7xl mx-auto px-4 relative z-10">
-            <div className="text-center mb-16">
-              <Badge color="purple" className="mb-4">
-                <Sparkles className="w-4 h-4 mr-2" />
-                Campus Life
-              </Badge>
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                Student Life & Community
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Vibrant campus life with diverse opportunities for growth and engagement
-              </p>
-            </div>
+  <div className="absolute inset-0 bg-gradient-to-r from-pink-100/30 to-purple-100/30"></div>
+  <div className="max-w-7xl mx-auto px-4 relative z-10">
+    <div className="text-center mb-16">
+      <Badge color="purple" className="mb-4">
+        <Sparkles className="w-4 h-4 mr-2" />
+        Campus Life
+      </Badge>
+      <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        Student Life & Community
+      </h2>
+      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        Vibrant campus life with diverse opportunities for growth and engagement
+      </p>
+    </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {aboutData.studentLife.map((activity, index) => (
-                <Card key={index} className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-white/70 backdrop-blur-sm">
-                  <CardContent className="p-8 text-center">
-                    <div className="mb-6 flex justify-center">
-                      <div className="p-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
-                        {renderIcon(activity.icon, "w-8 h-8")}
-                      </div>
-                    </div>
-                    <h3 className="font-bold text-gray-900 mb-3 text-lg group-hover:text-purple-600 transition-colors">
-                      {activity.title}
-                    </h3>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-
-          </div>
-        </section>
-
-        {/* Section 15: Final CTA Banner */}
-        <section className="py-16 bg-gray-50 text-gray-900">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8">
-              Join GBU – Where Excellence, Empathy & Enlightenment Thrive
-            </h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-blue-600 text-white hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 rounded-lg"
-              >
-                Apply Now
-              </Button>
-              <Button
-                size="lg"
-                className="bg-blue-600 text-white hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 rounded-lg"
-              >
-                Download Brochure
-              </Button>
-              <Button
-                size="lg"
-                className="bg-blue-600 text-white hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 rounded-lg"
-              >
-                Plan a Visit
-              </Button>
-            </div>
-          </div>
-        </section>
-
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {aboutData.studentLife.map((activity, index) => (
+        <Link key={index} to={activity.link} className="block">
+          <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-white/70 backdrop-blur-sm cursor-pointer">
+            <CardContent className="p-8 text-center">
+              <div className="mb-6 flex justify-center">
+                <div className="p-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
+                  {renderIcon(activity.icon, "w-8 h-8")}
+                </div>
+              </div>
+              <h3 className="font-bold text-gray-900 mb-3 text-lg group-hover:text-purple-600 transition-colors">
+                {activity.title}
+              </h3>
+            </CardContent>
+          </Card>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
       </div>
     </SearchableWrapper>
   );

@@ -68,13 +68,13 @@ const HostelDetailed = () => {
 
   return (
     <SearchableWrapper>
-    <section className="pb-20 bg-gray-50">
+    <section className="min-h-screen bg-gray-50">
       <HeroBanner
         title="Hostel Life"
         subtitle="Explore our hostels with modern amenities and comfortable living."
         bgTheme={1}
       />
-      <div className="container mx-auto px-4 md:px-8 lg:px-30">
+      <div className="container mt-10 mx-auto px-4 md:px-8 lg:px-30">
         {/* === Category Cards === */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-8">
           {categories.map((cat) => (

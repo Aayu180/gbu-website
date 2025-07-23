@@ -200,26 +200,7 @@ const ClubsMain = () => {
         </div>
       </div>
 
-      {/* Call to Action */}
-      <div className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Make Your Mark?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Join a community of passionate students and start your journey of
-            growth, learning, and leadership.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" variant="secondary" className="gap-2">
-              <Users className="w-5 h-5" />
-              Find Your Club
-            </Button>
-            <Button size="lg" variant="secondary">
-              <ExternalLink className="w-5 h-5" />
-              Contact Us
-            </Button>
-          </div>
-        </div>
-      </div>
+      
     </div>
     </SearchableWrapper>
   );

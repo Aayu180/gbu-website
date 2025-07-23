@@ -19,26 +19,77 @@ const Disclosures = () => {
   const [expandedSection, setExpandedSection] = useState(null);
 
   const disclosures = [
+     {
+      category: 'Regulatory Approvals & MoUs',
+      icon: FileText, // or ShieldCheck, or CheckSquare for approvals
+      color: 'from-indigo-400 to-indigo-600',
+      items: [
+        {
+          title: 'AICTE Approved Courses',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/Content/gbudata/approval/AICTE_Approved_Courses.pdf'
+        },
+        {
+          title: 'UGC Approval Letter under Section 12(B)',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/Content/gbudata/approval/UGC_12BCertificate_28June19.pdf'
+        },
+        {
+          title: 'UGC Approval Letter under Section 2(f)',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/Content/gbudata/approval/UGC-GBU%202f.pdf'
+        },
+        {
+          title: 'NCTE Recognition Order',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/Content/gbudata/approval/Deppt_Education_NCT_17May2017.pdf'
+        },
+        {
+          title: 'MoU with Cybertick India Pvt. Ltd.',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/Content/gbudata/General/Matter%20for%20Media%20Press.pdf'
+        },
+        {
+          title: 'ISO Manual & Certificate',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/Content/gbudata/approval/Certificate.pdf'
+        },
+        {
+          title: 'MoU with NSDC (Skill Development)',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/Content/gbudata/General/MOU_NSDC_DOC_1July15.pdf'
+        },
+        {
+          title: 'Educational Society Registration Certificate',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/Content/gbudata/General/GBU_SocietyRegistration.pdf'
+        }
+      ]
+    }
+    ,
     {
       category: 'Academic Information',
       icon: FileText,
       color: 'from-blue-400 to-blue-600',
       items: [
-        { title: 'NAAC Accreditation Certificate', status: 'completed', lastUpdated: '2024' },
-        { title: 'Academic Calendar 2024-25', status: 'completed', lastUpdated: '2024' },
-        { title: 'Fee Structure', status: 'completed', lastUpdated: '2024' },
-        { title: 'Admission Criteria', status: 'completed', lastUpdated: '2024' }
-      ]
-    },
-    {
-      category: 'Financial Disclosures',
-      icon: DollarSign,
-      color: 'from-green-400 to-green-600',
-      items: [
-        { title: 'Annual Financial Statement', status: 'completed', lastUpdated: '2023-24' },
-        { title: 'Audit Report', status: 'completed', lastUpdated: '2023-24' },
-        { title: 'Budget Allocation', status: 'completed', lastUpdated: '2024-25' },
-        { title: 'Expenditure Report', status: 'completed', lastUpdated: '2023-24' }
+        { title: 'NAAC Accreditation Certificate', status: 'completed', lastUpdated: '2024', link: "https://www.gbu.ac.in/Content/gbudata/approval/NAAC%20Certificate_31Dec18.jpg", },
+        { title: 'Academic Calendar 2024-25', status: 'completed', lastUpdated: '2024', link: "https://www.gbu.ac.in/Content/gbudata/General/Academic%20Calendar%202024-25.pdf", },
+        { title: 'Fee Structure', status: 'completed', lastUpdated: '2024', link: "https://pravesh.gbu.ac.in/Content/Data/Fee_Structure2024-25.pdf", },
+        { title: 'Admission Criteria', status: 'completed', lastUpdated: '2024', link: "https://pravesh.gbu.ac.in/Content/Data/GBU-BROCHURE-2025.pdf", },
+        {
+          title: 'Anti Ragging Guidelines',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/page/AntiRagging'
+        }
       ]
     },
     {
@@ -46,30 +97,45 @@ const Disclosures = () => {
       icon: Users,
       color: 'from-purple-400 to-purple-600',
       items: [
-        { title: 'Faculty Qualification Details', status: 'completed', lastUpdated: '2024' },
-        { title: 'Student-Faculty Ratio', status: 'completed', lastUpdated: '2024' },
-        { title: 'Faculty Development Programs', status: 'completed', lastUpdated: '2024' },
-        { title: 'Research Publications', status: 'completed', lastUpdated: '2024' }
+        {
+          title: 'Faculty List',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://gbu-website.vercel.app/academics/faculty'
+        },
+        {
+          title: 'Schools & Departments',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://gbu-website.vercel.app/academics/schools'
+        },
+        {
+          title: 'Research Publications',
+          status: 'completed',
+          lastUpdated: '2024',
+          link: 'https://www.gbu.ac.in/public/publications'
+        }
       ]
-    },
+    }
+    ,
     {
       category: 'Infrastructure Details',
       icon: Award,
       color: 'from-red-400 to-red-600',
       items: [
-        { title: 'Campus Facilities', status: 'completed', lastUpdated: '2024' },
-        { title: 'Library Resources', status: 'completed', lastUpdated: '2024' },
-        { title: 'Laboratory Details', status: 'completed', lastUpdated: '2024' },
-        { title: 'Hostel Facilities', status: 'completed', lastUpdated: '2024' }
+        { title: 'Campus Facilities', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/campus-life/hero", },
+        { title: 'Library Resources', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/campus-life/hero", },
+        { title: 'Laboratory Details', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/academics/centers-of-excellence", },
+        { title: 'Hostel Facilities', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/campus-life/hostel-detailed", }
       ]
     }
   ];
 
   const complianceMetrics = [
-    { icon: Award, numberText: "A+", title: "NAAC Grade" },
-    { icon: ShieldCheck, numberText: "98%", title: "Compliance Rate" },
-    { icon: FileText, numberText: "95%", title: "Transparency Index" },
-    { icon: CheckCircle, numberText: "A", title: "Audit Score" },
+    { icon: Award, numberText: "B+", title: "NAAC Grade" },
+    { icon: ShieldCheck, numberText: "16:1", title: "Student–Faculty Ratio" },
+    { icon: FileText, number: 21, title: "Funded Projects" },
+    { icon: CheckCircle, numberText: "3+", title: "MoUs Signed" },
   ];
 
   const toggleSection = (index) => {
@@ -130,9 +196,15 @@ const Disclosures = () => {
                                 Last Updated: {item.lastUpdated}
                               </div>
                             </div>
-                            <button className="text-emerald-600 hover:text-emerald-800 transition-colors">
+                            <a
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-emerald-600 hover:text-emerald-800 transition-colors"
+                            >
                               <Download className="w-5 h-5" />
-                            </button>
+                            </a>
+
                           </div>
                         </div>
                       ))}

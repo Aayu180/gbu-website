@@ -17,7 +17,7 @@ const AboutSection = ({
   photos = [],
 }) => {
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <section className="py-20 bg-white">
       <h2 className="text-3xl sm:text-4xl font-bold text-center text-blue-800 mb-10 sm:mb-12">
         {sectionTitle}
         <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full"></div>

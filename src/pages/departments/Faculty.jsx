@@ -2,7 +2,7 @@
 import {
   Mail, Phone, Search, Filter, X, BookOpen
 } from 'lucide-react';
-
+import BannerSection from '../../components/HeroBanner';
 const Faculty = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('All');
@@ -871,17 +871,12 @@ const expYears = parseInt(faculty.experience) || 0;
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section with Dark Overlay */}
-      <div className="relative h-[400px] bg-cover bg-center" style={{ backgroundImage: 'url(/assets/GBU.webp)' }}>
-        <div className="absolute inset-0 bg-black bg-opacity-70"></div>
-        <div className="relative z-10 h-full flex flex-col justify-center items-center text-white px-4">
-          <h1 className="text-6xl font-bold mb-6 text-center">Faculty Members<br/>USICT</h1>
-          <p className="text-xl text-center max-w-4xl">
-            Meet our world-class faculty members who are dedicated to excellence in teaching, research, and innovation. 
-            Our accomplished professors bring years of industry and academic experience to shape the next generation of technology leaders.
-          </p>
-            </div>
-          </div>
 
+<BannerSection
+        title="Meet Our Faculty Members"
+        subtitle="Dedicated to Excellence in Teaching, Research, and Innovation"
+        bgtheme={5}
+        />
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Department Pills */}

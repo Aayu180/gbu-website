@@ -126,7 +126,7 @@ const HiringSection = () => {
 
       {/* Placement Button */}
       <div className="text-center mt-16 sm:mt-20">
-        <button
+        <a href="https://gbu-website.vercel.app/placements"><button
           onClick={() => {
             console.log("View Placements clicked!");
           }}
@@ -145,7 +145,7 @@ const HiringSection = () => {
             </svg>
           </span>
           <div className="absolute inset-0 rounded-full opacity-0 group-active:opacity-30 bg-white animate-ping group-active:animate-pulse"></div>
-        </button>
+        </button></a>
       </div>
 
       {/* Stats Section */}

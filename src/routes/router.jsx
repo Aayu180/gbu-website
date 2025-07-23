@@ -64,6 +64,7 @@ import SitemapAbout from "../pages/Sitemap/SitemapAbout.jsx";
 import SitemapContact from "../pages/Sitemap/SitemapContact.jsx";
 import SitemapAcademics from "../pages/Sitemap/SitemapAcademics.jsx";
 import InstitutionInnovation from "../pages/Reasearch/InstitutionInnovation.jsx";
+import GBUHistory from "../pages/Aboutus/History.jsx";
 
 const AcademicCalendar = React.lazy(() =>
   import("../pages/Academic/AcademicCalendar.jsx")
@@ -88,6 +89,7 @@ const ReportsPublications = React.lazy(() =>
 const Schools = React.lazy(() => import("../pages/Academic/Schools.jsx"));
 
 const Disclosures = lazy(() => import("../pages/Aboutus/Disclosures.jsx"));
+const History = lazy(() => import("../pages/Aboutus/History.jsx"));
 const Policies = lazy(() => import("../pages/Aboutus/Policies.jsx"));
 const AboutGbu = lazy(() => import("../pages/Aboutus/AboutGbu.jsx"));
 
@@ -156,8 +158,9 @@ import Coedt from "../pages/departments/Coedt.jsx";
 import Raem from "../pages/departments/Raem.jsx";
 import CyberSecurity from "../pages/departments/CyberSecurity.jsx";
 
-import DAC from "../pages/dac/DAC.jsx"; 
+import DAC from "../pages/dac/DAC.jsx";
 import PlacementDashboard from "../pages/departments/PlacementDashboard.jsx";
+import ContactBanner from "../pages/Contact/ContactBanner.jsx";
 // import DACmain from "../pages/dac/DACmain.jsx";
 
 
@@ -176,7 +179,8 @@ export default function AppRouter() {
         <Routes>
           {/* About Us Routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/about-us/About GBU" element={<AboutGbu/>} />
+          <Route path="/about-us/About GBU" element={<AboutGbu />} />
+          <Route path="/aboutUs/GBUHistory" element={<History />} />
           <Route path="/about-us/chancellor-message" element={<Chancellor />} />
           <Route
             path="/about-us/vice-chancellor-message"
@@ -226,13 +230,13 @@ export default function AppRouter() {
 
             {/* Faculty */}
             <Route path="faculty" element={<ICTFaculty />} />
- <Route path="placement" element={<PlacementDashboard/>} />
+            <Route path="placement" element={<PlacementDashboard />} />
             {/* About Section */}
             <Route
               path="about/coeidrone"
               element={<Coedt />}
             />
-            <Route path="about/cyber" element={<CyberSecurity/>}/>
+            <Route path="about/cyber" element={<CyberSecurity />} />
             <Route path="about/dean" element={<Dean />} />
             <Route
               path="about/coeiraem"
@@ -408,7 +412,7 @@ export default function AppRouter() {
               path="about/coeidrone"
               element={<h1>COE Drone - Coming Soon</h1>}
             />
-            
+
             <Route path="about/dean" element={<Dean />} />
             <Route
               path="about/coeiraem"
@@ -618,13 +622,13 @@ export default function AppRouter() {
             path="/campus-life/hostel-facilities"
             element={<HostelDining />}
           />
-          <Route path="/campus-life/hostel-detailed" element={<HostelDetailed/>}/>
+          <Route path="/campus-life/hostel-detailed" element={<HostelDetailed />} />
           <Route path="/campus-life/hero" element={<Overview />} />
           <Route
             path="/campus-life/sports-fitness"
             element={<SportsCultural />}
           />
-          
+
           <Route
             path="/campus-life/clubs-societies"
             element={<ClubsMain />}
@@ -675,7 +679,7 @@ export default function AppRouter() {
           <Route path="/alumni/alumni-events" element={<EventsReunions />} />
           <Route
             path="/alumni/success-stories"
-            element={<SuccessStories/>}
+            element={<SuccessStories />}
           />
           <Route
             path="/alumni/become-mentor"
@@ -725,33 +729,33 @@ export default function AppRouter() {
 
 
           {/* <Route path="/dacMain" element={<DACmain/>}/> */}
-          <Route path="/dac" element={<DAC/>}/>
+          <Route path="/dac" element={<DAC />} />
 
 
 
 
           <Route path="/booking" element={<BookingMain />} />
           <Route path="/booking/:facilityId" element={<FacilityBookingPage />} />
-    
 
-           
+
+
 
 
           <Route path="/tender" element={<TenderMain />} />
 
 
           <Route path="/rti" element={<RTI />} />
+          <Route path="/contactUs" element={<ContactBanner />} />
 
 
-
-        <Route path="/recruitments" element={<RecruitMain/>}/>
+          <Route path="/recruitments" element={<RecruitMain />} />
 
 
           <Route path="/sitemapMain" element={<SitemapMain />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/sitemapAbout" element={<SitemapAbout />} />
           <Route path="/sitemapContact" element={<SitemapContact />} />
-          <Route path="/sitemapAcademics" element={<SitemapAcademics />} /> 
+          <Route path="/sitemapAcademics" element={<SitemapAcademics />} />
 
         </Routes>
       </AuthProvider>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 import BannerSection from "../../components/HeroBanner.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import ButtonGroup from "../../components/TabsData.jsx";
@@ -140,15 +140,14 @@ const ViceChancellor = () => {
             {/* Vice Chancellor Card */}
             <div className="lg:w-1/3">
               <div className="bg-blue-50 p-6 rounded-lg shadow-lg">
-                <div className="bg-gray-300 h-64 rounded-lg mb-4 flex items-center justify-center">
-                  {/* <span className="text-gray-600">Vice Chancellor's Photo</span> */}
+                <Link to="#"><div className="bg-gray-300 h-80 rounded-lg mb-4 flex items-center justify-center">
                   <img
                     src="/assets/prof.jpeg"
                     alt="Prof. Rana Pratap Singh"
                     className="object-cover h-full w-full rounded-lg"
                   />
+                </div></Link>
 
-                </div>
                 <div className="text-center">
                   <h3 className="text-xl font-bold text-gray-800 mb-1">Prof. Rana Pratap Singh</h3>
                   <p className="text-sm text-blue-600 mb-1">Vice Chancellor</p>
@@ -165,35 +164,11 @@ const ViceChancellor = () => {
               {/* Quote Text */}
               <div className="space-y-6 text-gray-700 leading-relaxed">
                 <p className="text-lg text-justify">
-                  It is a great honour and privilege to work under the able leadership of hon'ble Chief Minister,
-                  Shri Yogi Adityanath Ji, the hon'ble Chancellor of Gautam Buddha University.
-
-                  Gautam Buddha University stands as a beacon of knowledge, innovation, and inclusivity,
-                  committed to shaping the future of education, research, and societal transformation.
-                  Rooted in the values of wisdom, compassion, and excellence, our university fosters an
-                  environment where intellectual pursuits align with ethical responsibility and social commitment.
+                  Gautam Buddha University ko Shri Yogi Adityanath Ji ke netritva mein chalana hum sabke liye garv ki baat hai. Yeh vishwavidyalaya gyaan, navachar aur samaveshita ka prateek hai, jahan hum apne vidyarthiyon ko sirf takneek aur vaigyanik soch hi nahin, balki sadbhavna, neetik zimmedari aur samaajik pratibaddhata ka gyaan bhi dete hain.
                 </p>
 
                 <p className="text-lg text-justify">
-                  In an era marked by rapid technological advancements and evolving global challenges,
-                  we strive to equip our students with the skills, creativity, and moral compass necessary
-                  to lead with integrity. Our academic ecosystem nurtures a culture of inquiry, critical thinking,
-                  and interdisciplinary research, ensuring that our graduates emerge as thought leaders and
-                  change-makers who contribute meaningfully to society.
-                </p>
-
-                <p className="text-lg text-justify">
-                  With a steadfast focus on holistic development, Gautam Buddha University integrates
-                  tradition with modernity, blending the wisdom of ancient knowledge systems with
-                  contemporary scientific and technological advancements. We remain dedicated to fostering
-                  innovation, entrepreneurship, and sustainable solutions that address societal needs while
-                  upholding the values of equity, justice, and inclusivity.
-                </p>
-                <p className="text-lg text-justify">
-                  As we continue our journey toward becoming a globally recognized university, I invite
-                  faculty, students, scholars, and industry leaders to collaborate in our shared mission
-                  of academic excellence, cultivation of research and innovation, and transformative impact.
-                  Together, let us build a future that is enlightened, empowered, and enduring.
+                  Aaj ke tezi se badalte yug mein, hum holistic vikas par zor dete hue apne chhatron mein rachnatmakta, aalochanaatmak soch aur antarvishayi anusandhan ki bhavna jagate hain. Hamari koshish hai ki hamare graduates na keval sochne wale neta bane, balki naye aur susthaya laagoo karne wale badlaav-lane wale too ban kar ubhren.
                 </p>
               </div>
               <div className="text-6xl text-blue-500 font-serif mb-4 text-right">"</div>

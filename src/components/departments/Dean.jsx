@@ -1,13 +1,13 @@
 import React from "react";
 
 const LeadershipCard = ({ name, title, image, description }) => {
-  const safeName = name || "Unknown Leader";
-  const safeTitle = title || "Designation not available";
-  const safeImage = image || "/default-avatar.jpg"; 
-  const safeDescription = description || "No description available";
+  const safeName = name || "Dr. Arpit Bhardwaj";
+  const safeTitle = title || "Dean, School of Information and Communication Technology, Gautam Buddha University";
+  const safeImage = image || "https://www.gbu.ac.in/USICT/media/img/arpit%20bhardwaj.jpg"; 
+  const safeDescription = description || "Dr. Arpit Bhardwaj, Ph.D. (IIT Indore), serves as the Dean of the School of ICT at Gautam Buddha University. With over 50+ research publications in reputed journals like IEEE, Elsevier, and Springer, his research interests include Genetic Programming, Brain-Computer Interface (BCI), and EEG-based emotion recognition.Since the inception of the School in 2008, he has played a vital role in shaping the academic and research environment, overseeing undergraduate, postgraduate, and doctoral programs. Under his leadership, the school emphasizes innovation, interdisciplinary research, and industry-oriented learning with modern labs and regular expert talks.He continues to contribute actively to academia and industry collaborations, guiding students and faculty alike towards excellence in the field of Information and Communication Technology.";
 
   return (
-    <section className="py-12 sm:py-16 bg-gray-100">
+    <section className="py-12 sm:py-16 ">
       <div className="text-center mb-10 sm:mb-12">
         <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
           Dean's <span className="text-blue-800">Message</span>

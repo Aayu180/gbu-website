@@ -12,6 +12,7 @@ import fnarea1 from "../../assets/fnarea1.png";
 import fnarea2 from "../../assets/fnarea2.png";
 import fnarea3 from "../../assets/fnarea3.png";
 import fnarea4 from "../../assets/fnarea4.png";
+import BannerSection from "../../components/HeroBanner";
 
 const functionalAreas = [
   {
@@ -151,26 +152,10 @@ const raemEvents = [
 const Raem = () => {
   return (
     <div>
-      <Hero
-        backgroundImage="http://raem.gbu.ac.in/images/demo/gallery/rect/IMG-20190423-WA0128.jpg"
-        title="Center for"
-        highlightedText="Rapid and Alternative Energy Mobility"
-        subtitle="Empowering Sustainable Mobility and Clean Energy Innovation"
-        showTagline={true}
-        taglineItems={[
-          { icon: PenTool, text: "Research", color: "text-blue-600" },
-          { icon: Wrench, text: "Develop", color: "text-green-600" },
-          { icon: Send, text: "Deploy", color: "text-indigo-600" },
-          { icon: Rocket, text: "Transform Mobility", color: "text-purple-600" },
-        ]}
-        primaryBtn={{
-          label: "Explore Programs",
-          onClick: () => alert("Explore Programs Clicked!"),
-        }}
-        secondaryBtn={{
-          label: "Projects",
-          onClick: () => alert("Projects Clicked!"),
-        }}
+      <BannerSection
+        title="Center for Rapid and Alternative Energy Mobility"
+        subtitle="Leading the Future of Rapid and Alternative Energy Mobility"
+        bgTheme={8}
       />
       <AboutRAEM
         visionText={[

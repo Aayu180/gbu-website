@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import StatsCard from "../../StatsCard";
 
 const AboutDepartment = ({
   heading = "About the Department",
@@ -11,7 +12,7 @@ const AboutDepartment = ({
   return (
     <section
       id="about"
-      className="py-24 bg-gradient-to-br from-[#eef2f7] via-[#f1f5f9] to-[#eef2f7]"
+      className="py-24 bg-white"
     >
       <div className="container mx-auto px-6">
         <motion.div
@@ -30,37 +31,7 @@ const AboutDepartment = ({
           </p>
 
           {/* Stats */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.2 } },
-            }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
-                }}
-                className="text-center p-6 rounded-3xl bg-white/60 backdrop-blur-md shadow-lg transition-all duration-500"
-              >
-                <div className="h-16 w-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-[#6366f1] to-[#3b82f6] text-white shadow-md">
-                  <stat.icon className="h-7 w-7" />
-                </div>
-                <div className="text-3xl font-extrabold text-[#111827] mb-1">{stat.value}</div>
-                <div className="text-[#475569]">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+           <StatsCard stats={stats}/>
 
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <motion.div

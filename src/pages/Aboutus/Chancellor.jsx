@@ -127,13 +127,13 @@ const Chancellor = () => {
             {/* Chancellor Card */}
             <div className="lg:w-1/3">
               <div className="bg-yellow-100 p-6 rounded-lg shadow-lg">
-                <div className="bg-gray-300 aspect-[3/4] rounded-lg mb-4 overflow-hidden max-w-xs mx-auto">
-                  <img
-                    src="/assets/Yogiji.jpg"
-                    alt="Yogi Adityanath"
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
+                <div className="bg-gray-300 h-80 rounded-lg mb-4 overflow-hidden max-w-xs mx-auto">
+  <img
+    src="/assets/Yogiji.jpg"
+    alt="Yogi Adityanath"
+    className="w-full h-full object-cover object-top"
+  />
+</div>
                 <div className="text-center">
                   <h3 className="text-xl font-bold text-gray-800 mb-1">
                     Shri Yogi Adityanath

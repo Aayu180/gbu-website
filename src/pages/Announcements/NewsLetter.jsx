@@ -240,7 +240,7 @@ const NewsLetter = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <BannerSection
         title="Newsletter"
         subtitle="Stay updated with the latest campus highlights"

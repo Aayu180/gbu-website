@@ -1,4 +1,5 @@
 import * as React from "react";
+import BannerSection from "../HeroBanner";
 
 // ✅ Simple cn helper
 function cn(...inputs) {
@@ -60,42 +61,11 @@ Button.displayName = "Button";
 // ✅ HeroBanner
 const HeroBanner = () => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-900 text-white py-20 flex items-center justify-center">
-      {/* Decorative circles */}
-      <div className="absolute -top-20 -left-20 w-80 h-80 bg-white rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-
-      {/* Subtle overlay for extra depth */}
-      <div className="absolute inset-0 bg-black/30"></div>
-
-      <div className="relative z-10 container mx-auto px-6 text-center">
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 animate-fade-in drop-shadow-md">
-          Facility Booking Portal
-        </h1>
-        <p className="text-lg md:text-2xl mb-10 text-white/80 max-w-3xl mx-auto animate-fade-in delay-100">
-          Reserve auditoriums, conference halls, and other campus spaces at Gautam Buddha University in just a few clicks.
-        </p>
-
-        <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in delay-200">
-          <Button
-            href="/booking"
-            variant="primary"
-            size="lg"
-            className="shadow-xl"
-          >
-            Browse Facilities
-          </Button>
-          <Button
-            href="/availability"
-            variant="secondary"
-            size="lg"
-            className="shadow-xl"
-          >
-            Check Availability
-          </Button>
-        </div>
-      </div>
-    </section>
+    <BannerSection
+  title="Facility Booking Portal"
+  subtitle="Reserve auditoriums, conference halls, and other campus spaces at Gautam Buddha University in just a few clicks."
+  bgTheme={1}
+/>
   );
 };
 

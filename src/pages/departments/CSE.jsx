@@ -14,6 +14,9 @@ import {
 } from "lucide-react";
 
 import researchBg from "../../assets/research.jpg";
+import BannerSection from "../../components/HeroBanner";
+import StatsCard from "../../components/StatsCard";
+import { number } from "framer-motion";
 
 const Cse = () => {
   const heroProps = {
@@ -29,21 +32,21 @@ const Cse = () => {
       {
         icon: <Code className="h-8 w-8 text-white" />,
         bg: "bg-gradient-to-br from-blue-500 to-blue-600",
-        title: "Software Development",
+        subtitle: "Software Development",
         description:
           "Full-stack development, mobile apps, and cutting-edge software solutions",
       },
       {
         icon: <Cpu className="h-8 w-8 text-white" />,
         bg: "bg-gradient-to-br from-purple-500 to-purple-600",
-        title: "AI & Machine Learning",
+        subtitle: "AI & Machine Learning",
         description:
           "Artificial intelligence, deep learning, and intelligent systems research",
       },
       {
         icon: <Database className="h-8 w-8 text-white" />,
         bg: "bg-gradient-to-br from-indigo-500 to-indigo-600",
-        title: "Data Science",
+        subtitle: "Data Science",
         description:
           "Big data analytics, cloud computing, and database management systems",
       },
@@ -78,11 +81,11 @@ const Cse = () => {
     subheading:
       "Established in 1995, our department has been at the forefront of computer science education and research for over two decades.",
     stats: [
-      { icon: Users, label: "Students", value: "800+" },
-      { icon: BookOpen, label: "Faculty", value: "45+" },
-      { icon: Award, label: "Research Projects", value: "120+" },
-      { icon: Lightbulb, label: "Patents Filed", value: "25+" },
-    ],
+          { icon: Users, numberText: "800+", title: "Students", subtitle: "Enrolled" },
+          { icon: BookOpen, numberText: "45+", title: "Faculty", subtitle: "Members" },
+          { icon: Award, numberText: "120+", title: "Research Projects", subtitle: "Completed" },
+          { icon: Lightbulb, numberText: "25+", title: "Patents Filed", subtitle: "Innovations" },
+        ],
     highlights: [
       {
         title: "Excellence in Education",
@@ -379,7 +382,12 @@ const achievements = [
 
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection {...heroProps} />
+      <BannerSection
+        title={heroProps.title}
+        subtitle={heroProps.subtitle}
+        bgTheme={1}
+      />
+     
       <HodMessage {...hodProps} />
       <AboutDepartment {...aboutProps} />
       <Programs heading="Academic Programs" subheading="Choose from our diverse range of programs designed to meet your academic and career goals in computer science." programs={programsData} />

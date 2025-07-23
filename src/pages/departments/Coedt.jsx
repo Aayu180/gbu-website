@@ -34,6 +34,7 @@ import mentor10 from "../../assets/mentor10.png"
 import mentor11 from "../../assets/mentor11.png"
 
 import { PenTool, Wrench, Send, Rocket } from "lucide-react";
+import BannerSection from "../../components/HeroBanner";
 
 const mentorsData = [
   {
@@ -329,27 +330,11 @@ const mediaItems = [
 const Coedt = () => {
   return (
     <div>
-      <Hero
-        backgroundImage="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwWHjEgmHWV5dObOY_Yb-R3OMecdGp2u2dEw&s"
-        title="Center of"
-        highlightedText="Excellence in Drone Technology"
+      <BannerSection 
+        title="Centre of Excellence in Drone Technology"
         subtitle="Empowering Innovation in Drone Technology"
-        taglineItems={[
-          { icon: PenTool, text: "Design", color: "text-blue-600" },
-          { icon: Wrench, text: "Develop", color: "text-green-600" },
-          { icon: Send, text: "Fly", color: "text-indigo-600" },
-          { icon: Rocket, text: "Lead the Future", color: "text-purple-600" },
-        ]}
-        primaryButton={{
-          text: "Explore Programs",
-          onClick: () => { },
-        }}
-        secondaryButton={{
-          text: "Projects",
-          onClick: () => { },
-        }}
-      />
-
+        bgTheme={5}
+/>
       <AboutSection
         sectionTitle="About Us"
         visionTitle="Our Vision"

@@ -86,12 +86,12 @@ const Primarynavbar = () => {
 
          
 
-              <a
-                href="http://gbu-contact-hub-banner.vercel.app"
+              <Link
+                to="/contactUs"
                 className="flex items-center gap-1 hover:underline"
               >
                 <Phone size={14} /> Contact Us
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -175,9 +175,9 @@ const Primarynavbar = () => {
                 >
                   Grievance Portal
                 </Link>
-                <a href="http://gbu-contact-hub-banner.vercel.app" className="block px-3 py-2 rounded-md hover:bg-gray-100">
+                <Link to="/contactUs" className="block px-3 py-2 rounded-md hover:bg-gray-100">
                   Contact Us
-                </a>
+                </Link>
               </div>
             </div>
           </div>

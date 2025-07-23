@@ -105,8 +105,6 @@
 //     </section>
 //   );
 // }
-
-
 import React from "react";
 import {
   FaUniversity,
@@ -154,15 +152,8 @@ const quickLinks = [
     desc: "Capacity Building",
     icon: <FaUser className="text-white text-2xl" />,
     color: "bg-blue-700",
-    link: "https://buddha-university-portal.lovable.app/campus/infrastructure",
+    link: "/campus-life/NSS",
     external: true,
-  },
-  {
-    title: "Placements",
-    desc: "Career opportunities",
-    icon: <FaBriefcase className="text-white text-2xl" />,
-    color: "bg-orange-600",
-    link: "/placements/placement-process",
   },
 ];
 
@@ -180,19 +171,19 @@ export default function QuickLinks() {
         Quick Access
       </h2>
 
-      <div className="grid gap-6 px-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 max-w-7xl mx-auto">
+      <div className="grid gap-6 px-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 max-w-7xl mx-auto">
         {quickLinks.map((item, idx) => {
           const Card = (
-            <div className="bg-white rounded-lg shadow-md p-6 text-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl h-full">
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-5 text-center transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl h-full">
               <div
-                className={`w-14 h-14 mx-auto flex items-center justify-center rounded-full ${item.color} mb-4`}
+                className={`w-12 h-12 mx-auto flex items-center justify-center rounded-full ${item.color} mb-4`}
               >
                 {item.icon}
               </div>
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-sm sm:text-base font-semibold text-gray-800">
                 {item.title}
               </h3>
-              <p className="text-sm text-gray-600">{item.desc}</p>
+              <p className="text-xs sm:text-sm text-gray-600">{item.desc}</p>
             </div>
           );
 

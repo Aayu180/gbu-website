@@ -15,7 +15,7 @@ const AboutRAEM = ({
   photos = [],
 }) => {
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <section className="py-20 bg-white">
       <h2 className="text-3xl sm:text-4xl font-bold text-center text-purple-800 mb-10 sm:mb-12">
         {title} <span className="text-purple-800">{highlight}</span>
         <div className="w-20 sm:w-24 h-1 bg-purple-500 mx-auto mt-2 rounded-full"></div>

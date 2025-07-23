@@ -71,40 +71,40 @@ const AcademicCalendar = () => {
   const preparedStats = stats.map((stat) => {
     let icon;
     let number = 0;
-    let title = "";
+    let subtitle = "";
 
     switch (stat.icon_class) {
       case "calendar":
         icon = Calendar;
         number = stat.ssemester_count || 0;
-        title = stat.icon_text || "Semesters";
+        subtitle = stat.icon_text || "Semesters";
         break;
       case "clock":
         icon = Clock;
         number = stat.teaching_days || 0;
-        title = stat.icon_text || "Teaching Days";
+        subtitle = stat.icon_text || "Teaching Days";
         break;
       case "book":
         icon = BookOpen;
         number = stat.examination_periods || 0;
-        title = stat.icon_text || "Examination Periods";
+        subtitle = stat.icon_text || "Examination Periods";
         break;
       case "file":
         icon = FileText;
         number = stat.academic_regulations || 0;
-        title = stat.icon_text || "Academic Regulations";
+        subtitle = stat.icon_text || "Academic Regulations";
         break;
       default:
         icon = null;
         number = 0;
-        title = "--";
+        subtitle = "--";
     }
 
     return {
       icon,
       number,
-      title,
-      iconColor: stat.icon_color || "#2563eb", // fallback color
+      subtitle,
+      iconColor: stat.icon_color || "#2563eb", 
     };
   });
 
@@ -263,30 +263,6 @@ const AcademicCalendar = () => {
             </div>
           </div>
         </section>
-
-        {/* CTA Section */}
-        {cta && (
-          <section className="py-16 text-white" style={{ backgroundColor: cta.background_color }}>
-            <div className="container mx-auto px-4 text-center">
-              <h2 className="text-4xl font-bold mb-6">{cta.title}</h2>
-              <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">{cta.description}</p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href={cta.url1}
-                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors transform hover:scale-105"
-                >
-                  {cta.button1_text}
-                </a>
-                <a
-                  href={cta.url2}
-                  className="border border-white border-solid text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-                >
-                  {cta.button2_text}
-                </a>
-              </div>
-            </div>
-          </section>
-        )}
       </>
     </SearchableWrapper>
   );

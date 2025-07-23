@@ -1,18 +1,17 @@
 import React from "react";
+import BannerSection from "../../components/HeroBanner";
 
 // ✅ Fully props-based BoardOfStudies component
 const BoardOfStudies = ({ departments }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-12 px-6">
+    <>
+    <BannerSection
+          title="Board of Studies"
+          subtitle="Empowering Academic Excellence"
+          bgTheme={10}
+        />
+     <div className="min-h-screen bg-white py-12 px-6">
       <div className="max-w-[1400px] mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2 tracking-tight">
-            Board of Studies
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full"></div>
-        </div>
-
         {/* Department Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {departments.map((dept, deptIndex) => (
@@ -155,6 +154,8 @@ const BoardOfStudies = ({ departments }) => {
         }
       `}</style>
     </div>
+    </>
+   
   );
 };
 

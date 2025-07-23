@@ -234,16 +234,5 @@ const CentersOfExcellence = () => {
   );
 };
 
-const StatCard = ({ icon, value, label, bg }) => (
-  <div className="animate-fade-in">
-    <div
-      className={`${bg} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4`}
-    >
-      {icon}
-    </div>
-    <h3 className="text-3xl font-bold text-gray-800 mb-2">{value}</h3>
-    <p className="text-gray-600">{label}</p>
-  </div>
-);
 
 export default CentersOfExcellence;

@@ -125,10 +125,10 @@ const SchoolCard = ({ imageUrl, label, description, path, features }) => {
 
 const HoverCards = () => {
   const stats = [
-    { icon: Users, numberText: "15K+", title: "Students" },
+    { icon: Users, numberText: "4K+", title: "Students" },
     { icon: BookOpen, number: 8, title: "Schools" },
     { icon: Award, numberText: "200+", title: "Programs" },
-    { icon: Globe, numberText: "50+", title: "Countries" }
+    { icon: Globe, numberText: "10+", title: "Countries" }
   ];
 
   const schools = [
@@ -241,7 +241,7 @@ const HoverCards = () => {
               <button className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
                 Apply Now
               </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors">
+              <button className="border-2 border-white border-solid text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors">
                 Schedule a Visit
               </button>
             </div>

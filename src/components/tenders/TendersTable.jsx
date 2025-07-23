@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+// import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import ButtonGroup from '../TabsData.jsx';
 
 // ✅ Modern Card with subtle lift effect on hover
@@ -209,7 +209,7 @@ const TenderTable = ({ tenders, variant }) => (
 // ✅ Final TendersTable
 const TendersTable = () => {
   return (
-    <SearchableWrapper>
+    // <SearchableWrapper>
       <div className="w-full bg-white shadow-xl border border-gray-200 p-8 sm:p-10 rounded-2xl">
         <Tabs defaultValue="current" className="w-full ">
             <TabsList />
@@ -228,7 +228,7 @@ const TendersTable = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </SearchableWrapper>
+    // </SearchableWrapper>
   );
 };
 
