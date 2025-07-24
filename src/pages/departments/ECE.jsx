@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import researchBg from "../../assets/research.jpg";
+import BannerSection from "../../components/HeroBanner";
 
 const ECE = () => {
   const heroProps = {
@@ -360,7 +361,11 @@ const ECE = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection {...heroProps} />
+     <BannerSection
+        title={heroProps.title}
+        subtitle={heroProps.subtitle}
+        bgTheme={7}
+      />
       <HodMessage {...hodProps} />
       <AboutDepartment {...aboutProps} />
       <Programs

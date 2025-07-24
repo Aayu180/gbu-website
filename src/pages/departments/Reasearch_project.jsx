@@ -10,6 +10,8 @@ import {
   Clock,
   Target,
 } from "lucide-react";
+import BannerSection from "../../components/HeroBanner";
+import StatsCard from "../../components/StatsCard";
 
 /* -------------------------- Data Definitions -------------------------- */
 
@@ -20,10 +22,10 @@ const heroData = {
 };
 
 const statsData = [
-  { icon: Award, value: "75", label: "Active Projects", color: "text-blue-600" },
+  { icon: Award, value: 75, label: "Active Projects", color: "text-blue-600" },
   { icon: DollarSign, value: "₹45Cr", label: "Total Funding", color: "text-green-600" },
-  { icon: Users, value: "120", label: "Researchers Involved", color: "text-purple-600" },
-  { icon: CheckCircle, value: "45", label: "Completed Projects", color: "text-orange-600" },
+  { icon: Users, value: 120, label: "Researchers Involved", color: "text-purple-600" },
+  { icon: CheckCircle, value: 45, label: "Completed Projects", color: "text-orange-600" },
 ];
 
 const ongoingProjects = [
@@ -264,56 +266,23 @@ const fadeUp = {
 };
 
 const Hero = ({ data }) => (
-  <motion.section
-    className="py-30 bg-gradient-to-br from-purple-50 to-indigo-100 h-[310px]"
-    initial="hidden"
-    whileInView="show"
-    viewport={{ once: true }}
-    variants={fadeUp}
-  >
-    <div className="container mx-auto px-4 text-center">
-      <motion.h2
-        className="text-5xl font-bold text-gray-900 mb-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        {data.title}
-      </motion.h2>
-      <motion.p
-        className="text-xl text-gray-600 max-w-3xl mx-auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-      >
-        {data.description}
-      </motion.p>
-    </div>
-  </motion.section>
+ <BannerSection
+    title={data.title}
+    subtitle={data.description}
+    bgTheme={1}
+  />
 );
 
 const Stats = ({ data }) => (
-  <motion.section
-    className="py-16 px-4 bg-white"
-    initial="hidden"
-    whileInView="show"
-    viewport={{ once: true }}
-    variants={fadeUp}
-  >
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-      {data.map((stat, i) => (
-        <motion.div
-          key={i}
-          className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
-          whileHover={{ scale: 1.05 }}
-        >
-          <stat.icon className={`h-12 w-12 ${stat.color} mx-auto mb-4`} />
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">{stat.value}</h3>
-          <p className="text-gray-600">{stat.label}</p>
-        </motion.div>
-      ))}
-    </div>
-  </motion.section>
+  <StatsCard 
+    stats={data.map((item) => ({
+      icon: item.icon,
+      ...(typeof item.value === 'string' 
+        ? { numberText: item.value } 
+        : { number: item.value }),
+      subtitle: item.label
+    }))}
+  />
 );
 
 const OngoingProjects = ({ projects }) => (

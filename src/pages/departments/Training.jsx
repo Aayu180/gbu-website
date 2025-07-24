@@ -1,14 +1,9 @@
 import React from "react";
 import { Briefcase, Users, Award, Building, TrendingUp, CheckCircle } from "lucide-react";
+import BannerSection from "../../components/HeroBanner";
+import StatsCard from "../../components/StatsCard";
 
-// ✅ Reusable Stat Card
-const StatCard = ({ Icon, number, label, color }) => (
-  <div className="bg-white p-6 rounded-xl shadow-lg text-center">
-    <Icon className={`h-12 w-12 ${color} mx-auto mb-4`} />
-    <h3 className="text-2xl font-bold text-gray-900 mb-2">{number}</h3>
-    <p className="text-gray-600">{label}</p>
-  </div>
-);
+
 
 // ✅ Reusable Program Card
 const ProgramCard = ({ bg, icon, title, subtitle, items, footer }) => (
@@ -83,16 +78,21 @@ const SuccessCard = ({ from, iconColor, quote, details }) => (
 const TrainingConsultancy = ({ hero, stats, trainingPrograms, technicalConsultancy, businessConsultancy, successStories }) => {
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="py-30 bg-gradient-to-br from-green-50 to-blue-100 text-center">
-        <h2 className="text-5xl font-bold text-gray-900 mb-6">{hero.title}</h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">{hero.subtitle}</p>
-      </section>
+     
+     <BannerSection
+        title={hero.title}
+        subtitle={hero.subtitle}
+        bgTheme={9}
+      />
 
       {/* Stats */}
-      <section className="py-16 px-4 bg-white grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-        {stats.map((s, i) => <StatCard key={i} {...s} />)}
-      </section>
+     <StatsCard
+        stats={stats.map((item) => ({
+          icon: item.Icon,
+          numberText: item.number,
+          subtitle: item.label
+        }))}
+      />
 
       {/* Training Programs */}
       <section className="py-16 px-4 bg-white max-w-7xl mx-auto">

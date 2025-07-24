@@ -10,7 +10,7 @@ const HodMessage = ({
   contact = null,
 }) => {
   return (
-    <section className="py-20 bg-gradient-to-r from-slate-50 to-blue-50 relative overflow-hidden">
+    <section className="py-20 bg-white relative overflow-hidden">
       {/* Optional decorative background */}
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
 

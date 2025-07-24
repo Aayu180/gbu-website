@@ -12,50 +12,27 @@ import {
   Mail,
   CheckCircle,
 } from "lucide-react";
+import BannerSection from "../../components/HeroBanner";
+import StatsCard from "../../components/StatsCard";
 
 // Hero Section
 const HeroSection = ({ title, subtitle }) => (
-  <section className="py-30 bg-gradient-to-br from-purple-50 to-indigo-100">
-    <div className="container mx-auto px-4 text-center">
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-5xl font-bold text-gray-900 mb-6"
-      >
-        {title}
-      </motion.h2>
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-xl text-gray-600 max-w-3xl mx-auto"
-      >
-        {subtitle}
-      </motion.p>
-    </div>
-  </section>
+  <BannerSection
+    title={title}
+    subtitle={subtitle}
+    bgTheme={3}
+  />
 );
 
 // Stats Section
 const StatsSection = ({ stats }) => (
-  <section className="py-16 px-4 bg-white">
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-      {stats.map((stat, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 + i * 0.2 }}
-          className="bg-white p-6 rounded-xl shadow-lg text-center"
-        >
-          <stat.icon className={`h-12 w-12 ${stat.color} mx-auto mb-4`} />
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">{stat.count}</h3>
-          <p className="text-gray-600">{stat.label}</p>
-        </motion.div>
-      ))}
-    </div>
-  </section>
+  <StatsCard
+    stats={stats.map((item) => ({
+      icon: item.icon,
+      number: item.count,
+      subtitle: item.label,
+    }))}  
+  />
 );
 
 // Featured Scholars

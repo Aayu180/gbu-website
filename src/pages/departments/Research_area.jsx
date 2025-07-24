@@ -10,6 +10,8 @@ import {
   Shield,
   Database,
 } from "lucide-react";
+import BannerSection from "../../components/HeroBanner";
+import StatsCard from "../../components/StatsCard";
 
 const ResearchArea = ({
   hero,
@@ -24,25 +26,21 @@ const ResearchArea = ({
   return (
     <>
       {/* Hero */}
-      <section className="py-30 bg-gradient-to-br from-green-50 to-blue-100">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">{hero.title}</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">{hero.subtitle}</p>
-        </div>
-      </section>
+      <BannerSection
+        title={hero.title}
+        subtitle={hero.subtitle}
+        bgTheme={1}
+      />
 
       {/* Stats */}
-      <section className="py-16 px-4 bg-white">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {stats.map((s, i) => (
-            <div key={i} className="bg-white p-6 rounded-xl shadow-lg text-center">
-              <s.icon className={`h-12 w-12 ${s.color} mx-auto mb-4`} />
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">{s.number}</h3>
-              <p className="text-gray-600">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <StatsCard
+        stats={stats.map((item) => ({
+          icon: item.icon,
+          number: item.number,
+          numberText: typeof item.number === 'string' ? item.number : undefined,
+          subtitle: item.label
+        }))}
+      />
 
       {/* Domains */}
       <section className="py-16 px-4 bg-white">
@@ -180,7 +178,7 @@ export default function ResearchPage() {
       }}
       stats={[
         { icon: BookOpen, color: "text-indigo-600", number: "150+", label: "Active Research Projects" },
-        { icon: Users, color: "text-blue-600", number: "85", label: "Research Faculty" },
+        { icon: Users, color: "text-blue-600", number: 85, label: "Research Faculty" },
         { icon: Award, color: "text-green-600", number: "500+", label: "Publications" },
         { icon: TrendingUp, color: "text-purple-600", number: "₹25Cr", label: "Research Funding" },
       ]}

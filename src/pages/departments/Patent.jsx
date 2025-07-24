@@ -9,26 +9,21 @@ import {
   CheckCircle,
   Clock,
 } from "lucide-react";
+import BannerSection from "../../components/HeroBanner";
+import StatsCard from "../../components/StatsCard";
 
 const Patents = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-30  bg-gradient-to-br from-purple-50 to-indigo-100">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-5xl font-bold text-gray-900 mb-6 animate-fade-in">
-            Intellectual Property Portfolio
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in">
-            TechVision Engineering College has a robust intellectual property
-            portfolio, protecting innovative solutions across multiple
-            engineering domains and fostering technology transfer to industry.
-          </p>
-        </div>
-      </section>
+     <BannerSection
+        title="Patents & Innovations"
+        subtitle="Showcasing our cutting-edge research and technological advancements"
+        bgTheme={1}
+      />
 
       {/*Stats*/}
-      <section className="py-16 px-4 bg-white">
+      {/* <section className="py-16 px-4 bg-white">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
           <div className="bg-white p-6 rounded-xl shadow-lg">
             <Award className="h-12 w-12 text-orange-600 mx-auto mb-4" />
@@ -51,7 +46,15 @@ const Patents = () => {
             <p className="text-gray-600">Licensed Patents</p>
           </div>
         </div>
-      </section>
+      </section> */}
+      <StatsCard
+        stats={[
+          { icon: Award, number: 45, subtitle: "Patents Filed" },
+          { icon: CheckCircle, number: 28, subtitle: "Patents Granted" },
+          { icon: Clock, number: 17, subtitle: "Under Review" },
+          { icon: TrendingUp, number: 12, subtitle: "Licensed Patents" },
+        ]}
+      />
       {/* Featured Patents */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
