@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
+import StatsCard from "../../StatsCard";
 
 // Reusable Card
 const Card = ({ children, className = "", ...props }) => (
@@ -51,7 +52,7 @@ const Faculty = ({
   return (
     <section
       id="faculty"
-      className="py-20 bg-gradient-to-br from-purple-50 via-white to-blue-50"
+      className="py-20 bg-white"
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -139,40 +140,14 @@ const Faculty = ({
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16"
         >
-          <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
-            <p className="text-muted-foreground mb-6 text-center text-lg">
+         
+            <p className="text-muted-foreground text-center text-lg">
               {bottomStats.text}
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              {bottomStats.stats.map((stat, idx) => (
-                <motion.div
-                  key={idx}
-                  whileHover={{ y: -5 }}
-                  className={`text-center p-4 ${stat.bg} rounded-xl`}
-                >
-                  {stat.icon ? (
-                    <stat.icon
-                      className={`h-8 w-8 ${stat.color} mx-auto mb-2`}
-                    />
-                  ) : (
-                    <div
-                      className={`w-8 h-8 ${stat.color} rounded mx-auto mb-2 flex items-center justify-center`}
-                    >
-                      <span className="text-white text-xs font-bold">
-                        {stat.custom}
-                      </span>
-                    </div>
-                  )}
-                  <div className="text-2xl font-bold text-foreground">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+           <StatsCard
+             stats={bottomStats.stats}
+           />
+     
         </motion.div>
       </motion.div>
     </section>

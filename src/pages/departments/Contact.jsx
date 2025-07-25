@@ -1,4 +1,4 @@
- import React from "react";
+import React from "react";
 import {
   Phone,
   Mail,
@@ -11,6 +11,7 @@ import {
   Instagram,
   Youtube,
 } from "lucide-react";
+import BannerSection from "../../components/HeroBanner";
 
 // Reusable Card Components
 const Card = ({ children, className = "" }) => (
@@ -39,30 +40,14 @@ const Contact = ({ data, departments, officeHours, generalInfo }) => {
     <div className="min-h-screen bg-background">
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 py-20">
-        <div className="absolute inset-0 opacity-20">
-          <img
-            src={generalInfo.backgroundImage}
-            alt="University Building"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 to-blue-900/50"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              {generalInfo.heading}
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              {generalInfo.subheading}
-            </p>
-          </div>
-        </div>
-      </section>
+      <BannerSection
+        title={generalInfo.heading}
+        subtitle={generalInfo.subheading}
+        bgTheme={3}
+      />
 
       {/* General Info Cards */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-center text-foreground mb-12">
@@ -293,7 +278,6 @@ const officeHours = [
 const generalInfo = {
   heading: "Contact Us",
   subheading: "Get in touch with our departments and COE.",
-  backgroundImage: "https://images.unsplash.com/photo-1494891848038-7bd202a2afeb?auto=format&fit=crop&w=1920&q=80",
   cards: [
     {
       title: "Address",

@@ -1,8 +1,4 @@
-import React from "react";
-import HeroSection from "../../components/departments/cse/Hero";
 import AboutDepartment from "../../components/departments/cse/AboutDepartment";
-import Research from "../../components/departments/cse/Research";
-import HeroBanner from "../../components/departments/Research";
 import HodMessage from "../../components/departments/cse/Hod";
 import Programs from "../../components/departments/cse/Program";
 import Faculty from "../../components/departments/cse/Faculty";
@@ -12,15 +8,12 @@ import {
   Code, Cpu, Database, Users, Award, BookOpen, Lightbulb, Brain, Shield, Cloud, Smartphone,
   GraduationCap, Globe
 } from "lucide-react";
-
-import researchBg from "../../assets/research.jpg";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
-import { number } from "framer-motion";
 
 const Cse = () => {
   const heroProps = {
-    title: "Department of",
+    title: "Department of Computer Science & Engineering",
     highlight: "Computer Science & Engineering",
     subtitle:
       "Pioneering innovation in technology education. Empowering students to become tomorrow's digital leaders and problem solvers.",
@@ -227,101 +220,42 @@ const Cse = () => {
     stats: [
       {
         icon: BookOpen,
-        value: "500+",
-        label: "Research Papers",
+      numberText: "500+",
+        subtitle: "Research Papers",
         bg: "bg-blue-50",
         color: "text-blue-600",
       },
       {
         icon: Award,
-        value: "50+",
-        label: "Awards",
+      numberText: "50+",
+        subtitle: "Awards",
         bg: "bg-green-50",
         color: "text-green-600",
       },
       {
-        icon: null,
+        icon: GraduationCap,
         custom: "PhD",
-        value: "100%",
-        label: "PhD Faculty",
-        bg: "bg-purple-50",
+      numberText: "100%",
+        subtitle: "PhD Faculty",
+        bg: "bg-purple-0",
         color: "bg-purple-600",
       },
       {
-        icon: null,
+        icon: GraduationCap,
         custom: "Exp",
-        value: "15+",
-        label: "Avg Experience",
+      numberText: "15+",
+        subtitle: "Avg Experience",
         bg: "bg-orange-50",
         color: "bg-orange-600",
       },
     ],
   };
-  const researchAreas = [
-    {
-      icon: Brain,
-      title: "Artificial Intelligence & Machine Learning",
-      description: "Deep learning, NLP, computer vision, and intelligent systems.",
-      projects: ["Smart Healthcare", "Autonomous Vehicles", "Predictive Analytics"],
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: Shield,
-      title: "Cybersecurity & Network Security",
-      description: "Threat detection, encryption, secure system design.",
-      projects: ["Blockchain Security", "IoT Security", "Malware Detection"],
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-red-500 to-pink-500",
-    },
-    {
-      icon: Database,
-      title: "Data Science & Big Data",
-      description:
-        "Large-scale data processing, analytics, visualization, and knowledge discovery.",
-      projects: ["Social Media Analytics", "Financial Data Mining", "Healthcare Data"],
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-green-500 to-emerald-500"
-    },
-    {
-      icon: Cloud,
-      title: "Cloud Computing & Distributed Systems",
-      description:
-        "Scalable architectures, distributed algorithms, edge computing, cloud-native apps.",
-      projects: ["Edge AI Systems", "Serverless Computing", "Distributed Databases"],
-      image:
-        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-violet-500"
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Computing & IoT",
-      description:
-        "Mobile apps, Internet of Things, sensor networks, and ubiquitous computing.",
-      projects: ["Smart City Solutions", "Wearable Computing", "Industrial IoT"],
-      image:
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-yellow-500"
-    },
-    {
-      icon: Globe,
-      title: "Web Technologies & HCI",
-      description:
-        "Modern web development, UX design, HCI, and accessibility research.",
-      projects: ["Progressive Web Apps", "AR/VR Interfaces", "Accessibility Tools"],
-      image:
-        "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-blue-500"
-    }
-
-  ];
 
   const researchStats = [
-    { value: "80+", label: "Research Projects", bg: "bg-blue-500/20" },
-    { value: "₹10Cr+", label: "Research Funding", bg: "bg-indigo-500/20" },
-    { value: "250+", label: "Publications", bg: "bg-purple-500/20" },
-    { value: "15+", label: "Patents Filed", bg: "bg-emerald-500/20" },
+    { numberText: "80+", subtitle: "Research Projects" },
+    { numberText: "₹10Cr+", subtitle: "Research Funding" },
+    { numberText: "250+", subtitle: "Publications" },
+    { numberText: "15+", subtitle: "Patents Filed" },
   ];
 
   const topAchievers = [
@@ -391,24 +325,32 @@ const achievements = [
       <HodMessage {...hodProps} />
       <AboutDepartment {...aboutProps} />
       <Programs heading="Academic Programs" subheading="Choose from our diverse range of programs designed to meet your academic and career goals in computer science." programs={programsData} />
+      
       <Faculty
         title="Distinguished Faculty"
         subtitle="Learn from world-class faculty members leading cutting-edge research."
         facultyMembers={facultyMembers}
         bottomStats={facultyStats}
       />
-      <Research
-        banner={() => (
-          <HeroBanner
-            backgroundImage={researchBg}
-            mainHeading="Research"
-            highlight="& Development"
-            subheading="Driving innovation and new technologies for a connected world."
-          />
-        )}
-        researchAreas={researchAreas}
-        stats={researchStats}
+      
+      <div className="mt-10">
+         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-foreground">
+          Research Areas
+        </h2>
+        <p className="text-xl text-blue-600 text-center  max-w-3xl mx-auto">
+          Explore our diverse research areas that push the boundaries of technology and innovation.
+        </p>
+
+      </div>
+      <StatsCard
+        stats={researchStats.map((stat) => ({
+          icon: stat.icon,
+          numberText: stat.numberText,
+          title: stat.subtitle,
+          subtitle: stat.subtitle,
+        }))}
       />
+
       <StudentAchievers
         topAchievers={topAchievers}
         achievements={achievements}

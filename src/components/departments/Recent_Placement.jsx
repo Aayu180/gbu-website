@@ -41,9 +41,9 @@ const fallbackImage = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 text-blue-800">
-            {data.heading}
+            Recent Placements
           </h2>
-          <p className="text-xl text-gray-600">{data.subheading}</p>
+          <p className="text-xl text-gray-600">Our students securing positions at top companie</p>
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full" />
         </div>
 

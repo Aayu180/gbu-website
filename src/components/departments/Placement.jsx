@@ -18,16 +18,6 @@ const PlacementsSection = ({data}) => {
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-6 rounded-full" />
         </div>
 
-        {/* Hero Image */}
-        <div className="relative mb-12 rounded-2xl overflow-hidden shadow-lg group">
-          <img
-            src={heroImage}
-            alt="Placement Drive"
-            className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
-
         {/* Stats */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {placementStats.map((stat, index) => (

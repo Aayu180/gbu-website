@@ -73,10 +73,10 @@ const Library = () => {
     const fetchData = async () => {
       try {
         const [infoRes, featuresRes, statsRes, facilitiesRes] = await Promise.all([
-          axios.get(`${BASE_URL}campuslife/library-info/`),
-          axios.get(`${BASE_URL}campuslife/library-facilities/`),
-          axios.get(`${BASE_URL}campuslife/library-stats/`),
-          axios.get(`${BASE_URL}campuslife/library-facilities/`),
+          axios.get(`${BASE_URL}/campuslife/library-info/`),
+          axios.get(`${BASE_URL}/campuslife/library-facilities/`),
+          axios.get(`${BASE_URL}/campuslife/library-stats/`),
+          axios.get(`${BASE_URL}/campuslife/library-facilities/`),
         ]);
         setLibraryInfo(infoRes.data[0]);
         setFeatures(featuresRes.data);

@@ -705,8 +705,6 @@ export default function DepartmentDynamicPage() {
                position: 11,
                props: {
                  data: {
-                   heading: "Recent Placements",
-                   subheading: "Our students securing positions at top companies",
                    sectionTitle: "Success Stories",
                    students: [
                       {

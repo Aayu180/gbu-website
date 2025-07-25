@@ -192,9 +192,9 @@ const CafesFood = () => {
     const fetchData = async () => {
       try {
         const [categoriesRes, outletsRes, tagsRes] = await Promise.all([
-          axios.get(`${VITE_HOST}campuslife/food-court-categories/`),
-          axios.get(`${VITE_HOST}campuslife/food-outlets/`),
-          axios.get(`${VITE_HOST}campuslife/tags/`),
+          axios.get(`${VITE_HOST}/campuslife/food-court-categories/`),
+          axios.get(`${VITE_HOST}/campuslife/food-outlets/`),
+          axios.get(`${VITE_HOST}/campuslife/tags/`),
         ]);
 
         setCategories(categoriesRes.data);

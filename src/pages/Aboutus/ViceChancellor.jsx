@@ -163,14 +163,20 @@ const ViceChancellor = () => {
 
               {/* Quote Text */}
               <div className="space-y-6 text-gray-700 leading-relaxed">
-                <p className="text-lg text-justify">
-                  Gautam Buddha University ko Shri Yogi Adityanath Ji ke netritva mein chalana hum sabke liye garv ki baat hai. Yeh vishwavidyalaya gyaan, navachar aur samaveshita ka prateek hai, jahan hum apne vidyarthiyon ko sirf takneek aur vaigyanik soch hi nahin, balki sadbhavna, neetik zimmedari aur samaajik pratibaddhata ka gyaan bhi dete hain.
-                </p>
+  <p className="text-lg text-justify">
+    It is a great honour to work under the visionary leadership of Hon'ble Chief Minister Shri Yogi Adityanath Ji,
+    Chancellor of Gautam Buddha University. The university stands as a hub of knowledge, innovation, and inclusivity,
+    committed to nurturing future-ready individuals grounded in wisdom, compassion, and ethical values. Our academic
+    ecosystem promotes inquiry, critical thinking, and holistic development, aligning intellectual growth with social responsibility.
+  </p>
 
-                <p className="text-lg text-justify">
-                  Aaj ke tezi se badalte yug mein, hum holistic vikas par zor dete hue apne chhatron mein rachnatmakta, aalochanaatmak soch aur antarvishayi anusandhan ki bhavna jagate hain. Hamari koshish hai ki hamare graduates na keval sochne wale neta bane, balki naye aur susthaya laagoo karne wale badlaav-lane wale too ban kar ubhren.
-                </p>
-              </div>
+  <p className="text-lg text-justify">
+    In an era of rapid global change, GBU blends traditional values with modern scientific advancements to drive sustainable innovation and entrepreneurship. 
+    As we advance toward global recognition, we invite students, scholars, and industry leaders to join us in our mission of academic excellence, 
+    transformative research, and meaningful societal impact.
+  </p>
+</div>
+
               <div className="text-6xl text-blue-500 font-serif mb-4 text-right">"</div>
               {/* Signature */}
               <div className="mt-8 text-right">
@@ -270,6 +276,15 @@ const ViceChancellor = () => {
                           <p className="text-xs text-gray-600">Peer-reviewed research papers</p>
                         </div>
                       </div>
+                       <button className="ml-20 mt-60 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50" onClick={() => window.open("https://rpscancerlab.com/", "_blank")} >
+
+                          <span className="flex items-center justify-center space-x-2">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span>View More</span>
+                          </span>
+                        </button>
                     </>
                   )}
 

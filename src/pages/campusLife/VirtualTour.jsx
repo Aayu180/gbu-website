@@ -111,7 +111,7 @@ const VirtualTour = () => {
   useEffect(() => {
     const fetchVirtualTour = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_HOST}campuslife/virtual-tours/`);
+        const res = await axios.get(`${import.meta.env.VITE_HOST}/campuslife/virtual-tours/`);
         if (res.data && res.data.length > 0) {
           setTour(res.data[0]);
         }
