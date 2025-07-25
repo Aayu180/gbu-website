@@ -19,11 +19,10 @@ export default function FacultyResponsiveSlider({
 
   const moveBy = cardWidth + gap;
 
-  // Loop the faculty list for infinite effect
   const loopData = [...facultyList, ...facultyList.slice(0, visibleCards)];
 
   useEffect(() => {
-    if (facultyList.length <= visibleCards) return; // Don't slide if not enough cards
+    if (facultyList.length <= visibleCards) return; 
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {

@@ -126,7 +126,7 @@ export default function ExcellenceSection() {
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-t ${item.gradient} opacity-60`}></div>
+                <div className={`absolute inset-0 opacity-60`}></div>
                 <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-2xl">
                   {item.icon}
                 </div>

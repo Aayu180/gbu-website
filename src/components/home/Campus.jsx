@@ -115,28 +115,13 @@ export default function CampusLifeSection() {
                 />
                 
                 {/* Image overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-t ${gradient} opacity-40`} />
-                
-                {/* Category badge */}
-                <div className="absolute top-4 left-4 z-10">
-                  <div className="bg-white/95 backdrop-blur-lg rounded-full px-3 py-1.5 shadow-lg border border-white/30">
-                    <span className="text-xs font-bold text-gray-800 uppercase tracking-wider">
-                      {category}
-                    </span>
-                  </div>
-                </div>
+                <div className={`absolute inset-0  opacity-40`} />
 
                 {/* Icon container */}
                 <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-lg rounded-full flex items-center justify-center text-xl shadow-lg border border-white/30">
                   {icon}
                 </div>
-
-                {/* University logo overlay */}
-                <div className="absolute bottom-4 left-4 opacity-70">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1">
-                    <span className="text-xs font-bold text-gray-800">GBU</span>
-                  </div>
-                </div>
+               
               </div>
 
               {/* Content container - now expands with card */}
@@ -144,7 +129,7 @@ export default function CampusLifeSection() {
                 {/* Basic content - always visible */}
                 <div className="mb-4">
                   <h3 className="font-bold text-lg text-gray-800 mb-2 line-clamp-2">
-                    {item.title}
+                    {category}
                   </h3>
                   
                   <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">

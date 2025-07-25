@@ -53,16 +53,12 @@ export default function AboutSection() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="bg-green-600 text-white px-5 py-3 rounded-md hover:bg-green-700 transition w-full sm:w-auto">
+                <button className="border border-blue-700 text-blue-700 px-5 py-3 rounded-md hover:bg-blue-50 transition w-full sm:w-auto">
                   {aboutData.button1_text}
                 </button>
               </a>
             )}
-            {aboutData.button2_text && (
-              <button className="border border-blue-700 text-blue-700 px-5 py-3 rounded-md hover:bg-blue-50 transition w-full sm:w-auto">
-                {aboutData.button2_text}
-              </button>
-            )}
+           
           </div>
         </div>
 

@@ -42,7 +42,7 @@ const HiringSection = () => {
   useEffect(() => {
     const fetchCompanyData = async () => {
       try {
-        const res = await axios.get(API_URL); // <-- Use axios
+        const res = await axios.get(API_URL); 
         const data = res.data;
         if (Array.isArray(data)) {
           setCompanyData(data);
@@ -78,14 +78,15 @@ const HiringSection = () => {
   const first = companyData[0];
 
   return (
-    <section className="relative bg-[#f5f9ff] py-24 sm:py-32 overflow-hidden">
-      {/* Heading */}
-      <div className="absolute top-4 left-0 w-full text-center px-4 z-10">
+    <>
+    <div className="bg-[#f5f9ff]">
+     <div className="text-center px-4 mt-10">
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">{first?.title || "Companies Hiring"}</h2>
         <p className="text-gray-600 text-sm sm:text-lg max-w-xl mx-auto">
           {first?.content_text || "Prestigious companies regularly hire students from G.B.U."}
         </p>
       </div>
+    <section className="bg-[#f5f9ff] py-10 sm:py-32 overflow-hidden">
 
       {/* Animated Semicircle */}
       <div
@@ -175,6 +176,8 @@ const HiringSection = () => {
         </div>
       </div>
     </section>
+    </div>
+    </>
   );
 };
 

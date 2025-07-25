@@ -3,6 +3,7 @@ import {
   Medal,
   Target,
 } from "lucide-react";
+import StatsCard from "../../StatsCard";
 
 // ✅ Reusable Card
 const Card = ({ children, className = "" }) => (
@@ -104,39 +105,25 @@ const StudentAchievers = ({
       </section>
 
       {/* Achievements */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+       <div className="text-center mt-8">
               <h2 className="text-4xl font-bold text-foreground mb-4">
                 {achievementsHeading}
               </h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-muted-foreground text-blue-600">
                 {achievementsSubheading}
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {achievements.map((achievement, index) => (
-                <div
-                  key={index}
-                  className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <achievement.icon
-                    className={`h-12 w-12 ${achievement.color} mx-auto mb-4`}
-                  />
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
-                    {achievement.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {achievement.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <StatsCard
+        stats={achievements.map((achievement) => ({
+          icon: achievement.icon,
+          number: achievement.number,
+          numberText: achievement.numberText,
+          title: achievement.title,
+          subtitle: achievement.description,
+          
+        }))}
+      />
     </>
   );
 };

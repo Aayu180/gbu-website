@@ -228,25 +228,7 @@ const HoverCards = () => {
           </div>
         </section>
 
-        {/* Call to Action Section */}
-        <section className="bg-gradient-to-r from-purple-600 to-blue-600 py-20 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Begin Your Journey?
-            </h2>
-            <p className="text-xl text-white/90 mb-8">
-              Join thousands of students who have chosen excellence. Explore our admission process and find your perfect academic home.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
-                Apply Now
-              </button>
-              <button className="border-2 border-white border-solid text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-colors">
-                Schedule a Visit
-              </button>
-            </div>
-          </div>
-        </section>
+       
       </div>
     </SearchableWrapper>
   );

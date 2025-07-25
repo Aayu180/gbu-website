@@ -1,5 +1,3 @@
-"use client";
-import React from "react";
 import { motion } from "framer-motion";
 
 const AboutUs = ({ data }) => {
@@ -10,55 +8,54 @@ const AboutUs = ({ data }) => {
     cards = [],
   } = data || {};
 
-  // Framer Motion Animations
+  // Simplified variants with only transform & opacity for performance
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.5, staggerChildren: 0.3 } },
+    visible: { opacity: 1, transition: { duration: 0.4, ease: "easeOut" } },
   };
+
   const itemVariants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
+    hidden: { opacity: 0, y: 15 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
   };
+
   const iconVariants = {
-    hidden: { scale: 0, rotate: -180 },
+    hidden: { scale: 0.85, rotate: -5, opacity: 0 },
     visible: {
       scale: 1,
       rotate: 0,
-      transition: { type: "spring", stiffness: 200, damping: 10, delay: 0.5 },
+      opacity: 1,
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
+
   const floatingVariants = {
     animate: {
-      y: [-10, 10, -10],
-      rotate: [0, 5, -5, 0],
-      transition: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+      y: [-6, 6, -6],
+      rotate: [0, 3, -3, 0],
+      transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut" },
     },
   };
+
   const highlightVariants = {
-    hidden: { width: 0 },
+    hidden: { scaleX: 0, originX: 0 },
     visible: {
-      width: "100%",
-      transition: { duration: 0.8, delay: 1.2, ease: "easeInOut" },
+      scaleX: 1,
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
+
   const cardVariants = {
-    hidden: { opacity: 0, scale: 0.8, rotateY: -15 },
+    hidden: { opacity: 0, scale: 0.97, y: 6 },
     visible: {
       opacity: 1,
       scale: 1,
-      rotateY: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" },
     },
     hover: {
       scale: 1.02,
-      rotateY: 5,
-      boxShadow: "0 25px 50px -12px rgba(0,0,0,0.25)",
-      transition: { duration: 0.3 },
+      transition: { duration: 0.2, ease: "easeOut" },
     },
   };
 
@@ -71,21 +68,27 @@ const AboutUs = ({ data }) => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.3 }}
+          style={{ willChange: "opacity" }}
         >
           <motion.div className="relative inline-block">
-            <h2 className="text-5xl md:text-6xl font-bold text-blue-600 mb-4">
+            <h2
+              className="text-5xl md:text-6xl font-bold text-blue-600 mb-4"
+              style={{ willChange: "transform, opacity" }}
+            >
               {heading}
             </h2>
             <motion.div
-              className="absolute -bottom-2 left-0 h-1 bg-blue-500 rounded-full"
+              className="absolute -bottom-2 left-0 h-1 bg-blue-500 rounded-full origin-left"
               variants={highlightVariants}
+              style={{ willChange: "transform" }}
             />
           </motion.div>
           {subtitle && (
             <motion.p
               className="text-xl text-gray-600 mt-6 font-medium"
               variants={itemVariants}
+              style={{ willChange: "transform, opacity" }}
             >
               {subtitle}
             </motion.p>
@@ -97,9 +100,10 @@ const AboutUs = ({ data }) => {
           {floatingIcons.map((icon, i) => (
             <motion.div
               key={i}
-              className={`absolute ${icon.style} ${icon.color} opacity-30`}
+              className={`absolute ${icon.style} ${icon.color} opacity-20`}
               variants={floatingVariants}
               animate="animate"
+              style={{ willChange: "transform" }}
             >
               {icon.icon}
             </motion.div>
@@ -119,16 +123,20 @@ const AboutUs = ({ data }) => {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
+                  style={{ willChange: "transform, opacity" }}
                 >
+                  {/* Removed heavy blur and boxShadow on background for performance */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-r ${
                       card.bgGradient || "from-blue-500 to-purple-600"
-                    } rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity duration-300`}
+                    } rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-300`}
+                    aria-hidden="true"
                   />
-                  <div className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-xl h-full flex flex-col">
+                  <div className="relative bg-white/90 rounded-2xl p-8 border border-white/20 shadow-md h-full flex flex-col">
                     <motion.div
                       className="flex items-center mb-6"
                       variants={iconVariants}
+                      style={{ willChange: "transform, opacity" }}
                     >
                       <div
                         className={`p-3 bg-gradient-to-r ${
@@ -141,34 +149,34 @@ const AboutUs = ({ data }) => {
                         {card.title || "No Title"}
                       </h3>
                     </motion.div>
+
                     <div className="flex-grow">
                       <p className="text-gray-700 leading-relaxed text-lg">
                         {card.content}
                       </p>
+
                       {card.highlight && (
                         <motion.div
-                          className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border-l-4 border-blue-500"
-                          initial={{ opacity: 0, x: -20 }}
+                          className="mt-6 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-500"
+                          initial={{ opacity: 0, x: -8 }}
                           whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.5, duration: 0.6 }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                          style={{ willChange: "transform, opacity" }}
                         >
-                          <p className="text-gray-700 italic">
-                            {card.highlight}
-                          </p>
+                          <p className="text-gray-700 italic">{card.highlight}</p>
                         </motion.div>
                       )}
+
                       {card.bullets && (
                         <motion.div
                           className="space-y-4 mt-6"
                           initial={{ opacity: 0 }}
                           whileInView={{ opacity: 1 }}
-                          transition={{ delay: 0.7, duration: 0.6 }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                          style={{ willChange: "opacity" }}
                         >
                           {card.bullets.map((point, i) => (
-                            <div
-                              key={i}
-                              className="flex items-center space-x-3"
-                            >
+                            <div key={i} className="flex items-center space-x-3">
                               <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full" />
                               <p className="text-gray-700">{point}</p>
                             </div>
@@ -180,9 +188,7 @@ const AboutUs = ({ data }) => {
                 </motion.div>
               ))
             ) : (
-              <p className="text-center text-gray-500 col-span-2">
-                No cards found.
-              </p>
+              <p className="text-center text-gray-500 col-span-2">No cards found.</p>
             )}
           </div>
         </div>
