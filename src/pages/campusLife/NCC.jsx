@@ -96,89 +96,112 @@ const NCC = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white">
-        <HeroBanner
-          title="National Cadet Corps"
-          subtitle='"Unity and Discipline"'
-          bgTheme={1}
-        />
-
-        <div className="bg-white/80 backdrop-blur-sm shadow-lg sticky top-0 z-10 border-b border-blue-100">
-          <div className="container mx-auto px-4 py-2">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="py-2">
-                {tabs.map((tab) => {
-                  const IconComponent = tab.icon;
-                  return (
-                    <TabsTrigger key={tab.value} value={tab.value}>
-                      <IconComponent size={16} className="mr-2" />
-                      {tab.label}
-                    </TabsTrigger>
-                  );
-                })}
-              </TabsList>
-
-              <div className="py-8">
-                <TabsContent value="overview">
-                  <NCCIntroduction />
-                </TabsContent>
-                <TabsContent value="structure">
-                  <NCCStructure />
-                </TabsContent>
-                <TabsContent value="training">
-                  <NCCTraining />
-                </TabsContent>
-                <TabsContent value="register">
-                  <NCCRegistration />
-                </TabsContent>
-                <TabsContent value="events">
-                  <NCCEvents />
-                </TabsContent>
-                <TabsContent value="achievements">
-                  <NCCAchievements />
-                </TabsContent>
-                <TabsContent value="resources">
-                  <NCCResources />
-                </TabsContent>
-                <TabsContent value="gallery">
-                  <NCCGallery />
-                </TabsContent>
-                <TabsContent value="social">
-                  <NCCSocialMedia />
-                </TabsContent>
+      <div className="min-h-screen bg-white">
+       <div className="relative">
+                <HeroBanner
+                  title="National Cadet Corps"
+                  subtitle='"Unity and Discipline"'
+                  bgTheme={5}
+                />
+                <div className="absolute top-10 left-14 md:top-24 md:left-48 ">
+                  <img
+                    src="https://panducollege.ac.in/images/ncc-new-logo.png"
+                    alt="NSS Logo"
+                    className="w-28 h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain pt-3  bg-white/30 backdrop-blur-sm rounded-full shadow-lg"
+                  />
+                </div>
               </div>
-            </Tabs>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <div className="sticky top-25 z-10 bg-white">
+          <TabsList className="py-2 px-2 sm:px-4">
+            <div className="flex overflow-x-auto scrollbar-hide gap-1 sm:gap-2 min-w-full sm:justify-center">
+            {tabs.map((tab) => {
+              const IconComponent = tab.icon;
+              return (
+              <TabsTrigger 
+                key={tab.value} 
+                value={tab.value}
+                className="flex-shrink-0 min-w-fit px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm"
+              >
+                <IconComponent size={14} className="mr-1 sm:mr-2" />
+                <span className="hidden xs:inline sm:inline">{tab.label}</span>
+                <span className="xs:hidden sm:hidden">{tab.label.slice(0, 3)}</span>
+              </TabsTrigger>
+              );
+            })}
+            </div>
+          </TabsList>
           </div>
-        </div>
+
+          <div className="py-4 sm:py-8 px-2 sm:px-4">
+          <TabsContent value="overview">
+            <NCCIntroduction />
+          </TabsContent>
+          <TabsContent value="structure">
+            <NCCStructure />
+          </TabsContent>
+          <TabsContent value="training">
+            <NCCTraining />
+          </TabsContent>
+          <TabsContent value="register">
+            <NCCRegistration />
+          </TabsContent>
+          <TabsContent value="events">
+            <NCCEvents />
+          </TabsContent>
+          <TabsContent value="achievements">
+            <NCCAchievements />
+          </TabsContent>
+          <TabsContent value="resources">
+            <NCCResources />
+          </TabsContent>
+          <TabsContent value="gallery">
+            <NCCGallery />
+          </TabsContent>
+          <TabsContent value="social">
+            <NCCSocialMedia />
+          </TabsContent>
+          </div>
+        </Tabs>
       </div>
 
       <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+      @keyframes fadeIn {
+        from {
+        opacity: 0;
+        transform: translateY(10px);
         }
+        to {
+        opacity: 1;
+        transform: translateY(0);
+        }
+      }
 
-        .animate-fadeIn {
-          animation: fadeIn 0.5s ease-out;
-        }
+      .animate-fadeIn {
+        animation: fadeIn 0.5s ease-out;
+      }
 
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
 
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+
+      @media (min-width: 475px) {
+        .xs\\:inline {
+        display: inline;
         }
+        .xs\\:hidden {
+        display: none;
+        }
+      }
       `}</style>
     </SearchableWrapper>
-  );
+    );
 };
 
 export default NCC;

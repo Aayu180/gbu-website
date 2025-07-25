@@ -1,4 +1,4 @@
- import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import {
   FileText,
   Building2,
@@ -51,11 +51,10 @@ const TabsTrigger = ({ value, children, className = "", ...props }) => {
 
   return (
     <button
-      className={`relative flex items-center px-4 py-3 mx-1 text-xs sm:text-sm font-medium rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 whitespace-nowrap ${
-        isActive
+      className={`relative flex items-center px-4 py-3 mx-1 text-xs sm:text-sm font-medium rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 whitespace-nowrap ${isActive
           ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-200"
           : "text-gray-600 hover:text-blue-600 hover:bg-blue-50 border border-gray-200 hover:border-blue-200"
-      } ${className}`}
+        } ${className}`}
       onClick={() => ctx.setActive(value)}
       type="button"
       {...props}
@@ -95,16 +94,25 @@ const NSS = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-        <HeroBanner
-          title="National Service Scheme"
-          subtitle='"Not Me, But You"'
-          bgTheme={10}
-        />
+      <div className="min-h-screen bg-white">
+        <div className="relative">
+          <HeroBanner
+            title="National Service Scheme"
+            subtitle='"Not Me, But You"'
+            bgTheme={5}
+          />
+          <div className="absolute top-10 left-14 md:top-24 md:left-48">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/9/90/NSS-symbol.jpeg"
+              alt="NSS Logo"
+              className="w-28 h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain bg-white/20 backdrop-blur-sm rounded-full p-2 shadow-lg"
+            />
+          </div>
+        </div>
 
-        <div className="bg-white/80 backdrop-blur-sm shadow-lg sticky top-0 z-10 border-b border-blue-100">
-          <div className="container mx-auto px-4 py-2">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <div className="bg-white/80 backdrop-blur-sm  sticky top-25 z-10 ">
+            <div className="container mx-auto px-4 py-2">
               <TabsList className="py-2">
                 {tabs.map((tab) => {
                   const IconComponent = tab.icon;
@@ -116,39 +124,38 @@ const NSS = () => {
                   );
                 })}
               </TabsList>
-
-              <div className="py-8">
-                <TabsContent value="overview">
-                  <NSSIntroduction />
-                </TabsContent>
-                <TabsContent value="structure">
-                  <NSSStructure />
-                </TabsContent>
-                <TabsContent value="activities">
-                  <NSSActivities />
-                </TabsContent>
-                <TabsContent value="register">
-                  <NSSRegistration />
-                </TabsContent>
-                <TabsContent value="events">
-                  <NSSEvents />
-                </TabsContent>
-                <TabsContent value="achievements">
-                  <NSSAchievements />
-                </TabsContent>
-                <TabsContent value="resources">
-                  <NSSResources />
-                </TabsContent>
-                <TabsContent value="gallery">
-                  <NSSGallery />
-                </TabsContent>
-                <TabsContent value="social">
-                  <NSSSocialMedia />
-                </TabsContent>
-              </div>
-            </Tabs>
+            </div>
           </div>
-        </div>
+          <div className="container mx-auto px-4 py-8">
+            <TabsContent value="overview">
+              <NSSIntroduction />
+            </TabsContent>
+            <TabsContent value="structure">
+              <NSSStructure />
+            </TabsContent>
+            <TabsContent value="activities">
+              <NSSActivities />
+            </TabsContent>
+            <TabsContent value="register">
+              <NSSRegistration />
+            </TabsContent>
+            <TabsContent value="events">
+              <NSSEvents />
+            </TabsContent>
+            <TabsContent value="achievements">
+              <NSSAchievements />
+            </TabsContent>
+            <TabsContent value="resources">
+              <NSSResources />
+            </TabsContent>
+            <TabsContent value="gallery">
+              <NSSGallery />
+            </TabsContent>
+            <TabsContent value="social">
+              <NSSSocialMedia />
+            </TabsContent>
+          </div>
+        </Tabs>
       </div>
 
       <style jsx>{`
