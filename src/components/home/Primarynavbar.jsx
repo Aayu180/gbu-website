@@ -79,7 +79,7 @@ const Primarynavbar = () => {
             >
               <Map size={14} /> Grievance Portal
             </Link>
-            <a href="https://buddha-directory-glide-28.lovable.app" className="flex items-center gap-1 hover:underline">
+            <a href="/contactDirectory" className="flex items-center gap-1 hover:underline">
               <Map size={14} /> Directory
             </a>
 
@@ -165,7 +165,7 @@ const Primarynavbar = () => {
                 <a href="https://mygbu-faculty-nexus-3d.lovable.app/" className="block px-3 py-2 rounded-md hover:bg-gray-100">
                   Employee Login
                 </a>
-                <a href="https://buddha-directory-glide-28.lovable.app" className="block px-3 py-2 rounded-md hover:bg-gray-100">
+                <a href="/contactDirectory" className="block px-3 py-2 rounded-md hover:bg-gray-100">
                   Directory
                 </a>
 

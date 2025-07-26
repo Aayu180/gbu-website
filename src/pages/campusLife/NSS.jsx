@@ -103,7 +103,7 @@ const NSS = () => {
           />
           <div className="absolute top-10 left-14 md:top-24 md:left-48">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/90/NSS-symbol.jpeg"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQskMRga2F9mYN9FclMItZ1uhC-XCXkCDM6NuH1ryD_EGqplR1XrarhOZpafQ2V-WPvBs&usqp=CAU"
               alt="NSS Logo"
               className="w-28 h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain bg-white/20 backdrop-blur-sm rounded-full p-2 shadow-lg"
             />

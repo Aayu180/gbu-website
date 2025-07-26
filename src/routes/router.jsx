@@ -27,6 +27,8 @@ import EventsReunions from "../pages/Alumni/EventsReunions.jsx";
 import AlumniRegistration from "../pages/Alumni/AlumniRegistration.jsx";
 import SuccessStories from "../pages/Alumni/SuccessStories.jsx";
 
+import ContactDirectory from "../pages/directory/ContactDirectory.jsx";
+
 import HostelDining from "../pages/campusLife/HostelDining.jsx";
 import HostelDetailed from "../pages/campusLife/HostelDetailed.jsx";
 import SportsCultural from "../pages/campusLife/SportsCultural.jsx";
@@ -756,6 +758,8 @@ export default function AppRouter() {
           <Route path="/sitemapAbout" element={<SitemapAbout />} />
           <Route path="/sitemapContact" element={<SitemapContact />} />
           <Route path="/sitemapAcademics" element={<SitemapAcademics />} />
+
+          <Route path="/contactDirectory" element={<ContactDirectory/>}/>
 
         </Routes>
       </AuthProvider>
